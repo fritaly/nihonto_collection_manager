@@ -148,12 +148,50 @@ class NihontoFormState extends State<NihontoForm> {
   // Note: This is a `GlobalKey<FormState>`, not a GlobalKey<NihontoFormState>.
   final _formKey = GlobalKey<FormState>();
 
+  String _type;
+
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
     return Form(
         key: _formKey,
         child: Column(children: <Widget>[
+            DropdownButtonFormField(
+                decoration: InputDecoration(
+                    labelText: 'Select the type'
+                ),
+            value: _type,
+            items: [
+              DropdownMenuItem(
+                child: Text("Katana"),
+                value: 1,
+              ),
+              DropdownMenuItem(
+                child: Text("Tachi"),
+                value: 2,
+              ),
+              DropdownMenuItem(
+                  child: Text("Wakizashi"),
+                  value: 3
+              ),
+              DropdownMenuItem(
+                  child: Text("Tanto"),
+                  value: 4
+              ),
+              DropdownMenuItem(
+                  child: Text("Naginata"),
+                  value: 5
+              ),
+              DropdownMenuItem(
+                child: Text("Unknown"),
+                value: 0,
+              ),
+            ],
+            onChanged: (value) {
+              setState(() {
+                _type = value;
+              });
+            }),
           TextFormField(
             decoration: InputDecoration(
                 labelText: 'Enter your username'
