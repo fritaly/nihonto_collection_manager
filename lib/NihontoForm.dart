@@ -85,7 +85,7 @@ class NihontoFormState extends State<NihontoForm> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(
+              Utils.pad(ElevatedButton(
                 onPressed: () {
                   setState(() {
                     _signature = "";
@@ -94,8 +94,8 @@ class NihontoFormState extends State<NihontoForm> {
                   });
                 },
                 child: Text('Reset'),
-              ),
-              ElevatedButton(
+              )),
+              Utils.pad(ElevatedButton(
                 onPressed: () {
                   setState(() {
                     _signature = "MASAMUNE";
@@ -104,8 +104,8 @@ class NihontoFormState extends State<NihontoForm> {
                   });
                 },
                 child: Text('Test Data'),
-              ),
-              ElevatedButton(
+              )),
+              Utils.pad(ElevatedButton(
                 onPressed: () {
                   // Validate returns true if the form is valid, otherwise false.
                   if (_formKey.currentState.validate()) {
@@ -120,7 +120,7 @@ class NihontoFormState extends State<NihontoForm> {
                   }
                 },
                 child: Text('Save'),
-              )
+              ))
             ],
           )
         ]));
