@@ -1,9 +1,4 @@
-// Copyright 2018 The Flutter team. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
 import 'package:nihonto_collection_manager/Nihonto.dart';
 
 void main() => runApp(MyApp());
@@ -16,59 +11,49 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.green,
       ),
-      home: RandomWords(),
+      home: NihontoCollection(),
     );
   }
 }
 
-// ==================== //
-// === Random words === //
-// ==================== //
+// ========================== //
+// === Nihonto collection === //
+// ========================== //
 
-class RandomWords extends StatefulWidget {
+class NihontoCollection extends StatefulWidget {
   @override
-  _RandomWordsState createState() => _RandomWordsState();
+  _NihontoCollectionState createState() => _NihontoCollectionState();
 }
 
-class _RandomWordsState extends State<RandomWords> {
-  final _suggestions = <WordPair>[];
-  final _saved = Set<WordPair>();
-  final _biggerFont = TextStyle(fontSize: 18.0);
+class _NihontoCollectionState extends State<NihontoCollection> {
+  final _collection = List<Nihonto>();
 
-  Widget _buildSuggestions() {
+  Widget _buildWidget() {
+    // Generate a ListView listing the swords in the collection
     return ListView.builder(
         padding: EdgeInsets.all(16.0),
         itemBuilder: (context, i) {
-          if (i.isOdd) return Divider();
-
-          final index = i ~/ 2;
-          if (index >= _suggestions.length) {
-            _suggestions.addAll(generateWordPairs().take(10));
+          if (i.isOdd) {
+            return Divider();
           }
-          return _buildRow(_suggestions[index]);
+
+          var index = i ~/ 2;
+
+          if (index >= _collection.length) {
+            return null;
+          }
+
+          return _buildRow(_collection[index]);
         });
   }
 
-  Widget _buildRow(WordPair pair) {
-    final alreadySaved = _saved.contains(pair);
-
+  Widget _buildRow(Nihonto nihonto) {
     return ListTile(
       title: Text(
-        pair.asPascalCase,
-        style: _biggerFont,
-      ),
-      trailing: Icon(
-        alreadySaved ? Icons.favorite : Icons.favorite_border,
-        color: alreadySaved ? Colors.red : null,
+        nihonto.signature,
       ),
       onTap: () {
-        setState(() {
-          if (alreadySaved) {
-            _saved.remove(pair);
-          } else {
-            _saved.add(pair);
-          }
-        });
+        // TODO Display the nihonto form
       },
     );
   }
@@ -77,44 +62,12 @@ class _RandomWordsState extends State<RandomWords> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nihonto Collection Manager'),
+        title: Text('Nihonto Collection'),
         actions: [
-          IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
           IconButton(icon: Icon(Icons.add), onPressed: _pushAdd),
         ],
       ),
-      body: _buildSuggestions(),
-    );
-  }
-
-  void _pushSaved() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (BuildContext context) {
-          final tiles = _saved.map(
-            (WordPair pair) {
-              return ListTile(
-                title: Text(
-                  pair.asPascalCase,
-                  style: _biggerFont,
-                ),
-              );
-            },
-          );
-
-          final divided = ListTile.divideTiles(
-            context: context,
-            tiles: tiles,
-          ).toList();
-
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('Saved Suggestions'),
-            ),
-            body: ListView(children: divided),
-          );
-        },
-      ),
+      body: _buildWidget(),
     );
   }
 
@@ -178,18 +131,18 @@ class NihontoFormState extends State<NihontoForm> {
               items: [
                 DropdownMenuItem(
                   child: Text("Katana"),
-                  value: 1,
+                  value: "KATANA",
                 ),
                 DropdownMenuItem(
                   child: Text("Tachi"),
-                  value: 2,
+                  value: "TACHI",
                 ),
-                DropdownMenuItem(child: Text("Wakizashi"), value: 3),
-                DropdownMenuItem(child: Text("Tanto"), value: 4),
-                DropdownMenuItem(child: Text("Naginata"), value: 5),
+                DropdownMenuItem(child: Text("Wakizashi"), value: "WAKIZASHI"),
+                DropdownMenuItem(child: Text("Tanto"), value: "TANTO"),
+                DropdownMenuItem(child: Text("Naginata"), value: "NAGINATA"),
                 DropdownMenuItem(
                   child: Text("Unknown"),
-                  value: 0,
+                  value: "UNKNOWN",
                 ),
               ],
               onChanged: (value) {
@@ -203,16 +156,16 @@ class NihontoFormState extends State<NihontoForm> {
               items: [
                 DropdownMenuItem(
                   child: Text("Shinogi zukuri"),
-                  value: 1,
+                  value: "SHINOGI_ZUKURI",
                 ),
                 DropdownMenuItem(
                   child: Text("Shobu zukuri"),
-                  value: 2,
+                  value: "SHOBU_ZUKURI",
                 ),
-                DropdownMenuItem(child: Text("Hira zukuri"), value: 3),
+                DropdownMenuItem(child: Text("Hira zukuri"), value: "HIRA_ZUKURI"),
                 DropdownMenuItem(
                   child: Text("Unknown"),
-                  value: 0,
+                  value: "UNKNOWN",
                 ),
               ],
               onChanged: (value) {
