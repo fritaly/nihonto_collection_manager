@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nihonto_collection_manager/Geometry.dart';
 import 'package:nihonto_collection_manager/Nihonto.dart';
 
 class NihontoForm extends StatefulWidget {
@@ -22,7 +23,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   String _type;
 
-  String _geometry;
+  Geometry _geometry;
 
   String _signature;
 
@@ -76,16 +77,16 @@ class NihontoFormState extends State<NihontoForm> {
               items: [
                 DropdownMenuItem(
                   child: Text("Shinogi zukuri"),
-                  value: "SHINOGI_ZUKURI",
+                  value: Geometry.SHINOGI_ZUKURI,
                 ),
                 DropdownMenuItem(
                   child: Text("Shobu zukuri"),
-                  value: "SHOBU_ZUKURI",
+                  value: Geometry.SHOBU_ZUKURI,
                 ),
-                DropdownMenuItem(child: Text("Hira zukuri"), value: "HIRA_ZUKURI"),
+                DropdownMenuItem(child: Text("Hira zukuri"), value: Geometry.HIRA_ZUKURI),
                 DropdownMenuItem(
                   child: Text("Unknown"),
-                  value: "UNKNOWN",
+                  value: Geometry.UNKNOWN,
                 ),
               ],
               onChanged: (value) {
@@ -126,7 +127,7 @@ class NihontoFormState extends State<NihontoForm> {
                 onPressed: () {
                   setState(() {
                     _signature = "MASAMUNE";
-                    _geometry = "SHINOGI_ZUKURI";
+                    _geometry = Geometry.SHINOGI_ZUKURI;
                     _type = "KATANA";
                   });
                 },
