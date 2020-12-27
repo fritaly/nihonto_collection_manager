@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:nihonto_collection_manager/Nihonto.dart';
 
 void main() => runApp(MyApp());
 
@@ -155,6 +156,16 @@ class NihontoFormState extends State<NihontoForm> {
 
   String _signature;
 
+  Nihonto getAsObject() {
+    Nihonto(_type, _geometry, _signature);
+  }
+
+  void setFrom(Nihonto source) {
+    _type = source.type;
+    _geometry = source.geometry;
+    _signature = source.signature;
+  }
+
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -244,7 +255,7 @@ class NihontoFormState extends State<NihontoForm> {
                         SnackBar(content: Text('Processing Data')));
                   }
                 },
-                child: Text('Submit'),
+                child: Text('Save'),
               )
             ],
           )
