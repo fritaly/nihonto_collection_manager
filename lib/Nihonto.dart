@@ -4,13 +4,13 @@ import 'package:nihonto_collection_manager/NihontoType.dart';
 
 class Nihonto {
 
-  NihontoType type;
+  final NihontoType type;
 
-  String signature;
+  final String signature;
 
-  Geometry geometry;
+  final Geometry geometry;
 
-  Money price;
+  final Money price;
 
-  Nihonto(this.type, this.geometry, this.signature, { this.price = Money.ZERO });
+  const Nihonto(this.type, this.geometry, this.signature, { this.price = Money.ZERO });
 }
