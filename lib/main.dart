@@ -174,6 +174,7 @@ class NihontoFormState extends State<NihontoForm> {
                 });
               }),
           TextFormField(
+            initialValue: _signature,
             decoration: InputDecoration(labelText: 'Signature'),
             validator: (value) {
               if (value.isEmpty) {
@@ -189,13 +190,27 @@ class NihontoFormState extends State<NihontoForm> {
             },
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
                 onPressed: () {
-                  _formKey.currentState.reset();
+                  setState(() {
+                    _signature = "";
+                    _type = null;
+                    _geometry = null;
+                  });
                 },
                 child: Text('Reset'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _signature = "MASAMUNE";
+                    _geometry = "SHINOGI_ZUKURI";
+                    _type = "KATANA";
+                  });
+                },
+                child: Text('Test Data'),
               ),
               ElevatedButton(
                 onPressed: () {
