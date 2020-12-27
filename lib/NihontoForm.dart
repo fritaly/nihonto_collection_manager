@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/Geometry.dart';
 import 'package:nihonto_collection_manager/Nihonto.dart';
+import 'package:nihonto_collection_manager/NihontoType.dart';
 
 class NihontoForm extends StatefulWidget {
 
@@ -21,7 +22,7 @@ class NihontoFormState extends State<NihontoForm> {
   // Note: This is a `GlobalKey<FormState>`, not a GlobalKey<NihontoFormState>.
   final _formKey = GlobalKey<FormState>();
 
-  String _type;
+  NihontoType _type;
 
   Geometry _geometry;
 
@@ -52,18 +53,19 @@ class NihontoFormState extends State<NihontoForm> {
               items: [
                 DropdownMenuItem(
                   child: Text("Katana"),
-                  value: "KATANA",
+                  value: NihontoType.KATANA,
                 ),
                 DropdownMenuItem(
                   child: Text("Tachi"),
-                  value: "TACHI",
+                  value: NihontoType.TACHI,
                 ),
-                DropdownMenuItem(child: Text("Wakizashi"), value: "WAKIZASHI"),
-                DropdownMenuItem(child: Text("Tanto"), value: "TANTO"),
-                DropdownMenuItem(child: Text("Naginata"), value: "NAGINATA"),
+                DropdownMenuItem(child: Text("Wakizashi"), value: NihontoType.WAKIZASHI),
+                DropdownMenuItem(child: Text("Tanto"), value: NihontoType.TANTO),
+                DropdownMenuItem(child: Text("Naginata"), value: NihontoType.NAGINATA),
+                DropdownMenuItem(child: Text("Nagamaki"), value: NihontoType.NAGAMAKI),
                 DropdownMenuItem(
                   child: Text("Unknown"),
-                  value: "UNKNOWN",
+                  value: NihontoType.UNKNOWN,
                 ),
               ],
               onChanged: (value) {
@@ -128,7 +130,7 @@ class NihontoFormState extends State<NihontoForm> {
                   setState(() {
                     _signature = "MASAMUNE";
                     _geometry = Geometry.SHINOGI_ZUKURI;
-                    _type = "KATANA";
+                    _type = NihontoType.KATANA;
                   });
                 },
                 child: Text('Test Data'),

@@ -1,9 +1,13 @@
 import 'package:nihonto_collection_manager/Geometry.dart';
+import 'package:nihonto_collection_manager/NihontoType.dart';
 
 class Nihonto {
-  String type, signature;
+
+  NihontoType type;
+
+  String signature;
 
   Geometry geometry;
 
-  Nihonto(String this.type, Geometry this.geometry, String this.signature);
+  Nihonto(NihontoType this.type, Geometry this.geometry, String this.signature);
 }
