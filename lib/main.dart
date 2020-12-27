@@ -58,7 +58,8 @@ class _NihontoCollectionState extends State<NihontoCollection> {
         nihonto.signature,
       ),
       onTap: () {
-        // TODO Display the nihonto form
+        // Display the nihonto form
+        _pushShow(nihonto);
       },
     );
   }
@@ -84,7 +85,7 @@ class _NihontoCollectionState extends State<NihontoCollection> {
               title: Text('Add a new nihonto'),
               actions: [],
             ),
-            body: NihontoForm(),
+            body: NihontoForm(null), // TODO Use a no-arg constructor
           );
         },
       );
@@ -98,6 +99,24 @@ class _NihontoCollectionState extends State<NihontoCollection> {
       _collection.add(data);
     }
   }
+
+  void _pushShow(Nihonto nihonto) {
+    assert (nihonto != null);
+
+    var route = MaterialPageRoute<void>(
+      builder: (BuildContext context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Nihonto information'),
+            actions: [],
+          ),
+          body: NihontoForm(nihonto),
+        );
+      },
+    );
+
+    Navigator.of(context).push(route);
+  }
 }
 
 // ==================== //
@@ -105,8 +124,16 @@ class _NihontoCollectionState extends State<NihontoCollection> {
 // ==================== //
 
 class NihontoForm extends StatefulWidget {
+
+  Nihonto _nihonto;
+
+  NihontoForm(Nihonto nihonto) {
+    // The argument can be null
+    _nihonto = nihonto;
+  }
+
   @override
-  NihontoFormState createState() => NihontoFormState();
+  NihontoFormState createState() => NihontoFormState(_nihonto);
 }
 
 class NihontoFormState extends State<NihontoForm> {
@@ -121,14 +148,17 @@ class NihontoFormState extends State<NihontoForm> {
 
   String _signature;
 
-  Nihonto getAsObject() {
-    return Nihonto(_type, _geometry, _signature);
+  NihontoFormState(Nihonto nihonto) {
+    // The argument can be null
+    if (nihonto != null) {
+      _type = nihonto.type;
+      _geometry = nihonto.geometry;
+      _signature = nihonto.signature;
+    }
   }
 
-  void setFrom(Nihonto source) {
-    _type = source.type;
-    _geometry = source.geometry;
-    _signature = source.signature;
+  Nihonto getAsObject() {
+    return Nihonto(_type, _geometry, _signature);
   }
 
   @override
