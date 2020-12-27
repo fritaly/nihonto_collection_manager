@@ -37,17 +37,22 @@ class _NihontoCollectionState extends State<NihontoCollection> {
             return Divider();
           }
 
+          // Compute the index of the entry in the collection (0, 0, 1, 1, 2, 2...)
           var index = i ~/ 2;
 
           if (index >= _collection.length) {
             return null;
           }
 
+          print("Collection = ${_collection}");
+
           return _buildRow(_collection[index]);
         });
   }
 
   Widget _buildRow(Nihonto nihonto) {
+    assert (nihonto != null);
+
     return ListTile(
       title: Text(
         nihonto.signature,
@@ -71,9 +76,8 @@ class _NihontoCollectionState extends State<NihontoCollection> {
     );
   }
 
-  void _pushAdd() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
+  void _pushAdd() async {
+    var route = MaterialPageRoute<void>(
         builder: (BuildContext context) {
           return Scaffold(
             appBar: AppBar(
@@ -83,8 +87,16 @@ class _NihontoCollectionState extends State<NihontoCollection> {
             body: NihontoForm(),
           );
         },
-      ),
-    );
+      );
+
+    final data = await Navigator.of(context).push(route) as Nihonto;
+
+    print("Data = ${data}");
+
+    if (data != null) {
+      // Add the entry to the collection
+      _collection.add(data);
+    }
   }
 }
 
@@ -110,7 +122,7 @@ class NihontoFormState extends State<NihontoForm> {
   String _signature;
 
   Nihonto getAsObject() {
-    Nihonto(_type, _geometry, _signature);
+    return Nihonto(_type, _geometry, _signature);
   }
 
   void setFrom(Nihonto source) {
@@ -220,7 +232,10 @@ class NihontoFormState extends State<NihontoForm> {
                     // you'd often call a server or save the information in a database.
 
                     Scaffold.of(context).showSnackBar(
-                        SnackBar(content: Text('Processing Data')));
+                         SnackBar(content: Text('Saved data')));
+
+                    // Pass the entry created to the navigator and display the previous screen
+                    Navigator.pop(context, getAsObject());
                   }
                 },
                 child: Text('Save'),
