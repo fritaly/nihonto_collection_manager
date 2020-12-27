@@ -25,10 +25,4 @@ class Utils {
         value: e
     )).toList(growable: false);
   }
-
-  static Widget pad(Widget widget) {
-    assert (widget != null);
-
-    return new Container(padding: EdgeInsets.all(8.0), child: widget);
-  }
 }

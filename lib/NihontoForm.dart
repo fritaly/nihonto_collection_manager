@@ -3,6 +3,7 @@ import 'package:nihonto_collection_manager/Geometry.dart';
 import 'package:nihonto_collection_manager/Nihonto.dart';
 import 'package:nihonto_collection_manager/NihontoType.dart';
 import 'package:nihonto_collection_manager/Utils.dart';
+import 'package:nihonto_collection_manager/WidgetExtension.dart';
 
 class NihontoForm extends StatefulWidget {
 
@@ -38,7 +39,7 @@ class NihontoFormState extends State<NihontoForm> {
     }
   }
 
-  Nihonto getAsObject() {
+  Nihonto _createNihonto() {
     return Nihonto(_type, _geometry, _signature);
   }
 
@@ -48,7 +49,7 @@ class NihontoFormState extends State<NihontoForm> {
     return Form(
         key: _formKey,
         child: Column(children: <Widget>[
-          Utils.pad(DropdownButtonFormField(
+          DropdownButtonFormField(
               decoration: InputDecoration(labelText: 'Type'),
               value: _type,
               items: Utils.getNihontoTypeMenuItems(),
@@ -65,8 +66,8 @@ class NihontoFormState extends State<NihontoForm> {
                 });
 
                 _formKey.currentState.validate();
-              })),
-          Utils.pad(DropdownButtonFormField(
+              }),
+          DropdownButtonFormField(
               decoration: InputDecoration(labelText: 'Geometry'),
               value: _geometry,
               items: Utils.getGeometryMenuItems(),
@@ -83,8 +84,8 @@ class NihontoFormState extends State<NihontoForm> {
                 });
 
                 _formKey.currentState.validate();
-              })),
-          Utils.pad(TextFormField(
+              }),
+          TextFormField(
             initialValue: _signature,
             decoration: InputDecoration(labelText: 'Signature'),
             validator: (value) {
@@ -101,11 +102,12 @@ class NihontoFormState extends State<NihontoForm> {
 
               _formKey.currentState.validate();
             },
-          )),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Utils.pad(ElevatedButton(
+              ElevatedButton(
+                child: Text('Reset'),
                 onPressed: () {
                   setState(() {
                     _signature = "";
@@ -113,9 +115,9 @@ class NihontoFormState extends State<NihontoForm> {
                     _geometry = null;
                   });
                 },
-                child: Text('Reset'),
-              )),
-              Utils.pad(ElevatedButton(
+              ).pad(),
+              ElevatedButton(
+                child: Text('Test Data'),
                 onPressed: () {
                   setState(() {
                     _signature = "MASAMUNE";
@@ -123,9 +125,9 @@ class NihontoFormState extends State<NihontoForm> {
                     _type = NihontoType.KATANA;
                   });
                 },
-                child: Text('Test Data'),
-              )),
-              Utils.pad(ElevatedButton(
+              ).pad(),
+              ElevatedButton(
+                child: Text('Save'),
                 onPressed: () {
                   // Validate returns true if the form is valid, otherwise false.
                   if (_formKey.currentState.validate()) {
@@ -136,13 +138,12 @@ class NihontoFormState extends State<NihontoForm> {
                         SnackBar(content: Text('Saved data')));
 
                     // Pass the entry created to the navigator and display the previous screen
-                    Navigator.pop(context, getAsObject());
+                    Navigator.pop(context, _createNihonto());
                   }
                 },
-                child: Text('Save'),
-              ))
+              ).pad()
             ],
           )
-        ]));
+        ])).pad();
   }
 }
