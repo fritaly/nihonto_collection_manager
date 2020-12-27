@@ -43,6 +43,36 @@ class NihontoFormState extends State<NihontoForm> {
     return Nihonto(_type, _geometry, _signature);
   }
 
+  void _reset() {
+    setState(() {
+      _signature = "";
+      _type = null;
+      _geometry = null;
+    });
+  }
+
+  void _populateData() {
+    setState(() {
+      _signature = "MASAMUNE";
+      _geometry = Geometry.SHINOGI_ZUKURI;
+      _type = NihontoType.KATANA;
+    });
+  }
+
+  void _save() {
+    // Validate returns true if the form is valid, otherwise false.
+    if (_formKey.currentState.validate()) {
+      // If the form is valid, display a snackbar. In the real world,
+      // you'd often call a server or save the information in a database.
+
+      Scaffold.of(context).showSnackBar(
+          SnackBar(content: Text('Saved data')));
+
+      // Pass the entry created to the navigator and display the previous screen
+      Navigator.pop(context, _createNihonto());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -108,39 +138,15 @@ class NihontoFormState extends State<NihontoForm> {
             children: [
               ElevatedButton(
                 child: Text('Reset'),
-                onPressed: () {
-                  setState(() {
-                    _signature = "";
-                    _type = null;
-                    _geometry = null;
-                  });
-                },
+                onPressed: _reset
               ).pad(),
               ElevatedButton(
                 child: Text('Test Data'),
-                onPressed: () {
-                  setState(() {
-                    _signature = "MASAMUNE";
-                    _geometry = Geometry.SHINOGI_ZUKURI;
-                    _type = NihontoType.KATANA;
-                  });
-                },
+                onPressed: _populateData
               ).pad(),
               ElevatedButton(
                 child: Text('Save'),
-                onPressed: () {
-                  // Validate returns true if the form is valid, otherwise false.
-                  if (_formKey.currentState.validate()) {
-                    // If the form is valid, display a snackbar. In the real world,
-                    // you'd often call a server or save the information in a database.
-
-                    Scaffold.of(context).showSnackBar(
-                        SnackBar(content: Text('Saved data')));
-
-                    // Pass the entry created to the navigator and display the previous screen
-                    Navigator.pop(context, _createNihonto());
-                  }
-                },
+                onPressed: _save
               ).pad()
             ],
           )
