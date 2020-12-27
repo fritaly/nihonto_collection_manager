@@ -124,6 +124,8 @@ class _RandomWordsState extends State<RandomWords> {
           return Scaffold(
             appBar: AppBar(
               title: Text('Add a new nihonto'),
+              actions: [
+              ],
             ),
             body: NihontoForm(),
           );
@@ -149,6 +151,10 @@ class NihontoFormState extends State<NihontoForm> {
   final _formKey = GlobalKey<FormState>();
 
   String _type;
+
+  String _geometry;
+
+  String _signature;
 
   @override
   Widget build(BuildContext context) {
@@ -192,16 +198,49 @@ class NihontoFormState extends State<NihontoForm> {
                 _type = value;
               });
             }),
+          DropdownButtonFormField(
+              decoration: InputDecoration(
+                  labelText: 'Select the geometry'
+              ),
+              value: _geometry,
+              items: [
+                DropdownMenuItem(
+                  child: Text("Shinogi zukuri"),
+                  value: 1,
+                ),
+                DropdownMenuItem(
+                  child: Text("Shobu zukuri"),
+                  value: 2,
+                ),
+                DropdownMenuItem(
+                    child: Text("Hira zukuri"),
+                    value: 3
+                ),
+                DropdownMenuItem(
+                  child: Text("Unknown"),
+                  value: 0,
+                ),
+              ],
+              onChanged: (value) {
+                setState(() {
+                  _geometry = value;
+                });
+              }),
           TextFormField(
             decoration: InputDecoration(
-                labelText: 'Enter your username'
+                labelText: 'Signature'
             ),
-            // The validator receives the text that the user has entered.
             validator: (value) {
               if (value.isEmpty) {
-                return 'Please enter some text';
+                return 'Please enter the signature';
               }
+
               return null;
+            },
+            onChanged: (value) {
+              setState(() {
+                _signature = value;
+              });
             },
           ),
           ElevatedButton(
