@@ -124,8 +124,7 @@ class _RandomWordsState extends State<RandomWords> {
           return Scaffold(
             appBar: AppBar(
               title: Text('Add a new nihonto'),
-              actions: [
-              ],
+              actions: [],
             ),
             body: NihontoForm(),
           );
@@ -162,46 +161,33 @@ class NihontoFormState extends State<NihontoForm> {
     return Form(
         key: _formKey,
         child: Column(children: <Widget>[
-            DropdownButtonFormField(
-                decoration: InputDecoration(
-                    labelText: 'Select the type'
-                ),
-            value: _type,
-            items: [
-              DropdownMenuItem(
-                child: Text("Katana"),
-                value: 1,
-              ),
-              DropdownMenuItem(
-                child: Text("Tachi"),
-                value: 2,
-              ),
-              DropdownMenuItem(
-                  child: Text("Wakizashi"),
-                  value: 3
-              ),
-              DropdownMenuItem(
-                  child: Text("Tanto"),
-                  value: 4
-              ),
-              DropdownMenuItem(
-                  child: Text("Naginata"),
-                  value: 5
-              ),
-              DropdownMenuItem(
-                child: Text("Unknown"),
-                value: 0,
-              ),
-            ],
-            onChanged: (value) {
-              setState(() {
-                _type = value;
-              });
-            }),
           DropdownButtonFormField(
-              decoration: InputDecoration(
-                  labelText: 'Select the geometry'
-              ),
+              decoration: InputDecoration(labelText: 'Select the type'),
+              value: _type,
+              items: [
+                DropdownMenuItem(
+                  child: Text("Katana"),
+                  value: 1,
+                ),
+                DropdownMenuItem(
+                  child: Text("Tachi"),
+                  value: 2,
+                ),
+                DropdownMenuItem(child: Text("Wakizashi"), value: 3),
+                DropdownMenuItem(child: Text("Tanto"), value: 4),
+                DropdownMenuItem(child: Text("Naginata"), value: 5),
+                DropdownMenuItem(
+                  child: Text("Unknown"),
+                  value: 0,
+                ),
+              ],
+              onChanged: (value) {
+                setState(() {
+                  _type = value;
+                });
+              }),
+          DropdownButtonFormField(
+              decoration: InputDecoration(labelText: 'Select the geometry'),
               value: _geometry,
               items: [
                 DropdownMenuItem(
@@ -212,10 +198,7 @@ class NihontoFormState extends State<NihontoForm> {
                   child: Text("Shobu zukuri"),
                   value: 2,
                 ),
-                DropdownMenuItem(
-                    child: Text("Hira zukuri"),
-                    value: 3
-                ),
+                DropdownMenuItem(child: Text("Hira zukuri"), value: 3),
                 DropdownMenuItem(
                   child: Text("Unknown"),
                   value: 0,
@@ -227,9 +210,7 @@ class NihontoFormState extends State<NihontoForm> {
                 });
               }),
           TextFormField(
-            decoration: InputDecoration(
-                labelText: 'Signature'
-            ),
+            decoration: InputDecoration(labelText: 'Signature'),
             validator: (value) {
               if (value.isEmpty) {
                 return 'Please enter the signature';
@@ -243,19 +224,29 @@ class NihontoFormState extends State<NihontoForm> {
               });
             },
           ),
-          ElevatedButton(
-            onPressed: () {
-              // Validate returns true if the form is valid, otherwise false.
-              if (_formKey.currentState.validate()) {
-                // If the form is valid, display a snackbar. In the real world,
-                // you'd often call a server or save the information in a database.
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  _formKey.currentState.reset();
+                },
+                child: Text('Reset'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // Validate returns true if the form is valid, otherwise false.
+                  if (_formKey.currentState.validate()) {
+                    // If the form is valid, display a snackbar. In the real world,
+                    // you'd often call a server or save the information in a database.
 
-                Scaffold
-                    .of(context)
-                    .showSnackBar(SnackBar(content: Text('Processing Data')));
-              }
-            },
-            child: Text('Submit'),
+                    Scaffold.of(context).showSnackBar(
+                        SnackBar(content: Text('Processing Data')));
+                  }
+                },
+                child: Text('Submit'),
+              )
+            ],
           )
         ]));
   }
