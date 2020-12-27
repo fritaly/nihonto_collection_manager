@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:nihonto_collection_manager/Currency.dart';
 import 'package:nihonto_collection_manager/Geometry.dart';
+import 'package:nihonto_collection_manager/Money.dart';
 import 'package:nihonto_collection_manager/Nihonto.dart';
 import 'package:nihonto_collection_manager/NihontoType.dart';
 import 'package:nihonto_collection_manager/Utils.dart';
@@ -30,17 +33,20 @@ class NihontoFormState extends State<NihontoForm> {
 
   String _signature;
 
+  Money _price = Money(0, Currency.USD);
+
   NihontoFormState(Nihonto nihonto) {
     // The argument can be null
     if (nihonto != null) {
       _type = nihonto.type;
       _geometry = nihonto.geometry;
       _signature = nihonto.signature;
+      _price = nihonto.price;
     }
   }
 
   Nihonto _createNihonto() {
-    return Nihonto(_type, _geometry, _signature);
+    return Nihonto(_type, _geometry, _signature, price: _price);
   }
 
   void _reset() {
@@ -48,6 +54,7 @@ class NihontoFormState extends State<NihontoForm> {
       _signature = "";
       _type = null;
       _geometry = null;
+      _price = Money.ZERO;
     });
   }
 
@@ -56,6 +63,7 @@ class NihontoFormState extends State<NihontoForm> {
       _signature = "MASAMUNE";
       _geometry = Geometry.SHINOGI_ZUKURI;
       _type = NihontoType.KATANA;
+      _price = Money(1500, Currency.USD);
     });
   }
 
@@ -133,6 +141,21 @@ class NihontoFormState extends State<NihontoForm> {
               _formKey.currentState.validate();
             },
           ),
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Price'),
+            initialValue: "${_price.amount}",
+            keyboardType: TextInputType.number,
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.digitsOnly
+            ]
+          ),
+          DropdownButtonFormField(
+              decoration: InputDecoration(labelText: 'Currency'),
+              value: _price.currency,
+              items: Utils.getCurrencyMenuItems(),
+              onChanged: (value) {
+
+              },),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
