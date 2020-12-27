@@ -48,7 +48,7 @@ class NihontoFormState extends State<NihontoForm> {
     return Form(
         key: _formKey,
         child: Column(children: <Widget>[
-          DropdownButtonFormField(
+          Utils.pad(DropdownButtonFormField(
               decoration: InputDecoration(labelText: 'Type'),
               value: _type,
               items: Utils.getNihontoTypeMenuItems(),
@@ -65,8 +65,8 @@ class NihontoFormState extends State<NihontoForm> {
                 });
 
                 _formKey.currentState.validate();
-              }),
-          DropdownButtonFormField(
+              })),
+          Utils.pad(DropdownButtonFormField(
               decoration: InputDecoration(labelText: 'Geometry'),
               value: _geometry,
               items: Utils.getGeometryMenuItems(),
@@ -83,8 +83,8 @@ class NihontoFormState extends State<NihontoForm> {
                 });
 
                 _formKey.currentState.validate();
-              }),
-          TextFormField(
+              })),
+          Utils.pad(TextFormField(
             initialValue: _signature,
             decoration: InputDecoration(labelText: 'Signature'),
             validator: (value) {
@@ -101,7 +101,7 @@ class NihontoFormState extends State<NihontoForm> {
 
               _formKey.currentState.validate();
             },
-          ),
+          )),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
