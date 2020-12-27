@@ -52,26 +52,44 @@ class NihontoFormState extends State<NihontoForm> {
               decoration: InputDecoration(labelText: 'Type'),
               value: _type,
               items: Utils.getNihontoTypeMenuItems(),
+              validator: (value) {
+                if (value == null) {
+                  return 'Required';
+                }
+
+                return null;
+              },
               onChanged: (value) {
                 setState(() {
                   _type = value;
                 });
+
+                _formKey.currentState.validate();
               }),
           DropdownButtonFormField(
               decoration: InputDecoration(labelText: 'Geometry'),
               value: _geometry,
               items: Utils.getGeometryMenuItems(),
+              validator: (value) {
+                if (value == null) {
+                  return 'Required';
+                }
+
+                return null;
+              },
               onChanged: (value) {
                 setState(() {
                   _geometry = value;
                 });
+
+                _formKey.currentState.validate();
               }),
           TextFormField(
             initialValue: _signature,
             decoration: InputDecoration(labelText: 'Signature'),
             validator: (value) {
               if (value.isEmpty) {
-                return 'Please enter the signature';
+                return 'Required';
               }
 
               return null;
@@ -80,6 +98,8 @@ class NihontoFormState extends State<NihontoForm> {
               setState(() {
                 _signature = value;
               });
+
+              _formKey.currentState.validate();
             },
           ),
           Row(
