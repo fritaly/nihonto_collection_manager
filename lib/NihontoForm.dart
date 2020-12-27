@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/Geometry.dart';
 import 'package:nihonto_collection_manager/Nihonto.dart';
 import 'package:nihonto_collection_manager/NihontoType.dart';
+import 'package:nihonto_collection_manager/Utils.dart';
 
 class NihontoForm extends StatefulWidget {
 
@@ -48,49 +49,18 @@ class NihontoFormState extends State<NihontoForm> {
         key: _formKey,
         child: Column(children: <Widget>[
           DropdownButtonFormField(
-              decoration: InputDecoration(labelText: 'Select the type'),
+              decoration: InputDecoration(labelText: 'Type'),
               value: _type,
-              items: [
-                DropdownMenuItem(
-                  child: Text("Katana"),
-                  value: NihontoType.KATANA,
-                ),
-                DropdownMenuItem(
-                  child: Text("Tachi"),
-                  value: NihontoType.TACHI,
-                ),
-                DropdownMenuItem(child: Text("Wakizashi"), value: NihontoType.WAKIZASHI),
-                DropdownMenuItem(child: Text("Tanto"), value: NihontoType.TANTO),
-                DropdownMenuItem(child: Text("Naginata"), value: NihontoType.NAGINATA),
-                DropdownMenuItem(child: Text("Nagamaki"), value: NihontoType.NAGAMAKI),
-                DropdownMenuItem(
-                  child: Text("Unknown"),
-                  value: NihontoType.UNKNOWN,
-                ),
-              ],
+              items: Utils.getNihontoTypeMenuItems(),
               onChanged: (value) {
                 setState(() {
                   _type = value;
                 });
               }),
           DropdownButtonFormField(
-              decoration: InputDecoration(labelText: 'Select the geometry'),
+              decoration: InputDecoration(labelText: 'Geometry'),
               value: _geometry,
-              items: [
-                DropdownMenuItem(
-                  child: Text("Shinogi zukuri"),
-                  value: Geometry.SHINOGI_ZUKURI,
-                ),
-                DropdownMenuItem(
-                  child: Text("Shobu zukuri"),
-                  value: Geometry.SHOBU_ZUKURI,
-                ),
-                DropdownMenuItem(child: Text("Hira zukuri"), value: Geometry.HIRA_ZUKURI),
-                DropdownMenuItem(
-                  child: Text("Unknown"),
-                  value: Geometry.UNKNOWN,
-                ),
-              ],
+              items: Utils.getGeometryMenuItems(),
               onChanged: (value) {
                 setState(() {
                   _geometry = value;
