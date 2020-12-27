@@ -156,23 +156,20 @@ class NihontoFormState extends State<NihontoForm> {
               onChanged: (value) {
 
               },),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
+          ButtonBar(children: [
+            ElevatedButton(
                 child: Text('Reset'),
                 onPressed: _reset
-              ).pad(),
-              ElevatedButton(
+            ),
+            ElevatedButton(
                 child: Text('Test Data'),
                 onPressed: _populateData
-              ).pad(),
-              ElevatedButton(
+            ),
+            ElevatedButton(
                 child: Text('Save'),
                 onPressed: _save
-              ).pad()
-            ],
-          )
+            )
+          ])
         ])).pad();
   }
 }
