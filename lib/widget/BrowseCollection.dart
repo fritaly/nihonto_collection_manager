@@ -95,7 +95,7 @@ class _BrowseCollectionState extends State<BrowseCollection> {
     }
   }
 
-  void _pushShow(Nihonto nihonto) {
+  void _pushShow(Nihonto nihonto) async {
     assert(nihonto != null);
 
     var route = MaterialPageRoute<void>(
@@ -109,6 +109,18 @@ class _BrowseCollectionState extends State<BrowseCollection> {
       },
     );
 
-    Navigator.of(context).push(route);
+    final result = await Navigator.of(context).push(route) as Nihonto;
+
+    if (result != null) {
+      print("Nihonto updated: ${result}");
+
+      setState(() {
+        // Replace the nihonto in the collection
+        var index = _collection.indexOf(nihonto);
+
+        _collection.removeAt(index);
+        _collection.replaceRange(index, index+1, [ result ]);
+      });
+    }
   }
 }
