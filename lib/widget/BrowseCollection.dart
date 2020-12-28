@@ -78,7 +78,7 @@ class _BrowseCollectionState extends State<BrowseCollection> {
             title: Text('Add a new nihonto'),
             actions: [],
           ),
-          body: NihontoForm(null), // TODO Use a no-arg constructor
+          body: NihontoForm(),
         );
       },
     );

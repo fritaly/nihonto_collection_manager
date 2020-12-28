@@ -15,8 +15,7 @@ class NihontoForm extends StatefulWidget {
 
   Nihonto _nihonto;
 
-  NihontoForm(Nihonto nihonto) {
-    // The argument can be null
+  NihontoForm([ Nihonto nihonto ]) {
     _nihonto = nihonto;
   }
 
