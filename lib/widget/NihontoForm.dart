@@ -97,7 +97,9 @@ class NihontoFormState extends State<NihontoForm> {
     // Money can be null
     assert (context != null);
 
-    var form = MoneyForm(money);
+    final key = GlobalKey<MoneyFormState>();
+
+    var form = MoneyForm(money: money, key: key);
 
     final AlertDialog dialog = AlertDialog(
       title: Text(''),
@@ -110,7 +112,13 @@ class NihontoFormState extends State<NihontoForm> {
         ),
         ElevatedButton(
           // Return the new price to the caller via the navigator stack
-          onPressed: () => Navigator.pop(context, Money(1000, Currency.EUR)),
+          onPressed: () {
+            var data = key.currentState.getMoney();
+
+            print('Data: ${data}');
+
+            return Navigator.pop(context, data);
+          },
           child: Text('OK'),
         ),
       ],
