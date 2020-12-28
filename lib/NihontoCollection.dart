@@ -3,26 +3,23 @@ import 'package:nihonto_collection_manager/Nihonto.dart';
 import 'package:nihonto_collection_manager/NihontoForm.dart';
 
 class NihontoCollection extends StatefulWidget {
-
   List<Nihonto> _collection;
 
   NihontoCollection(List<Nihonto> collection) {
-    assert (collection != null);
+    assert(collection != null);
 
     _collection = collection;
   }
-
 
   @override
   _NihontoCollectionState createState() => _NihontoCollectionState(_collection);
 }
 
 class _NihontoCollectionState extends State<NihontoCollection> {
-
   List<Nihonto> _collection;
 
   _NihontoCollectionState(List<Nihonto> collection) {
-    assert (collection != null);
+    assert(collection != null);
 
     _collection = collection;
   }
@@ -50,7 +47,7 @@ class _NihontoCollectionState extends State<NihontoCollection> {
   }
 
   Widget _buildRow(Nihonto nihonto) {
-    assert (nihonto != null);
+    assert(nihonto != null);
 
     return ListTile(
       title: Text(
@@ -66,14 +63,11 @@ class _NihontoCollectionState extends State<NihontoCollection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Nihonto Collection'),
-        actions: [
-          IconButton(icon: Icon(Icons.add), onPressed: _pushAdd),
-        ],
-      ),
-      body: _buildWidget(),
-    );
+        body: _buildWidget(),
+        floatingActionButton: FloatingActionButton(
+            onPressed: _pushAdd,
+            child: Icon(Icons.add),
+            backgroundColor: Colors.green));
   }
 
   void _pushAdd() async {
@@ -100,17 +94,16 @@ class _NihontoCollectionState extends State<NihontoCollection> {
   }
 
   void _pushShow(Nihonto nihonto) {
-    assert (nihonto != null);
+    assert(nihonto != null);
 
     var route = MaterialPageRoute<void>(
       builder: (BuildContext context) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text('Nihonto information'),
-            actions: [],
-          ),
-          body: NihontoForm(nihonto),
-        );
+            appBar: AppBar(
+              title: Text('Nihonto information'),
+              actions: [],
+            ),
+            body: NihontoForm(nihonto));
       },
     );
 
