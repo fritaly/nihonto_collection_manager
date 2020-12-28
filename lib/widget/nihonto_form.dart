@@ -14,12 +14,12 @@ import 'package:nihonto_collection_manager/widget/length_widget.dart';
 import 'package:nihonto_collection_manager/widget/money_widget.dart';
 
 class NihontoForm extends StatefulWidget {
-
-  static final TextInputFormatter decimalNumber = FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'));
+  static final TextInputFormatter decimalNumber =
+      FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'));
 
   Nihonto _nihonto;
 
-  NihontoForm([ Nihonto nihonto ]) {
+  NihontoForm([Nihonto nihonto]) {
     _nihonto = nihonto;
   }
 
@@ -61,7 +61,14 @@ class NihontoFormState extends State<NihontoForm> {
   }
 
   Nihonto _createNihonto() {
-    return Nihonto(type: _type, geometry: _geometry, signature: _signature, price: _price, nagasa: _nagasa, sori: _sori, soriType: _soriType);
+    return Nihonto(
+        type: _type,
+        geometry: _geometry,
+        signature: _signature,
+        price: _price,
+        nagasa: _nagasa,
+        sori: _sori,
+        soriType: _soriType);
   }
 
   void _reset() {
@@ -76,7 +83,7 @@ class NihontoFormState extends State<NihontoForm> {
     });
   }
 
-  void _populateData() {
+  void _randomize() {
     setState(() {
       var random = Nihonto.random();
 
@@ -96,8 +103,7 @@ class NihontoFormState extends State<NihontoForm> {
       // If the form is valid, display a snackbar. In the real world,
       // you'd often call a server or save the information in a database.
 
-      Scaffold.of(context).showSnackBar(
-          SnackBar(content: Text('Saved data')));
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text('Saved data')));
 
       // Pass the entry created to the navigator and display the previous screen
       var created = _createNihonto();
@@ -108,7 +114,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   AlertDialog _showPriceDialog(BuildContext context, Money money) {
     // Money can be null
-    assert (context != null);
+    assert(context != null);
 
     final key = GlobalKey<MoneyWidgetState>();
 
@@ -142,7 +148,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   AlertDialog _showNagasaDialog(BuildContext context, Length length) {
     // length can be null
-    assert (context != null);
+    assert(context != null);
 
     final key = GlobalKey<LengthWidgetState>();
 
@@ -176,7 +182,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   AlertDialog _showSoriDialog(BuildContext context, Length length) {
     // length can be null
-    assert (context != null);
+    assert(context != null);
 
     final key = GlobalKey<LengthWidgetState>();
 
@@ -214,7 +220,6 @@ class NihontoFormState extends State<NihontoForm> {
     return Form(
         key: _formKey,
         child: Column(children: <Widget>[
-
           // ============ //
           // === Type === //
           // ============ //
@@ -268,7 +273,8 @@ class NihontoFormState extends State<NihontoForm> {
           TextFormField(
             decoration: InputDecoration(labelText: 'Signature (romaji)'),
             initialValue: _signature.romaji,
-            key: Key('Signature-${_signature.romaji}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+            key: Key(
+                'Signature-${_signature.romaji}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
             onChanged: (value) {
               setState(() {
                 _signature = _signature.copyWith(romaji: value);
@@ -281,7 +287,8 @@ class NihontoFormState extends State<NihontoForm> {
           TextFormField(
             decoration: InputDecoration(labelText: 'Signature (kanji)'),
             initialValue: _signature.kanji,
-            key: Key('Signature-${_signature.kanji}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+            key: Key(
+                'Signature-${_signature.kanji}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
             onChanged: (value) {
               setState(() {
                 _signature = _signature.copyWith(kanji: value);
@@ -291,6 +298,36 @@ class NihontoFormState extends State<NihontoForm> {
             },
           ),
 
+          SwitchListTile(
+              title: Text('Mumei'),
+              value: _signature.mumei,
+              controlAffinity: ListTileControlAffinity.leading,
+              onChanged: (value) {
+                setState(() {
+                  _signature = _signature.copyWith(mumei: value);
+                });
+              }),
+
+          SwitchListTile(
+              title: Text('Gimei'),
+              value: _signature.gimei,
+              controlAffinity: ListTileControlAffinity.leading,
+              onChanged: (value) {
+                setState(() {
+                  _signature = _signature.copyWith(gimei: value);
+                });
+              }),
+
+          SwitchListTile(
+              title: Text('Modern'),
+              value: _signature.modern,
+              controlAffinity: ListTileControlAffinity.leading,
+              onChanged: (value) {
+                setState(() {
+                  _signature = _signature.copyWith(modern: value);
+                });
+              }),
+
           // ============= //
           // === Price === //
           // ============= //
@@ -299,9 +336,14 @@ class NihontoFormState extends State<NihontoForm> {
             decoration: InputDecoration(labelText: 'Price'),
             readOnly: true,
             initialValue: "${_price.toText()}",
-            key: Key('Price-${_price.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+            key: Key(
+                'Price-${_price.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
             onTap: () {
-              showDialog(context: context, builder: (context) { return _showPriceDialog(context, _price); }).then((value) {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return _showPriceDialog(context, _price);
+                  }).then((value) {
                 if (value != null) {
                   setState(() {
                     // Update the price based on the value returned by the dialog
@@ -324,9 +366,14 @@ class NihontoFormState extends State<NihontoForm> {
             decoration: InputDecoration(labelText: 'Nagasa'),
             readOnly: true,
             initialValue: "${_nagasa?.toText() ?? ''}",
-            key: Key('Nagasa-${_nagasa?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+            key: Key(
+                'Nagasa-${_nagasa?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
             onTap: () {
-              showDialog(context: context, builder: (context) { return _showNagasaDialog(context, _nagasa); }).then((value) {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return _showNagasaDialog(context, _nagasa);
+                  }).then((value) {
                 if (value != null) {
                   setState(() {
                     // Update the nagasa based on the value returned by the dialog
@@ -349,9 +396,14 @@ class NihontoFormState extends State<NihontoForm> {
             decoration: InputDecoration(labelText: 'Sori'),
             readOnly: true,
             initialValue: "${_sori?.toText() ?? ''}",
-            key: Key('Sori-${_sori?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+            key: Key(
+                'Sori-${_sori?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
             onTap: () {
-              showDialog(context: context, builder: (context) { return _showSoriDialog(context, _sori); }).then((value) {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return _showSoriDialog(context, _sori);
+                  }).then((value) {
                 if (value != null) {
                   setState(() {
                     // Update the sori based on the value returned by the dialog
@@ -385,18 +437,9 @@ class NihontoFormState extends State<NihontoForm> {
           // =============== //
 
           ButtonBar(children: [
-            ElevatedButton(
-                child: Text('Reset'),
-                onPressed: _reset
-            ),
-            ElevatedButton(
-                child: Text('Randomize'),
-                onPressed: _populateData
-            ),
-            ElevatedButton(
-                child: Text('Save'),
-                onPressed: _save
-            )
+            ElevatedButton(child: Text('Reset'), onPressed: _reset),
+            ElevatedButton(child: Text('Randomize'), onPressed: _randomize),
+            ElevatedButton(child: Text('Save'), onPressed: _save)
           ])
         ])).pad();
   }
