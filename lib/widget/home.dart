@@ -19,12 +19,17 @@ class _HomeState extends State<Home> {
         actions: [
         ],
       ),
-      body: Column(
-        children: [
-          ElevatedButton(onPressed: _pushBrowse, child: Text('Browse collection')),
-          ElevatedButton(onPressed: _pushConverter, child: Text('Unit converter'))
-        ]
-      ),
+      body: Padding(
+        padding: EdgeInsets.all(8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ElevatedButton(onPressed: _pushBrowse, child: Text('Browse collection')),
+            ElevatedButton(onPressed: _pushConverter, child: Text('Unit converter')),
+            ElevatedButton(onPressed: null, child: Text('Date converter')),
+            ElevatedButton(onPressed: null, child: Text('Wish list')),
+          ]
+      ),),
     );
   }
 
