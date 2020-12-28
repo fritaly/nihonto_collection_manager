@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nihonto_collection_manager/model/Nihonto.dart';
-import 'package:nihonto_collection_manager/widget/NihontoForm.dart';
+import 'package:nihonto_collection_manager/model/nihonto.dart';
+import 'package:nihonto_collection_manager/widget/nihonto_form.dart';
 
 class BrowseCollection extends StatefulWidget {
   List<Nihonto> _collection;

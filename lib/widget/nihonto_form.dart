@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nihonto_collection_manager/model/Currency.dart';
-import 'package:nihonto_collection_manager/model/Geometry.dart';
-import 'package:nihonto_collection_manager/model/Length.dart';
-import 'package:nihonto_collection_manager/model/Money.dart';
-import 'package:nihonto_collection_manager/model/Nihonto.dart';
-import 'package:nihonto_collection_manager/model/NihontoType.dart';
-import 'package:nihonto_collection_manager/Utils.dart';
-import 'package:nihonto_collection_manager/Extensions.dart';
-import 'package:nihonto_collection_manager/widget/MoneyForm.dart';
+import 'package:nihonto_collection_manager/model/currency.dart';
+import 'package:nihonto_collection_manager/model/geometry.dart';
+import 'package:nihonto_collection_manager/model/length.dart';
+import 'package:nihonto_collection_manager/model/money.dart';
+import 'package:nihonto_collection_manager/model/nihonto.dart';
+import 'package:nihonto_collection_manager/model/nihonto_type.dart';
+import 'package:nihonto_collection_manager/extensions.dart';
+import 'package:nihonto_collection_manager/utils.dart';
+import 'package:nihonto_collection_manager/widget/money_form.dart';
 
 class NihontoForm extends StatefulWidget {
 

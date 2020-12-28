@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:nihonto_collection_manager/Extensions.dart';
-import 'package:nihonto_collection_manager/model/LengthUnit.dart';
+import 'package:nihonto_collection_manager/extensions.dart';
+import 'package:nihonto_collection_manager/model/length_unit.dart';
 
 class Length {
 

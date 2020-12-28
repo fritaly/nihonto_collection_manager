@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nihonto_collection_manager/Extensions.dart';
-import 'package:nihonto_collection_manager/Utils.dart';
-import 'package:nihonto_collection_manager/model/Currency.dart';
-import 'package:nihonto_collection_manager/model/Money.dart';
+import 'package:nihonto_collection_manager/extensions.dart';
+import 'package:nihonto_collection_manager/utils.dart';
+import 'package:nihonto_collection_manager/model/currency.dart';
+import 'package:nihonto_collection_manager/model/money.dart';
 
 class MoneyForm extends StatefulWidget {
   static final TextInputFormatter decimalNumber =

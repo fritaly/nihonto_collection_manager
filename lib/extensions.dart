@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nihonto_collection_manager/model/Currency.dart';
-import 'package:nihonto_collection_manager/model/Geometry.dart';
-import 'package:nihonto_collection_manager/model/LengthUnit.dart';
-import 'package:nihonto_collection_manager/model/NihontoType.dart';
+import 'package:nihonto_collection_manager/model/currency.dart';
+import 'package:nihonto_collection_manager/model/geometry.dart';
+import 'package:nihonto_collection_manager/model/length_unit.dart';
+import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 
 extension StringExtension on String {
   String capitalize() {
