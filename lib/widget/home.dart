@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
 import 'package:nihonto_collection_manager/widget/browse_collection.dart';
+import 'package:nihonto_collection_manager/widget/unit_converter.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -20,7 +21,8 @@ class _HomeState extends State<Home> {
       ),
       body: Column(
         children: [
-          ElevatedButton(onPressed: _pushBrowse, child: Text('Browse collection'))
+          ElevatedButton(onPressed: _pushBrowse, child: Text('Browse collection')),
+          ElevatedButton(onPressed: _pushConverter, child: Text('Unit converter'))
         ]
       ),
     );
@@ -35,6 +37,22 @@ class _HomeState extends State<Home> {
             actions: [],
           ),
           body: BrowseCollection(_collection),
+        );
+      },
+    );
+
+    Navigator.of(context).push(route);
+  }
+
+  void _pushConverter() {
+    var route = MaterialPageRoute<void>(
+      builder: (BuildContext context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Unit converter'),
+            actions: [],
+          ),
+          body: UnitConverter(),
         );
       },
     );
