@@ -3,6 +3,7 @@ import 'package:nihonto_collection_manager/model/currency.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
+import 'package:nihonto_collection_manager/model/sori_type.dart';
 
 extension StringExtension on String {
   String capitalize() {
@@ -50,5 +51,16 @@ extension LengthUnitExtension on LengthUnit {
 
   String name() {
     return this.toString().split('.').last;
+  }
+}
+
+extension SoriExtension on SoriType {
+
+  String name() {
+    return this.toString().split('.').last;
+  }
+
+  String label() {
+    return name().capitalize().replaceAll(new RegExp("_"), " ");
   }
 }

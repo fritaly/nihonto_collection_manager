@@ -6,6 +6,7 @@ import 'package:nihonto_collection_manager/model/currency.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
+import 'package:nihonto_collection_manager/model/sori_type.dart';
 
 class Utils {
 
@@ -37,6 +38,13 @@ class Utils {
     )).toList(growable: false);
   }
 
+  static List<DropdownMenuItem> getSoriTypeMenuItems() {
+    return SoriType.values.map((e) => DropdownMenuItem(
+        child: Text(e.label()),
+        value: e
+    )).toList(growable: false);
+  }
+
   static T random<T>(List<T> list) {
     assert (list != null);
 
@@ -53,6 +61,10 @@ class Utils {
 
   static NihontoType randomNihontoType() {
     return Utils.random(NihontoType.values);
+  }
+
+  static SoriType randomSoriType() {
+    return Utils.random(SoriType.values);
   }
 
   static String randomSignature() {

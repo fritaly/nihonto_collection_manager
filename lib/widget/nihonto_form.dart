@@ -7,6 +7,7 @@ import 'package:nihonto_collection_manager/model/money.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/extensions.dart';
+import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 import 'package:nihonto_collection_manager/widget/length_widget.dart';
 import 'package:nihonto_collection_manager/widget/money_widget.dart';
@@ -41,6 +42,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   Length _nagasa, _sori;
 
+  SoriType _soriType;
+
   // TODO Add motohaba, sakihaba, motokasane, sakikasane, sori
 
   NihontoFormState(Nihonto nihonto) {
@@ -52,11 +55,12 @@ class NihontoFormState extends State<NihontoForm> {
       _price = nihonto.price;
       _nagasa = nihonto.nagasa;
       _sori = nihonto.sori;
+      _soriType = nihonto.soriType;
     }
   }
 
   Nihonto _createNihonto() {
-    return Nihonto(_type, _geometry, _signature, price: _price, nagasa: _nagasa, sori: _sori);
+    return Nihonto(_type, _geometry, _signature, price: _price, nagasa: _nagasa, sori: _sori, soriType: _soriType);
   }
 
   void _reset() {
@@ -67,6 +71,7 @@ class NihontoFormState extends State<NihontoForm> {
       _price = Money.ZERO;
       _nagasa = null;
       _sori = null;
+      _soriType = null;
     });
   }
 
@@ -78,8 +83,9 @@ class NihontoFormState extends State<NihontoForm> {
       _geometry = random.geometry;
       _type = random.type;
       _price = random.price;
-      _nagasa = Length.random();
-      _sori = Length.random(min: 0, max: 3);
+      _nagasa = random.nagasa;
+      _sori = random.sori;
+      _soriType = random.soriType;
     });
   }
 
@@ -326,9 +332,9 @@ class NihontoFormState extends State<NihontoForm> {
             },
           ),
 
-          // ============== //
+          // ============ //
           // === Sori === //
-          // ============== //
+          // ============ //
 
           TextFormField(
             decoration: InputDecoration(labelText: 'Sori'),
@@ -349,6 +355,20 @@ class NihontoFormState extends State<NihontoForm> {
               });
             },
           ),
+
+          // ================= //
+          // === Sori Type === //
+          // ================= //
+
+          DropdownButtonFormField(
+              decoration: InputDecoration(labelText: 'Sori type'),
+              value: _soriType,
+              items: Utils.getSoriTypeMenuItems(),
+              onChanged: (value) {
+                setState(() {
+                  _soriType = value;
+                });
+              }),
 
           // =============== //
           // === Buttons === //
