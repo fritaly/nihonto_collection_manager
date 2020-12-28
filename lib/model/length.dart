@@ -23,8 +23,7 @@ class Length {
   }
 
   static Length random({ double min = 25, double max = 75 }) {
-    assert (min > 10);
-    assert (max > 10);
+    assert (min >= 0);
     assert (min < max);
 
     var span = max - min;

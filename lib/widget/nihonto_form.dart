@@ -39,7 +39,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   Money _price = Money(0, Currency.USD);
 
-  Length _nagasa;
+  Length _nagasa, _sori;
 
   // TODO Add motohaba, sakihaba, motokasane, sakikasane, sori
 
@@ -51,11 +51,12 @@ class NihontoFormState extends State<NihontoForm> {
       _signature = nihonto.signature;
       _price = nihonto.price;
       _nagasa = nihonto.nagasa;
+      _sori = nihonto.sori;
     }
   }
 
   Nihonto _createNihonto() {
-    return Nihonto(_type, _geometry, _signature, price: _price, nagasa: _nagasa);
+    return Nihonto(_type, _geometry, _signature, price: _price, nagasa: _nagasa, sori: _sori);
   }
 
   void _reset() {
@@ -65,6 +66,7 @@ class NihontoFormState extends State<NihontoForm> {
       _geometry = null;
       _price = Money.ZERO;
       _nagasa = null;
+      _sori = null;
     });
   }
 
@@ -77,6 +79,7 @@ class NihontoFormState extends State<NihontoForm> {
       _type = random.type;
       _price = random.price;
       _nagasa = Length.random();
+      _sori = Length.random(min: 0, max: 3);
     });
   }
 
@@ -140,6 +143,40 @@ class NihontoFormState extends State<NihontoForm> {
 
     final AlertDialog dialog = AlertDialog(
       title: Text('Set the nagasa'),
+      contentPadding: EdgeInsets.zero,
+      content: form,
+      actions: [
+        ElevatedButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text('Cancel'),
+        ),
+        ElevatedButton(
+          // Return the new price to the caller via the navigator stack
+          onPressed: () {
+            var data = key.currentState.getLength();
+
+            print('Data: ${data}');
+
+            return Navigator.pop(context, data);
+          },
+          child: Text('OK'),
+        ),
+      ],
+    );
+
+    return dialog;
+  }
+
+  AlertDialog _showSoriDialog(BuildContext context, Length length) {
+    // length can be null
+    assert (context != null);
+
+    final key = GlobalKey<LengthWidgetState>();
+
+    var form = LengthWidget(length: length, key: key);
+
+    final AlertDialog dialog = AlertDialog(
+      title: Text('Set the sori'),
       contentPadding: EdgeInsets.zero,
       content: form,
       actions: [
@@ -289,30 +326,29 @@ class NihontoFormState extends State<NihontoForm> {
             },
           ),
 
-          // TextFormField(
-          //     decoration: InputDecoration(labelText: 'Nagasa'),
-          //     initialValue: _nagasa?.value?.toString() ?? '',
-          //     key: Key("Nagasa-${_nagasa?.value}"), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
-          //     keyboardType: TextInputType.numberWithOptions(decimal: true),
-          //     inputFormatters: <TextInputFormatter>[
-          //       NihontoForm.decimalNumber
-          //     ],
-          //   validator: (value) {
-          //       if (!Utils.isDoubleValue(value)) {
-          //         return 'Invalid value';
-          //       }
-          //
-          //       return null;
-          //   },
-          //   onChanged: (value) {
-          //       // TODO To implement
-          //     setState(() {
-          //       _nagasa = Length(double.parse(value), _nagasa.unit);
-          //
-          //       print("Nagasa set to ${_nagasa}");
-          //     });
-          //   },
-          // ),
+          // ============== //
+          // === Sori === //
+          // ============== //
+
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Sori'),
+            initialValue: "${_sori?.toText() ?? ''}",
+            key: Key('Sori-${_sori?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+            onTap: () {
+              showDialog(context: context, builder: (context) { return _showSoriDialog(context, _sori); }).then((value) {
+                if (value != null) {
+                  setState(() {
+                    // Update the sori based on the value returned by the dialog
+                    _sori = value;
+
+                    print("Sori set to ${value}");
+                  });
+                } else {
+                  // The value is null if the user clicked "Cancel"
+                }
+              });
+            },
+          ),
 
           // =============== //
           // === Buttons === //

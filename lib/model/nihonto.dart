@@ -15,9 +15,9 @@ class Nihonto {
 
   final Money price;
 
-  final Length nagasa;
+  final Length nagasa, sori;
 
-  const Nihonto(this.type, this.geometry, this.signature, { this.price = Money.ZERO, this.nagasa = null });
+  const Nihonto(this.type, this.geometry, this.signature, { this.price = Money.ZERO, this.nagasa, this.sori });
 
   static Nihonto random() {
     return Nihonto(
@@ -25,11 +25,12 @@ class Nihonto {
         Utils.randomGeometry(),
         Utils.randomSignature(),
         price: Money.random(),
-        nagasa: Length.random(min: 25, max: 75)
+        nagasa: Length.random(min: 25, max: 75),
+        sori: Length.random(min: 0, max: 3),
     );
   }
 
   String toString() {
-    return "Nihonto[type: ${type.name()}, signature: '${signature}', geometry: ${geometry.name()}, price: ${price}, nagasa: ${nagasa}]";
+    return "Nihonto[type: ${type.name()}, signature: '${signature}', geometry: ${geometry.name()}, price: ${price}, nagasa: ${nagasa}, sori: ${sori}]";
   }
 }
