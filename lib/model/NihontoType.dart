@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/Extensions.dart';
+import 'package:nihonto_collection_manager/Utils.dart';
 
 enum NihontoType {
   KATANA,
@@ -19,5 +20,9 @@ extension NihontoTypeExtension on NihontoType {
 
   String label() {
     return name().capitalize();
+  }
+
+  static NihontoType random() {
+    return Utils.random(NihontoType.values);
   }
 }

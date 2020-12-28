@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/Extensions.dart';
+import 'package:nihonto_collection_manager/Utils.dart';
 
 enum Geometry {
   SHINOGI_ZUKURI,
@@ -19,5 +20,9 @@ extension GeometryExtension on Geometry {
 
   String label() {
     return name().capitalize().replaceAll(new RegExp("_"), " ");
+  }
+
+  static Geometry random() {
+    return Utils.random(Geometry.values);
   }
 }

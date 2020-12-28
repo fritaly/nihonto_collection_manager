@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/model/Currency.dart';
 import 'package:nihonto_collection_manager/model/Geometry.dart';
@@ -24,5 +26,11 @@ class Utils {
         child: Text(e.name()),
         value: e
     )).toList(growable: false);
+  }
+
+  static T random<T>(List<T> list) {
+    assert (list != null);
+
+    return list[Random().nextInt(list.length)];
   }
 }

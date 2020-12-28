@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:nihonto_collection_manager/model/Currency.dart';
 
 class Money {
@@ -11,5 +13,9 @@ class Money {
 
   String toText() {
     return "${amount} ${currency.name()}";
+  }
+
+  static Money random() {
+    return Money(Random().nextInt(5000) + 1500, Currency.USD);
   }
 }
