@@ -60,10 +60,12 @@ class NihontoFormState extends State<NihontoForm> {
 
   void _populateData() {
     setState(() {
-      _signature = "MASAMUNE";
-      _geometry = Geometry.SHINOGI_ZUKURI;
-      _type = NihontoType.KATANA;
-      _price = Money(1500, Currency.USD);
+      var random = Nihonto.random();
+
+      _signature = random.signature;
+      _geometry = random.geometry;
+      _type = random.type;
+      _price = random.price;
     });
   }
 

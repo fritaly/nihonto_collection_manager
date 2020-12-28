@@ -17,6 +17,6 @@ class Money {
   }
 
   static Money random() {
-    return Money(Random().nextInt(5000) + 1500, Currency.USD);
+    return Money((Random().nextInt(100) * 50) + 1500, Currency.USD);
   }
 }

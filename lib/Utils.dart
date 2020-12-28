@@ -34,4 +34,20 @@ class Utils {
 
     return list[Random().nextInt(list.length)];
   }
+
+  static Currency randomCurrency() {
+    return Utils.random(Currency.values);
+  }
+
+  static Geometry randomGeometry() {
+    return Utils.random(Geometry.values);
+  }
+
+  static NihontoType randomNihontoType() {
+    return Utils.random(NihontoType.values);
+  }
+
+  static String randomSignature() {
+    return Utils.random([ 'Masamune', 'Tadayoshi', 'Gassan Sadakazu', 'Ishido Teruhide', 'Chounsai Emura' ]);
+  }
 }
