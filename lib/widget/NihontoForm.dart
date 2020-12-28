@@ -6,7 +6,7 @@ import 'package:nihonto_collection_manager/model/Money.dart';
 import 'package:nihonto_collection_manager/model/Nihonto.dart';
 import 'package:nihonto_collection_manager/model/NihontoType.dart';
 import 'package:nihonto_collection_manager/Utils.dart';
-import 'package:nihonto_collection_manager/WidgetExtension.dart';
+import 'package:nihonto_collection_manager/Extensions.dart';
 
 class NihontoForm extends StatefulWidget {
 

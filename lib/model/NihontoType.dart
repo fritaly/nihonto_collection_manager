@@ -1,4 +1,4 @@
-import 'package:nihonto_collection_manager/StringExtension.dart';
+import 'package:nihonto_collection_manager/Extensions.dart';
 
 enum NihontoType {
   KATANA,
