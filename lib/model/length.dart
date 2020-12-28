@@ -22,6 +22,19 @@ class Length {
     return toText();
   }
 
+  Length asCentimeters() {
+    switch (unit) {
+      case LengthUnit.cm:
+        return this;
+      case LengthUnit.mm:
+        return Length(value / 10, LengthUnit.cm);
+      case LengthUnit.inch:
+        return Length(value * 2.54, LengthUnit.cm);
+      default:
+        throw Exception("Unsupported length unit: ${unit}");
+    }
+  }
+
   static Length random({ double min = 25, double max = 75 }) {
     assert (min >= 0);
     assert (min < max);
