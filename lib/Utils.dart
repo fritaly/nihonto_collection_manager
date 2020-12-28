@@ -48,6 +48,20 @@ class Utils {
   }
 
   static String randomSignature() {
-    return Utils.random([ 'Masamune', 'Tadayoshi', 'Gassan Sadakazu', 'Ishido Teruhide', 'Chounsai Emura' ]);
+    return Utils.random([
+      'Masamune',
+      'Tadayoshi',
+      'Gassan Sadakazu',
+      'Ishido Teruhide',
+      'Chounsai Emura',
+      'Kanenori',
+      'Murayama Kaneshige',
+      'Koa Issin Mantetsu',
+      'Masakiyo',
+      'Masayuki',
+      'Akihide',
+      'Amahide',
+      'Watanabe Kanenaga',
+    ]);
   }
 }

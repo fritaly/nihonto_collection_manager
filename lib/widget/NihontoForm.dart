@@ -167,7 +167,7 @@ class NihontoFormState extends State<NihontoForm> {
                 onPressed: _reset
             ),
             ElevatedButton(
-                child: Text('Test Data'),
+                child: Text('Randomize'),
                 onPressed: _populateData
             ),
             ElevatedButton(
