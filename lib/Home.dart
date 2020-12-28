@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/Nihonto.dart';
-import 'package:nihonto_collection_manager/NihontoCollection.dart';
+import 'package:nihonto_collection_manager/BrowseCollection.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
             title: Text('Browse collection'),
             actions: [],
           ),
-          body: NihontoCollection(_collection),
+          body: BrowseCollection(_collection),
         );
       },
     );

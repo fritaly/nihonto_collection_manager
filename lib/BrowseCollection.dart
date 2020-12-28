@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/Nihonto.dart';
 import 'package:nihonto_collection_manager/NihontoForm.dart';
 
-class NihontoCollection extends StatefulWidget {
+class BrowseCollection extends StatefulWidget {
   List<Nihonto> _collection;
 
-  NihontoCollection(List<Nihonto> collection) {
+  BrowseCollection(List<Nihonto> collection) {
     assert(collection != null);
 
     _collection = collection;
   }
 
   @override
-  _NihontoCollectionState createState() => _NihontoCollectionState(_collection);
+  _BrowseCollectionState createState() => _BrowseCollectionState(_collection);
 }
 
-class _NihontoCollectionState extends State<NihontoCollection> {
+class _BrowseCollectionState extends State<BrowseCollection> {
   List<Nihonto> _collection;
 
-  _NihontoCollectionState(List<Nihonto> collection) {
+  _BrowseCollectionState(List<Nihonto> collection) {
     assert(collection != null);
 
     _collection = collection;
