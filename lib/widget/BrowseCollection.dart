@@ -116,9 +116,8 @@ class _BrowseCollectionState extends State<BrowseCollection> {
 
       setState(() {
         // Replace the nihonto in the collection
-        var index = _collection.indexOf(nihonto);
+        final index = _collection.indexOf(nihonto);
 
-        _collection.removeAt(index);
         _collection.replaceRange(index, index+1, [ result ]);
       });
     }
