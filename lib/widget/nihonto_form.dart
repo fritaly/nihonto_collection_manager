@@ -266,12 +266,25 @@ class NihontoFormState extends State<NihontoForm> {
           // ================= //
 
           TextFormField(
-            decoration: InputDecoration(labelText: 'Signature'),
+            decoration: InputDecoration(labelText: 'Signature (romaji)'),
             initialValue: _signature.romaji,
             key: Key('Signature-${_signature.romaji}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
             onChanged: (value) {
               setState(() {
                 _signature = _signature.copyWith(romaji: value);
+              });
+
+              _formKey.currentState.validate();
+            },
+          ),
+
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Signature (kanji)'),
+            initialValue: _signature.kanji,
+            key: Key('Signature-${_signature.kanji}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+            onChanged: (value) {
+              setState(() {
+                _signature = _signature.copyWith(kanji: value);
               });
 
               _formKey.currentState.validate();
