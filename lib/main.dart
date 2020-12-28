@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nihonto_collection_manager/Home.dart';
+import 'package:nihonto_collection_manager/widget/Home.dart';
 
 void main() => runApp(MyApp());
 
