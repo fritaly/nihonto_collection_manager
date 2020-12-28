@@ -34,6 +34,10 @@ class Nihonto {
     );
   }
 
+  String get description {
+    return "${type?.label()} - ${geometry?.label()} (${nagasa?.toText()})";
+  }
+
   String toString() {
     return "Nihonto[type: ${type?.name()}, signature: '${signature}', geometry: ${geometry?.name()}, price: ${price}, nagasa: ${nagasa}, sori: ${sori}, soriType: ${soriType?.name()}]";
   }

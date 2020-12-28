@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nihonto_collection_manager/extensions.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
 import 'package:nihonto_collection_manager/widget/nihonto_form.dart';
 
@@ -53,6 +54,7 @@ class _BrowseCollectionState extends State<BrowseCollection> {
       title: Text(
         nihonto.signature,
       ),
+      subtitle: Text("${nihonto.description}"),
       onTap: () {
         // Display the nihonto form
         _pushShow(nihonto);
