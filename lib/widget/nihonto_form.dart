@@ -8,6 +8,7 @@ import 'package:nihonto_collection_manager/model/nihonto.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/extensions.dart';
 import 'package:nihonto_collection_manager/utils.dart';
+import 'package:nihonto_collection_manager/widget/length_widget.dart';
 import 'package:nihonto_collection_manager/widget/money_widget.dart';
 
 class NihontoForm extends StatefulWidget {
@@ -127,6 +128,40 @@ class NihontoFormState extends State<NihontoForm> {
     return dialog;
   }
 
+  AlertDialog _showLengthDialog(BuildContext context, Length length) {
+    // length can be null
+    assert (context != null);
+
+    final key = GlobalKey<LengthWidgetState>();
+
+    var form = LengthWidget(length: length, key: key);
+
+    final AlertDialog dialog = AlertDialog(
+      title: Text(''),
+      contentPadding: EdgeInsets.zero,
+      content: form,
+      actions: [
+        ElevatedButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text('Cancel'),
+        ),
+        ElevatedButton(
+          // Return the new price to the caller via the navigator stack
+          onPressed: () {
+            var data = key.currentState.getLength();
+
+            print('Data: ${data}');
+
+            return Navigator.pop(context, data);
+          },
+          child: Text('OK'),
+        ),
+      ],
+    );
+
+    return dialog;
+  }
+
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -233,29 +268,49 @@ class NihontoFormState extends State<NihontoForm> {
           // ============== //
 
           TextFormField(
-              decoration: InputDecoration(labelText: 'Nagasa'),
-              initialValue: _nagasa?.value?.toString() ?? '',
-              key: Key("Nagasa-${_nagasa?.value}"), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              inputFormatters: <TextInputFormatter>[
-                NihontoForm.decimalNumber
-              ],
-            validator: (value) {
-                if (!Utils.isDoubleValue(value)) {
-                  return 'Invalid value';
+            decoration: InputDecoration(labelText: 'Nagasa'),
+            initialValue: "${_nagasa.toText()}",
+            key: Key('Nagasa-${_nagasa.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+            onTap: () {
+              showDialog(context: context, builder: (context) { return _showLengthDialog(context, _nagasa); }).then((value) {
+                if (value != null) {
+                  setState(() {
+                    // Update the nagasa based on the value returned by the dialog
+                    _nagasa = value;
+
+                    print("Nagasa set to ${value}");
+                  });
+                } else {
+                  // The value is null if the user clicked "Cancel"
                 }
-
-                return null;
-            },
-            onChanged: (value) {
-                // TODO To implement
-              setState(() {
-                _nagasa = Length(double.parse(value), _nagasa.unit);
-
-                print("Nagasa set to ${_nagasa}");
               });
             },
           ),
+
+          // TextFormField(
+          //     decoration: InputDecoration(labelText: 'Nagasa'),
+          //     initialValue: _nagasa?.value?.toString() ?? '',
+          //     key: Key("Nagasa-${_nagasa?.value}"), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+          //     keyboardType: TextInputType.numberWithOptions(decimal: true),
+          //     inputFormatters: <TextInputFormatter>[
+          //       NihontoForm.decimalNumber
+          //     ],
+          //   validator: (value) {
+          //       if (!Utils.isDoubleValue(value)) {
+          //         return 'Invalid value';
+          //       }
+          //
+          //       return null;
+          //   },
+          //   onChanged: (value) {
+          //       // TODO To implement
+          //     setState(() {
+          //       _nagasa = Length(double.parse(value), _nagasa.unit);
+          //
+          //       print("Nagasa set to ${_nagasa}");
+          //     });
+          //   },
+          // ),
 
           // =============== //
           // === Buttons === //
