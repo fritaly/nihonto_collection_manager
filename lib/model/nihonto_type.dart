@@ -6,5 +6,6 @@ enum NihontoType {
   NAGINATA,
   NAGAMAKI,
   YARI,
+  KEN,
   UNKNOWN
 }
