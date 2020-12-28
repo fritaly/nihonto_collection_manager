@@ -1,3 +1,4 @@
+import 'package:nihonto_collection_manager/Extensions.dart';
 import 'package:nihonto_collection_manager/Utils.dart';
 import 'package:nihonto_collection_manager/model/Geometry.dart';
 import 'package:nihonto_collection_manager/model/Money.dart';
@@ -17,5 +18,9 @@ class Nihonto {
 
   static Nihonto random() {
     return Nihonto(Utils.randomNihontoType(), Utils.randomGeometry(), Utils.randomSignature(), price: Money.random());
+  }
+
+  String toString() {
+    return "Nihonto[type: ${type.name()}, signature: '${signature}', geometry: ${geometry.name()}, price: ${price}]";
   }
 }

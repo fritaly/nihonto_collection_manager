@@ -16,6 +16,10 @@ class Money {
     return "${amount} ${currency.name()}";
   }
 
+  String toString() {
+    return toText();
+  }
+
   static Money random() {
     return Money((Random().nextInt(100) * 50) + 1500, Currency.USD);
   }
