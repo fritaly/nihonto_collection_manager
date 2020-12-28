@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nihonto_collection_manager/Currency.dart';
-import 'package:nihonto_collection_manager/Geometry.dart';
-import 'package:nihonto_collection_manager/Money.dart';
-import 'package:nihonto_collection_manager/Nihonto.dart';
-import 'package:nihonto_collection_manager/NihontoType.dart';
+import 'package:nihonto_collection_manager/model/Currency.dart';
+import 'package:nihonto_collection_manager/model/Geometry.dart';
+import 'package:nihonto_collection_manager/model/Money.dart';
+import 'package:nihonto_collection_manager/model/Nihonto.dart';
+import 'package:nihonto_collection_manager/model/NihontoType.dart';
 import 'package:nihonto_collection_manager/Utils.dart';
 import 'package:nihonto_collection_manager/WidgetExtension.dart';
 

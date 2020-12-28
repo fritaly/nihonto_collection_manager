@@ -1,4 +1,4 @@
-import 'package:nihonto_collection_manager/Currency.dart';
+import 'package:nihonto_collection_manager/model/Currency.dart';
 
 class Money {
 

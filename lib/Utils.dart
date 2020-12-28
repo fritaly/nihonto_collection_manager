@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nihonto_collection_manager/Currency.dart';
-import 'package:nihonto_collection_manager/Geometry.dart';
-import 'package:nihonto_collection_manager/NihontoType.dart';
+import 'package:nihonto_collection_manager/model/Currency.dart';
+import 'package:nihonto_collection_manager/model/Geometry.dart';
+import 'package:nihonto_collection_manager/model/NihontoType.dart';
 
 class Utils {
 

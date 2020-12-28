@@ -1,6 +1,6 @@
-import 'package:nihonto_collection_manager/Geometry.dart';
-import 'package:nihonto_collection_manager/Money.dart';
-import 'package:nihonto_collection_manager/NihontoType.dart';
+import 'package:nihonto_collection_manager/model/Geometry.dart';
+import 'package:nihonto_collection_manager/model/Money.dart';
+import 'package:nihonto_collection_manager/model/NihontoType.dart';
 
 class Nihonto {
 
