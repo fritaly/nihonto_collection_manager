@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/model/Currency.dart';
 import 'package:nihonto_collection_manager/model/Geometry.dart';
+import 'package:nihonto_collection_manager/model/LengthUnit.dart';
 import 'package:nihonto_collection_manager/model/NihontoType.dart';
 
 extension StringExtension on String {
@@ -42,5 +43,12 @@ extension NihontoTypeExtension on NihontoType {
 
   String label() {
     return name().capitalize();
+  }
+}
+
+extension LengthUnitExtension on LengthUnit {
+
+  String name() {
+    return this.toString().split('.').last;
   }
 }

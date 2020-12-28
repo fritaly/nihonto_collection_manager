@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/Extensions.dart';
 import 'package:nihonto_collection_manager/model/Currency.dart';
 import 'package:nihonto_collection_manager/model/Geometry.dart';
+import 'package:nihonto_collection_manager/model/LengthUnit.dart';
 import 'package:nihonto_collection_manager/model/NihontoType.dart';
 
 class Utils {
@@ -24,6 +25,13 @@ class Utils {
 
   static List<DropdownMenuItem> getCurrencyMenuItems() {
     return Currency.values.map((e) => DropdownMenuItem(
+        child: Text(e.name()),
+        value: e
+    )).toList(growable: false);
+  }
+
+  static List<DropdownMenuItem> getLengthUnitMenuItems() {
+    return LengthUnit.values.map((e) => DropdownMenuItem(
         child: Text(e.name()),
         value: e
     )).toList(growable: false);
