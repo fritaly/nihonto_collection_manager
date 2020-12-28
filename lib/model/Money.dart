@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:nihonto_collection_manager/Extensions.dart';
 import 'package:nihonto_collection_manager/model/Currency.dart';
 
 class Money {

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:nihonto_collection_manager/Extensions.dart';
 import 'package:nihonto_collection_manager/model/Currency.dart';
 import 'package:nihonto_collection_manager/model/Geometry.dart';
 import 'package:nihonto_collection_manager/model/NihontoType.dart';
