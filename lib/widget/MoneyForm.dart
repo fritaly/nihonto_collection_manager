@@ -19,11 +19,6 @@ class MoneyForm extends StatefulWidget {
 }
 
 class MoneyFormState extends State<MoneyForm> {
-  // Create a global key that uniquely identifies the Form widget and allows validation of the form.
-  //
-  // Note: This is a `GlobalKey<FormState>`, not a GlobalKey<MoneyFormState>.
-  final _formKey = GlobalKey<FormState>();
-
   Money _money;
 
   MoneyFormState([ Money money = Money.ZERO ]) {
@@ -32,9 +27,7 @@ class MoneyFormState extends State<MoneyForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-        key: _formKey,
-        child: Column(mainAxisSize: MainAxisSize.min,
+    return Column(mainAxisSize: MainAxisSize.min,
             children: <Widget>[
           TextFormField(
             decoration: InputDecoration(labelText: 'Price'),
@@ -53,6 +46,6 @@ class MoneyFormState extends State<MoneyForm> {
               items: Utils.getCurrencyMenuItems(),
               onChanged: (value) {
               }),
-        ])).pad();
+        ]).pad();
   }
 }
