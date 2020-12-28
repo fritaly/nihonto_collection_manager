@@ -72,4 +72,14 @@ class Utils {
       'Watanabe Kanenaga',
     ]);
   }
+
+  static bool isDoubleValue(String s) {
+    try {
+      double.parse(s);
+
+      return true;
+    } on FormatException {
+      return false;
+    }
+  }
 }

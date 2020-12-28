@@ -19,6 +19,6 @@ class Length {
   }
 
   static Length random() {
-    return Length((Random().nextInt(50) + 25).toDouble(), LengthUnit.cm);
+    return Length(((Random().nextInt(500).toDouble() / 10) + 25).toDouble(), LengthUnit.cm);
   }
 }
