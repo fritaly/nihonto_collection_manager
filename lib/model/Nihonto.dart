@@ -25,7 +25,7 @@ class Nihonto {
         Utils.randomGeometry(),
         Utils.randomSignature(),
         price: Money.random(),
-        nagasa: Length.random()
+        nagasa: Length.random(min: 25, max: 75)
     );
   }
 

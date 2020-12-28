@@ -10,6 +10,10 @@ class Length {
 
   const Length(this.value, this.unit);
 
+  bool validate() {
+    return (value > 0) && (unit != null);
+  }
+
   String toText() {
     return "${value} ${unit.name()}";
   }
@@ -18,7 +22,13 @@ class Length {
     return toText();
   }
 
-  static Length random() {
-    return Length(((Random().nextInt(500).toDouble() / 10) + 25).toDouble(), LengthUnit.cm);
+  static Length random({ double min = 25, double max = 75 }) {
+    assert (min > 10);
+    assert (max > 10);
+    assert (min < max);
+
+    var span = max - min;
+
+    return Length(((Random().nextInt((span * 10).toInt()).toDouble() / 10) + min).toDouble(), LengthUnit.cm);
   }
 }
