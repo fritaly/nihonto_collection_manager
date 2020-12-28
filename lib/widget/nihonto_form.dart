@@ -105,7 +105,7 @@ class NihontoFormState extends State<NihontoForm> {
     var form = MoneyWidget(money: money, key: key);
 
     final AlertDialog dialog = AlertDialog(
-      title: Text(''),
+      title: Text('Set the price'),
       contentPadding: EdgeInsets.zero,
       content: form,
       actions: [
@@ -130,7 +130,7 @@ class NihontoFormState extends State<NihontoForm> {
     return dialog;
   }
 
-  AlertDialog _showLengthDialog(BuildContext context, Length length) {
+  AlertDialog _showNagasaDialog(BuildContext context, Length length) {
     // length can be null
     assert (context != null);
 
@@ -139,7 +139,7 @@ class NihontoFormState extends State<NihontoForm> {
     var form = LengthWidget(length: length, key: key);
 
     final AlertDialog dialog = AlertDialog(
-      title: Text(''),
+      title: Text('Set the nagasa'),
       contentPadding: EdgeInsets.zero,
       content: form,
       actions: [
@@ -274,7 +274,7 @@ class NihontoFormState extends State<NihontoForm> {
             initialValue: "${_nagasa?.toText() ?? ''}",
             key: Key('Nagasa-${_nagasa?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
             onTap: () {
-              showDialog(context: context, builder: (context) { return _showLengthDialog(context, _nagasa); }).then((value) {
+              showDialog(context: context, builder: (context) { return _showNagasaDialog(context, _nagasa); }).then((value) {
                 if (value != null) {
                   setState(() {
                     // Update the nagasa based on the value returned by the dialog
