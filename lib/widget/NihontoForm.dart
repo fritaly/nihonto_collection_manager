@@ -8,6 +8,7 @@ import 'package:nihonto_collection_manager/model/Nihonto.dart';
 import 'package:nihonto_collection_manager/model/NihontoType.dart';
 import 'package:nihonto_collection_manager/Utils.dart';
 import 'package:nihonto_collection_manager/Extensions.dart';
+import 'package:nihonto_collection_manager/widget/MoneyForm.dart';
 
 class NihontoForm extends StatefulWidget {
 
@@ -90,6 +91,32 @@ class NihontoFormState extends State<NihontoForm> {
 
       Navigator.pop(context, created);
     }
+  }
+
+  AlertDialog _showPriceDialog(BuildContext context, Money money) {
+    // Money can be null
+    assert (context != null);
+
+    var form = MoneyForm(money);
+
+    final AlertDialog dialog = AlertDialog(
+      title: Text(''),
+      contentPadding: EdgeInsets.zero,
+      content: form,
+      actions: [
+        ElevatedButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text('Cancel'),
+        ),
+        ElevatedButton(
+          // Return the new price to the caller via the navigator stack
+          onPressed: () => Navigator.pop(context, Money(1000, Currency.EUR)),
+          child: Text('OK'),
+        ),
+      ],
+    );
+
+    return dialog;
   }
 
   @override
@@ -175,22 +202,23 @@ class NihontoFormState extends State<NihontoForm> {
 
           TextFormField(
             decoration: InputDecoration(labelText: 'Price'),
-            initialValue: "${_price.amount}",
-            key: Key(_price.amount.toString()), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.digitsOnly
-            ]
+            initialValue: "${_price.toText()}",
+            key: Key('Price-${_price.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+            onTap: () {
+              showDialog(context: context, builder: (context) { return _showPriceDialog(context, _price); }).then((value) {
+                if (value != null) {
+                  setState(() {
+                    // Update the price based on the value returned by the dialog
+                    _price = value;
+
+                    print("Price set to ${value}");
+                  });
+                } else {
+                  // The value is null if the user clicked "Cancel"
+                }
+              });
+            },
           ),
-
-          DropdownButtonFormField(
-              decoration: InputDecoration(labelText: 'Currency'),
-              value: _price.currency,
-              key: Key(_price.currency.name()), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
-              items: Utils.getCurrencyMenuItems(),
-              onChanged: (value) {
-
-              }),
 
           // ============== //
           // === Nagasa === //
