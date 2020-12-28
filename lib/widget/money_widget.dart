@@ -5,25 +5,25 @@ import 'package:nihonto_collection_manager/utils.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
 import 'package:nihonto_collection_manager/model/money.dart';
 
-class MoneyForm extends StatefulWidget {
+class MoneyWidget extends StatefulWidget {
   static final TextInputFormatter decimalNumber =
       FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'));
 
   Money _money;
 
-  MoneyForm({Key key, Money money = Money.ZERO}) : super(key: key) {
+  MoneyWidget({Key key, Money money = Money.ZERO}) : super(key: key) {
     _money = money;
   }
 
   @override
-  MoneyFormState createState() => MoneyFormState(_money);
+  MoneyWidgetState createState() => MoneyWidgetState(_money);
 }
 
-class MoneyFormState extends State<MoneyForm> {
+class MoneyWidgetState extends State<MoneyWidget> {
   int _amount;
   Currency _currency;
 
-  MoneyFormState([Money money = Money.ZERO]) {
+  MoneyWidgetState([Money money = Money.ZERO]) {
     assert(money != null);
 
     this._amount = money.amount;

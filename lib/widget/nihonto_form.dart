@@ -8,7 +8,7 @@ import 'package:nihonto_collection_manager/model/nihonto.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/extensions.dart';
 import 'package:nihonto_collection_manager/utils.dart';
-import 'package:nihonto_collection_manager/widget/money_form.dart';
+import 'package:nihonto_collection_manager/widget/money_widget.dart';
 
 class NihontoForm extends StatefulWidget {
 
@@ -97,9 +97,9 @@ class NihontoFormState extends State<NihontoForm> {
     // Money can be null
     assert (context != null);
 
-    final key = GlobalKey<MoneyFormState>();
+    final key = GlobalKey<MoneyWidgetState>();
 
-    var form = MoneyForm(money: money, key: key);
+    var form = MoneyWidget(money: money, key: key);
 
     final AlertDialog dialog = AlertDialog(
       title: Text(''),
