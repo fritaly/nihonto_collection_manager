@@ -126,8 +126,9 @@ class NihontoFormState extends State<NihontoForm> {
                 _formKey.currentState.validate();
               }),
           TextFormField(
-            initialValue: _signature,
             decoration: InputDecoration(labelText: 'Signature'),
+            initialValue: _signature,
+            key: Key(_signature), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
             validator: (value) {
               if (value.isEmpty) {
                 return 'Required';
@@ -146,6 +147,7 @@ class NihontoFormState extends State<NihontoForm> {
           TextFormField(
             decoration: InputDecoration(labelText: 'Price'),
             initialValue: "${_price.amount}",
+            key: Key(_price.amount.toString()), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
             keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.digitsOnly
@@ -154,6 +156,7 @@ class NihontoFormState extends State<NihontoForm> {
           DropdownButtonFormField(
               decoration: InputDecoration(labelText: 'Currency'),
               value: _price.currency,
+              key: Key(_price.currency.name()), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
               items: Utils.getCurrencyMenuItems(),
               onChanged: (value) {
 
