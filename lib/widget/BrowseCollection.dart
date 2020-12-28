@@ -85,11 +85,13 @@ class _BrowseCollectionState extends State<BrowseCollection> {
 
     final data = await Navigator.of(context).push(route) as Nihonto;
 
-    print("Data = ${data}");
+    print("Nihonto added: ${data}");
 
     if (data != null) {
-      // Add the entry to the collection
-      _collection.add(data);
+      setState(() {
+        // Update the collection from setState() to refresh the UI
+        _collection.add(data);
+      });
     }
   }
 
