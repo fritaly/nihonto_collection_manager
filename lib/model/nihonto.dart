@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/extensions.dart';
+import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
@@ -10,7 +11,8 @@ class Nihonto {
 
   final NihontoType type;
 
-  final String signature;
+  // The signature should never be null
+  final Signature signature;
 
   final Geometry geometry;
 
@@ -20,13 +22,13 @@ class Nihonto {
 
   final SoriType soriType;
 
-  const Nihonto(this.type, this.geometry, this.signature, { this.price = Money.ZERO, this.nagasa, this.sori, this.soriType });
+  const Nihonto({ this.type, this.geometry, this.signature = Signature.EMPTY, this.price = Money.ZERO, this.nagasa, this.sori, this.soriType });
 
   static Nihonto random() {
     return Nihonto(
-        Utils.randomNihontoType(),
-        Utils.randomGeometry(),
-        Utils.randomSignature(),
+        type: Utils.randomNihontoType(),
+        geometry: Utils.randomGeometry(),
+        signature: Signature.random(),
         price: Money.random(),
         nagasa: Length.random(min: 25, max: 75),
         sori: Length.random(min: 0, max: 3),

@@ -7,6 +7,7 @@ import 'package:nihonto_collection_manager/model/money.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/extensions.dart';
+import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 import 'package:nihonto_collection_manager/widget/length_widget.dart';
@@ -36,7 +37,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   Geometry _geometry;
 
-  String _signature;
+  Signature _signature = Signature.EMPTY;
 
   Money _price = Money(0, Currency.USD);
 
@@ -60,12 +61,12 @@ class NihontoFormState extends State<NihontoForm> {
   }
 
   Nihonto _createNihonto() {
-    return Nihonto(_type, _geometry, _signature, price: _price, nagasa: _nagasa, sori: _sori, soriType: _soriType);
+    return Nihonto(type: _type, geometry: _geometry, signature: _signature, price: _price, nagasa: _nagasa, sori: _sori, soriType: _soriType);
   }
 
   void _reset() {
     setState(() {
-      _signature = "";
+      _signature = Signature.EMPTY;
       _type = null;
       _geometry = null;
       _price = Money.ZERO;
@@ -266,18 +267,11 @@ class NihontoFormState extends State<NihontoForm> {
 
           TextFormField(
             decoration: InputDecoration(labelText: 'Signature'),
-            initialValue: _signature,
-            key: Key('Signature-${_signature}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Required';
-              }
-
-              return null;
-            },
+            initialValue: _signature.romaji,
+            key: Key('Signature-${_signature.romaji}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
             onChanged: (value) {
               setState(() {
-                _signature = value;
+                _signature = _signature.copyWith(romaji: value);
               });
 
               _formKey.currentState.validate();

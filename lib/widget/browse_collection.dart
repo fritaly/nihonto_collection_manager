@@ -52,7 +52,7 @@ class _BrowseCollectionState extends State<BrowseCollection> {
 
     return ListTile(
       title: Text(
-        nihonto.signature,
+        nihonto.signature.romaji,
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       subtitle: Text("${nihonto.description}"),
