@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nihonto_collection_manager/NihontoCollection.dart';
+import 'package:nihonto_collection_manager/Home.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.green,
       ),
-      home: NihontoCollection(),
+      home: Home(),
     );
   }
 }

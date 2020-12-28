@@ -3,12 +3,29 @@ import 'package:nihonto_collection_manager/Nihonto.dart';
 import 'package:nihonto_collection_manager/NihontoForm.dart';
 
 class NihontoCollection extends StatefulWidget {
+
+  List<Nihonto> _collection;
+
+  NihontoCollection(List<Nihonto> collection) {
+    assert (collection != null);
+
+    _collection = collection;
+  }
+
+
   @override
-  _NihontoCollectionState createState() => _NihontoCollectionState();
+  _NihontoCollectionState createState() => _NihontoCollectionState(_collection);
 }
 
 class _NihontoCollectionState extends State<NihontoCollection> {
-  final _collection = List<Nihonto>();
+
+  List<Nihonto> _collection;
+
+  _NihontoCollectionState(List<Nihonto> collection) {
+    assert (collection != null);
+
+    _collection = collection;
+  }
 
   Widget _buildWidget() {
     // Generate a ListView listing the swords in the collection
