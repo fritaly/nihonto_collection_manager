@@ -28,6 +28,10 @@ class LengthWidgetState extends State<LengthWidget> {
     if (length != null) {
       this._value = length.value;
       this._unit = length.unit;
+    } else {
+      // Default to 0 cm
+      this._value = 0;
+      this._unit = LengthUnit.cm;
     }
   }
 

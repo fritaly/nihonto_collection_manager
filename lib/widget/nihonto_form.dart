@@ -41,6 +41,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   Length _nagasa;
 
+  // TODO Add motohaba, sakihaba, motokasane, sakikasane, sori
+
   NihontoFormState(Nihonto nihonto) {
     // The argument can be null
     if (nihonto != null) {
@@ -269,8 +271,8 @@ class NihontoFormState extends State<NihontoForm> {
 
           TextFormField(
             decoration: InputDecoration(labelText: 'Nagasa'),
-            initialValue: "${_nagasa.toText()}",
-            key: Key('Nagasa-${_nagasa.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+            initialValue: "${_nagasa?.toText() ?? ''}",
+            key: Key('Nagasa-${_nagasa?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
             onTap: () {
               showDialog(context: context, builder: (context) { return _showLengthDialog(context, _nagasa); }).then((value) {
                 if (value != null) {
