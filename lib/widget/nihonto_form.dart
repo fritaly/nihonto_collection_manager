@@ -290,6 +290,7 @@ class NihontoFormState extends State<NihontoForm> {
 
           TextFormField(
             decoration: InputDecoration(labelText: 'Price'),
+            readOnly: true,
             initialValue: "${_price.toText()}",
             key: Key('Price-${_price.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
             onTap: () {
@@ -314,6 +315,7 @@ class NihontoFormState extends State<NihontoForm> {
 
           TextFormField(
             decoration: InputDecoration(labelText: 'Nagasa'),
+            readOnly: true,
             initialValue: "${_nagasa?.toText() ?? ''}",
             key: Key('Nagasa-${_nagasa?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
             onTap: () {
@@ -338,6 +340,7 @@ class NihontoFormState extends State<NihontoForm> {
 
           TextFormField(
             decoration: InputDecoration(labelText: 'Sori'),
+            readOnly: true,
             initialValue: "${_sori?.toText() ?? ''}",
             key: Key('Sori-${_sori?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
             onTap: () {
