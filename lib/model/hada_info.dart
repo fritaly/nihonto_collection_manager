@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:nihonto_collection_manager/model/hada.dart';
+
 class HadaInfo {
   final bool itame, mokume, masame, ayasugi, nashiji, konuka, muji;
 
@@ -43,6 +45,29 @@ class HadaInfo {
         mokume: random.nextBool(),
         muji: random.nextBool(),
         nashiji: random.nextBool());
+  }
+
+  bool getValue(Hada hada) {
+    assert (hada != null);
+
+    switch (hada) {
+      case Hada.ITAME:
+        return itame;
+      case Hada.MOKUME:
+        return mokume;
+      case Hada.MASAME:
+        return masame;
+      case Hada.AYASUGI:
+        return ayasugi;
+      case Hada.NASHIJI:
+        return nashiji;
+      case Hada.KONUKA:
+        return konuka;
+      case Hada.MUJI:
+        return muji;
+      default:
+        throw Exception("Unsupported hada ${hada}");
+    }
   }
 
   @override
