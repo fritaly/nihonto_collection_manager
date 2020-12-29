@@ -10,6 +10,7 @@ import 'package:nihonto_collection_manager/model/hamon_type.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
+import 'package:nihonto_collection_manager/model/nakago.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/model/yakiba.dart';
@@ -141,5 +142,9 @@ class Utils {
 
   static Boshi boshiFrom(String name) {
     return Boshi.values.firstWhere((element) => element.toString() == 'Boshi.${name}');
+  }
+
+  static Nakago nakagoFrom(String name) {
+    return Nakago.values.firstWhere((element) => element.toString() == 'Nakago.${name}');
   }
 }
