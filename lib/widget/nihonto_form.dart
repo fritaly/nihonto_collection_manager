@@ -16,6 +16,8 @@ import 'package:nihonto_collection_manager/model/nihonto.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
+import 'package:nihonto_collection_manager/model/yakiba.dart';
+import 'package:nihonto_collection_manager/model/yakiba_info.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 import 'package:nihonto_collection_manager/widget/length_widget.dart';
 import 'package:nihonto_collection_manager/widget/money_widget.dart';
@@ -60,6 +62,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   HamonInfo _hamonInfo = HamonInfo();
 
+  YakibaInfo _yakibaInfo = YakibaInfo();
+
   // TODO Add motohaba, sakihaba, motokasane, sakikasane
 
   NihontoFormState(Nihonto nihonto) {
@@ -75,6 +79,7 @@ class NihontoFormState extends State<NihontoForm> {
       _kissakiType = nihonto.kissakiType;
       _muneType = nihonto.muneType;
       _hamonInfo = nihonto.hamonInfo;
+      _yakibaInfo = nihonto.yakibaInfo;
     }
   }
 
@@ -89,7 +94,8 @@ class NihontoFormState extends State<NihontoForm> {
         hada: _hada,
         kissakiType: _kissakiType,
         muneType: _muneType,
-        hamonInfo: _hamonInfo);
+        hamonInfo: _hamonInfo,
+        yakibaInfo: _yakibaInfo);
   }
 
   void _reset() {
@@ -104,6 +110,7 @@ class NihontoFormState extends State<NihontoForm> {
       _kissakiType = null;
       _muneType = null;
       _hamonInfo = HamonInfo();
+      _yakibaInfo = YakibaInfo();
     });
   }
 
@@ -121,6 +128,7 @@ class NihontoFormState extends State<NihontoForm> {
       _kissakiType = random.kissakiType;
       _muneType = random.muneType;
       _hamonInfo = random.hamonInfo;
+      _yakibaInfo = random.yakibaInfo;
     });
   }
 
@@ -293,6 +301,33 @@ class NihontoFormState extends State<NihontoForm> {
           // List<dynamic> -> List<String> -> List<HamonType>
           _hamonInfo = HamonInfo(
               value.map((name) => Utils.hamonFrom(name)).toList().cast<HamonType>());
+        });
+      },
+    );
+
+    final yakibaWidget = MultiSelectFormField(
+      autovalidate: false,
+      title: Text('Yakiba'),
+      dataSource: Yakiba.values
+          .map((e) => {'display': e.label(), 'value': e.name()})
+          .toList(),
+      textField: 'display',
+      valueField: 'value',
+      okButtonLabel: 'OK',
+      cancelButtonLabel: 'CANCEL',
+      // required: true,
+      hintWidget: Text('Please choose one or more'),
+      initialValue: Yakiba.values
+          .where((element) => (_yakibaInfo != null) && _yakibaInfo.getValue(element))
+          .map((e) => e.name())
+          .toList(),
+      onSaved: (value) {
+        print('Value=${value}');
+
+        setState(() {
+          // List<dynamic> -> List<String> -> List<Yakiba>
+          _yakibaInfo = YakibaInfo(
+              value.map((name) => Utils.yakibaFrom(name)).toList().cast<Yakiba>());
         });
       },
     );
@@ -552,6 +587,8 @@ class NihontoFormState extends State<NihontoForm> {
           // ============= //
 
           hamonWidget,
+
+          yakibaWidget,
 
           // =============== //
           // === Buttons === //
