@@ -1,0 +1,7 @@
+enum Yasurime {
+  KIRI,
+  KATTESAGARI,
+  HIGAKI,
+  TAKANOHA,
+  SUJIKAI
+}

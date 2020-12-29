@@ -11,6 +11,7 @@ import 'package:nihonto_collection_manager/model/nakago.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/model/yakiba.dart';
+import 'package:nihonto_collection_manager/model/yasurime.dart';
 
 extension StringExtension on String {
   String capitalize() {
@@ -139,6 +140,17 @@ extension BoshiExtension on Boshi {
 }
 
 extension NakagoExtension on Nakago {
+
+  String name() {
+    return this.toString().split('.').last;
+  }
+
+  String label() {
+    return name().capitalize().replaceAll(new RegExp("_"), " ");
+  }
+}
+
+extension YasurimeExtension on Yasurime {
 
   String name() {
     return this.toString().split('.').last;
