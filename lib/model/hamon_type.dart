@@ -1,0 +1,17 @@
+enum HamonType {
+  SUGUHA,
+  GUNOME,
+  CHOJI,
+  MIDARE,
+  NOTARE,
+  HITATSURA,
+  SURARE,
+  TORANBA,
+  JUZUBA,
+  KIKUSUI,
+  MIMIGATA,
+  NOKOGIRIBA,
+  FUJI,
+  DORAN,
+  UNKNOWN
+}
