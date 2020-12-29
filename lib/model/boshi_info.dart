@@ -42,6 +42,10 @@ class BoshiInfo {
     return _set.contains(boshi);
   }
 
+  List<Boshi> getValues() {
+    return Boshi.values.where((element) => getValue(element)).toList();
+  }
+
   @override
   String toString() {
     return 'BoshiInfo[set: ${_set}]';

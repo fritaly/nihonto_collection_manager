@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:nihonto_collection_manager/extensions.dart';
 import 'package:nihonto_collection_manager/model/boshi.dart';
 import 'package:nihonto_collection_manager/model/boshi_info.dart';
@@ -25,6 +24,7 @@ import 'package:nihonto_collection_manager/model/yakiba_info.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 import 'package:nihonto_collection_manager/widget/length_widget.dart';
 import 'package:nihonto_collection_manager/widget/money_widget.dart';
+import 'package:nihonto_collection_manager/widget/multiselect_formfield.dart';
 
 class NihontoForm extends StatefulWidget {
   static final TextInputFormatter decimalNumber =
@@ -269,6 +269,7 @@ class NihontoFormState extends State<NihontoForm> {
   @override
   Widget build(BuildContext context) {
     final hadaWidget = MultiSelectFormField(
+      key: Key('Hada-${_hada.toString()}'),
       autovalidate: false,
       title: Text('Hada'),
       dataSource: Hada.values
@@ -296,6 +297,7 @@ class NihontoFormState extends State<NihontoForm> {
     );
 
     final hamonWidget = MultiSelectFormField(
+      key: Key('Hamon-${_hamonInfo.toString()}'),
       autovalidate: false,
       title: Text('Hamon'),
       dataSource: HamonType.values
@@ -323,6 +325,7 @@ class NihontoFormState extends State<NihontoForm> {
     );
 
     final yakibaWidget = MultiSelectFormField(
+      key: Key('Yakiba-${_yakibaInfo.toString()}'),
       autovalidate: false,
       title: Text('Yakiba'),
       dataSource: Yakiba.values
@@ -350,6 +353,7 @@ class NihontoFormState extends State<NihontoForm> {
     );
 
     final boshiWidget = MultiSelectFormField(
+      key: Key('Boshi-${_boshiInfo.toString()}'),
       autovalidate: false,
       title: Text('Boshi'),
       dataSource: Boshi.values
@@ -377,6 +381,7 @@ class NihontoFormState extends State<NihontoForm> {
     );
 
     final nakagoWidget = MultiSelectFormField(
+      key: Key('Nakago-${_nakagoInfo.toString()}'),
       autovalidate: false,
       title: Text('Nakago'),
       dataSource: Nakago.values
