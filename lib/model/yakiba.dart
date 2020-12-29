@@ -1,0 +1,15 @@
+enum Yakiba {
+  NIE,
+  NIOI,
+  INAZUMA,
+  CHIKEI,
+  TOBIYAKI,
+  HOTSURE,
+  YO,
+  YAKI_KUZURE,
+  YUBASHIRI,
+  KINSUJI,
+  ASHI,
+  NIJUBA,
+  UTSURI
+}

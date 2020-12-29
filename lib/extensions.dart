@@ -8,6 +8,7 @@ import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
+import 'package:nihonto_collection_manager/model/yakiba.dart';
 
 extension StringExtension on String {
   String capitalize() {
@@ -103,6 +104,17 @@ extension MuneTypeExtension on MuneType {
 }
 
 extension HamonTypeExtension on HamonType {
+
+  String name() {
+    return this.toString().split('.').last;
+  }
+
+  String label() {
+    return name().capitalize().replaceAll(new RegExp("_"), " ");
+  }
+}
+
+extension YakibaExtension on Yakiba {
 
   String name() {
     return this.toString().split('.').last;

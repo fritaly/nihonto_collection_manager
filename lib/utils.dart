@@ -11,6 +11,7 @@ import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
+import 'package:nihonto_collection_manager/model/yakiba.dart';
 
 class Utils {
 
@@ -93,6 +94,10 @@ class Utils {
     return Utils.random(SoriType.values);
   }
 
+  static Yakiba randomYakiba() {
+    return Utils.random(Yakiba.values);
+  }
+
   static String randomSignature() {
     return Utils.random([
       'Masamune',
@@ -127,5 +132,9 @@ class Utils {
 
   static HamonType hamonFrom(String name) {
     return HamonType.values.firstWhere((element) => element.toString() == 'HamonType.${name}');
+  }
+
+  static Yakiba yakibaFrom(String name) {
+    return Yakiba.values.firstWhere((element) => element.toString() == 'Yakiba.${name}');
   }
 }
