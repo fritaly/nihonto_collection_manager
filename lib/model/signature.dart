@@ -11,9 +11,9 @@ class Signature {
 
   final bool mumei, gimei, modern;
 
-  const Signature({ this.kanji = '', this.romaji = '', this.mumei, this.gimei, this.modern });
+  const Signature({ this.kanji = '', this.romaji = '', this.mumei = false, this.gimei = false, this.modern = false });
 
-  Signature copyWith({ String kanji, String romaji, bool mumei, bool gimei, bool modern }) {
+  Signature copyWith({ String kanji, String romaji, bool mumei = false, bool gimei = false, bool modern = false }) {
     return Signature(
       kanji: kanji ?? this.kanji,
       romaji: romaji ?? this.romaji,
