@@ -286,8 +286,6 @@ class NihontoFormState extends State<NihontoForm> {
           .toList(),
       textField: 'display',
       valueField: 'value',
-      okButtonLabel: 'OK',
-      cancelButtonLabel: 'CANCEL',
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: Hada.values
@@ -315,8 +313,6 @@ class NihontoFormState extends State<NihontoForm> {
           .toList(),
       textField: 'display',
       valueField: 'value',
-      okButtonLabel: 'OK',
-      cancelButtonLabel: 'CANCEL',
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: HamonType.values
@@ -344,8 +340,6 @@ class NihontoFormState extends State<NihontoForm> {
           .toList(),
       textField: 'display',
       valueField: 'value',
-      okButtonLabel: 'OK',
-      cancelButtonLabel: 'CANCEL',
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: Yakiba.values
@@ -373,8 +367,6 @@ class NihontoFormState extends State<NihontoForm> {
           .toList(),
       textField: 'display',
       valueField: 'value',
-      okButtonLabel: 'OK',
-      cancelButtonLabel: 'CANCEL',
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: Boshi.values
@@ -402,8 +394,6 @@ class NihontoFormState extends State<NihontoForm> {
           .toList(),
       textField: 'display',
       valueField: 'value',
-      okButtonLabel: 'OK',
-      cancelButtonLabel: 'CANCEL',
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: Nakago.values
@@ -431,8 +421,6 @@ class NihontoFormState extends State<NihontoForm> {
           .toList(),
       textField: 'display',
       valueField: 'value',
-      okButtonLabel: 'OK',
-      cancelButtonLabel: 'CANCEL',
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: Yasurime.values
