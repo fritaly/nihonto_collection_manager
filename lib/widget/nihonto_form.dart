@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
+import 'package:nihonto_collection_manager/model/hada.dart';
+import 'package:nihonto_collection_manager/model/hada_info.dart';
 import 'package:nihonto_collection_manager/model/length.dart';
 import 'package:nihonto_collection_manager/model/money.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
@@ -45,6 +47,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   SoriType _soriType;
 
+  HadaInfo _hada = HadaInfo.DEFAULT;
+
   // TODO Add motohaba, sakihaba, motokasane, sakikasane, sori
 
   NihontoFormState(Nihonto nihonto) {
@@ -57,6 +61,7 @@ class NihontoFormState extends State<NihontoForm> {
       _nagasa = nihonto.nagasa;
       _sori = nihonto.sori;
       _soriType = nihonto.soriType;
+      _hada = nihonto.hada;
     }
   }
 
@@ -68,7 +73,8 @@ class NihontoFormState extends State<NihontoForm> {
         price: _price,
         nagasa: _nagasa,
         sori: _sori,
-        soriType: _soriType);
+        soriType: _soriType,
+        hada: _hada);
   }
 
   void _reset() {
@@ -80,6 +86,7 @@ class NihontoFormState extends State<NihontoForm> {
       _nagasa = null;
       _sori = null;
       _soriType = null;
+      _hada = HadaInfo.DEFAULT;
     });
   }
 
@@ -94,6 +101,7 @@ class NihontoFormState extends State<NihontoForm> {
       _nagasa = random.nagasa;
       _sori = random.sori;
       _soriType = random.soriType;
+      _hada = random.hada;
     });
   }
 
@@ -216,8 +224,22 @@ class NihontoFormState extends State<NihontoForm> {
 
   @override
   Widget build(BuildContext context) {
+    final hadaWidgets =
+        Hada.values.where((element) => element != Hada.UNKNOWN).map((hada) {
+
+      return SwitchListTile(
+          title: Text(hada.label()),
+          value: _hada.getValue(hada),
+          controlAffinity: ListTileControlAffinity.leading,
+          onChanged: (value) {
+            setState(() {
+              _hada = _hada.withValue(hada, value);
+            });
+          });
+    }).toList();
+
     // Build a Form widget using the _formKey created above.
-    return Form(
+    final form = Form(
         key: _formKey,
         child: Column(children: <Widget>[
           // ============ //
@@ -432,15 +454,24 @@ class NihontoFormState extends State<NihontoForm> {
                 });
               }),
 
+          // ============ //
+          // === Hada === //
+          // ============ //
+
+          ...hadaWidgets,
+
           // =============== //
           // === Buttons === //
           // =============== //
 
           ButtonBar(children: [
-            ElevatedButton(child: Text('Reset'), onPressed: _reset),
+//            ElevatedButton(child: Text('Reset'), onPressed: _reset),
             ElevatedButton(child: Text('Randomize'), onPressed: _randomize),
             ElevatedButton(child: Text('Save'), onPressed: _save)
           ])
         ])).pad();
+
+    // Wrap the form into a list view to support scrolling
+    return ListView(children: [form]);
   }
 }
