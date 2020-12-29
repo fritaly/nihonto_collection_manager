@@ -9,6 +9,7 @@ import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/model/yakiba_info.dart';
+import 'package:nihonto_collection_manager/model/yasurime_info.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
 import 'package:nihonto_collection_manager/model/length.dart';
@@ -45,6 +46,8 @@ class Nihonto {
 
   final NakagoInfo nakagoInfo;
 
+  final YasurimeInfo yasurimeInfo;
+
   const Nihonto(
       {this.type,
       this.geometry,
@@ -59,7 +62,8 @@ class Nihonto {
       this.hamonInfo,
       this.yakibaInfo,
       this.boshiInfo,
-      this.nakagoInfo});
+      this.nakagoInfo,
+      this.yasurimeInfo});
 
   static Nihonto random() {
     return Nihonto(
@@ -76,7 +80,9 @@ class Nihonto {
         hamonInfo: HamonInfo.random(),
         yakibaInfo: YakibaInfo.random(),
         boshiInfo: BoshiInfo.random(),
-        nakagoInfo: NakagoInfo.random());
+        nakagoInfo: NakagoInfo.random(),
+        yasurimeInfo: YasurimeInfo.random()
+    );
   }
 
   String get description {

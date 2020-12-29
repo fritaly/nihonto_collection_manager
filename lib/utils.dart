@@ -14,6 +14,7 @@ import 'package:nihonto_collection_manager/model/nakago.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/model/yakiba.dart';
+import 'package:nihonto_collection_manager/model/yasurime.dart';
 
 class Utils {
 
@@ -146,5 +147,9 @@ class Utils {
 
   static Nakago nakagoFrom(String name) {
     return Nakago.values.firstWhere((element) => element.toString() == 'Nakago.${name}');
+  }
+
+  static Yasurime yasurimeFrom(String name) {
+    return Yasurime.values.firstWhere((element) => element.toString() == 'Yasurime.${name}');
   }
 }

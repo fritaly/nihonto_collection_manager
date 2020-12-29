@@ -21,6 +21,8 @@ import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
 import 'package:nihonto_collection_manager/model/yakiba.dart';
 import 'package:nihonto_collection_manager/model/yakiba_info.dart';
+import 'package:nihonto_collection_manager/model/yasurime.dart';
+import 'package:nihonto_collection_manager/model/yasurime_info.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 import 'package:nihonto_collection_manager/widget/length_widget.dart';
 import 'package:nihonto_collection_manager/widget/money_widget.dart';
@@ -72,6 +74,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   NakagoInfo _nakagoInfo = NakagoInfo();
 
+  YasurimeInfo _yasurimeInfo = YasurimeInfo();
+
   // TODO Add motohaba, sakihaba, motokasane, sakikasane
 
   NihontoFormState(Nihonto nihonto) {
@@ -90,6 +94,7 @@ class NihontoFormState extends State<NihontoForm> {
       _yakibaInfo = nihonto.yakibaInfo;
       _boshiInfo = nihonto.boshiInfo;
       _nakagoInfo = nihonto.nakagoInfo;
+      _yasurimeInfo = nihonto.yasurimeInfo;
     }
   }
 
@@ -107,7 +112,8 @@ class NihontoFormState extends State<NihontoForm> {
         hamonInfo: _hamonInfo,
         yakibaInfo: _yakibaInfo,
         boshiInfo: _boshiInfo,
-        nakagoInfo: _nakagoInfo
+        nakagoInfo: _nakagoInfo,
+        yasurimeInfo: _yasurimeInfo
     );
   }
 
@@ -126,6 +132,7 @@ class NihontoFormState extends State<NihontoForm> {
       _yakibaInfo = YakibaInfo();
       _boshiInfo = BoshiInfo();
       _nakagoInfo = NakagoInfo();
+      _yasurimeInfo = YasurimeInfo();
     });
   }
 
@@ -146,6 +153,7 @@ class NihontoFormState extends State<NihontoForm> {
       _yakibaInfo = random.yakibaInfo;
       _boshiInfo = random.boshiInfo;
       _nakagoInfo = random.nakagoInfo;
+      _yasurimeInfo = random.yasurimeInfo;
     });
   }
 
@@ -404,6 +412,34 @@ class NihontoFormState extends State<NihontoForm> {
           // List<dynamic> -> List<String> -> List<Nakago>
           _nakagoInfo = NakagoInfo(
               value.map((name) => Utils.boshiFrom(name)).toList().cast<Nakago>());
+        });
+      },
+    );
+
+    final yasurimeWidget = MultiSelectFormField(
+      key: Key('Yasurime-${_yasurimeInfo.toString()}'),
+      autovalidate: false,
+      title: Text('Yasurime'),
+      dataSource: Yasurime.values
+          .map((e) => {'display': e.label(), 'value': e.name()})
+          .toList(),
+      textField: 'display',
+      valueField: 'value',
+      okButtonLabel: 'OK',
+      cancelButtonLabel: 'CANCEL',
+      // required: true,
+      hintWidget: Text('Please choose one or more'),
+      initialValue: Yasurime.values
+          .where((element) => (_yasurimeInfo != null) && _yasurimeInfo.getValue(element))
+          .map((e) => e.name())
+          .toList(),
+      onSaved: (value) {
+        print('Value=${value}');
+
+        setState(() {
+          // List<dynamic> -> List<String> -> List<Yasurime>
+          _yasurimeInfo = YasurimeInfo(
+              value.map((name) => Utils.yasurimeFrom(name)).toList().cast<Yasurime>());
         });
       },
     );
@@ -669,6 +705,8 @@ class NihontoFormState extends State<NihontoForm> {
           boshiWidget,
 
           nakagoWidget,
+
+          yasurimeWidget,
 
           // =============== //
           // === Buttons === //
