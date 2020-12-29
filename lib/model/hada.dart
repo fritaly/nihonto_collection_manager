@@ -1,0 +1,10 @@
+enum Hada {
+  ITAME,
+  MOKUME,
+  MASAME,
+  AYASUGI,
+  NASHIJI,
+  KONUKA,
+  MUJI,
+  UNKNOWN
+}
