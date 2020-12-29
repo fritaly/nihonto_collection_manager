@@ -5,6 +5,7 @@ import 'package:nihonto_collection_manager/extensions.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
 import 'package:nihonto_collection_manager/model/hada.dart';
+import 'package:nihonto_collection_manager/model/hamon_type.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
@@ -122,5 +123,9 @@ class Utils {
 
   static Hada hadaFrom(String name) {
     return Hada.values.firstWhere((element) => element.toString() == 'Hada.${name}');
+  }
+
+  static HamonType hamonFrom(String name) {
+    return HamonType.values.firstWhere((element) => element.toString() == 'HamonType.${name}');
   }
 }

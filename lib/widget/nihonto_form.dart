@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:nihonto_collection_manager/extensions.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
@@ -18,8 +19,6 @@ import 'package:nihonto_collection_manager/model/sori_info.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 import 'package:nihonto_collection_manager/widget/length_widget.dart';
 import 'package:nihonto_collection_manager/widget/money_widget.dart';
-
-import 'package:multiselect_formfield/multiselect_formfield.dart';
 
 class NihontoForm extends StatefulWidget {
   static final TextInputFormatter decimalNumber =
@@ -271,23 +270,32 @@ class NihontoFormState extends State<NihontoForm> {
       },
     );
 
-    final hamonWidgets = HamonType.values
-        .where((element) => element != HamonType.UNKNOWN)
-        .map((type) {
-      return SwitchListTile(
-          title: Text(type.label()),
-          value: _hamonInfo.getValue(type),
-          controlAffinity: ListTileControlAffinity.leading,
-          onChanged: (value) {
-            setState(() {
-              if (value) {
-                _hamonInfo = _hamonInfo.add(type);
-              } else {
-                _hamonInfo = _hamonInfo.remove(type);
-              }
-            });
-          });
-    }).toList();
+    final hamonWidget = MultiSelectFormField(
+      autovalidate: false,
+      title: Text('Hamon'),
+      dataSource: HamonType.values
+          .map((e) => {'display': e.label(), 'value': e.name()})
+          .toList(),
+      textField: 'display',
+      valueField: 'value',
+      okButtonLabel: 'OK',
+      cancelButtonLabel: 'CANCEL',
+      // required: true,
+      hintWidget: Text('Please choose one or more'),
+      initialValue: HamonType.values
+          .where((element) => _hamonInfo.getValue(element))
+          .map((e) => e.name())
+          .toList(),
+      onSaved: (value) {
+        print('Value=${value}');
+
+        setState(() {
+          // List<dynamic> -> List<String> -> List<HamonType>
+          _hamonInfo = HamonInfo(
+              value.map((name) => Utils.hamonFrom(name)).toList().cast<HamonType>());
+        });
+      },
+    );
 
     // Build a Form widget using the _formKey created above.
     final form = Form(
@@ -539,15 +547,11 @@ class NihontoFormState extends State<NihontoForm> {
 
           hadaWidget,
 
-          Divider(),
-
           // ============= //
           // === Hamon === //
           // ============= //
 
-          Divider(),
-
-          ...hamonWidgets,
+          hamonWidget,
 
           // =============== //
           // === Buttons === //

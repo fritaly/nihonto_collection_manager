@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:nihonto_collection_manager/model/hada.dart';
 
 class HadaInfo {
-  final bool itame, mokume, masame, ayasugi, nashiji, konuka, muji;
+  final bool itame, mokume, masame, ayasugi, nashiji, konuka, muji, unknown;
 
   static const DEFAULT = HadaInfo();
 
@@ -14,7 +14,8 @@ class HadaInfo {
       this.ayasugi = false,
       this.nashiji = false,
       this.konuka = false,
-      this.muji = false});
+      this.muji = false,
+      this.unknown = false });
 
   HadaInfo copyWith(
       {bool itame,
@@ -23,7 +24,8 @@ class HadaInfo {
       bool ayasugi,
       bool nashiji,
       bool konuka,
-      bool muji}) {
+      bool muji,
+      bool unknown}) {
     return HadaInfo(
         itame: itame ?? this.itame,
         mokume: mokume ?? this.mokume,
@@ -31,7 +33,8 @@ class HadaInfo {
         ayasugi: ayasugi ?? this.ayasugi,
         nashiji: nashiji ?? this.nashiji,
         konuka: konuka ?? this.konuka,
-        muji: muji ?? this.muji);
+        muji: muji ?? this.muji,
+        unknown: unknown ?? this.unknown);
   }
 
   static HadaInfo random() {
@@ -44,7 +47,8 @@ class HadaInfo {
         masame: random.nextBool(),
         mokume: random.nextBool(),
         muji: random.nextBool(),
-        nashiji: random.nextBool());
+        nashiji: random.nextBool(),
+        unknown: random.nextBool());
   }
 
   bool getValue(Hada hada) {
@@ -65,6 +69,8 @@ class HadaInfo {
         return konuka;
       case Hada.MUJI:
         return muji;
+      case Hada.UNKNOWN:
+        return unknown;
       default:
         throw Exception("Unsupported hada ${hada}");
     }
@@ -88,6 +94,8 @@ class HadaInfo {
         return copyWith(konuka: value);
       case Hada.MUJI:
         return copyWith(muji: value);
+      case Hada.UNKNOWN:
+        return copyWith(unknown: value);
       default:
         throw Exception("Unsupported hada ${hada}");
     }
@@ -107,6 +115,6 @@ class HadaInfo {
 
   @override
   String toString() {
-    return 'HadaInfo[itame: $itame, mokume: $mokume, masame: $masame, ayasugi: $ayasugi, nashiji: $nashiji, konuka: $konuka, muji: $muji]';
+    return 'HadaInfo[itame: $itame, mokume: $mokume, masame: $masame, ayasugi: $ayasugi, nashiji: $nashiji, konuka: $konuka, muji: $muji, unknown: ${unknown}]';
   }
 }
