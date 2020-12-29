@@ -3,5 +3,6 @@ enum SoriType {
   TORIIZORI,
   SAKIZORI,
   MUZORI,
+  UCHIZORI,
   UNKNOWN
 }
