@@ -1,5 +1,6 @@
 import 'package:nihonto_collection_manager/extensions.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
+import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
@@ -28,7 +29,9 @@ class Nihonto {
 
   final SoriInfo sori;
 
-  const Nihonto({ this.type, this.geometry, this.signature = Signature.EMPTY, this.price = Money.ZERO, this.nagasa, this.sori, this.soriType, this.hada = HadaInfo.DEFAULT });
+  final KissakiType kissakiType;
+
+  const Nihonto({ this.type, this.geometry, this.signature = Signature.EMPTY, this.price = Money.ZERO, this.nagasa, this.sori, this.soriType, this.hada = HadaInfo.DEFAULT, this.kissakiType });
 
   static Nihonto random() {
     return Nihonto(
@@ -39,7 +42,8 @@ class Nihonto {
       nagasa: Length.random(min: 25, max: 75),
       sori: SoriInfo.random(),
       soriType: Utils.randomSoriType(),
-      hada: HadaInfo.random()
+      hada: HadaInfo.random(),
+      kissakiType: Utils.randomKissakiType()
     );
   }
 
@@ -48,6 +52,6 @@ class Nihonto {
   }
 
   String toString() {
-    return "Nihonto[type: ${type?.name()}, signature: '${signature}', geometry: ${geometry?.name()}, price: ${price}, nagasa: ${nagasa}, sori: ${sori}, soriType: ${soriType?.name()}, hada: ${hada}]";
+    return "Nihonto[type: ${type?.name()}, signature: '${signature}', geometry: ${geometry?.name()}, price: ${price}, nagasa: ${nagasa}, sori: ${sori}, soriType: ${soriType?.name()}, hada: ${hada}, kissakiType: ${kissakiType}]";
   }
 }

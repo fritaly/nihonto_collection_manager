@@ -5,6 +5,7 @@ import 'package:nihonto_collection_manager/model/currency.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
 import 'package:nihonto_collection_manager/model/hada.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
+import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/length.dart';
 import 'package:nihonto_collection_manager/model/money.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
@@ -49,6 +50,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   HadaInfo _hada = HadaInfo.DEFAULT;
 
+  KissakiType _kissakiType;
+
   // TODO Add motohaba, sakihaba, motokasane, sakikasane
 
   NihontoFormState(Nihonto nihonto) {
@@ -61,18 +64,20 @@ class NihontoFormState extends State<NihontoForm> {
       _nagasa = nihonto.nagasa;
       _sori = nihonto.sori;
       _hada = nihonto.hada;
+      _kissakiType = nihonto.kissakiType;
     }
   }
 
   Nihonto _createNihonto() {
     return Nihonto(
-        type: _type,
-        geometry: _geometry,
-        signature: _signature,
-        price: _price,
-        nagasa: _nagasa,
-        sori: _sori,
-        hada: _hada);
+      type: _type,
+      geometry: _geometry,
+      signature: _signature,
+      price: _price,
+      nagasa: _nagasa,
+      sori: _sori,
+      hada: _hada,
+      kissakiType: _kissakiType);
   }
 
   void _reset() {
@@ -84,6 +89,7 @@ class NihontoFormState extends State<NihontoForm> {
       _nagasa = null;
       _sori = SoriInfo();
       _hada = HadaInfo.DEFAULT;
+      _kissakiType = null;
     });
   }
 
@@ -98,6 +104,7 @@ class NihontoFormState extends State<NihontoForm> {
       _nagasa = random.nagasa;
       _sori = random.sori;
       _hada = random.hada;
+      _kissakiType = random.kissakiType;
     });
   }
 
@@ -447,6 +454,20 @@ class NihontoFormState extends State<NihontoForm> {
               onChanged: (value) {
                 setState(() {
                   _sori = _sori.copyWith(type: value);
+                });
+              }),
+
+          // ==================== //
+          // === Kissaki Type === //
+          // ==================== //
+
+          DropdownButtonFormField(
+              decoration: InputDecoration(labelText: 'Kissaki'),
+              value: _kissakiType,
+              items: Utils.getKissakiTypeMenuItems(),
+              onChanged: (value) {
+                setState(() {
+                  _kissakiType = value;
                 });
               }),
 
