@@ -5,6 +5,8 @@ import 'package:nihonto_collection_manager/model/currency.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
 import 'package:nihonto_collection_manager/model/hada.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
+import 'package:nihonto_collection_manager/model/hamon_info.dart';
+import 'package:nihonto_collection_manager/model/hamon_type.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/length.dart';
 import 'package:nihonto_collection_manager/model/money.dart';
@@ -55,6 +57,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   MuneType _muneType;
 
+  HamonInfo _hamonInfo = HamonInfo();
+
   // TODO Add motohaba, sakihaba, motokasane, sakikasane
 
   NihontoFormState(Nihonto nihonto) {
@@ -69,6 +73,7 @@ class NihontoFormState extends State<NihontoForm> {
       _hada = nihonto.hada;
       _kissakiType = nihonto.kissakiType;
       _muneType = nihonto.muneType;
+      _hamonInfo = nihonto.hamonInfo;
     }
   }
 
@@ -82,7 +87,9 @@ class NihontoFormState extends State<NihontoForm> {
       sori: _sori,
       hada: _hada,
       kissakiType: _kissakiType,
-      muneType: _muneType);
+      muneType: _muneType,
+      hamonInfo: _hamonInfo
+    );
   }
 
   void _reset() {
@@ -96,6 +103,7 @@ class NihontoFormState extends State<NihontoForm> {
       _hada = HadaInfo.DEFAULT;
       _kissakiType = null;
       _muneType = null;
+      _hamonInfo = HamonInfo();
     });
   }
 
@@ -112,6 +120,7 @@ class NihontoFormState extends State<NihontoForm> {
       _hada = random.hada;
       _kissakiType = random.kissakiType;
       _muneType = random.muneType;
+      _hamonInfo = random.hamonInfo;
     });
   }
 
@@ -244,6 +253,24 @@ class NihontoFormState extends State<NihontoForm> {
           onChanged: (value) {
             setState(() {
               _hada = _hada.withValue(hada, value);
+            });
+          });
+    }).toList();
+
+    final hamonWidgets =
+    HamonType.values.where((element) => element != HamonType.UNKNOWN).map((type) {
+
+      return SwitchListTile(
+          title: Text(type.label()),
+          value: _hamonInfo.getValue(type),
+          controlAffinity: ListTileControlAffinity.leading,
+          onChanged: (value) {
+            setState(() {
+              if (value) {
+                _hamonInfo = _hamonInfo.add(type);
+              } else {
+                _hamonInfo = _hamonInfo.remove(type);
+              }
             });
           });
     }).toList();
@@ -497,6 +524,14 @@ class NihontoFormState extends State<NihontoForm> {
           // ============ //
 
           ...hadaWidgets,
+
+          // ============= //
+          // === Hamon === //
+          // ============= //
+
+          Divider(),
+
+          ...hamonWidgets,
 
           // =============== //
           // === Buttons === //

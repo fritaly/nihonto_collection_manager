@@ -1,5 +1,6 @@
 import 'package:nihonto_collection_manager/extensions.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
+import 'package:nihonto_collection_manager/model/hamon_info.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
 import 'package:nihonto_collection_manager/model/signature.dart';
@@ -34,7 +35,9 @@ class Nihonto {
 
   final MuneType muneType;
 
-  const Nihonto({ this.type, this.geometry, this.signature = Signature.EMPTY, this.price = Money.ZERO, this.nagasa, this.sori, this.soriType, this.hada = HadaInfo.DEFAULT, this.kissakiType, this.muneType });
+  final HamonInfo hamonInfo;
+
+  const Nihonto({ this.type, this.geometry, this.signature = Signature.EMPTY, this.price = Money.ZERO, this.nagasa, this.sori, this.soriType, this.hada = HadaInfo.DEFAULT, this.kissakiType, this.muneType, this.hamonInfo });
 
   static Nihonto random() {
     return Nihonto(
@@ -47,7 +50,8 @@ class Nihonto {
       soriType: Utils.randomSoriType(),
       hada: HadaInfo.random(),
       kissakiType: Utils.randomKissakiType(),
-      muneType: Utils.randomMuneType()
+      muneType: Utils.randomMuneType(),
+      hamonInfo: HamonInfo.random()
     );
   }
 
