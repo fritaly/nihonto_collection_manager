@@ -8,6 +8,7 @@ import 'package:nihonto_collection_manager/model/hada_info.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/length.dart';
 import 'package:nihonto_collection_manager/model/money.dart';
+import 'package:nihonto_collection_manager/model/mune_type.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/signature.dart';
@@ -52,6 +53,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   KissakiType _kissakiType;
 
+  MuneType _muneType;
+
   // TODO Add motohaba, sakihaba, motokasane, sakikasane
 
   NihontoFormState(Nihonto nihonto) {
@@ -65,6 +68,7 @@ class NihontoFormState extends State<NihontoForm> {
       _sori = nihonto.sori;
       _hada = nihonto.hada;
       _kissakiType = nihonto.kissakiType;
+      _muneType = nihonto.muneType;
     }
   }
 
@@ -77,7 +81,8 @@ class NihontoFormState extends State<NihontoForm> {
       nagasa: _nagasa,
       sori: _sori,
       hada: _hada,
-      kissakiType: _kissakiType);
+      kissakiType: _kissakiType,
+      muneType: _muneType);
   }
 
   void _reset() {
@@ -90,6 +95,7 @@ class NihontoFormState extends State<NihontoForm> {
       _sori = SoriInfo();
       _hada = HadaInfo.DEFAULT;
       _kissakiType = null;
+      _muneType = null;
     });
   }
 
@@ -105,6 +111,7 @@ class NihontoFormState extends State<NihontoForm> {
       _sori = random.sori;
       _hada = random.hada;
       _kissakiType = random.kissakiType;
+      _muneType = random.muneType;
     });
   }
 
@@ -468,6 +475,20 @@ class NihontoFormState extends State<NihontoForm> {
               onChanged: (value) {
                 setState(() {
                   _kissakiType = value;
+                });
+              }),
+
+          // ================= //
+          // === Mune Type === //
+          // ================= //
+
+          DropdownButtonFormField(
+              decoration: InputDecoration(labelText: 'Mune'),
+              value: _muneType,
+              items: Utils.getMuneTypeMenuItems(),
+              onChanged: (value) {
+                setState(() {
+                  _muneType = value;
                 });
               }),
 
