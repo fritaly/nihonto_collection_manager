@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nihonto_collection_manager/model/boshi.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
 import 'package:nihonto_collection_manager/model/hada.dart';
@@ -115,6 +116,17 @@ extension HamonTypeExtension on HamonType {
 }
 
 extension YakibaExtension on Yakiba {
+
+  String name() {
+    return this.toString().split('.').last;
+  }
+
+  String label() {
+    return name().capitalize().replaceAll(new RegExp("_"), " ");
+  }
+}
+
+extension BoshiExtension on Boshi {
 
   String name() {
     return this.toString().split('.').last;
