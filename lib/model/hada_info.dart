@@ -24,7 +24,6 @@ class HadaInfo {
       bool nashiji,
       bool konuka,
       bool muji}) {
-
     return HadaInfo(
         itame: itame ?? this.itame,
         mokume: mokume ?? this.mokume,
@@ -49,7 +48,7 @@ class HadaInfo {
   }
 
   bool getValue(Hada hada) {
-    assert (hada != null);
+    assert(hada != null);
 
     switch (hada) {
       case Hada.ITAME:
@@ -72,7 +71,7 @@ class HadaInfo {
   }
 
   HadaInfo withValue(Hada hada, bool value) {
-    assert (hada != null);
+    assert(hada != null);
 
     switch (hada) {
       case Hada.ITAME:
@@ -92,6 +91,18 @@ class HadaInfo {
       default:
         throw Exception("Unsupported hada ${hada}");
     }
+  }
+
+  static HadaInfo from(Iterable<Hada> types) {
+    assert(types != null);
+
+    var result = DEFAULT;
+
+    types.forEach((element) {
+      result = result.withValue(element, true);
+    });
+
+    return result;
   }
 
   @override

@@ -19,6 +19,8 @@ import 'package:nihonto_collection_manager/utils.dart';
 import 'package:nihonto_collection_manager/widget/length_widget.dart';
 import 'package:nihonto_collection_manager/widget/money_widget.dart';
 
+import 'package:multiselect_formfield/multiselect_formfield.dart';
+
 class NihontoForm extends StatefulWidget {
   static final TextInputFormatter decimalNumber =
       FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'));
@@ -79,17 +81,16 @@ class NihontoFormState extends State<NihontoForm> {
 
   Nihonto _createNihonto() {
     return Nihonto(
-      type: _type,
-      geometry: _geometry,
-      signature: _signature,
-      price: _price,
-      nagasa: _nagasa,
-      sori: _sori,
-      hada: _hada,
-      kissakiType: _kissakiType,
-      muneType: _muneType,
-      hamonInfo: _hamonInfo
-    );
+        type: _type,
+        geometry: _geometry,
+        signature: _signature,
+        price: _price,
+        nagasa: _nagasa,
+        sori: _sori,
+        hada: _hada,
+        kissakiType: _kissakiType,
+        muneType: _muneType,
+        hamonInfo: _hamonInfo);
   }
 
   void _reset() {
@@ -243,23 +244,36 @@ class NihontoFormState extends State<NihontoForm> {
 
   @override
   Widget build(BuildContext context) {
-    final hadaWidgets =
-        Hada.values.where((element) => element != Hada.UNKNOWN).map((hada) {
+    final hadaWidget = MultiSelectFormField(
+      autovalidate: false,
+      title: Text('Hada'),
+      dataSource: Hada.values
+          .map((e) => {'display': e.label(), 'value': e.name()})
+          .toList(),
+      textField: 'display',
+      valueField: 'value',
+      okButtonLabel: 'OK',
+      cancelButtonLabel: 'CANCEL',
+      // required: true,
+      hintWidget: Text('Please choose one or more'),
+      initialValue: Hada.values
+          .where((element) => _hada.getValue(element))
+          .map((e) => e.name())
+          .toList(),
+      onSaved: (value) {
+        print('Value=${value}');
 
-      return SwitchListTile(
-          title: Text(hada.label()),
-          value: _hada.getValue(hada),
-          controlAffinity: ListTileControlAffinity.leading,
-          onChanged: (value) {
-            setState(() {
-              _hada = _hada.withValue(hada, value);
-            });
-          });
-    }).toList();
+        setState(() {
+          // List<dynamic> -> List<String> -> List<Hada>
+          _hada = HadaInfo.from(
+              value.map((name) => Utils.hadaFrom(name)).toList().cast<Hada>());
+        });
+      },
+    );
 
-    final hamonWidgets =
-    HamonType.values.where((element) => element != HamonType.UNKNOWN).map((type) {
-
+    final hamonWidgets = HamonType.values
+        .where((element) => element != HamonType.UNKNOWN)
+        .map((type) {
       return SwitchListTile(
           title: Text(type.label()),
           value: _hamonInfo.getValue(type),
@@ -523,7 +537,9 @@ class NihontoFormState extends State<NihontoForm> {
           // === Hada === //
           // ============ //
 
-          ...hadaWidgets,
+          hadaWidget,
+
+          Divider(),
 
           // ============= //
           // === Hamon === //
