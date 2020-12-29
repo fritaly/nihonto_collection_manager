@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/extensions.dart';
+import 'package:nihonto_collection_manager/model/boshi.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
 import 'package:nihonto_collection_manager/model/hada.dart';
@@ -136,5 +137,9 @@ class Utils {
 
   static Yakiba yakibaFrom(String name) {
     return Yakiba.values.firstWhere((element) => element.toString() == 'Yakiba.${name}');
+  }
+
+  static Boshi boshiFrom(String name) {
+    return Boshi.values.firstWhere((element) => element.toString() == 'Boshi.${name}');
   }
 }

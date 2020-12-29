@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 import 'package:nihonto_collection_manager/extensions.dart';
+import 'package:nihonto_collection_manager/model/boshi.dart';
+import 'package:nihonto_collection_manager/model/boshi_info.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
 import 'package:nihonto_collection_manager/model/hada.dart';
@@ -64,6 +66,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   YakibaInfo _yakibaInfo = YakibaInfo();
 
+  BoshiInfo _boshiInfo = BoshiInfo();
+
   // TODO Add motohaba, sakihaba, motokasane, sakikasane
 
   NihontoFormState(Nihonto nihonto) {
@@ -80,6 +84,7 @@ class NihontoFormState extends State<NihontoForm> {
       _muneType = nihonto.muneType;
       _hamonInfo = nihonto.hamonInfo;
       _yakibaInfo = nihonto.yakibaInfo;
+      _boshiInfo = nihonto.boshiInfo;
     }
   }
 
@@ -95,7 +100,8 @@ class NihontoFormState extends State<NihontoForm> {
         kissakiType: _kissakiType,
         muneType: _muneType,
         hamonInfo: _hamonInfo,
-        yakibaInfo: _yakibaInfo);
+        yakibaInfo: _yakibaInfo,
+        boshiInfo: _boshiInfo);
   }
 
   void _reset() {
@@ -111,6 +117,7 @@ class NihontoFormState extends State<NihontoForm> {
       _muneType = null;
       _hamonInfo = HamonInfo();
       _yakibaInfo = YakibaInfo();
+      _boshiInfo = BoshiInfo();
     });
   }
 
@@ -129,6 +136,7 @@ class NihontoFormState extends State<NihontoForm> {
       _muneType = random.muneType;
       _hamonInfo = random.hamonInfo;
       _yakibaInfo = random.yakibaInfo;
+      _boshiInfo = random.boshiInfo;
     });
   }
 
@@ -328,6 +336,33 @@ class NihontoFormState extends State<NihontoForm> {
           // List<dynamic> -> List<String> -> List<Yakiba>
           _yakibaInfo = YakibaInfo(
               value.map((name) => Utils.yakibaFrom(name)).toList().cast<Yakiba>());
+        });
+      },
+    );
+
+    final boshiWidget = MultiSelectFormField(
+      autovalidate: false,
+      title: Text('Boshi'),
+      dataSource: Boshi.values
+          .map((e) => {'display': e.label(), 'value': e.name()})
+          .toList(),
+      textField: 'display',
+      valueField: 'value',
+      okButtonLabel: 'OK',
+      cancelButtonLabel: 'CANCEL',
+      // required: true,
+      hintWidget: Text('Please choose one or more'),
+      initialValue: Boshi.values
+          .where((element) => (_boshiInfo != null) && _boshiInfo.getValue(element))
+          .map((e) => e.name())
+          .toList(),
+      onSaved: (value) {
+        print('Value=${value}');
+
+        setState(() {
+          // List<dynamic> -> List<String> -> List<Boshi>
+          _boshiInfo = BoshiInfo(
+              value.map((name) => Utils.boshiFrom(name)).toList().cast<Boshi>());
         });
       },
     );
@@ -589,6 +624,8 @@ class NihontoFormState extends State<NihontoForm> {
           hamonWidget,
 
           yakibaWidget,
+
+          boshiWidget,
 
           // =============== //
           // === Buttons === //
