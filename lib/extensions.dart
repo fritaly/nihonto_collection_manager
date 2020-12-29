@@ -4,6 +4,7 @@ import 'package:nihonto_collection_manager/model/geometry.dart';
 import 'package:nihonto_collection_manager/model/hada.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
+import 'package:nihonto_collection_manager/model/mune_type.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 
@@ -79,6 +80,17 @@ extension HadaExtension on Hada {
 }
 
 extension KissakiTypeExtension on KissakiType {
+
+  String name() {
+    return this.toString().split('.').last;
+  }
+
+  String label() {
+    return name().capitalize().replaceAll(new RegExp("_"), " ");
+  }
+}
+
+extension MuneTypeExtension on MuneType {
 
   String name() {
     return this.toString().split('.').last;
