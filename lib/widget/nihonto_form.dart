@@ -279,6 +279,7 @@ class NihontoFormState extends State<NihontoForm> {
     final hadaWidget = MultiSelectFormField(
       key: Key('Hada-${_hada.toString()}'),
       autovalidate: false,
+      border: OutlineInputBorder(),
       title: Text('Hada'),
       dataSource: Hada.values
           .map((e) => {'display': e.label(), 'value': e.name()})
@@ -307,6 +308,7 @@ class NihontoFormState extends State<NihontoForm> {
     final hamonWidget = MultiSelectFormField(
       key: Key('Hamon-${_hamonInfo.toString()}'),
       autovalidate: false,
+      border: OutlineInputBorder(),
       title: Text('Hamon'),
       dataSource: HamonType.values
           .map((e) => {'display': e.label(), 'value': e.name()})
@@ -335,6 +337,7 @@ class NihontoFormState extends State<NihontoForm> {
     final yakibaWidget = MultiSelectFormField(
       key: Key('Yakiba-${_yakibaInfo.toString()}'),
       autovalidate: false,
+      border: OutlineInputBorder(),
       title: Text('Yakiba'),
       dataSource: Yakiba.values
           .map((e) => {'display': e.label(), 'value': e.name()})
@@ -363,6 +366,7 @@ class NihontoFormState extends State<NihontoForm> {
     final boshiWidget = MultiSelectFormField(
       key: Key('Boshi-${_boshiInfo.toString()}'),
       autovalidate: false,
+      border: OutlineInputBorder(),
       title: Text('Boshi'),
       dataSource: Boshi.values
           .map((e) => {'display': e.label(), 'value': e.name()})
@@ -391,6 +395,7 @@ class NihontoFormState extends State<NihontoForm> {
     final nakagoWidget = MultiSelectFormField(
       key: Key('Nakago-${_nakagoInfo.toString()}'),
       autovalidate: false,
+      border: OutlineInputBorder(),
       title: Text('Nakago'),
       dataSource: Nakago.values
           .map((e) => {'display': e.label(), 'value': e.name()})
@@ -419,6 +424,7 @@ class NihontoFormState extends State<NihontoForm> {
     final yasurimeWidget = MultiSelectFormField(
       key: Key('Yasurime-${_yasurimeInfo.toString()}'),
       autovalidate: false,
+      border: OutlineInputBorder(),
       title: Text('Yasurime'),
       dataSource: Yasurime.values
           .map((e) => {'display': e.label(), 'value': e.name()})
@@ -444,6 +450,8 @@ class NihontoFormState extends State<NihontoForm> {
       },
     );
 
+    const sizedBoxSpace = SizedBox(height: 8);
+
     // Build a Form widget using the _formKey created above.
     final form = Form(
         key: _formKey,
@@ -453,7 +461,7 @@ class NihontoFormState extends State<NihontoForm> {
           // ============ //
 
           DropdownButtonFormField(
-              decoration: InputDecoration(labelText: 'Type'),
+              decoration: InputDecoration(labelText: 'Type', border: OutlineInputBorder()),
               value: _type,
               items: Utils.getNihontoTypeMenuItems(),
               validator: (value) {
@@ -475,8 +483,10 @@ class NihontoFormState extends State<NihontoForm> {
           // === Geometry === //
           // ================ //
 
+          sizedBoxSpace,
+
           DropdownButtonFormField(
-              decoration: InputDecoration(labelText: 'Geometry'),
+              decoration: InputDecoration(labelText: 'Geometry', border: OutlineInputBorder()),
               value: _geometry,
               items: Utils.getGeometryMenuItems(),
               validator: (value) {
@@ -498,8 +508,10 @@ class NihontoFormState extends State<NihontoForm> {
           // === Signature === //
           // ================= //
 
+          sizedBoxSpace,
+
           TextFormField(
-            decoration: InputDecoration(labelText: 'Signature (romaji)'),
+            decoration: InputDecoration(labelText: 'Signature (romaji)', border: OutlineInputBorder()),
             initialValue: _signature.romaji,
             key: Key(
                 'Signature-Romaji-${_signature.romaji}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
@@ -512,8 +524,10 @@ class NihontoFormState extends State<NihontoForm> {
             },
           ),
 
+          sizedBoxSpace,
+
           TextFormField(
-            decoration: InputDecoration(labelText: 'Signature (kanji)'),
+            decoration: InputDecoration(labelText: 'Signature (kanji)', border: OutlineInputBorder()),
             initialValue: _signature.kanji,
             key: Key(
                 'Signature-Kanji-${_signature.kanji}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
@@ -526,6 +540,8 @@ class NihontoFormState extends State<NihontoForm> {
             },
           ),
 
+          sizedBoxSpace,
+
           SwitchListTile(
               title: Text('Mumei'),
               value: _signature.mumei,
@@ -536,6 +552,8 @@ class NihontoFormState extends State<NihontoForm> {
                 });
               }),
 
+          sizedBoxSpace,
+
           SwitchListTile(
               title: Text('Gimei'),
               value: _signature.gimei,
@@ -545,6 +563,8 @@ class NihontoFormState extends State<NihontoForm> {
                   _signature = _signature.copyWith(gimei: value);
                 });
               }),
+
+          sizedBoxSpace,
 
           SwitchListTile(
               title: Text('Modern'),
@@ -560,8 +580,10 @@ class NihontoFormState extends State<NihontoForm> {
           // === Price === //
           // ============= //
 
+          sizedBoxSpace,
+
           TextFormField(
-            decoration: InputDecoration(labelText: 'Price'),
+            decoration: InputDecoration(labelText: 'Price', border: OutlineInputBorder()),
             readOnly: true,
             initialValue: "${_price.toText()}",
             key: Key(
@@ -590,8 +612,10 @@ class NihontoFormState extends State<NihontoForm> {
           // === Nagasa === //
           // ============== //
 
+          sizedBoxSpace,
+
           TextFormField(
-            decoration: InputDecoration(labelText: 'Nagasa'),
+            decoration: InputDecoration(labelText: 'Nagasa', border: OutlineInputBorder()),
             readOnly: true,
             initialValue: "${_nagasa?.toText() ?? ''}",
             key: Key(
@@ -620,8 +644,10 @@ class NihontoFormState extends State<NihontoForm> {
           // === Sori === //
           // ============ //
 
+          sizedBoxSpace,
+
           TextFormField(
-            decoration: InputDecoration(labelText: 'Sori'),
+            decoration: InputDecoration(labelText: 'Sori', border: OutlineInputBorder()),
             readOnly: true,
             initialValue: "${_sori?.sori?.toText() ?? ''}",
             key: Key(
@@ -650,8 +676,10 @@ class NihontoFormState extends State<NihontoForm> {
           // === Sori Type === //
           // ================= //
 
+          sizedBoxSpace,
+
           DropdownButtonFormField(
-              decoration: InputDecoration(labelText: 'Sori type'),
+              decoration: InputDecoration(labelText: 'Sori type', border: OutlineInputBorder()),
               value: _sori.type,
               items: Utils.getSoriTypeMenuItems(),
               onChanged: (value) {
@@ -664,8 +692,10 @@ class NihontoFormState extends State<NihontoForm> {
           // === Kissaki Type === //
           // ==================== //
 
+          sizedBoxSpace,
+
           DropdownButtonFormField(
-              decoration: InputDecoration(labelText: 'Kissaki'),
+              decoration: InputDecoration(labelText: 'Kissaki', border: OutlineInputBorder()),
               value: _kissakiType,
               items: Utils.getKissakiTypeMenuItems(),
               onChanged: (value) {
@@ -678,8 +708,10 @@ class NihontoFormState extends State<NihontoForm> {
           // === Mune Type === //
           // ================= //
 
+          sizedBoxSpace,
+
           DropdownButtonFormField(
-              decoration: InputDecoration(labelText: 'Mune'),
+              decoration: InputDecoration(labelText: 'Mune', border: OutlineInputBorder()),
               value: _muneType,
               items: Utils.getMuneTypeMenuItems(),
               onChanged: (value) {
@@ -692,20 +724,26 @@ class NihontoFormState extends State<NihontoForm> {
           // === Hada === //
           // ============ //
 
+          sizedBoxSpace,
           hadaWidget,
 
           // ============= //
           // === Hamon === //
           // ============= //
 
+          sizedBoxSpace,
           hamonWidget,
 
+          sizedBoxSpace,
           yakibaWidget,
 
+          sizedBoxSpace,
           boshiWidget,
 
+          sizedBoxSpace,
           nakagoWidget,
 
+          sizedBoxSpace,
           yasurimeWidget,
 
           // =============== //
