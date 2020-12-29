@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/extensions.dart';
+import 'package:nihonto_collection_manager/model/hada_info.dart';
 import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/utils.dart';
@@ -22,17 +23,20 @@ class Nihonto {
 
   final SoriType soriType;
 
-  const Nihonto({ this.type, this.geometry, this.signature = Signature.EMPTY, this.price = Money.ZERO, this.nagasa, this.sori, this.soriType });
+  final HadaInfo hada;
+
+  const Nihonto({ this.type, this.geometry, this.signature = Signature.EMPTY, this.price = Money.ZERO, this.nagasa, this.sori, this.soriType, this.hada = HadaInfo.DEFAULT });
 
   static Nihonto random() {
     return Nihonto(
-        type: Utils.randomNihontoType(),
-        geometry: Utils.randomGeometry(),
-        signature: Signature.random(),
-        price: Money.random(),
-        nagasa: Length.random(min: 25, max: 75),
-        sori: Length.random(min: 0, max: 3),
-        soriType: Utils.randomSoriType()
+      type: Utils.randomNihontoType(),
+      geometry: Utils.randomGeometry(),
+      signature: Signature.random(),
+      price: Money.random(),
+      nagasa: Length.random(min: 25, max: 75),
+      sori: Length.random(min: 0, max: 3),
+      soriType: Utils.randomSoriType(),
+      hada: HadaInfo.random()
     );
   }
 
@@ -41,6 +45,6 @@ class Nihonto {
   }
 
   String toString() {
-    return "Nihonto[type: ${type?.name()}, signature: '${signature}', geometry: ${geometry?.name()}, price: ${price}, nagasa: ${nagasa}, sori: ${sori}, soriType: ${soriType?.name()}]";
+    return "Nihonto[type: ${type?.name()}, signature: '${signature}', geometry: ${geometry?.name()}, price: ${price}, nagasa: ${nagasa}, sori: ${sori}, soriType: ${soriType?.name()}, hada: ${hada}]";
   }
 }
