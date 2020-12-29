@@ -24,6 +24,7 @@ class HadaInfo {
       bool nashiji,
       bool konuka,
       bool muji}) {
+
     return HadaInfo(
         itame: itame ?? this.itame,
         mokume: mokume ?? this.mokume,
@@ -65,6 +66,29 @@ class HadaInfo {
         return konuka;
       case Hada.MUJI:
         return muji;
+      default:
+        throw Exception("Unsupported hada ${hada}");
+    }
+  }
+
+  HadaInfo withValue(Hada hada, bool value) {
+    assert (hada != null);
+
+    switch (hada) {
+      case Hada.ITAME:
+        return copyWith(itame: value);
+      case Hada.MOKUME:
+        return copyWith(mokume: value);
+      case Hada.MASAME:
+        return copyWith(masame: value);
+      case Hada.AYASUGI:
+        return copyWith(ayasugi: value);
+      case Hada.NASHIJI:
+        return copyWith(nashiji: value);
+      case Hada.KONUKA:
+        return copyWith(konuka: value);
+      case Hada.MUJI:
+        return copyWith(muji: value);
       default:
         throw Exception("Unsupported hada ${hada}");
     }
