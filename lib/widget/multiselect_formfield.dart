@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/widget/multiselect_dialog.dart';
 
 class MultiSelectFormField extends FormField<dynamic> {
-  final Widget title;
+  final String title;
   final Widget hintWidget;
   final bool required;
   final String errorText;
@@ -32,7 +32,7 @@ class MultiSelectFormField extends FormField<dynamic> {
     FormFieldValidator<dynamic> validator,
     dynamic initialValue,
     bool autovalidate = false,
-    this.title = const Text('Title'),
+    this.title = 'Title',
     this.hintWidget = const Text('Tap to select one or more'),
     this.required = false,
     this.errorText = 'Please select one or more options',
@@ -105,7 +105,7 @@ class MultiSelectFormField extends FormField<dynamic> {
                   context: state.context,
                   builder: (BuildContext context) {
                     return MultiSelectDialog(
-                      title: title,
+                      title: Text(title),
                       okButtonLabel: okButtonLabel,
                       cancelButtonLabel: cancelButtonLabel,
                       items: items,
@@ -125,6 +125,7 @@ class MultiSelectFormField extends FormField<dynamic> {
               },
               child: InputDecorator(
                 decoration: InputDecoration(
+                  labelText: title,
                   filled: true,
                   errorText: state.hasError ? state.errorText : null,
                   errorMaxLines: 4,
@@ -140,9 +141,9 @@ class MultiSelectFormField extends FormField<dynamic> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Expanded(
-                            child: title,
-                          ),
+                          // Expanded(
+                          //   child: title,
+                          // ),
                           required
                               ? Padding(
                                   padding: EdgeInsets.only(top: 5, right: 5),
@@ -155,11 +156,11 @@ class MultiSelectFormField extends FormField<dynamic> {
                                   ),
                                 )
                               : Container(),
-                          Icon(
+                          /* Icon(
                             Icons.arrow_drop_down,
                             color: Colors.black87,
                             size: 25.0,
-                          ),
+                          ), */
                         ],
                       ),
                     ),

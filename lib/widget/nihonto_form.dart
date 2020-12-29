@@ -280,7 +280,7 @@ class NihontoFormState extends State<NihontoForm> {
       key: Key('Hada-${_hada.toString()}'),
       autovalidate: false,
       border: OutlineInputBorder(),
-      title: Text('Hada'),
+      title: 'Hada',
       dataSource: Hada.values
           .map((e) => {'display': e.label(), 'value': e.name()})
           .toList(),
@@ -309,7 +309,7 @@ class NihontoFormState extends State<NihontoForm> {
       key: Key('Hamon-${_hamonInfo.toString()}'),
       autovalidate: false,
       border: OutlineInputBorder(),
-      title: Text('Hamon'),
+      title: 'Hamon',
       dataSource: HamonType.values
           .map((e) => {'display': e.label(), 'value': e.name()})
           .toList(),
@@ -338,7 +338,7 @@ class NihontoFormState extends State<NihontoForm> {
       key: Key('Yakiba-${_yakibaInfo.toString()}'),
       autovalidate: false,
       border: OutlineInputBorder(),
-      title: Text('Yakiba'),
+      title: 'Yakiba',
       dataSource: Yakiba.values
           .map((e) => {'display': e.label(), 'value': e.name()})
           .toList(),
@@ -367,7 +367,7 @@ class NihontoFormState extends State<NihontoForm> {
       key: Key('Boshi-${_boshiInfo.toString()}'),
       autovalidate: false,
       border: OutlineInputBorder(),
-      title: Text('Boshi'),
+      title: 'Boshi',
       dataSource: Boshi.values
           .map((e) => {'display': e.label(), 'value': e.name()})
           .toList(),
@@ -396,7 +396,7 @@ class NihontoFormState extends State<NihontoForm> {
       key: Key('Nakago-${_nakagoInfo.toString()}'),
       autovalidate: false,
       border: OutlineInputBorder(),
-      title: Text('Nakago'),
+      title: 'Nakago',
       dataSource: Nakago.values
           .map((e) => {'display': e.label(), 'value': e.name()})
           .toList(),
@@ -425,7 +425,7 @@ class NihontoFormState extends State<NihontoForm> {
       key: Key('Yasurime-${_yasurimeInfo.toString()}'),
       autovalidate: false,
       border: OutlineInputBorder(),
-      title: Text('Yasurime'),
+      title: 'Yasurime',
       dataSource: Yasurime.values
           .map((e) => {'display': e.label(), 'value': e.name()})
           .toList(),
