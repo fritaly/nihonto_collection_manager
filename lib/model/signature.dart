@@ -13,7 +13,7 @@ class Signature {
 
   const Signature({ this.kanji = '', this.romaji = '', this.mumei = false, this.gimei = false, this.modern = false });
 
-  Signature copyWith({ String kanji, String romaji, bool mumei = false, bool gimei = false, bool modern = false }) {
+  Signature copyWith({ String kanji, String romaji, bool mumei, bool gimei, bool modern }) {
     return Signature(
       kanji: kanji ?? this.kanji,
       romaji: romaji ?? this.romaji,
