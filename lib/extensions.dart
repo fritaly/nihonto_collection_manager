@@ -7,6 +7,7 @@ import 'package:nihonto_collection_manager/model/hamon_type.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
+import 'package:nihonto_collection_manager/model/nakago.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/model/yakiba.dart';
@@ -127,6 +128,17 @@ extension YakibaExtension on Yakiba {
 }
 
 extension BoshiExtension on Boshi {
+
+  String name() {
+    return this.toString().split('.').last;
+  }
+
+  String label() {
+    return name().capitalize().replaceAll(new RegExp("_"), " ");
+  }
+}
+
+extension NakagoExtension on Nakago {
 
   String name() {
     return this.toString().split('.').last;
