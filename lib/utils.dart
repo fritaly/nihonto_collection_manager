@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/extensions.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
+import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
@@ -38,6 +39,13 @@ class Utils {
     )).toList(growable: false);
   }
 
+  static List<DropdownMenuItem> getKissakiTypeMenuItems() {
+    return KissakiType.values.map((e) => DropdownMenuItem(
+        child: Text(e.label()),
+        value: e
+    )).toList(growable: false);
+  }
+
   static List<DropdownMenuItem> getSoriTypeMenuItems() {
     return SoriType.values.map((e) => DropdownMenuItem(
         child: Text(e.label()),
@@ -49,6 +57,10 @@ class Utils {
     assert (list != null);
 
     return list[Random().nextInt(list.length)];
+  }
+
+  static KissakiType randomKissakiType() {
+    return Utils.random(KissakiType.values);
   }
 
   static Currency randomCurrency() {

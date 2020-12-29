@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
 import 'package:nihonto_collection_manager/model/hada.dart';
+import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
@@ -67,6 +68,17 @@ extension SoriExtension on SoriType {
 }
 
 extension HadaExtension on Hada {
+
+  String name() {
+    return this.toString().split('.').last;
+  }
+
+  String label() {
+    return name().capitalize().replaceAll(new RegExp("_"), " ");
+  }
+}
+
+extension KissakiTypeExtension on KissakiType {
 
   String name() {
     return this.toString().split('.').last;

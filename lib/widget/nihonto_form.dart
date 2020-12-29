@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nihonto_collection_manager/extensions.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
 import 'package:nihonto_collection_manager/model/hada.dart';
@@ -8,9 +9,8 @@ import 'package:nihonto_collection_manager/model/length.dart';
 import 'package:nihonto_collection_manager/model/money.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
-import 'package:nihonto_collection_manager/extensions.dart';
 import 'package:nihonto_collection_manager/model/signature.dart';
-import 'package:nihonto_collection_manager/model/sori_type.dart';
+import 'package:nihonto_collection_manager/model/sori_info.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 import 'package:nihonto_collection_manager/widget/length_widget.dart';
 import 'package:nihonto_collection_manager/widget/money_widget.dart';
@@ -43,13 +43,13 @@ class NihontoFormState extends State<NihontoForm> {
 
   Money _price = Money(0, Currency.USD);
 
-  Length _nagasa, _sori;
+  Length _nagasa;
 
-  SoriType _soriType;
+  SoriInfo _sori = SoriInfo();
 
   HadaInfo _hada = HadaInfo.DEFAULT;
 
-  // TODO Add motohaba, sakihaba, motokasane, sakikasane, sori
+  // TODO Add motohaba, sakihaba, motokasane, sakikasane
 
   NihontoFormState(Nihonto nihonto) {
     // The argument can be null
@@ -60,7 +60,6 @@ class NihontoFormState extends State<NihontoForm> {
       _price = nihonto.price;
       _nagasa = nihonto.nagasa;
       _sori = nihonto.sori;
-      _soriType = nihonto.soriType;
       _hada = nihonto.hada;
     }
   }
@@ -73,7 +72,6 @@ class NihontoFormState extends State<NihontoForm> {
         price: _price,
         nagasa: _nagasa,
         sori: _sori,
-        soriType: _soriType,
         hada: _hada);
   }
 
@@ -84,8 +82,7 @@ class NihontoFormState extends State<NihontoForm> {
       _geometry = null;
       _price = Money.ZERO;
       _nagasa = null;
-      _sori = null;
-      _soriType = null;
+      _sori = SoriInfo();
       _hada = HadaInfo.DEFAULT;
     });
   }
@@ -100,7 +97,6 @@ class NihontoFormState extends State<NihontoForm> {
       _price = random.price;
       _nagasa = random.nagasa;
       _sori = random.sori;
-      _soriType = random.soriType;
       _hada = random.hada;
     });
   }
@@ -417,19 +413,19 @@ class NihontoFormState extends State<NihontoForm> {
           TextFormField(
             decoration: InputDecoration(labelText: 'Sori'),
             readOnly: true,
-            initialValue: "${_sori?.toText() ?? ''}",
+            initialValue: "${_sori?.sori?.toText() ?? ''}",
             key: Key(
-                'Sori-${_sori?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+                'Sori-${_sori?.sori?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
             onTap: () {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return _showSoriDialog(context, _sori);
+                    return _showSoriDialog(context, _sori.sori);
                   }).then((value) {
                 if (value != null) {
                   setState(() {
                     // Update the sori based on the value returned by the dialog
-                    _sori = value;
+                    _sori = _sori.copyWith(sori: value);
 
                     print("Sori set to ${value}");
                   });
@@ -446,11 +442,11 @@ class NihontoFormState extends State<NihontoForm> {
 
           DropdownButtonFormField(
               decoration: InputDecoration(labelText: 'Sori type'),
-              value: _soriType,
+              value: _sori.type,
               items: Utils.getSoriTypeMenuItems(),
               onChanged: (value) {
                 setState(() {
-                  _soriType = value;
+                  _sori = _sori.copyWith(type: value);
                 });
               }),
 

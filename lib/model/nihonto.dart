@@ -1,6 +1,7 @@
 import 'package:nihonto_collection_manager/extensions.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
 import 'package:nihonto_collection_manager/model/signature.dart';
+import 'package:nihonto_collection_manager/model/sori_info.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
@@ -19,11 +20,13 @@ class Nihonto {
 
   final Money price;
 
-  final Length nagasa, sori;
+  final Length nagasa;
 
   final SoriType soriType;
 
   final HadaInfo hada;
+
+  final SoriInfo sori;
 
   const Nihonto({ this.type, this.geometry, this.signature = Signature.EMPTY, this.price = Money.ZERO, this.nagasa, this.sori, this.soriType, this.hada = HadaInfo.DEFAULT });
 
@@ -34,7 +37,7 @@ class Nihonto {
       signature: Signature.random(),
       price: Money.random(),
       nagasa: Length.random(min: 25, max: 75),
-      sori: Length.random(min: 0, max: 3),
+      sori: SoriInfo.random(),
       soriType: Utils.randomSoriType(),
       hada: HadaInfo.random()
     );
