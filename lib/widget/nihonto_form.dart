@@ -968,19 +968,15 @@ class NihontoFormState extends State<NihontoForm> {
           ButtonBar(children: [
 //            ElevatedButton(child: Text('Reset'), onPressed: _reset),
             ElevatedButton(child: Text('Randomize'), onPressed: _randomize),
-            ElevatedButton(child: Text('Save'), onPressed: _save)
           ])
         ])).pad();
-
-    // Wrap the form into a list view to support scrolling
-    final listView = ListView(children: [form]);
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Add a new nihonto'),
-        actions: [],
+        actions: [ TextButton(child: Text('SAVE', style: TextStyle(color: Colors.white)), onPressed: _save ) ]
       ),
-      body: listView,
+      body: ListView(children: [form]) // Wrap the form into a list view to support scrolling
     );
   }
 }
