@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
-import 'package:nihonto_collection_manager/model/yasurime.dart';
 
 extension StringExtension on String {
   String capitalize() {
@@ -19,16 +18,5 @@ extension LengthUnitExtension on LengthUnit {
 
   String name() {
     return this.toString().split('.').last;
-  }
-}
-
-extension YasurimeExtension on Yasurime {
-
-  String name() {
-    return this.toString().split('.').last;
-  }
-
-  String label() {
-    return name().capitalize().replaceAll(new RegExp("_"), " ");
   }
 }
