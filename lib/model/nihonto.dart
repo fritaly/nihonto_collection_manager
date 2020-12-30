@@ -30,6 +30,8 @@ class Nihonto {
 
   final Sugata sugata;
 
+  final String sugataOther;
+
   final Money price;
 
   final Length nagasa, totalLength, kasane, motokasane, sakikasane, mihaba, motohaba, sakihaba;
@@ -65,6 +67,7 @@ class Nihonto {
       this.overallDescription,
       this.type,
       this.sugata,
+      this.sugataOther = '',
       this.signature = Signature.EMPTY,
       this.signatureInfo,
       this.price = Money.ZERO,
@@ -100,6 +103,7 @@ class Nihonto {
         overallDescription: 'Description goes here...\nDescription goes here...\nDescription goes here...',
         type: NihontoType.random(),
         sugata: Sugata.random(),
+        sugataOther: '',
         signature: Signature.random(),
         signatureInfo: SignatureInfo.random(),
         price: Money.random(),

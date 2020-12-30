@@ -65,6 +65,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   Sugata _sugata;
 
+  String _sugataOther;
+
   Signature _signature = Signature.EMPTY;
 
   SignatureInfo _signatureInfo = SignatureInfo();
@@ -110,6 +112,7 @@ class NihontoFormState extends State<NihontoForm> {
       _overallDescription = nihonto.overallDescription;
       _type = nihonto.type;
       _sugata = nihonto.sugata;
+      _sugataOther = nihonto.sugataOther;
       _signature = nihonto.signature;
       _signatureInfo = nihonto.signatureInfo;
       _price = nihonto.price;
@@ -141,6 +144,7 @@ class NihontoFormState extends State<NihontoForm> {
         overallDescription: _overallDescription,
         type: _type,
         sugata: _sugata,
+        sugataOther: _sugataOther,
         signature: _signature,
         signatureInfo: _signatureInfo,
         price: _price,
@@ -173,6 +177,7 @@ class NihontoFormState extends State<NihontoForm> {
       _signatureInfo = SignatureInfo();
       _type = null;
       _sugata = null;
+      _sugataOther = '';
       _price = Money.ZERO;
       _nagasa = null;
       _totalLength = null;
@@ -205,6 +210,7 @@ class NihontoFormState extends State<NihontoForm> {
       _signature = random.signature;
       _signatureInfo = random.signatureInfo;
       _sugata = random.sugata;
+      _sugataOther = random.sugataOther;
       _type = random.type;
       _price = random.price;
       _nagasa = random.nagasa;
@@ -576,7 +582,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Sugata === //
           // ============== //
 
-          sizedBoxSpace,
+          sizedBoxSpace, Divider(), sizedBoxSpace,
 
           DropdownButtonFormField(
               decoration: FieldDecoration('Sugata'),
@@ -588,11 +594,26 @@ class NihontoFormState extends State<NihontoForm> {
                 });
               }),
 
+          sizedBoxSpace,
+
+          TextFormField(
+            decoration: FieldDecoration('Sugata (other)'),
+            initialValue: _sugataOther ?? '',
+            minLines: 1,
+            maxLines: 25,
+            key: Key('Sugata-Other-${_sugataOther}'),
+            onChanged: (value) {
+              setState(() {
+                _sugataOther = value;
+              });
+            },
+          ),
+
           // ================= //
           // === Signature === //
           // ================= //
 
-          sizedBoxSpace,
+          sizedBoxSpace, Divider(), sizedBoxSpace,
 
           TextFormField(
             decoration: FieldDecoration('Signature (romaji)'),
@@ -626,7 +647,7 @@ class NihontoFormState extends State<NihontoForm> {
 
           signatureWidget,
 
-          sizedBoxSpace,
+          sizedBoxSpace, Divider(), sizedBoxSpace,
 
           Row(children: [
             Expanded(child: TextFormField(
