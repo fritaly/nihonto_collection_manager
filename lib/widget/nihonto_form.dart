@@ -59,7 +59,13 @@ class NihontoFormState extends State<NihontoForm> {
 
   Money _price = Money(0, Currency.USD);
 
-  Length _nagasa, _totalLength, _kasane, _motokasane, _sakikasane, _motohaba, _sakihaba;
+  Length _nagasa,
+      _totalLength,
+      _kasane,
+      _motokasane,
+      _sakikasane,
+      _motohaba,
+      _sakihaba;
 
   SoriInfo _sori = SoriInfo();
 
@@ -134,8 +140,7 @@ class NihontoFormState extends State<NihontoForm> {
         nakagoInfo: _nakagoInfo,
         yasurimeInfo: _yasurimeInfo,
         bohiInfo: _bohiInfo,
-        polish: _polish
-    );
+        polish: _polish);
   }
 
   void _reset() {
@@ -243,7 +248,8 @@ class NihontoFormState extends State<NihontoForm> {
     return dialog;
   }
 
-  AlertDialog _showLengthDialog(BuildContext context, String title, Length length) {
+  AlertDialog _showLengthDialog(
+      BuildContext context, String title, Length length) {
     // length can be null
     assert(context != null);
     assert(title != null);
@@ -285,9 +291,8 @@ class NihontoFormState extends State<NihontoForm> {
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Hada',
-      dataSource: Hada.values
-          .map((e) => {'display': e.label, 'value': e})
-          .toList(),
+      dataSource:
+          Hada.values.map((e) => {'display': e.label, 'value': e}).toList(),
       textField: 'display',
       valueField: 'value',
       // required: true,
@@ -329,9 +334,8 @@ class NihontoFormState extends State<NihontoForm> {
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Yakiba',
-      dataSource: Yakiba.values
-          .map((e) => {'display': e.label, 'value': e})
-          .toList(),
+      dataSource:
+          Yakiba.values.map((e) => {'display': e.label, 'value': e}).toList(),
       textField: 'display',
       valueField: 'value',
       // required: true,
@@ -351,9 +355,8 @@ class NihontoFormState extends State<NihontoForm> {
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Boshi',
-      dataSource: Boshi.values
-          .map((e) => {'display': e.label, 'value': e})
-          .toList(),
+      dataSource:
+          Boshi.values.map((e) => {'display': e.label, 'value': e}).toList(),
       textField: 'display',
       valueField: 'value',
       // required: true,
@@ -373,9 +376,8 @@ class NihontoFormState extends State<NihontoForm> {
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Nakago',
-      dataSource: Nakago.values
-          .map((e) => {'display': e.label, 'value': e})
-          .toList(),
+      dataSource:
+          Nakago.values.map((e) => {'display': e.label, 'value': e}).toList(),
       textField: 'display',
       valueField: 'value',
       // required: true,
@@ -395,9 +397,8 @@ class NihontoFormState extends State<NihontoForm> {
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Yasurime',
-      dataSource: Yasurime.values
-          .map((e) => {'display': e.label, 'value': e})
-          .toList(),
+      dataSource:
+          Yasurime.values.map((e) => {'display': e.label, 'value': e}).toList(),
       textField: 'display',
       valueField: 'value',
       // required: true,
@@ -417,9 +418,8 @@ class NihontoFormState extends State<NihontoForm> {
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Bohi',
-      dataSource: Bohi.values
-          .map((e) => {'display': e.label, 'value': e})
-          .toList(),
+      dataSource:
+          Bohi.values.map((e) => {'display': e.label, 'value': e}).toList(),
       textField: 'display',
       valueField: 'value',
       // required: true,
@@ -436,6 +436,8 @@ class NihontoFormState extends State<NihontoForm> {
 
     const sizedBoxSpace = SizedBox(height: 8);
 
+    const rowPadder = SizedBox(width: 8);
+
     // Build a Form widget using the _formKey created above.
     final form = Form(
         key: _formKey,
@@ -445,7 +447,8 @@ class NihontoFormState extends State<NihontoForm> {
           // ============ //
 
           DropdownButtonFormField(
-              decoration: InputDecoration(labelText: 'Type', border: OutlineInputBorder()),
+              decoration: InputDecoration(
+                  labelText: 'Type', border: OutlineInputBorder()),
               value: _type,
               items: Utils.getNihontoTypeMenuItems(),
               validator: (value) {
@@ -470,7 +473,8 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           DropdownButtonFormField(
-              decoration: InputDecoration(labelText: 'Sugata', border: OutlineInputBorder()),
+              decoration: InputDecoration(
+                  labelText: 'Sugata', border: OutlineInputBorder()),
               value: _sugata,
               items: Utils.getSugataMenuItems(),
               onChanged: (value) {
@@ -488,7 +492,8 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           TextFormField(
-            decoration: InputDecoration(labelText: 'Signature (romaji)', border: OutlineInputBorder()),
+            decoration: InputDecoration(
+                labelText: 'Signature (romaji)', border: OutlineInputBorder()),
             initialValue: _signature.romaji,
             key: Key(
                 'Signature-Romaji-${_signature.romaji}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
@@ -504,7 +509,8 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           TextFormField(
-            decoration: InputDecoration(labelText: 'Signature (kanji)', border: OutlineInputBorder()),
+            decoration: InputDecoration(
+                labelText: 'Signature (kanji)', border: OutlineInputBorder()),
             initialValue: _signature.kanji,
             key: Key(
                 'Signature-Kanji-${_signature.kanji}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
@@ -560,7 +566,8 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           TextFormField(
-            decoration: InputDecoration(labelText: 'Price', border: OutlineInputBorder()),
+            decoration: InputDecoration(
+                labelText: 'Price', border: OutlineInputBorder()),
             readOnly: true,
             initialValue: "${_price.toText()}",
             key: Key(
@@ -585,271 +592,298 @@ class NihontoFormState extends State<NihontoForm> {
             },
           ),
 
-          // ============== //
-          // === Nagasa === //
-          // ============== //
-
           sizedBoxSpace,
 
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Nagasa', border: OutlineInputBorder()),
-            readOnly: true,
-            initialValue: "${_nagasa?.toText() ?? ''}",
-            key: Key(
-                'Nagasa-${_nagasa?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return _showLengthDialog(context, 'Set the nagasa', _nagasa);
-                  }).then((value) {
-                if (value != null) {
-                  setState(() {
-                    // Update the nagasa based on the value returned by the dialog
-                    _nagasa = value;
+          Row(
+            children: [
+              Expanded(
+                  child:
 
-                    print("Nagasa set to ${value}");
+                      // ============== //
+                      // === Nagasa === //
+                      // ============== //
+
+                      TextFormField(
+                decoration: InputDecoration(
+                    labelText: 'Nagasa', border: OutlineInputBorder()),
+                readOnly: true,
+                initialValue: "${_nagasa?.toText() ?? ''}",
+                key: Key(
+                    'Nagasa-${_nagasa?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return _showLengthDialog(
+                            context, 'Set the nagasa', _nagasa);
+                      }).then((value) {
+                    if (value != null) {
+                      setState(() {
+                        // Update the nagasa based on the value returned by the dialog
+                        _nagasa = value;
+
+                        print("Nagasa set to ${value}");
+                      });
+                    } else {
+                      // The value is null if the user clicked "Cancel"
+                    }
                   });
-                } else {
-                  // The value is null if the user clicked "Cancel"
-                }
-              });
-            },
+                },
+              )),
+              rowPadder,
+              Expanded(
+                  child:
+
+                      // ==================== //
+                      // === Total length === //
+                      // ==================== //
+
+                      TextFormField(
+                decoration: InputDecoration(
+                    labelText: 'Total length', border: OutlineInputBorder()),
+                readOnly: true,
+                initialValue: "${_totalLength?.toText() ?? ''}",
+                key: Key('TotalLength-${_totalLength?.toText()}'),
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return _showLengthDialog(
+                            context, 'Set the total length', _totalLength);
+                      }).then((value) {
+                    if (value != null) {
+                      setState(() {
+                        _totalLength = value;
+
+                        print("Total length set to ${value}");
+                      });
+                    } else {
+                      // The value is null if the user clicked "Cancel"
+                    }
+                  });
+                },
+              ))
+            ],
           ),
 
-          // ==================== //
-          // === Total length === //
-          // ==================== //
-
           sizedBoxSpace,
 
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Total length', border: OutlineInputBorder()),
-            readOnly: true,
-            initialValue: "${_totalLength?.toText() ?? ''}",
-            key: Key(
-                'TotalLength-${_totalLength?.toText()}'),
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return _showLengthDialog(context, 'Set the total length', _totalLength);
-                  }).then((value) {
-                if (value != null) {
-                  setState(() {
-                    _totalLength = value;
+          Row(children: [
+            // ============== //
+            // === Kasane === //
+            // ============== //
 
-                    print("Total length set to ${value}");
-                  });
-                } else {
-                  // The value is null if the user clicked "Cancel"
-                }
-              });
-            },
-          ),
+            Expanded(
+                child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: 'Kasane', border: OutlineInputBorder()),
+              readOnly: true,
+              initialValue: "${_kasane?.toText() ?? ''}",
+              key: Key('Kasane-${_kasane?.toText()}'),
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return _showLengthDialog(
+                          context, 'Set the kasane', _kasane);
+                    }).then((value) {
+                  if (value != null) {
+                    setState(() {
+                      _kasane = value;
 
-          // ============== //
-          // === Kasane === //
-          // ============== //
-
-          sizedBoxSpace,
-
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Kasane', border: OutlineInputBorder()),
-            readOnly: true,
-            initialValue: "${_kasane?.toText() ?? ''}",
-            key: Key(
-                'Kasane-${_kasane?.toText()}'),
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return _showLengthDialog(context, 'Set the kasane', _kasane);
-                  }).then((value) {
-                if (value != null) {
-                  setState(() {
-                    _kasane = value;
-
-                    print("Kasane set to ${value}");
-                  });
-                } else {
-                  // The value is null if the user clicked "Cancel"
-                }
-              });
-            },
-          ),
-
-          // ================== //
-          // === Motokasane === //
-          // ================== //
-
-          sizedBoxSpace,
-
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Motokasane', border: OutlineInputBorder()),
-            readOnly: true,
-            initialValue: "${_motokasane?.toText() ?? ''}",
-            key: Key(
-                'Motokasane-${_motokasane?.toText()}'),
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return _showLengthDialog(context, 'Set the motokasane', _motokasane);
-                  }).then((value) {
-                if (value != null) {
-                  setState(() {
-                    _motokasane = value;
-
-                    print("Motokasane set to ${value}");
-                  });
-                } else {
-                  // The value is null if the user clicked "Cancel"
-                }
-              });
-            },
-          ),
-
-          // ================== //
-          // === Sakikasane === //
-          // ================== //
-
-          sizedBoxSpace,
-
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Sakikasane', border: OutlineInputBorder()),
-            readOnly: true,
-            initialValue: "${_sakikasane?.toText() ?? ''}",
-            key: Key(
-                'Sakikasane-${_sakikasane?.toText()}'),
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return _showLengthDialog(context, 'Set the sakikasane', _sakikasane);
-                  }).then((value) {
-                if (value != null) {
-                  setState(() {
-                    _sakikasane = value;
-
-                    print("Sakikasane set to ${value}");
-                  });
-                } else {
-                  // The value is null if the user clicked "Cancel"
-                }
-              });
-            },
-          ),
-
-          // ================ //
-          // === Motohaba === //
-          // ================ //
-
-          sizedBoxSpace,
-
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Motohaba', border: OutlineInputBorder()),
-            readOnly: true,
-            initialValue: "${_motohaba?.toText() ?? ''}",
-            key: Key(
-                'Motohaba-${_motohaba?.toText()}'),
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return _showLengthDialog(context, 'Set the motohaba', _motohaba);
-                  }).then((value) {
-                if (value != null) {
-                  setState(() {
-                    _motohaba = value;
-
-                    print("Motohaba set to ${value}");
-                  });
-                } else {
-                  // The value is null if the user clicked "Cancel"
-                }
-              });
-            },
-          ),
-
-          // ================ //
-          // === Sakihaba === //
-          // ================ //
-
-          sizedBoxSpace,
-
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Sakihaba', border: OutlineInputBorder()),
-            readOnly: true,
-            initialValue: "${_sakihaba?.toText() ?? ''}",
-            key: Key(
-                'Sakihaba-${_sakihaba?.toText()}'),
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return _showLengthDialog(context, 'Set the sakihaba', _sakihaba);
-                  }).then((value) {
-                if (value != null) {
-                  setState(() {
-                    _sakihaba = value;
-
-                    print("Sakihaba set to ${value}");
-                  });
-                } else {
-                  // The value is null if the user clicked "Cancel"
-                }
-              });
-            },
-          ),
-
-          // ============ //
-          // === Sori === //
-          // ============ //
-
-          sizedBoxSpace,
-
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Sori', border: OutlineInputBorder()),
-            readOnly: true,
-            initialValue: "${_sori?.sori?.toText() ?? ''}",
-            key: Key(
-                'Sori-${_sori?.sori?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return _showLengthDialog(context, 'Set the sori', _sori.sori);
-                  }).then((value) {
-                if (value != null) {
-                  setState(() {
-                    // Update the sori based on the value returned by the dialog
-                    _sori = _sori.copyWith(sori: value);
-
-                    print("Sori set to ${value}");
-                  });
-                } else {
-                  // The value is null if the user clicked "Cancel"
-                }
-              });
-            },
-          ),
-
-          // ================= //
-          // === Sori Type === //
-          // ================= //
-
-          sizedBoxSpace,
-
-          DropdownButtonFormField(
-              decoration: InputDecoration(labelText: 'Sori type', border: OutlineInputBorder()),
-              value: _sori.type,
-              items: Utils.getSoriTypeMenuItems(),
-              onChanged: (value) {
-                setState(() {
-                  _sori = _sori.copyWith(type: value);
+                      print("Kasane set to ${value}");
+                    });
+                  } else {
+                    // The value is null if the user clicked "Cancel"
+                  }
                 });
-              }),
+              },
+            )),
+
+            rowPadder,
+
+            // ================== //
+            // === Motokasane === //
+            // ================== //
+
+            Expanded(
+                child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: 'Motokasane', border: OutlineInputBorder()),
+              readOnly: true,
+              initialValue: "${_motokasane?.toText() ?? ''}",
+              key: Key('Motokasane-${_motokasane?.toText()}'),
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return _showLengthDialog(
+                          context, 'Set the motokasane', _motokasane);
+                    }).then((value) {
+                  if (value != null) {
+                    setState(() {
+                      _motokasane = value;
+
+                      print("Motokasane set to ${value}");
+                    });
+                  } else {
+                    // The value is null if the user clicked "Cancel"
+                  }
+                });
+              },
+            )),
+
+            rowPadder,
+
+            // ================== //
+            // === Sakikasane === //
+            // ================== //
+
+            Expanded(
+                child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: 'Sakikasane', border: OutlineInputBorder()),
+              readOnly: true,
+              initialValue: "${_sakikasane?.toText() ?? ''}",
+              key: Key('Sakikasane-${_sakikasane?.toText()}'),
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return _showLengthDialog(
+                          context, 'Set the sakikasane', _sakikasane);
+                    }).then((value) {
+                  if (value != null) {
+                    setState(() {
+                      _sakikasane = value;
+
+                      print("Sakikasane set to ${value}");
+                    });
+                  } else {
+                    // The value is null if the user clicked "Cancel"
+                  }
+                });
+              },
+            )),
+          ]),
+
+          sizedBoxSpace,
+
+          Row(children: [
+            Expanded(
+              child:
+
+                  // ================ //
+                  // === Motohaba === //
+                  // ================ //
+
+                  TextFormField(
+                decoration: InputDecoration(
+                    labelText: 'Motohaba', border: OutlineInputBorder()),
+                readOnly: true,
+                initialValue: "${_motohaba?.toText() ?? ''}",
+                key: Key('Motohaba-${_motohaba?.toText()}'),
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return _showLengthDialog(
+                            context, 'Set the motohaba', _motohaba);
+                      }).then((value) {
+                    if (value != null) {
+                      setState(() {
+                        _motohaba = value;
+
+                        print("Motohaba set to ${value}");
+                      });
+                    } else {
+                      // The value is null if the user clicked "Cancel"
+                    }
+                  });
+                },
+              ),
+            ),
+            rowPadder,
+            Expanded(
+                child:
+
+                    // ================ //
+                    // === Sakihaba === //
+                    // ================ //
+
+                    TextFormField(
+              decoration: InputDecoration(
+                  labelText: 'Sakihaba', border: OutlineInputBorder()),
+              readOnly: true,
+              initialValue: "${_sakihaba?.toText() ?? ''}",
+              key: Key('Sakihaba-${_sakihaba?.toText()}'),
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return _showLengthDialog(
+                          context, 'Set the sakihaba', _sakihaba);
+                    }).then((value) {
+                  if (value != null) {
+                    setState(() {
+                      _sakihaba = value;
+
+                      print("Sakihaba set to ${value}");
+                    });
+                  } else {
+                    // The value is null if the user clicked "Cancel"
+                  }
+                });
+              },
+            ))
+          ]),
+
+          sizedBoxSpace,
+
+          Row(
+            children: [
+              Expanded(
+                  child: TextFormField(
+                decoration: InputDecoration(
+                    labelText: 'Sori', border: OutlineInputBorder()),
+                readOnly: true,
+                initialValue: "${_sori?.sori?.toText() ?? ''}",
+                key: Key(
+                    'Sori-${_sori?.sori?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return _showLengthDialog(
+                            context, 'Set the sori', _sori.sori);
+                      }).then((value) {
+                    if (value != null) {
+                      setState(() {
+                        // Update the sori based on the value returned by the dialog
+                        _sori = _sori.copyWith(sori: value);
+
+                        print("Sori set to ${value}");
+                      });
+                    } else {
+                      // The value is null if the user clicked "Cancel"
+                    }
+                  });
+                },
+              )),
+              rowPadder,
+              Expanded(
+                  child: DropdownButtonFormField(
+                      decoration: InputDecoration(
+                          labelText: 'Sori type', border: OutlineInputBorder()),
+                      value: _sori.type,
+                      items: Utils.getSoriTypeMenuItems(),
+                      onChanged: (value) {
+                        setState(() {
+                          _sori = _sori.copyWith(type: value);
+                        });
+                      }))
+            ],
+          ),
 
           // ==================== //
           // === Kissaki Type === //
@@ -858,7 +892,8 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           DropdownButtonFormField(
-              decoration: InputDecoration(labelText: 'Kissaki', border: OutlineInputBorder()),
+              decoration: InputDecoration(
+                  labelText: 'Kissaki', border: OutlineInputBorder()),
               value: _kissakiType,
               items: Utils.getKissakiTypeMenuItems(),
               onChanged: (value) {
@@ -874,7 +909,8 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           DropdownButtonFormField(
-              decoration: InputDecoration(labelText: 'Mune', border: OutlineInputBorder()),
+              decoration: InputDecoration(
+                  labelText: 'Mune', border: OutlineInputBorder()),
               value: _muneType,
               items: Utils.getMuneTypeMenuItems(),
               onChanged: (value) {
@@ -919,7 +955,8 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           DropdownButtonFormField(
-              decoration: InputDecoration(labelText: 'Polish', border: OutlineInputBorder()),
+              decoration: InputDecoration(
+                  labelText: 'Polish', border: OutlineInputBorder()),
               value: _polish,
               items: Utils.getPolishMenuItems(),
               onChanged: (value) {
