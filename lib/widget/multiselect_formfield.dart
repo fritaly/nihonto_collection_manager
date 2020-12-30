@@ -126,6 +126,7 @@ class MultiSelectFormField extends FormField<dynamic> {
               child: InputDecorator(
                 decoration: InputDecoration(
                   labelText: title,
+                  labelStyle: TextStyle(fontWeight: FontWeight.bold),
                   filled: true,
                   errorText: state.hasError ? state.errorText : null,
                   errorMaxLines: 4,
