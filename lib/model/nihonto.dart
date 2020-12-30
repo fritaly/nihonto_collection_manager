@@ -24,7 +24,7 @@ class Nihonto {
 
   final Money price;
 
-  final Length nagasa, totalLength, kasane, motokasane;
+  final Length nagasa, totalLength, kasane, motokasane, sakikasane;
 
   final SoriType soriType;
 
@@ -55,6 +55,7 @@ class Nihonto {
       this.totalLength,
       this.kasane,
       this.motokasane,
+      this.sakikasane,
       this.sori,
       this.soriType,
       this.hada,
@@ -81,6 +82,7 @@ class Nihonto {
         totalLength: nagasa + nakagoLength,
         kasane: kasane,
         motokasane: kasane,
+        sakikasane: kasane,
         sori: SoriInfo.random(),
         soriType: SoriType.random(),
         hada: HadaInfo.random(),
