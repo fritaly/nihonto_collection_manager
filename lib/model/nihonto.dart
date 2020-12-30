@@ -1,20 +1,18 @@
-import 'package:nihonto_collection_manager/extensions.dart';
 import 'package:nihonto_collection_manager/model/boshi_info.dart';
+import 'package:nihonto_collection_manager/model/geometry.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
 import 'package:nihonto_collection_manager/model/hamon_info.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
+import 'package:nihonto_collection_manager/model/length.dart';
+import 'package:nihonto_collection_manager/model/money.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
 import 'package:nihonto_collection_manager/model/nakago_info.dart';
+import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/model/yakiba_info.dart';
 import 'package:nihonto_collection_manager/model/yasurime_info.dart';
-import 'package:nihonto_collection_manager/utils.dart';
-import 'package:nihonto_collection_manager/model/geometry.dart';
-import 'package:nihonto_collection_manager/model/length.dart';
-import 'package:nihonto_collection_manager/model/money.dart';
-import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 
 class Nihonto {
   final NihontoType type;
@@ -26,7 +24,7 @@ class Nihonto {
 
   final Money price;
 
-  final Length nagasa;
+  final Length nagasa, totalLength;
 
   final SoriType soriType;
 
@@ -54,6 +52,7 @@ class Nihonto {
       this.signature = Signature.EMPTY,
       this.price = Money.ZERO,
       this.nagasa,
+      this.totalLength,
       this.sori,
       this.soriType,
       this.hada,
@@ -66,12 +65,16 @@ class Nihonto {
       this.yasurimeInfo});
 
   static Nihonto random() {
+    final nagasa = Length.random(min: 25, max: 75);
+    final nakagoLength = Length.random(min: 15, max: 30);
+
     return Nihonto(
         type: NihontoType.random(),
         geometry: Geometry.random(),
         signature: Signature.random(),
         price: Money.random(),
-        nagasa: Length.random(min: 25, max: 75),
+        nagasa: nagasa,
+        totalLength: nagasa + nakagoLength,
         sori: SoriInfo.random(),
         soriType: SoriType.random(),
         hada: HadaInfo.random(),
@@ -90,6 +93,6 @@ class Nihonto {
   }
 
   String toString() {
-    return "Nihonto[type: ${type?.name}, signature: '${signature}', geometry: ${geometry}, price: ${price}, nagasa: ${nagasa}, sori: ${sori}, soriType: ${soriType?.name}, hada: ${hada}, kissakiType: ${kissakiType}]";
+    return "Nihonto[type: ${type}, signature: '${signature}', geometry: ${geometry}, price: ${price}, nagasa: ${nagasa}, sori: ${sori}, soriType: ${soriType}, hada: ${hada}, kissakiType: ${kissakiType}]";
   }
 }

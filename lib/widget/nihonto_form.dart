@@ -56,7 +56,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   Money _price = Money(0, Currency.USD);
 
-  Length _nagasa;
+  Length _nagasa, _totalLength;
 
   SoriInfo _sori = SoriInfo();
 
@@ -86,6 +86,7 @@ class NihontoFormState extends State<NihontoForm> {
       _signature = nihonto.signature;
       _price = nihonto.price;
       _nagasa = nihonto.nagasa;
+      _totalLength = nihonto.totalLength;
       _sori = nihonto.sori;
       _hada = nihonto.hada;
       _kissakiType = nihonto.kissakiType;
@@ -105,6 +106,7 @@ class NihontoFormState extends State<NihontoForm> {
         signature: _signature,
         price: _price,
         nagasa: _nagasa,
+        totalLength: _totalLength,
         sori: _sori,
         hada: _hada,
         kissakiType: _kissakiType,
@@ -124,6 +126,7 @@ class NihontoFormState extends State<NihontoForm> {
       _geometry = null;
       _price = Money.ZERO;
       _nagasa = null;
+      _totalLength = null;
       _sori = SoriInfo();
       _hada = HadaInfo();
       _kissakiType = null;
@@ -145,6 +148,7 @@ class NihontoFormState extends State<NihontoForm> {
       _type = random.type;
       _price = random.price;
       _nagasa = random.nagasa;
+      _totalLength = random.totalLength;
       _sori = random.sori;
       _hada = random.hada;
       _kissakiType = random.kissakiType;
@@ -225,6 +229,40 @@ class NihontoFormState extends State<NihontoForm> {
         ),
         ElevatedButton(
           // Return the new price to the caller via the navigator stack
+          onPressed: () {
+            var data = key.currentState.getLength();
+
+            print('Data: ${data}');
+
+            return Navigator.pop(context, data);
+          },
+          child: Text('OK'),
+        ),
+      ],
+    );
+
+    return dialog;
+  }
+
+  AlertDialog _showTotalLengthDialog(BuildContext context, Length length) {
+    // length can be null
+    assert(context != null);
+
+    final key = GlobalKey<LengthWidgetState>();
+
+    var form = LengthWidget(length: length, key: key);
+
+    final AlertDialog dialog = AlertDialog(
+      title: Text('Set the total length'),
+      contentPadding: EdgeInsets.zero,
+      content: form,
+      actions: [
+        ElevatedButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text('Cancel'),
+        ),
+        ElevatedButton(
+          // Return the value to the caller via the navigator stack
           onPressed: () {
             var data = key.currentState.getLength();
 
@@ -589,7 +627,7 @@ class NihontoFormState extends State<NihontoForm> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return _showNagasaDialog(context, _nagasa);
+                    return _showTotalLengthDialog(context, _nagasa);
                   }).then((value) {
                 if (value != null) {
                   setState(() {
@@ -597,6 +635,37 @@ class NihontoFormState extends State<NihontoForm> {
                     _nagasa = value;
 
                     print("Nagasa set to ${value}");
+                  });
+                } else {
+                  // The value is null if the user clicked "Cancel"
+                }
+              });
+            },
+          ),
+
+          // ==================== //
+          // === Total length === //
+          // ==================== //
+
+          sizedBoxSpace,
+
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Total length', border: OutlineInputBorder()),
+            readOnly: true,
+            initialValue: "${_totalLength?.toText() ?? ''}",
+            key: Key(
+                'TotalLength-${_totalLength?.toText()}'),
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return _showNagasaDialog(context, _totalLength);
+                  }).then((value) {
+                if (value != null) {
+                  setState(() {
+                    _totalLength = value;
+
+                    print("Total length set to ${value}");
                   });
                 } else {
                   // The value is null if the user clicked "Cancel"
