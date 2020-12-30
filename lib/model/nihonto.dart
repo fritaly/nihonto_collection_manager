@@ -14,6 +14,7 @@ import 'package:nihonto_collection_manager/model/signature_info.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/model/sugata.dart';
+import 'package:nihonto_collection_manager/model/weight.dart';
 import 'package:nihonto_collection_manager/model/yakiba_info.dart';
 import 'package:nihonto_collection_manager/model/yasurime_info.dart';
 
@@ -30,6 +31,8 @@ class Nihonto {
   final Money price;
 
   final Length nagasa, totalLength, kasane, motokasane, sakikasane, mihaba, motohaba, sakihaba;
+
+  final Weight weight;
 
   final SoriType soriType;
 
@@ -69,6 +72,7 @@ class Nihonto {
       this.mihaba,
       this.motohaba,
       this.sakihaba,
+      this.weight,
       this.sori,
       this.soriType,
       this.hada,
@@ -102,6 +106,7 @@ class Nihonto {
         mihaba: motohaba,
         motohaba: motohaba,
         sakihaba: motohaba,
+        weight: Weight.random(650, 1200),
         sori: SoriInfo.random(),
         soriType: SoriType.random(),
         hada: HadaInfo.random(),
