@@ -316,7 +316,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: HamonType.values
-          .where((element) => _hamonInfo.getValue(element))
+          .where((element) => _hamonInfo.contains(element))
           .map((e) => e.name)
           .toList(),
       onSaved: (value) {
