@@ -88,6 +88,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   HadaInfo _hada = HadaInfo();
 
+  String _hadaOther;
+
   KissakiType _kissakiType;
 
   MuneType _muneType;
@@ -127,6 +129,7 @@ class NihontoFormState extends State<NihontoForm> {
       _weight = nihonto.weight;
       _sori = nihonto.sori;
       _hada = nihonto.hada;
+      _hadaOther = nihonto.hadaOther;
       _kissakiType = nihonto.kissakiType;
       _muneType = nihonto.muneType;
       _hamonInfo = nihonto.hamonInfo;
@@ -159,6 +162,7 @@ class NihontoFormState extends State<NihontoForm> {
         weight: _weight,
         sori: _sori,
         hada: _hada,
+        hadaOther: _hadaOther,
         kissakiType: _kissakiType,
         muneType: _muneType,
         hamonInfo: _hamonInfo,
@@ -168,38 +172,6 @@ class NihontoFormState extends State<NihontoForm> {
         yasurimeInfo: _yasurimeInfo,
         bohiInfo: _bohiInfo,
         polish: _polish);
-  }
-
-  void _reset() {
-    setState(() {
-      _overallDescription = '';
-      _signature = Signature.EMPTY;
-      _signatureInfo = SignatureInfo();
-      _type = null;
-      _sugata = null;
-      _sugataOther = '';
-      _price = Money.ZERO;
-      _nagasa = null;
-      _totalLength = null;
-      _kasane = null;
-      _motokasane = null;
-      _sakikasane = null;
-      _mihaba = null;
-      _motohaba = null;
-      _sakihaba = null;
-      _weight = null;
-      _sori = SoriInfo();
-      _hada = HadaInfo();
-      _kissakiType = null;
-      _muneType = null;
-      _hamonInfo = HamonInfo();
-      _yakibaInfo = YakibaInfo();
-      _boshiInfo = BoshiInfo();
-      _nakagoInfo = NakagoInfo();
-      _yasurimeInfo = YasurimeInfo();
-      _bohiInfo = BohiInfo();
-      _polish = null;
-    });
   }
 
   void _randomize() {
@@ -224,6 +196,7 @@ class NihontoFormState extends State<NihontoForm> {
       _weight = random.weight;
       _sori = random.sori;
       _hada = random.hada;
+      _hadaOther = '';
       _kissakiType = random.kissakiType;
       _muneType = random.muneType;
       _hamonInfo = random.hamonInfo;
@@ -1044,14 +1017,31 @@ class NihontoFormState extends State<NihontoForm> {
           // === Hada === //
           // ============ //
 
-          sizedBoxSpace,
+          sizedBoxSpace, Divider(), sizedBoxSpace,
+
           hadaWidget,
+
+          sizedBoxSpace,
+
+          TextFormField(
+            decoration: FieldDecoration('Hada (other)'),
+            initialValue: _hadaOther ?? '',
+            minLines: 1,
+            maxLines: 25,
+            key: Key('Hada-Other-${_hadaOther}'),
+            onChanged: (value) {
+              setState(() {
+                _hadaOther = value;
+              });
+            },
+          ),
 
           // ============= //
           // === Hamon === //
           // ============= //
 
-          sizedBoxSpace,
+          sizedBoxSpace, Divider(), sizedBoxSpace,
+
           hamonWidget,
 
           sizedBoxSpace,

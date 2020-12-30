@@ -42,6 +42,8 @@ class Nihonto {
 
   final HadaInfo hada;
 
+  final String hadaOther;
+
   final SoriInfo sori;
 
   final KissakiType kissakiType;
@@ -83,6 +85,7 @@ class Nihonto {
       this.sori,
       this.soriType,
       this.hada,
+      this.hadaOther,
       this.kissakiType,
       this.muneType,
       this.hamonInfo,
@@ -119,6 +122,7 @@ class Nihonto {
         sori: SoriInfo.random(),
         soriType: SoriType.random(),
         hada: HadaInfo.random(),
+        hadaOther: '',
         kissakiType: KissakiType.random(),
         muneType: MuneType.random(),
         hamonInfo: HamonInfo.random(),
