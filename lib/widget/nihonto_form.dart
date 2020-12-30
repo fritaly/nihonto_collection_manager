@@ -56,7 +56,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   Money _price = Money(0, Currency.USD);
 
-  Length _nagasa, _totalLength;
+  Length _nagasa, _totalLength, _kasane;
 
   SoriInfo _sori = SoriInfo();
 
@@ -87,6 +87,7 @@ class NihontoFormState extends State<NihontoForm> {
       _price = nihonto.price;
       _nagasa = nihonto.nagasa;
       _totalLength = nihonto.totalLength;
+      _kasane = nihonto.kasane;
       _sori = nihonto.sori;
       _hada = nihonto.hada;
       _kissakiType = nihonto.kissakiType;
@@ -107,6 +108,7 @@ class NihontoFormState extends State<NihontoForm> {
         price: _price,
         nagasa: _nagasa,
         totalLength: _totalLength,
+        kasane: _kasane,
         sori: _sori,
         hada: _hada,
         kissakiType: _kissakiType,
@@ -127,6 +129,7 @@ class NihontoFormState extends State<NihontoForm> {
       _price = Money.ZERO;
       _nagasa = null;
       _totalLength = null;
+      _kasane = null;
       _sori = SoriInfo();
       _hada = HadaInfo();
       _kissakiType = null;
@@ -149,6 +152,7 @@ class NihontoFormState extends State<NihontoForm> {
       _price = random.price;
       _nagasa = random.nagasa;
       _totalLength = random.totalLength;
+      _kasane = random.kasane;
       _sori = random.sori;
       _hada = random.hada;
       _kissakiType = random.kissakiType;
@@ -599,6 +603,37 @@ class NihontoFormState extends State<NihontoForm> {
                     _totalLength = value;
 
                     print("Total length set to ${value}");
+                  });
+                } else {
+                  // The value is null if the user clicked "Cancel"
+                }
+              });
+            },
+          ),
+
+          // ============== //
+          // === Kasane === //
+          // ============== //
+
+          sizedBoxSpace,
+
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Kasane', border: OutlineInputBorder()),
+            readOnly: true,
+            initialValue: "${_kasane?.toText() ?? ''}",
+            key: Key(
+                'Kasane-${_kasane?.toText()}'),
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return _showLengthDialog(context, 'Set the kasane', _kasane);
+                  }).then((value) {
+                if (value != null) {
+                  setState(() {
+                    _kasane = value;
+
+                    print("Kasane set to ${value}");
                   });
                 } else {
                   // The value is null if the user clicked "Cancel"
