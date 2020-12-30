@@ -960,21 +960,15 @@ class NihontoFormState extends State<NihontoForm> {
                   _polish = value;
                 });
               }),
-
-          // =============== //
-          // === Buttons === //
-          // =============== //
-
-          ButtonBar(children: [
-//            ElevatedButton(child: Text('Reset'), onPressed: _reset),
-            ElevatedButton(child: Text('Randomize'), onPressed: _randomize),
-          ])
         ])).pad();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add a new nihonto'),
-        actions: [ TextButton(child: Text('SAVE', style: TextStyle(color: Colors.white)), onPressed: _save ) ]
+        title: Text('Nihonto information'),
+        actions: [
+          TextButton(child: Icon(Icons.report_problem_outlined, color: Colors.white), onPressed: _randomize),
+          TextButton(child: Icon(Icons.save, color: Colors.white), onPressed: _save)
+        ]
       ),
       body: ListView(children: [form]) // Wrap the form into a list view to support scrolling
     );
