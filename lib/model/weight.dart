@@ -21,8 +21,7 @@ class Weight {
   }
 
   String toText() {
-    // Display the length unit in lower case
-    return "${value.toStringAsFixed(2)} ${unit.name.toLowerCase()}";
+    return "${value.toStringAsFixed(2)} ${unit.symbol}";
   }
 
   String toString() {
