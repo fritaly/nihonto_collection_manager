@@ -271,20 +271,18 @@ class NihontoFormState extends State<NihontoForm> {
       border: OutlineInputBorder(),
       title: 'Hada',
       dataSource: Hada.values
-          .map((e) => {'display': e.label, 'value': e.name})
+          .map((e) => {'display': e.label, 'value': e})
           .toList(),
       textField: 'display',
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _hada.values().map((e) => e.name).toList() ?? [],
+      initialValue: _hada.values(),
       onSaved: (value) {
         print('Value=${value}');
 
         setState(() {
-          // List<dynamic> -> List<String> -> List<Hada>
-          _hada = HadaInfo(
-              value.map((name) => Hada.valueOf(name)).toList());
+          _hada = HadaInfo(value);
         });
       },
     );
@@ -295,19 +293,18 @@ class NihontoFormState extends State<NihontoForm> {
       border: OutlineInputBorder(),
       title: 'Hamon',
       dataSource: HamonType.values
-          .map((e) => {'display': e.label, 'value': e.name})
+          .map((e) => {'display': e.label, 'value': e})
           .toList(),
       textField: 'display',
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _hamonInfo.values().map((e) => e.name).toList(),
+      initialValue: _hamonInfo.values(),
       onSaved: (value) {
         print('Value=${value}');
 
         setState(() {
-          // List<dynamic> -> List<String> -> List<HamonType>
-          _hamonInfo = HamonInfo(value.map((name) => Hada.valueOf(name)).toList());
+          _hamonInfo = HamonInfo(value);
         });
       },
     );
@@ -318,19 +315,18 @@ class NihontoFormState extends State<NihontoForm> {
       border: OutlineInputBorder(),
       title: 'Yakiba',
       dataSource: Yakiba.values
-          .map((e) => {'display': e.label, 'value': e.name})
+          .map((e) => {'display': e.label, 'value': e})
           .toList(),
       textField: 'display',
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _yakibaInfo.values().map((e) => e.name).toList(),
+      initialValue: _yakibaInfo.values(),
       onSaved: (value) {
         print('Value=${value}');
 
         setState(() {
-          // List<dynamic> -> List<String> -> List<Yakiba>
-          _yakibaInfo = YakibaInfo(value.map((name) => Yakiba.valueOf(name)).toList());
+          _yakibaInfo = YakibaInfo(value);
         });
       },
     );
@@ -341,19 +337,18 @@ class NihontoFormState extends State<NihontoForm> {
       border: OutlineInputBorder(),
       title: 'Boshi',
       dataSource: Boshi.values
-          .map((e) => {'display': e.label, 'value': e.name})
+          .map((e) => {'display': e.label, 'value': e})
           .toList(),
       textField: 'display',
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _boshiInfo.values().map((e) => e.name).toList(),
+      initialValue: _boshiInfo.values(),
       onSaved: (value) {
         print('Value=${value}');
 
         setState(() {
-          // List<dynamic> -> List<String> -> List<Boshi>
-          _boshiInfo = BoshiInfo(value.map((name) => Boshi.valueOf(name)).toList());
+          _boshiInfo = BoshiInfo(value);
         });
       },
     );
@@ -364,19 +359,18 @@ class NihontoFormState extends State<NihontoForm> {
       border: OutlineInputBorder(),
       title: 'Nakago',
       dataSource: Nakago.values
-          .map((e) => {'display': e.label, 'value': e.name})
+          .map((e) => {'display': e.label, 'value': e})
           .toList(),
       textField: 'display',
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _nakagoInfo.values().map((e) => e.name).toList(),
+      initialValue: _nakagoInfo.values(),
       onSaved: (value) {
         print('Value=${value}');
 
         setState(() {
-          // List<dynamic> -> List<String> -> List<Nakago>
-          _nakagoInfo = NakagoInfo(value.map((name) => Boshi.valueOf(name)).toList());
+          _nakagoInfo = NakagoInfo(value);
         });
       },
     );
@@ -387,19 +381,18 @@ class NihontoFormState extends State<NihontoForm> {
       border: OutlineInputBorder(),
       title: 'Yasurime',
       dataSource: Yasurime.values
-          .map((e) => {'display': e.label, 'value': e.name})
+          .map((e) => {'display': e.label, 'value': e})
           .toList(),
       textField: 'display',
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _yasurimeInfo.values().map((e) => e.name).toList(),
+      initialValue: _yasurimeInfo.values(),
       onSaved: (value) {
         print('Value=${value}');
 
         setState(() {
-          // List<dynamic> -> List<String> -> List<Yasurime>
-          _yasurimeInfo = YasurimeInfo(value.map((name) => Yasurime.valueOf(name)).toList());
+          _yasurimeInfo = YasurimeInfo(value);
         });
       },
     );
