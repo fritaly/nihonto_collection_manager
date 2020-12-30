@@ -370,7 +370,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: Boshi.values
-          .where((element) => (_boshiInfo != null) && _boshiInfo.getValue(element))
+          .where((element) => (_boshiInfo != null) && _boshiInfo.contains(element))
           .map((e) => e.name)
           .toList(),
       onSaved: (value) {
