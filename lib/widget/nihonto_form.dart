@@ -397,7 +397,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: Nakago.values
-          .where((element) => (_nakagoInfo != null) && _nakagoInfo.getValue(element))
+          .where((element) => (_nakagoInfo != null) && _nakagoInfo.contains(element))
           .map((e) => e.name)
           .toList(),
       onSaved: (value) {
