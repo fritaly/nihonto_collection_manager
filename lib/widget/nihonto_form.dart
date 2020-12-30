@@ -25,6 +25,7 @@ import 'package:nihonto_collection_manager/model/signature_type.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/model/sugata.dart';
+import 'package:nihonto_collection_manager/model/weight.dart';
 import 'package:nihonto_collection_manager/model/yakiba.dart';
 import 'package:nihonto_collection_manager/model/yakiba_info.dart';
 import 'package:nihonto_collection_manager/model/yasurime.dart';
@@ -34,6 +35,7 @@ import 'package:nihonto_collection_manager/widget/field_decoration.dart';
 import 'package:nihonto_collection_manager/widget/length_widget.dart';
 import 'package:nihonto_collection_manager/widget/money_widget.dart';
 import 'package:nihonto_collection_manager/widget/multiselect_formfield.dart';
+import 'package:nihonto_collection_manager/widget/weight_widget.dart';
 
 class NihontoForm extends StatefulWidget {
   static final TextInputFormatter decimalNumber =
@@ -76,6 +78,8 @@ class NihontoFormState extends State<NihontoForm> {
       _motohaba,
       _sakihaba;
 
+  Weight _weight;
+
   SoriInfo _sori = SoriInfo();
 
   HadaInfo _hada = HadaInfo();
@@ -114,6 +118,7 @@ class NihontoFormState extends State<NihontoForm> {
       _mihaba = nihonto.mihaba;
       _motohaba = nihonto.motohaba;
       _sakihaba = nihonto.sakihaba;
+      _weight = nihonto.weight;
       _sori = nihonto.sori;
       _hada = nihonto.hada;
       _kissakiType = nihonto.kissakiType;
@@ -143,6 +148,7 @@ class NihontoFormState extends State<NihontoForm> {
         mihaba: _mihaba,
         motohaba: _motohaba,
         sakihaba: _sakihaba,
+        weight: _weight,
         sori: _sori,
         hada: _hada,
         kissakiType: _kissakiType,
@@ -171,6 +177,7 @@ class NihontoFormState extends State<NihontoForm> {
       _mihaba = null;
       _motohaba = null;
       _sakihaba = null;
+      _weight = null;
       _sori = SoriInfo();
       _hada = HadaInfo();
       _kissakiType = null;
@@ -202,6 +209,7 @@ class NihontoFormState extends State<NihontoForm> {
       _mihaba = random.mihaba;
       _motohaba = random.motohaba;
       _sakihaba = random.sakihaba;
+      _weight = random.weight;
       _sori = random.sori;
       _hada = random.hada;
       _kissakiType = random.kissakiType;
@@ -288,6 +296,43 @@ class NihontoFormState extends State<NihontoForm> {
             var data = key.currentState.getLength();
 
             print('New value: ${data}');
+
+            return Navigator.pop(context, data);
+          },
+          child: Text('OK'),
+        ),
+      ],
+    );
+
+    return dialog;
+  }
+
+  AlertDialog _showWeightDialog(
+      BuildContext context, String title, Weight weight) {
+
+    // weight can be null
+    assert(context != null);
+    assert(title != null);
+
+    final key = GlobalKey<WeightWidgetState>();
+
+    var form = WeightWidget(weight: weight, key: key);
+
+    final AlertDialog dialog = AlertDialog(
+      title: Text(title),
+      contentPadding: EdgeInsets.zero,
+      content: form,
+      actions: [
+        ElevatedButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text('Cancel'),
+        ),
+        ElevatedButton(
+          // Return the new value to the caller via the navigator stack
+          onPressed: () {
+            var data = key.currentState.getWeight();
+
+            print('New weight: ${data}');
 
             return Navigator.pop(context, data);
           },
@@ -559,36 +604,61 @@ class NihontoFormState extends State<NihontoForm> {
 
           signatureWidget,
 
-          // ============= //
-          // === Price === //
-          // ============= //
-
           sizedBoxSpace,
 
-          TextFormField(
-            decoration: FieldDecoration('Price'),
-            readOnly: true,
-            initialValue: "${_price.toText()}",
-            key: Key(
-                'Price-${_price.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return _showPriceDialog(context, _price);
-                  }).then((value) {
-                if (value != null) {
-                  setState(() {
-                    // Update the price based on the value returned by the dialog
-                    _price = value;
+          Row(children: [
+            Expanded(child: TextFormField(
+              decoration: FieldDecoration('Price'),
+              readOnly: true,
+              initialValue: "${_price.toText()}",
+              key: Key(
+                  'Price-${_price.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return _showPriceDialog(context, _price);
+                    }).then((value) {
+                  if (value != null) {
+                    setState(() {
+                      // Update the price based on the value returned by the dialog
+                      _price = value;
 
-                    print("Price set to ${value}");
-                  });
-                } else {
-                  // The value is null if the user clicked "Cancel"
-                }
-              });
-            },
+                      print("Price set to ${value}");
+                    });
+                  } else {
+                    // The value is null if the user clicked "Cancel"
+                  }
+                });
+              },
+            ),),
+            rowPadder,
+            Expanded(child: TextFormField(
+              decoration: FieldDecoration('Weight'),
+              readOnly: true,
+              initialValue: "${_weight?.toText() ?? ''}",
+              key: Key(
+                  'Weight-${_weight?.toText()}'),
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return _showWeightDialog(
+                          context, 'Set the weight', _weight);
+                    }).then((value) {
+                  if (value != null) {
+                    setState(() {
+                      _weight = value;
+
+                      print("Weight set to ${value}");
+                    });
+                  } else {
+                    // The value is null if the user clicked "Cancel"
+                  }
+                });
+              },
+            ))
+          ],
           ),
 
           sizedBoxSpace,
