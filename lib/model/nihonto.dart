@@ -19,6 +19,8 @@ import 'package:nihonto_collection_manager/model/yakiba_info.dart';
 import 'package:nihonto_collection_manager/model/yasurime_info.dart';
 
 class Nihonto {
+  final String overallDescription;
+
   final NihontoType type;
 
   // The signature should never be null
@@ -59,7 +61,9 @@ class Nihonto {
   final Polish polish;
 
   const Nihonto(
-      {this.type,
+      {
+      this.overallDescription,
+      this.type,
       this.sugata,
       this.signature = Signature.EMPTY,
       this.signatureInfo,
@@ -93,6 +97,7 @@ class Nihonto {
     final motohaba = Length.random(min: 2.7, max: 3.6);
 
     return Nihonto(
+        overallDescription: 'Description goes here...\nDescription goes here...\nDescription goes here...',
         type: NihontoType.random(),
         sugata: Sugata.random(),
         signature: Signature.random(),

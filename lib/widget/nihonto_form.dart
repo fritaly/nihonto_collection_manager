@@ -59,6 +59,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   static const TextStyle _BOLD = TextStyle(fontWeight: FontWeight.bold);
 
+  String _overallDescription;
+
   NihontoType _type;
 
   Sugata _sugata;
@@ -105,6 +107,7 @@ class NihontoFormState extends State<NihontoForm> {
   NihontoFormState(Nihonto nihonto) {
     // The argument can be null
     if (nihonto != null) {
+      _overallDescription = nihonto.overallDescription;
       _type = nihonto.type;
       _sugata = nihonto.sugata;
       _signature = nihonto.signature;
@@ -135,6 +138,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   Nihonto _createNihonto() {
     return Nihonto(
+        overallDescription: _overallDescription,
         type: _type,
         sugata: _sugata,
         signature: _signature,
@@ -164,6 +168,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   void _reset() {
     setState(() {
+      _overallDescription = '';
       _signature = Signature.EMPTY;
       _signatureInfo = SignatureInfo();
       _type = null;
@@ -196,6 +201,7 @@ class NihontoFormState extends State<NihontoForm> {
     setState(() {
       var random = Nihonto.random();
 
+      _overallDescription = random.overallDescription;
       _signature = random.signature;
       _signatureInfo = random.signatureInfo;
       _sugata = random.sugata;
@@ -523,6 +529,26 @@ class NihontoFormState extends State<NihontoForm> {
     final form = Form(
         key: _formKey,
         child: Column(children: <Widget>[
+
+          // =========================== //
+          // === Overall description === //
+          // =========================== //
+
+          TextFormField(
+            decoration: FieldDecoration('Overall description'),
+            initialValue: _overallDescription ?? '',
+            minLines: 1,
+            maxLines: 25,
+            key: Key('Overall-Description-${_overallDescription}'),
+            onChanged: (value) {
+              setState(() {
+                _overallDescription = value;
+              });
+            },
+          ),
+
+          sizedBoxSpace,
+
           // ============ //
           // === Type === //
           // ============ //
