@@ -128,17 +128,6 @@ extension YakibaExtension on Yakiba {
   }
 }
 
-extension BoshiExtension on Boshi {
-
-  String name() {
-    return this.toString().split('.').last;
-  }
-
-  String label() {
-    return name().capitalize().replaceAll(new RegExp("_"), " ");
-  }
-}
-
 extension NakagoExtension on Nakago {
 
   String name() {

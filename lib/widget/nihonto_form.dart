@@ -363,7 +363,7 @@ class NihontoFormState extends State<NihontoForm> {
       border: OutlineInputBorder(),
       title: 'Boshi',
       dataSource: Boshi.values
-          .map((e) => {'display': e.label(), 'value': e.name()})
+          .map((e) => {'display': e.label, 'value': e.name})
           .toList(),
       textField: 'display',
       valueField: 'value',
@@ -371,7 +371,7 @@ class NihontoFormState extends State<NihontoForm> {
       hintWidget: Text('Please choose one or more'),
       initialValue: Boshi.values
           .where((element) => (_boshiInfo != null) && _boshiInfo.getValue(element))
-          .map((e) => e.name())
+          .map((e) => e.name)
           .toList(),
       onSaved: (value) {
         print('Value=${value}');
