@@ -1,3 +1,4 @@
+import 'package:nihonto_collection_manager/model/bohi_info.dart';
 import 'package:nihonto_collection_manager/model/boshi_info.dart';
 import 'package:nihonto_collection_manager/model/sugata.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
@@ -46,6 +47,8 @@ class Nihonto {
 
   final YasurimeInfo yasurimeInfo;
 
+  final BohiInfo bohiInfo;
+
   const Nihonto(
       {this.type,
       this.sugata,
@@ -67,7 +70,8 @@ class Nihonto {
       this.yakibaInfo,
       this.boshiInfo,
       this.nakagoInfo,
-      this.yasurimeInfo});
+      this.yasurimeInfo,
+      this.bohiInfo});
 
   static Nihonto random() {
     final nagasa = Length.random(min: 25, max: 75);
@@ -96,7 +100,8 @@ class Nihonto {
         yakibaInfo: YakibaInfo.random(),
         boshiInfo: BoshiInfo.random(),
         nakagoInfo: NakagoInfo.random(),
-        yasurimeInfo: YasurimeInfo.random()
+        yasurimeInfo: YasurimeInfo.random(),
+        bohiInfo: BohiInfo.random()
     );
   }
 

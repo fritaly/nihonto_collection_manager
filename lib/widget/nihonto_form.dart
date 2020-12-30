@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nihonto_collection_manager/extensions.dart';
+import 'package:nihonto_collection_manager/model/bohi.dart';
+import 'package:nihonto_collection_manager/model/bohi_info.dart';
 import 'package:nihonto_collection_manager/model/boshi.dart';
 import 'package:nihonto_collection_manager/model/boshi_info.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
@@ -76,6 +78,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   YasurimeInfo _yasurimeInfo = YasurimeInfo();
 
+  BohiInfo _bohiInfo = BohiInfo();
+
   NihontoFormState(Nihonto nihonto) {
     // The argument can be null
     if (nihonto != null) {
@@ -99,6 +103,7 @@ class NihontoFormState extends State<NihontoForm> {
       _boshiInfo = nihonto.boshiInfo;
       _nakagoInfo = nihonto.nakagoInfo;
       _yasurimeInfo = nihonto.yasurimeInfo;
+      _bohiInfo = nihonto.bohiInfo;
     }
   }
 
@@ -123,7 +128,8 @@ class NihontoFormState extends State<NihontoForm> {
         yakibaInfo: _yakibaInfo,
         boshiInfo: _boshiInfo,
         nakagoInfo: _nakagoInfo,
-        yasurimeInfo: _yasurimeInfo
+        yasurimeInfo: _yasurimeInfo,
+        bohiInfo: _bohiInfo
     );
   }
 
@@ -149,6 +155,7 @@ class NihontoFormState extends State<NihontoForm> {
       _boshiInfo = BoshiInfo();
       _nakagoInfo = NakagoInfo();
       _yasurimeInfo = YasurimeInfo();
+      _bohiInfo = BohiInfo();
     });
   }
 
@@ -176,6 +183,7 @@ class NihontoFormState extends State<NihontoForm> {
       _boshiInfo = random.boshiInfo;
       _nakagoInfo = random.nakagoInfo;
       _yasurimeInfo = random.yasurimeInfo;
+      _bohiInfo = random.bohiInfo;
     });
   }
 
@@ -393,6 +401,28 @@ class NihontoFormState extends State<NihontoForm> {
 
         setState(() {
           _yasurimeInfo = YasurimeInfo(value);
+        });
+      },
+    );
+
+    final bohiWidget = MultiSelectFormField(
+      key: Key('Bohi-${_hada.toString()}'),
+      autovalidate: false,
+      border: OutlineInputBorder(),
+      title: 'Bohi',
+      dataSource: Bohi.values
+          .map((e) => {'display': e.label, 'value': e})
+          .toList(),
+      textField: 'display',
+      valueField: 'value',
+      // required: true,
+      hintWidget: Text('Please choose one or more'),
+      initialValue: _bohiInfo.values(),
+      onSaved: (value) {
+        print('Bohi=${value}');
+
+        setState(() {
+          _bohiInfo = BohiInfo(value);
         });
       },
     );
@@ -872,6 +902,9 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
           yasurimeWidget,
 
+          sizedBoxSpace,
+          bohiWidget,
+          
           // =============== //
           // === Buttons === //
           // =============== //
