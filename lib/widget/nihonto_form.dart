@@ -56,7 +56,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   Money _price = Money(0, Currency.USD);
 
-  Length _nagasa, _totalLength, _kasane, _motokasane, _sakikasane;
+  Length _nagasa, _totalLength, _kasane, _motokasane, _sakikasane, _motohaba;
 
   SoriInfo _sori = SoriInfo();
 
@@ -76,7 +76,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   YasurimeInfo _yasurimeInfo = YasurimeInfo();
 
-  // TODO Add motohaba, sakihaba
+  // TODO Add sakihaba
 
   NihontoFormState(Nihonto nihonto) {
     // The argument can be null
@@ -90,6 +90,7 @@ class NihontoFormState extends State<NihontoForm> {
       _kasane = nihonto.kasane;
       _motokasane = nihonto.motokasane;
       _sakikasane = nihonto.sakikasane;
+      _motohaba = nihonto.motohaba;
       _sori = nihonto.sori;
       _hada = nihonto.hada;
       _kissakiType = nihonto.kissakiType;
@@ -113,6 +114,7 @@ class NihontoFormState extends State<NihontoForm> {
         kasane: _kasane,
         motokasane: _motokasane,
         sakikasane: _sakikasane,
+        motohaba: _motohaba,
         sori: _sori,
         hada: _hada,
         kissakiType: _kissakiType,
@@ -136,6 +138,7 @@ class NihontoFormState extends State<NihontoForm> {
       _kasane = null;
       _motokasane = null;
       _sakikasane = null;
+      _motohaba = null;
       _sori = SoriInfo();
       _hada = HadaInfo();
       _kissakiType = null;
@@ -161,6 +164,7 @@ class NihontoFormState extends State<NihontoForm> {
       _kasane = random.kasane;
       _motokasane = random.motokasane;
       _sakikasane = random.sakikasane;
+      _motohaba = random.motohaba;
       _sori = random.sori;
       _hada = random.hada;
       _kissakiType = random.kissakiType;
@@ -704,6 +708,37 @@ class NihontoFormState extends State<NihontoForm> {
                     _sakikasane = value;
 
                     print("Sakikasane set to ${value}");
+                  });
+                } else {
+                  // The value is null if the user clicked "Cancel"
+                }
+              });
+            },
+          ),
+
+          // ================ //
+          // === Motohaba === //
+          // ================ //
+
+          sizedBoxSpace,
+
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Motohaba', border: OutlineInputBorder()),
+            readOnly: true,
+            initialValue: "${_motohaba?.toText() ?? ''}",
+            key: Key(
+                'Motohaba-${_motohaba?.toText()}'),
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return _showLengthDialog(context, 'Set the motohaba', _motohaba);
+                  }).then((value) {
+                if (value != null) {
+                  setState(() {
+                    _motohaba = value;
+
+                    print("Motohaba set to ${value}");
                   });
                 } else {
                   // The value is null if the user clicked "Cancel"
