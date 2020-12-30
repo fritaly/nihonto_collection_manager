@@ -56,7 +56,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   Money _price = Money(0, Currency.USD);
 
-  Length _nagasa, _totalLength, _kasane;
+  Length _nagasa, _totalLength, _kasane, _motokasane;
 
   SoriInfo _sori = SoriInfo();
 
@@ -88,6 +88,7 @@ class NihontoFormState extends State<NihontoForm> {
       _nagasa = nihonto.nagasa;
       _totalLength = nihonto.totalLength;
       _kasane = nihonto.kasane;
+      _motokasane = nihonto.motokasane;
       _sori = nihonto.sori;
       _hada = nihonto.hada;
       _kissakiType = nihonto.kissakiType;
@@ -109,6 +110,7 @@ class NihontoFormState extends State<NihontoForm> {
         nagasa: _nagasa,
         totalLength: _totalLength,
         kasane: _kasane,
+        motokasane: _motokasane,
         sori: _sori,
         hada: _hada,
         kissakiType: _kissakiType,
@@ -130,6 +132,7 @@ class NihontoFormState extends State<NihontoForm> {
       _nagasa = null;
       _totalLength = null;
       _kasane = null;
+      _motokasane = null;
       _sori = SoriInfo();
       _hada = HadaInfo();
       _kissakiType = null;
@@ -153,6 +156,7 @@ class NihontoFormState extends State<NihontoForm> {
       _nagasa = random.nagasa;
       _totalLength = random.totalLength;
       _kasane = random.kasane;
+      _motokasane = random.motokasane;
       _sori = random.sori;
       _hada = random.hada;
       _kissakiType = random.kissakiType;
@@ -634,6 +638,37 @@ class NihontoFormState extends State<NihontoForm> {
                     _kasane = value;
 
                     print("Kasane set to ${value}");
+                  });
+                } else {
+                  // The value is null if the user clicked "Cancel"
+                }
+              });
+            },
+          ),
+
+          // ================== //
+          // === Motokasane === //
+          // ================== //
+
+          sizedBoxSpace,
+
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Motokasane', border: OutlineInputBorder()),
+            readOnly: true,
+            initialValue: "${_motokasane?.toText() ?? ''}",
+            key: Key(
+                'Motokasane-${_motokasane?.toText()}'),
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return _showLengthDialog(context, 'Set the motokasane', _motokasane);
+                  }).then((value) {
+                if (value != null) {
+                  setState(() {
+                    _motokasane = value;
+
+                    print("Motokasane set to ${value}");
                   });
                 } else {
                   // The value is null if the user clicked "Cancel"
