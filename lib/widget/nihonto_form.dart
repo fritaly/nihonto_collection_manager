@@ -424,7 +424,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: Yasurime.values
-          .where((element) => (_yasurimeInfo != null) && _yasurimeInfo.getValue(element))
+          .where((element) => (_yasurimeInfo != null) && _yasurimeInfo.contains(element))
           .map((e) => e.name)
           .toList(),
       onSaved: (value) {
