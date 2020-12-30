@@ -6,8 +6,6 @@ import 'package:nihonto_collection_manager/model/bohi_info.dart';
 import 'package:nihonto_collection_manager/model/boshi.dart';
 import 'package:nihonto_collection_manager/model/boshi_info.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
-import 'package:nihonto_collection_manager/model/polish.dart';
-import 'package:nihonto_collection_manager/model/sugata.dart';
 import 'package:nihonto_collection_manager/model/hada.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
 import 'package:nihonto_collection_manager/model/hamon_info.dart';
@@ -20,8 +18,12 @@ import 'package:nihonto_collection_manager/model/nakago.dart';
 import 'package:nihonto_collection_manager/model/nakago_info.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
+import 'package:nihonto_collection_manager/model/polish.dart';
 import 'package:nihonto_collection_manager/model/signature.dart';
+import 'package:nihonto_collection_manager/model/signature_info.dart';
+import 'package:nihonto_collection_manager/model/signature_type.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
+import 'package:nihonto_collection_manager/model/sugata.dart';
 import 'package:nihonto_collection_manager/model/yakiba.dart';
 import 'package:nihonto_collection_manager/model/yakiba_info.dart';
 import 'package:nihonto_collection_manager/model/yasurime.dart';
@@ -56,6 +58,8 @@ class NihontoFormState extends State<NihontoForm> {
   Sugata _sugata;
 
   Signature _signature = Signature.EMPTY;
+
+  SignatureInfo _signatureInfo = SignatureInfo();
 
   Money _price = Money(0, Currency.USD);
 
@@ -96,6 +100,7 @@ class NihontoFormState extends State<NihontoForm> {
       _type = nihonto.type;
       _sugata = nihonto.sugata;
       _signature = nihonto.signature;
+      _signatureInfo = nihonto.signatureInfo;
       _price = nihonto.price;
       _nagasa = nihonto.nagasa;
       _totalLength = nihonto.totalLength;
@@ -124,6 +129,7 @@ class NihontoFormState extends State<NihontoForm> {
         type: _type,
         sugata: _sugata,
         signature: _signature,
+        signatureInfo: _signatureInfo,
         price: _price,
         nagasa: _nagasa,
         totalLength: _totalLength,
@@ -149,6 +155,7 @@ class NihontoFormState extends State<NihontoForm> {
   void _reset() {
     setState(() {
       _signature = Signature.EMPTY;
+      _signatureInfo = SignatureInfo();
       _type = null;
       _sugata = null;
       _price = Money.ZERO;
@@ -179,6 +186,7 @@ class NihontoFormState extends State<NihontoForm> {
       var random = Nihonto.random();
 
       _signature = random.signature;
+      _signatureInfo = random.signatureInfo;
       _sugata = random.sugata;
       _type = random.type;
       _price = random.price;
@@ -439,6 +447,27 @@ class NihontoFormState extends State<NihontoForm> {
       },
     );
 
+    final signatureWidget = MultiSelectFormField(
+      key: Key('SignatureInfo-${_signatureInfo.toString()}'),
+      autovalidate: false,
+      border: OutlineInputBorder(),
+      title: 'Signature features',
+      dataSource:
+      SignatureType.values.map((e) => {'display': e.label, 'value': e}).toList(),
+      textField: 'display',
+      valueField: 'value',
+      // required: true,
+      hintWidget: Text('Please choose one or more'),
+      initialValue: _signatureInfo.values(),
+      onSaved: (value) {
+        print('SignatureInfo=${value}');
+
+        setState(() {
+          _signatureInfo = SignatureInfo(value);
+        });
+      },
+    );
+
     const sizedBoxSpace = SizedBox(height: 8);
 
     const rowPadder = SizedBox(width: 8);
@@ -530,39 +559,7 @@ class NihontoFormState extends State<NihontoForm> {
 
           sizedBoxSpace,
 
-          SwitchListTile(
-              title: Text('Mumei'),
-              value: _signature.mumei,
-              controlAffinity: ListTileControlAffinity.leading,
-              onChanged: (value) {
-                setState(() {
-                  _signature = _signature.copyWith(mumei: value);
-                });
-              }),
-
-          sizedBoxSpace,
-
-          SwitchListTile(
-              title: Text('Gimei'),
-              value: _signature.gimei,
-              controlAffinity: ListTileControlAffinity.leading,
-              onChanged: (value) {
-                setState(() {
-                  _signature = _signature.copyWith(gimei: value);
-                });
-              }),
-
-          sizedBoxSpace,
-
-          SwitchListTile(
-              title: Text('Modern'),
-              value: _signature.modern,
-              controlAffinity: ListTileControlAffinity.leading,
-              onChanged: (value) {
-                setState(() {
-                  _signature = _signature.copyWith(modern: value);
-                });
-              }),
+          signatureWidget,
 
           // ============= //
           // === Price === //

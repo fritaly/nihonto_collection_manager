@@ -1,7 +1,5 @@
 import 'package:nihonto_collection_manager/model/bohi_info.dart';
 import 'package:nihonto_collection_manager/model/boshi_info.dart';
-import 'package:nihonto_collection_manager/model/polish.dart';
-import 'package:nihonto_collection_manager/model/sugata.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
 import 'package:nihonto_collection_manager/model/hamon_info.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
@@ -12,8 +10,10 @@ import 'package:nihonto_collection_manager/model/nakago_info.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/polish.dart';
 import 'package:nihonto_collection_manager/model/signature.dart';
+import 'package:nihonto_collection_manager/model/signature_info.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
+import 'package:nihonto_collection_manager/model/sugata.dart';
 import 'package:nihonto_collection_manager/model/yakiba_info.dart';
 import 'package:nihonto_collection_manager/model/yasurime_info.dart';
 
@@ -22,6 +22,8 @@ class Nihonto {
 
   // The signature should never be null
   final Signature signature;
+
+  final SignatureInfo signatureInfo;
 
   final Sugata sugata;
 
@@ -57,6 +59,7 @@ class Nihonto {
       {this.type,
       this.sugata,
       this.signature = Signature.EMPTY,
+      this.signatureInfo,
       this.price = Money.ZERO,
       this.nagasa,
       this.totalLength,
@@ -89,6 +92,7 @@ class Nihonto {
         type: NihontoType.random(),
         sugata: Sugata.random(),
         signature: Signature.random(),
+        signatureInfo: SignatureInfo.random(),
         price: Money.random(),
         nagasa: nagasa,
         totalLength: nagasa + nakagoLength,
