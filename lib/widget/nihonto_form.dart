@@ -60,7 +60,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   SoriInfo _sori = SoriInfo();
 
-  HadaInfo _hada = HadaInfo.DEFAULT;
+  HadaInfo _hada = HadaInfo();
 
   KissakiType _kissakiType;
 
@@ -125,7 +125,7 @@ class NihontoFormState extends State<NihontoForm> {
       _price = Money.ZERO;
       _nagasa = null;
       _sori = SoriInfo();
-      _hada = HadaInfo.DEFAULT;
+      _hada = HadaInfo();
       _kissakiType = null;
       _muneType = null;
       _hamonInfo = HamonInfo();
@@ -289,7 +289,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: Hada.values
-          .where((element) => _hada.getValue(element))
+          .where((element) => _hada.contains(element))
           .map((e) => e.name)
           .toList(),
       onSaved: (value) {
@@ -297,8 +297,8 @@ class NihontoFormState extends State<NihontoForm> {
 
         setState(() {
           // List<dynamic> -> List<String> -> List<Hada>
-          _hada = HadaInfo.from(
-              value.map((name) => Utils.hadaFrom(name)).toList().cast<Hada>());
+          _hada = HadaInfo(
+              value.map((name) => Hada.valueOf(name)).toList());
         });
       },
     );
@@ -316,7 +316,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: HamonType.values
-          .where((element) => _hamonInfo.getValue(element))
+          .where((element) => _hamonInfo.contains(element))
           .map((e) => e.name)
           .toList(),
       onSaved: (value) {
@@ -343,7 +343,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: Yakiba.values
-          .where((element) => (_yakibaInfo != null) && _yakibaInfo.getValue(element))
+          .where((element) => (_yakibaInfo != null) && _yakibaInfo.contains(element))
           .map((e) => e.name)
           .toList(),
       onSaved: (value) {
@@ -370,7 +370,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: Boshi.values
-          .where((element) => (_boshiInfo != null) && _boshiInfo.getValue(element))
+          .where((element) => (_boshiInfo != null) && _boshiInfo.contains(element))
           .map((e) => e.name)
           .toList(),
       onSaved: (value) {
@@ -397,7 +397,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: Nakago.values
-          .where((element) => (_nakagoInfo != null) && _nakagoInfo.getValue(element))
+          .where((element) => (_nakagoInfo != null) && _nakagoInfo.contains(element))
           .map((e) => e.name)
           .toList(),
       onSaved: (value) {
@@ -424,7 +424,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: Yasurime.values
-          .where((element) => (_yasurimeInfo != null) && _yasurimeInfo.getValue(element))
+          .where((element) => (_yasurimeInfo != null) && _yasurimeInfo.contains(element))
           .map((e) => e.name)
           .toList(),
       onSaved: (value) {
