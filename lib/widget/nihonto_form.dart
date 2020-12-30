@@ -611,6 +611,7 @@ class NihontoFormState extends State<NihontoForm> {
               decoration: FieldDecoration('Price'),
               readOnly: true,
               initialValue: "${_price.toText()}",
+              textAlign: TextAlign.end,
               key: Key(
                   'Price-${_price.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
               onTap: () {
@@ -637,6 +638,7 @@ class NihontoFormState extends State<NihontoForm> {
               decoration: FieldDecoration('Weight'),
               readOnly: true,
               initialValue: "${_weight?.toText() ?? ''}",
+              textAlign: TextAlign.end,
               key: Key(
                   'Weight-${_weight?.toText()}'),
               onTap: () {
@@ -672,6 +674,7 @@ class NihontoFormState extends State<NihontoForm> {
                 decoration: FieldDecoration('Nagasa'),
                 readOnly: true,
                 initialValue: "${_nagasa?.toText() ?? ''}",
+                textAlign: TextAlign.end,
                 key: Key(
                     'Nagasa-${_nagasa?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
                 onTap: () {
@@ -701,6 +704,7 @@ class NihontoFormState extends State<NihontoForm> {
                 decoration: FieldDecoration('Total length'),
                 readOnly: true,
                 initialValue: "${_totalLength?.toText() ?? ''}",
+                textAlign: TextAlign.end,
                 key: Key('TotalLength-${_totalLength?.toText()}'),
                 onTap: () {
                   showDialog(
@@ -733,6 +737,7 @@ class NihontoFormState extends State<NihontoForm> {
               decoration: FieldDecoration('Kasane'),
               readOnly: true,
               initialValue: "${_kasane?.toText() ?? ''}",
+              textAlign: TextAlign.end,
               key: Key('Kasane-${_kasane?.toText()}'),
               onTap: () {
                 showDialog(
@@ -761,6 +766,7 @@ class NihontoFormState extends State<NihontoForm> {
               decoration: FieldDecoration('Motokasane'),
               readOnly: true,
               initialValue: "${_motokasane?.toText() ?? ''}",
+              textAlign: TextAlign.end,
               key: Key('Motokasane-${_motokasane?.toText()}'),
               onTap: () {
                 showDialog(
@@ -789,6 +795,7 @@ class NihontoFormState extends State<NihontoForm> {
               decoration: FieldDecoration('Sakikasane'),
               readOnly: true,
               initialValue: "${_sakikasane?.toText() ?? ''}",
+              textAlign: TextAlign.end,
               key: Key('Sakikasane-${_sakikasane?.toText()}'),
               onTap: () {
                 showDialog(
@@ -825,6 +832,7 @@ class NihontoFormState extends State<NihontoForm> {
                 decoration: FieldDecoration('Mihaba'),
                 readOnly: true,
                 initialValue: "${_mihaba?.toText() ?? ''}",
+                textAlign: TextAlign.end,
                 key: Key('Mihaba-${_mihaba?.toText()}'),
                 onTap: () {
                   showDialog(
@@ -858,6 +866,7 @@ class NihontoFormState extends State<NihontoForm> {
                 decoration: FieldDecoration('Motohaba'),
                 readOnly: true,
                 initialValue: "${_motohaba?.toText() ?? ''}",
+                textAlign: TextAlign.end,
                 key: Key('Motohaba-${_motohaba?.toText()}'),
                 onTap: () {
                   showDialog(
@@ -887,6 +896,7 @@ class NihontoFormState extends State<NihontoForm> {
               decoration: FieldDecoration('Sakihaba'),
               readOnly: true,
               initialValue: "${_sakihaba?.toText() ?? ''}",
+              textAlign: TextAlign.end,
               key: Key('Sakihaba-${_sakihaba?.toText()}'),
               onTap: () {
                 showDialog(
@@ -918,6 +928,7 @@ class NihontoFormState extends State<NihontoForm> {
                 decoration: FieldDecoration('Sori'),
                 readOnly: true,
                 initialValue: "${_sori?.sori?.toText() ?? ''}",
+                textAlign: TextAlign.end,
                 key: Key(
                     'Sori-${_sori?.sori?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
                 onTap: () {
