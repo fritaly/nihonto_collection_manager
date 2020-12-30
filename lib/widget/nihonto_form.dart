@@ -6,6 +6,7 @@ import 'package:nihonto_collection_manager/model/bohi_info.dart';
 import 'package:nihonto_collection_manager/model/boshi.dart';
 import 'package:nihonto_collection_manager/model/boshi_info.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
+import 'package:nihonto_collection_manager/model/polish.dart';
 import 'package:nihonto_collection_manager/model/sugata.dart';
 import 'package:nihonto_collection_manager/model/hada.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
@@ -80,6 +81,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   BohiInfo _bohiInfo = BohiInfo();
 
+  Polish _polish;
+
   NihontoFormState(Nihonto nihonto) {
     // The argument can be null
     if (nihonto != null) {
@@ -104,6 +107,7 @@ class NihontoFormState extends State<NihontoForm> {
       _nakagoInfo = nihonto.nakagoInfo;
       _yasurimeInfo = nihonto.yasurimeInfo;
       _bohiInfo = nihonto.bohiInfo;
+      _polish = nihonto.polish;
     }
   }
 
@@ -129,7 +133,8 @@ class NihontoFormState extends State<NihontoForm> {
         boshiInfo: _boshiInfo,
         nakagoInfo: _nakagoInfo,
         yasurimeInfo: _yasurimeInfo,
-        bohiInfo: _bohiInfo
+        bohiInfo: _bohiInfo,
+        polish: _polish
     );
   }
 
@@ -156,6 +161,7 @@ class NihontoFormState extends State<NihontoForm> {
       _nakagoInfo = NakagoInfo();
       _yasurimeInfo = YasurimeInfo();
       _bohiInfo = BohiInfo();
+      _polish = null;
     });
   }
 
@@ -184,6 +190,7 @@ class NihontoFormState extends State<NihontoForm> {
       _nakagoInfo = random.nakagoInfo;
       _yasurimeInfo = random.yasurimeInfo;
       _bohiInfo = random.bohiInfo;
+      _polish = random.polish;
     });
   }
 
@@ -904,7 +911,23 @@ class NihontoFormState extends State<NihontoForm> {
 
           sizedBoxSpace,
           bohiWidget,
-          
+
+          // ============== //
+          // === Polish === //
+          // ============== //
+
+          sizedBoxSpace,
+
+          DropdownButtonFormField(
+              decoration: InputDecoration(labelText: 'Polish', border: OutlineInputBorder()),
+              value: _polish,
+              items: Utils.getPolishMenuItems(),
+              onChanged: (value) {
+                setState(() {
+                  _polish = value;
+                });
+              }),
+
           // =============== //
           // === Buttons === //
           // =============== //

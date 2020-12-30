@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/enum.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 class Polish extends EnumWithLabel<Polish> {
 
@@ -28,5 +29,9 @@ class Polish extends EnumWithLabel<Polish> {
     }
 
     return found;
+  }
+
+  static Polish random() {
+    return Utils.random(Polish.values);
   }
 }

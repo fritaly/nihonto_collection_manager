@@ -1,5 +1,6 @@
 import 'package:nihonto_collection_manager/model/bohi_info.dart';
 import 'package:nihonto_collection_manager/model/boshi_info.dart';
+import 'package:nihonto_collection_manager/model/polish.dart';
 import 'package:nihonto_collection_manager/model/sugata.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
 import 'package:nihonto_collection_manager/model/hamon_info.dart';
@@ -9,6 +10,7 @@ import 'package:nihonto_collection_manager/model/money.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
 import 'package:nihonto_collection_manager/model/nakago_info.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
+import 'package:nihonto_collection_manager/model/polish.dart';
 import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
@@ -49,6 +51,8 @@ class Nihonto {
 
   final BohiInfo bohiInfo;
 
+  final Polish polish;
+
   const Nihonto(
       {this.type,
       this.sugata,
@@ -71,7 +75,8 @@ class Nihonto {
       this.boshiInfo,
       this.nakagoInfo,
       this.yasurimeInfo,
-      this.bohiInfo});
+      this.bohiInfo,
+      this.polish});
 
   static Nihonto random() {
     final nagasa = Length.random(min: 25, max: 75);
@@ -101,7 +106,8 @@ class Nihonto {
         boshiInfo: BoshiInfo.random(),
         nakagoInfo: NakagoInfo.random(),
         yasurimeInfo: YasurimeInfo.random(),
-        bohiInfo: BohiInfo.random()
+        bohiInfo: BohiInfo.random(),
+        polish: Polish.random()
     );
   }
 

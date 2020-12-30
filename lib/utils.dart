@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
+import 'package:nihonto_collection_manager/model/polish.dart';
 import 'package:nihonto_collection_manager/model/sugata.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
@@ -55,6 +56,13 @@ class Utils {
 
   static List<DropdownMenuItem> getSoriTypeMenuItems() {
     return SoriType.values.map((e) => DropdownMenuItem(
+        child: Text(e.label),
+        value: e
+    )).toList(growable: false);
+  }
+
+  static List<DropdownMenuItem> getPolishMenuItems() {
+    return Polish.values.map((e) => DropdownMenuItem(
         child: Text(e.label),
         value: e
     )).toList(growable: false);
