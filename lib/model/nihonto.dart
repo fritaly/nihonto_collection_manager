@@ -90,6 +90,6 @@ class Nihonto {
   }
 
   String toString() {
-    return "Nihonto[type: ${type?.name}, signature: '${signature}', geometry: ${geometry}, price: ${price}, nagasa: ${nagasa}, sori: ${sori}, soriType: ${soriType?.name()}, hada: ${hada}, kissakiType: ${kissakiType}]";
+    return "Nihonto[type: ${type?.name}, signature: '${signature}', geometry: ${geometry}, price: ${price}, nagasa: ${nagasa}, sori: ${sori}, soriType: ${soriType?.name}, hada: ${hada}, kissakiType: ${kissakiType}]";
   }
 }

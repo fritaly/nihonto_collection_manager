@@ -62,7 +62,7 @@ class Utils {
 
   static List<DropdownMenuItem> getSoriTypeMenuItems() {
     return SoriType.values.map((e) => DropdownMenuItem(
-        child: Text(e.label()),
+        child: Text(e.label),
         value: e
     )).toList(growable: false);
   }
