@@ -94,6 +94,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   KissakiType _kissakiType;
 
+  String _kissakiOther;
+
   MuneType _muneType;
 
   HamonInfo _hamonInfo = HamonInfo();
@@ -134,6 +136,7 @@ class NihontoFormState extends State<NihontoForm> {
       _hada = nihonto.hada;
       _hadaOther = nihonto.hadaOther;
       _kissakiType = nihonto.kissakiType;
+      _kissakiOther = nihonto.kissakiOther;
       _muneType = nihonto.muneType;
       _hamonInfo = nihonto.hamonInfo;
       _yakibaInfo = nihonto.yakibaInfo;
@@ -168,6 +171,7 @@ class NihontoFormState extends State<NihontoForm> {
         hada: _hada,
         hadaOther: _hadaOther,
         kissakiType: _kissakiType,
+        kissakiOther: _kissakiOther,
         muneType: _muneType,
         hamonInfo: _hamonInfo,
         yakibaInfo: _yakibaInfo,
@@ -203,6 +207,7 @@ class NihontoFormState extends State<NihontoForm> {
       _hada = random.hada;
       _hadaOther = '';
       _kissakiType = random.kissakiType;
+      _kissakiOther = random.kissakiOther;
       _muneType = random.muneType;
       _hamonInfo = random.hamonInfo;
       _yakibaInfo = random.yakibaInfo;
@@ -1017,11 +1022,26 @@ class NihontoFormState extends State<NihontoForm> {
                 });
               }),
 
+          sizedBoxSpace,
+
+          TextFormField(
+            decoration: FieldDecoration('Kissaki (other)'),
+            initialValue: _kissakiOther ?? '',
+            minLines: 1,
+            maxLines: 25,
+            key: Key('Kissaki-Other-${_kissakiOther}'),
+            onChanged: (value) {
+              setState(() {
+                _kissakiOther = value;
+              });
+            },
+          ),
+
           // ================= //
           // === Mune Type === //
           // ================= //
 
-          sizedBoxSpace,
+          sizedBoxSpace, Divider(), sizedBoxSpace,
 
           DropdownButtonFormField(
               decoration: FieldDecoration('Mune'),
