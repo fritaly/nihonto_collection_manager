@@ -250,11 +250,11 @@ class NihontoFormState extends State<NihontoForm> {
       contentPadding: EdgeInsets.zero,
       content: form,
       actions: [
-        ElevatedButton(
+        TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancel'),
+          child: Text('CANCEL'),
         ),
-        ElevatedButton(
+        TextButton(
           // Return the new price to the caller via the navigator stack
           onPressed: () {
             var data = key.currentState.getMoney();
@@ -286,11 +286,11 @@ class NihontoFormState extends State<NihontoForm> {
       contentPadding: EdgeInsets.zero,
       content: form,
       actions: [
-        ElevatedButton(
+        TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancel'),
+          child: Text('CANCEL'),
         ),
-        ElevatedButton(
+        TextButton(
           // Return the new value to the caller via the navigator stack
           onPressed: () {
             var data = key.currentState.getLength();
@@ -323,11 +323,11 @@ class NihontoFormState extends State<NihontoForm> {
       contentPadding: EdgeInsets.zero,
       content: form,
       actions: [
-        ElevatedButton(
+        TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancel'),
+          child: Text('CANCEL'),
         ),
-        ElevatedButton(
+        TextButton(
           // Return the new value to the caller via the navigator stack
           onPressed: () {
             var data = key.currentState.getWeight();
