@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/enum.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 class SoriType extends EnumWithLabel<SoriType> {
 
@@ -28,5 +29,9 @@ class SoriType extends EnumWithLabel<SoriType> {
     }
 
     return found;
+  }
+
+  static SoriType random() {
+    return Utils.random(values);
   }
 }

@@ -20,7 +20,7 @@ class SoriInfo {
   }
 
   static SoriInfo random() {
-    return SoriInfo(type: Utils.randomSoriType(), sori: Length.random(min: 0, max: 3));
+    return SoriInfo(type: SoriType.random(), sori: Length.random(min: 0, max: 3));
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/enum.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 class KissakiType extends EnumWithLabel<KissakiType> {
 
@@ -32,5 +33,9 @@ class KissakiType extends EnumWithLabel<KissakiType> {
     }
 
     return found;
+  }
+
+  static KissakiType random() {
+    return Utils.random(values);
   }
 }

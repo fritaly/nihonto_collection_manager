@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nihonto_collection_manager/model/length_unit.dart';
 
 extension StringExtension on String {
   String capitalize() {

@@ -67,16 +67,16 @@ class Nihonto {
 
   static Nihonto random() {
     return Nihonto(
-        type: Utils.randomNihontoType(),
-        geometry: Utils.randomGeometry(),
+        type: NihontoType.random(),
+        geometry: Geometry.random(),
         signature: Signature.random(),
         price: Money.random(),
         nagasa: Length.random(min: 25, max: 75),
         sori: SoriInfo.random(),
-        soriType: Utils.randomSoriType(),
+        soriType: SoriType.random(),
         hada: HadaInfo.random(),
-        kissakiType: Utils.randomKissakiType(),
-        muneType: Utils.randomMuneType(),
+        kissakiType: KissakiType.random(),
+        muneType: MuneType.random(),
         hamonInfo: HamonInfo.random(),
         yakibaInfo: YakibaInfo.random(),
         boshiInfo: BoshiInfo.random(),

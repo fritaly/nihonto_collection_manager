@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/enum.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 class NihontoType extends EnumWithLabel<NihontoType> {
 
@@ -34,5 +35,9 @@ class NihontoType extends EnumWithLabel<NihontoType> {
     }
 
     return found;
+  }
+
+  static NihontoType random() {
+    return Utils.random(values);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/enum.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 class MuneType extends EnumWithLabel<MuneType> {
 
@@ -30,5 +31,9 @@ class MuneType extends EnumWithLabel<MuneType> {
     }
 
     return found;
+  }
+
+  static MuneType random() {
+    return Utils.random(values);
   }
 }

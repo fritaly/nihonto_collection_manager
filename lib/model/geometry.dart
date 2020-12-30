@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/enum.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 class Geometry extends EnumWithLabel<Geometry> {
 
@@ -40,5 +41,9 @@ class Geometry extends EnumWithLabel<Geometry> {
     }
 
     return found;
+  }
+
+  static Geometry random() {
+    return Utils.random(values);
   }
 }

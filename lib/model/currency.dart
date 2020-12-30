@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/enum.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 class Currency extends Enum<Currency> {
 
@@ -28,5 +29,9 @@ class Currency extends Enum<Currency> {
     }
 
     return found;
+  }
+
+  static Currency random() {
+    return Utils.random(values);
   }
 }

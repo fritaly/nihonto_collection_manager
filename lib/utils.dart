@@ -8,7 +8,6 @@ import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
-import 'package:nihonto_collection_manager/model/yakiba.dart';
 
 class Utils {
 
@@ -65,34 +64,6 @@ class Utils {
     assert (list != null);
 
     return list[Random().nextInt(list.length)];
-  }
-
-  static KissakiType randomKissakiType() {
-    return Utils.random(KissakiType.values);
-  }
-
-  static MuneType randomMuneType() {
-    return Utils.random(MuneType.values);
-  }
-
-  static Currency randomCurrency() {
-    return Utils.random(Currency.values);
-  }
-
-  static Geometry randomGeometry() {
-    return Utils.random(Geometry.values);
-  }
-
-  static NihontoType randomNihontoType() {
-    return Utils.random(NihontoType.values);
-  }
-
-  static SoriType randomSoriType() {
-    return Utils.random(SoriType.values);
-  }
-
-  static Yakiba randomYakiba() {
-    return Utils.random(Yakiba.values);
   }
 
   static String randomSignature() {
