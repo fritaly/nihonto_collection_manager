@@ -343,7 +343,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: Yakiba.values
-          .where((element) => (_yakibaInfo != null) && _yakibaInfo.getValue(element))
+          .where((element) => (_yakibaInfo != null) && _yakibaInfo.contains(element))
           .map((e) => e.name)
           .toList(),
       onSaved: (value) {
