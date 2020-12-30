@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nihonto_collection_manager/model/geometry.dart';
 import 'package:nihonto_collection_manager/model/hada.dart';
 import 'package:nihonto_collection_manager/model/hamon_type.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
@@ -21,17 +20,6 @@ extension WidgetExtension on Widget {
 
   Widget pad() {
     return new Container(padding: EdgeInsets.all(8.0), child: this);
-  }
-}
-
-extension GeometryExtension on Geometry {
-
-  String name() {
-    return this.toString().split('.').last;
-  }
-
-  String label() {
-    return name().capitalize().replaceAll(new RegExp("_"), " ");
   }
 }
 
