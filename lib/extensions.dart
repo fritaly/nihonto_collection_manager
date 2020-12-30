@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
-import 'package:nihonto_collection_manager/model/yakiba.dart';
 import 'package:nihonto_collection_manager/model/yasurime.dart';
 
 extension StringExtension on String {
@@ -20,17 +19,6 @@ extension LengthUnitExtension on LengthUnit {
 
   String name() {
     return this.toString().split('.').last;
-  }
-}
-
-extension YakibaExtension on Yakiba {
-
-  String name() {
-    return this.toString().split('.').last;
-  }
-
-  String label() {
-    return name().capitalize().replaceAll(new RegExp("_"), " ");
   }
 }
 

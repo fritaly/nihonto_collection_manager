@@ -336,7 +336,7 @@ class NihontoFormState extends State<NihontoForm> {
       border: OutlineInputBorder(),
       title: 'Yakiba',
       dataSource: Yakiba.values
-          .map((e) => {'display': e.label(), 'value': e.name()})
+          .map((e) => {'display': e.label, 'value': e.name})
           .toList(),
       textField: 'display',
       valueField: 'value',
@@ -344,7 +344,7 @@ class NihontoFormState extends State<NihontoForm> {
       hintWidget: Text('Please choose one or more'),
       initialValue: Yakiba.values
           .where((element) => (_yakibaInfo != null) && _yakibaInfo.getValue(element))
-          .map((e) => e.name())
+          .map((e) => e.name)
           .toList(),
       onSaved: (value) {
         print('Value=${value}');
