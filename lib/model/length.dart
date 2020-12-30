@@ -10,6 +10,13 @@ class Length {
 
   const Length(this.value, this.unit);
 
+  Length operator +(Length length) {
+    assert (length != null);
+    assert (length.unit == this.unit); // Can only add 2 lengths with the same unit
+
+    return Length(this.value + length.value, this.unit);
+  }
+
   bool validate() {
     return (value > 0) && (unit != null);
   }
