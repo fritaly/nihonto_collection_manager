@@ -20,7 +20,7 @@ class Utils {
 
   static List<DropdownMenuItem> getNihontoTypeMenuItems() {
     return NihontoType.values.map((e) => DropdownMenuItem(
-        child: Text(e.label()),
+        child: Text(e.label),
         value: e
     )).toList(growable: false);
   }
