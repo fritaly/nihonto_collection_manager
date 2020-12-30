@@ -1,20 +1,14 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:nihonto_collection_manager/extensions.dart';
-import 'package:nihonto_collection_manager/model/boshi.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
-import 'package:nihonto_collection_manager/model/hada.dart';
-import 'package:nihonto_collection_manager/model/hamon_type.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
-import 'package:nihonto_collection_manager/model/nakago.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/model/yakiba.dart';
-import 'package:nihonto_collection_manager/model/yasurime.dart';
 
 class Utils {
 
@@ -127,29 +121,5 @@ class Utils {
     } on FormatException {
       return false;
     }
-  }
-
-  static Hada hadaFrom(String name) {
-    return Hada.values.firstWhere((element) => element.toString() == 'Hada.${name}');
-  }
-
-  static HamonType hamonFrom(String name) {
-    return HamonType.values.firstWhere((element) => element.toString() == 'HamonType.${name}');
-  }
-
-  static Yakiba yakibaFrom(String name) {
-    return Yakiba.values.firstWhere((element) => element.toString() == 'Yakiba.${name}');
-  }
-
-  static Boshi boshiFrom(String name) {
-    return Boshi.values.firstWhere((element) => element.toString() == 'Boshi.${name}');
-  }
-
-  static Nakago nakagoFrom(String name) {
-    return Nakago.values.firstWhere((element) => element.toString() == 'Nakago.${name}');
-  }
-
-  static Yasurime yasurimeFrom(String name) {
-    return Yasurime.values.firstWhere((element) => element.toString() == 'Yasurime.${name}');
   }
 }

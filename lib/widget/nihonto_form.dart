@@ -319,7 +319,7 @@ class NihontoFormState extends State<NihontoForm> {
         setState(() {
           // List<dynamic> -> List<String> -> List<HamonType>
           _hamonInfo = HamonInfo(
-              value.map((name) => Utils.hamonFrom(name)).toList().cast<HamonType>());
+              value.map((name) => Hada.valueOf(name)).toList().cast<HamonType>());
         });
       },
     );
@@ -343,7 +343,7 @@ class NihontoFormState extends State<NihontoForm> {
         setState(() {
           // List<dynamic> -> List<String> -> List<Yakiba>
           _yakibaInfo = YakibaInfo(
-              value.map((name) => Utils.yakibaFrom(name)).toList().cast<Yakiba>());
+              value.map((name) => Yakiba.valueOf(name)).toList().cast<Yakiba>());
         });
       },
     );
@@ -367,7 +367,7 @@ class NihontoFormState extends State<NihontoForm> {
         setState(() {
           // List<dynamic> -> List<String> -> List<Boshi>
           _boshiInfo = BoshiInfo(
-              value.map((name) => Utils.boshiFrom(name)).toList().cast<Boshi>());
+              value.map((name) => Boshi.valueOf(name)).toList().cast<Boshi>());
         });
       },
     );
@@ -391,7 +391,7 @@ class NihontoFormState extends State<NihontoForm> {
         setState(() {
           // List<dynamic> -> List<String> -> List<Nakago>
           _nakagoInfo = NakagoInfo(
-              value.map((name) => Utils.boshiFrom(name)).toList().cast<Nakago>());
+              value.map((name) => Boshi.valueOf(name)).toList().cast<Nakago>());
         });
       },
     );
@@ -415,7 +415,7 @@ class NihontoFormState extends State<NihontoForm> {
         setState(() {
           // List<dynamic> -> List<String> -> List<Yasurime>
           _yasurimeInfo = YasurimeInfo(
-              value.map((name) => Utils.yasurimeFrom(name)).toList().cast<Yasurime>());
+              value.map((name) => Yasurime.valueOf(name)).toList().cast<Yasurime>());
         });
       },
     );
