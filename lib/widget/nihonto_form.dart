@@ -282,7 +282,7 @@ class NihontoFormState extends State<NihontoForm> {
       border: OutlineInputBorder(),
       title: 'Hada',
       dataSource: Hada.values
-          .map((e) => {'display': e.label(), 'value': e.name()})
+          .map((e) => {'display': e.label, 'value': e.name})
           .toList(),
       textField: 'display',
       valueField: 'value',
@@ -290,7 +290,7 @@ class NihontoFormState extends State<NihontoForm> {
       hintWidget: Text('Please choose one or more'),
       initialValue: Hada.values
           .where((element) => _hada.getValue(element))
-          .map((e) => e.name())
+          .map((e) => e.name)
           .toList(),
       onSaved: (value) {
         print('Value=${value}');
@@ -309,7 +309,7 @@ class NihontoFormState extends State<NihontoForm> {
       border: OutlineInputBorder(),
       title: 'Hamon',
       dataSource: HamonType.values
-          .map((e) => {'display': e.label(), 'value': e.name()})
+          .map((e) => {'display': e.label, 'value': e.name})
           .toList(),
       textField: 'display',
       valueField: 'value',
@@ -317,7 +317,7 @@ class NihontoFormState extends State<NihontoForm> {
       hintWidget: Text('Please choose one or more'),
       initialValue: HamonType.values
           .where((element) => _hamonInfo.getValue(element))
-          .map((e) => e.name())
+          .map((e) => e.name)
           .toList(),
       onSaved: (value) {
         print('Value=${value}');
@@ -336,7 +336,7 @@ class NihontoFormState extends State<NihontoForm> {
       border: OutlineInputBorder(),
       title: 'Yakiba',
       dataSource: Yakiba.values
-          .map((e) => {'display': e.label(), 'value': e.name()})
+          .map((e) => {'display': e.label, 'value': e.name})
           .toList(),
       textField: 'display',
       valueField: 'value',
@@ -344,7 +344,7 @@ class NihontoFormState extends State<NihontoForm> {
       hintWidget: Text('Please choose one or more'),
       initialValue: Yakiba.values
           .where((element) => (_yakibaInfo != null) && _yakibaInfo.getValue(element))
-          .map((e) => e.name())
+          .map((e) => e.name)
           .toList(),
       onSaved: (value) {
         print('Value=${value}');
@@ -390,7 +390,7 @@ class NihontoFormState extends State<NihontoForm> {
       border: OutlineInputBorder(),
       title: 'Nakago',
       dataSource: Nakago.values
-          .map((e) => {'display': e.label(), 'value': e.name()})
+          .map((e) => {'display': e.label, 'value': e.name})
           .toList(),
       textField: 'display',
       valueField: 'value',
@@ -398,7 +398,7 @@ class NihontoFormState extends State<NihontoForm> {
       hintWidget: Text('Please choose one or more'),
       initialValue: Nakago.values
           .where((element) => (_nakagoInfo != null) && _nakagoInfo.getValue(element))
-          .map((e) => e.name())
+          .map((e) => e.name)
           .toList(),
       onSaved: (value) {
         print('Value=${value}');
@@ -417,7 +417,7 @@ class NihontoFormState extends State<NihontoForm> {
       border: OutlineInputBorder(),
       title: 'Yasurime',
       dataSource: Yasurime.values
-          .map((e) => {'display': e.label(), 'value': e.name()})
+          .map((e) => {'display': e.label, 'value': e.name})
           .toList(),
       textField: 'display',
       valueField: 'value',
@@ -425,7 +425,7 @@ class NihontoFormState extends State<NihontoForm> {
       hintWidget: Text('Please choose one or more'),
       initialValue: Yasurime.values
           .where((element) => (_yasurimeInfo != null) && _yasurimeInfo.getValue(element))
-          .map((e) => e.name())
+          .map((e) => e.name)
           .toList(),
       onSaved: (value) {
         print('Value=${value}');

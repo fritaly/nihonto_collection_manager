@@ -13,7 +13,7 @@ class Money {
   const Money(this.amount, this.currency);
 
   String toText() {
-    return "${amount} ${currency.name()}";
+    return "${amount} ${currency.name}";
   }
 
   String toString() {

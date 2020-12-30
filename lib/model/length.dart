@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:nihonto_collection_manager/extensions.dart';
 import 'package:nihonto_collection_manager/model/japanese_length.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
 
@@ -16,7 +15,7 @@ class Length {
   }
 
   String toText() {
-    return "${value} ${unit.name()}";
+    return "${value} ${unit.name}";
   }
 
   String toString() {
@@ -25,12 +24,12 @@ class Length {
 
   Length asCentimeters() {
     switch (unit) {
-      case LengthUnit.cm:
+      case LengthUnit.CM:
         return this;
-      case LengthUnit.mm:
-        return Length(value / 10, LengthUnit.cm);
-      case LengthUnit.inch:
-        return Length(value * 2.54, LengthUnit.cm);
+      case LengthUnit.MM:
+        return Length(value / 10, LengthUnit.CM);
+      case LengthUnit.INCH:
+        return Length(value * 2.54, LengthUnit.CM);
       default:
         throw Exception("Unsupported length unit: ${unit}");
     }
@@ -76,6 +75,6 @@ class Length {
 
     var span = max - min;
 
-    return Length(((Random().nextInt((span * 10).toInt()).toDouble() / 10) + min).toDouble(), LengthUnit.cm);
+    return Length(((Random().nextInt((span * 10).toInt()).toDouble() / 10) + min).toDouble(), LengthUnit.CM);
   }
 }

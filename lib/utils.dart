@@ -20,49 +20,49 @@ class Utils {
 
   static List<DropdownMenuItem> getNihontoTypeMenuItems() {
     return NihontoType.values.map((e) => DropdownMenuItem(
-        child: Text(e.label()),
+        child: Text(e.label),
         value: e
     )).toList(growable: false);
   }
 
   static List<DropdownMenuItem> getGeometryMenuItems() {
     return Geometry.values.map((e) => DropdownMenuItem(
-        child: Text(e.label()),
+        child: Text(e.label),
         value: e
     )).toList(growable: false);
   }
 
   static List<DropdownMenuItem> getCurrencyMenuItems() {
     return Currency.values.map((e) => DropdownMenuItem(
-        child: Text(e.name()),
+        child: Text(e.name),
         value: e
     )).toList(growable: false);
   }
 
   static List<DropdownMenuItem> getLengthUnitMenuItems() {
     return LengthUnit.values.map((e) => DropdownMenuItem(
-        child: Text(e.name()),
+        child: Text(e.name),
         value: e
     )).toList(growable: false);
   }
 
   static List<DropdownMenuItem> getKissakiTypeMenuItems() {
     return KissakiType.values.map((e) => DropdownMenuItem(
-        child: Text(e.label()),
+        child: Text(e.label),
         value: e
     )).toList(growable: false);
   }
 
   static List<DropdownMenuItem> getMuneTypeMenuItems() {
     return MuneType.values.map((e) => DropdownMenuItem(
-        child: Text(e.label()),
+        child: Text(e.label),
         value: e
     )).toList(growable: false);
   }
 
   static List<DropdownMenuItem> getSoriTypeMenuItems() {
     return SoriType.values.map((e) => DropdownMenuItem(
-        child: Text(e.label()),
+        child: Text(e.label),
         value: e
     )).toList(growable: false);
   }

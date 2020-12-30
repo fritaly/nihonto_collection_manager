@@ -1,4 +1,6 @@
-class Boshi {
+import 'package:nihonto_collection_manager/enum.dart';
+
+class Boshi extends EnumWithLabel<Boshi> {
 
   static const OMARU = const Boshi._new('OMARU', 'Omaru');
   static const KOMARU = const Boshi._new('KOMARU', 'Komaru');
@@ -40,14 +42,7 @@ class Boshi {
     ICHI_MAI
   ];
 
-  final String name, label;
-
-  const Boshi._new(this.name, this.label);
-
-  @override
-  String toString() {
-    return 'Boshi.${name}';
-  }
+  const Boshi._new(String name, String label) : super(name, label);
 
   static Boshi valueOf(String name) {
     assert (name != null);

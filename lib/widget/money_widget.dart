@@ -56,7 +56,7 @@ class MoneyWidgetState extends State<MoneyWidget> {
           decoration: InputDecoration(labelText: 'Currency'),
           value: _currency,
           key: Key(_currency
-              .name()), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+              .name), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
           items: Utils.getCurrencyMenuItems(),
           onChanged: (value) {
             setState(() {
