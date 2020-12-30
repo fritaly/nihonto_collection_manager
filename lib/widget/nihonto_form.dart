@@ -586,8 +586,6 @@ class NihontoFormState extends State<NihontoForm> {
                 setState(() {
                   _sugata = value;
                 });
-
-                _formKey.currentState.validate();
               }),
 
           // ================= //
@@ -599,14 +597,13 @@ class NihontoFormState extends State<NihontoForm> {
           TextFormField(
             decoration: FieldDecoration('Signature (romaji)'),
             initialValue: _signature.romaji,
-            key: Key(
-                'Signature-Romaji-${_signature.romaji}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+            key: Key('Signature-Romaji-${_signature.romaji}'),
+            minLines: 1,
+            maxLines: 25,
             onChanged: (value) {
               setState(() {
                 _signature = _signature.copyWith(romaji: value);
               });
-
-              _formKey.currentState.validate();
             },
           ),
 
@@ -615,14 +612,13 @@ class NihontoFormState extends State<NihontoForm> {
           TextFormField(
             decoration: FieldDecoration('Signature (kanji)'),
             initialValue: _signature.kanji,
-            key: Key(
-                'Signature-Kanji-${_signature.kanji}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+            key: Key('Signature-Kanji-${_signature.kanji}'),
+            minLines: 1,
+            maxLines: 25,
             onChanged: (value) {
               setState(() {
                 _signature = _signature.copyWith(kanji: value);
               });
-
-              _formKey.currentState.validate();
             },
           ),
 
