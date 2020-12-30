@@ -8,7 +8,7 @@ class EnumSet<T> {
     }
   }
 
-  EnumSet<T> add(T value) {
+  EnumSet<T> operator +(T value) {
     assert (value != null);
 
     var set = Set<T>.from(_set);
@@ -17,7 +17,7 @@ class EnumSet<T> {
     return EnumSet(set);
   }
 
-  EnumSet<T> remove(T value) {
+  EnumSet<T> operator -(T value) {
     assert (value != null);
 
     var set = Set<T>.from(_set);
