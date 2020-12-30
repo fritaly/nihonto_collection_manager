@@ -288,10 +288,7 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: Hada.values
-          .where((element) => _hada.contains(element))
-          .map((e) => e.name)
-          .toList(),
+      initialValue: _hada.values().map((e) => e.name).toList() ?? [],
       onSaved: (value) {
         print('Value=${value}');
 
@@ -315,10 +312,7 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: HamonType.values
-          .where((element) => _hamonInfo.contains(element))
-          .map((e) => e.name)
-          .toList(),
+      initialValue: _hamonInfo.values().map((e) => e.name).toList(),
       onSaved: (value) {
         print('Value=${value}');
 
@@ -342,10 +336,7 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: Yakiba.values
-          .where((element) => (_yakibaInfo != null) && _yakibaInfo.contains(element))
-          .map((e) => e.name)
-          .toList(),
+      initialValue: _yakibaInfo.values().map((e) => e.name).toList(),
       onSaved: (value) {
         print('Value=${value}');
 
@@ -369,10 +360,7 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: Boshi.values
-          .where((element) => (_boshiInfo != null) && _boshiInfo.contains(element))
-          .map((e) => e.name)
-          .toList(),
+      initialValue: _boshiInfo.values().map((e) => e.name).toList(),
       onSaved: (value) {
         print('Value=${value}');
 
@@ -396,10 +384,7 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: Nakago.values
-          .where((element) => (_nakagoInfo != null) && _nakagoInfo.contains(element))
-          .map((e) => e.name)
-          .toList(),
+      initialValue: _nakagoInfo.values().map((e) => e.name).toList(),
       onSaved: (value) {
         print('Value=${value}');
 
@@ -423,10 +408,7 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: Yasurime.values
-          .where((element) => (_yasurimeInfo != null) && _yasurimeInfo.contains(element))
-          .map((e) => e.name)
-          .toList(),
+      initialValue: _yasurimeInfo.values().map((e) => e.name).toList(),
       onSaved: (value) {
         print('Value=${value}');
 
