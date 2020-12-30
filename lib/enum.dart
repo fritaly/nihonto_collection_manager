@@ -11,3 +11,12 @@ abstract class Enum<T> {
     return '${runtimeType}.${name}';
   }
 }
+
+abstract class EnumWithLabel<T> extends Enum<T> {
+
+  final String _label;
+
+  String get label => _label;
+
+  const EnumWithLabel(String name, this._label): super(name);
+}
