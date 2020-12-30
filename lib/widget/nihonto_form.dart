@@ -23,6 +23,7 @@ import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/signature_info.dart';
 import 'package:nihonto_collection_manager/model/signature_type.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
+import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/model/sugata.dart';
 import 'package:nihonto_collection_manager/model/yakiba.dart';
 import 'package:nihonto_collection_manager/model/yakiba_info.dart';
@@ -486,7 +487,7 @@ class NihontoFormState extends State<NihontoForm> {
           DropdownButtonFormField(
               decoration: FieldDecoration('Type'),
               value: _type,
-              items: Utils.getNihontoTypeMenuItems(),
+              items: Utils.getDropDownMenuItems(NihontoType.values),
               validator: (value) {
                 if (value == null) {
                   return 'Required';
@@ -511,7 +512,7 @@ class NihontoFormState extends State<NihontoForm> {
           DropdownButtonFormField(
               decoration: FieldDecoration('Sugata'),
               value: _sugata,
-              items: Utils.getSugataMenuItems(),
+              items: Utils.getDropDownMenuItems(Sugata.values),
               onChanged: (value) {
                 setState(() {
                   _sugata = value;
@@ -876,7 +877,7 @@ class NihontoFormState extends State<NihontoForm> {
                   child: DropdownButtonFormField(
                       decoration: FieldDecoration('Sori type'),
                       value: _sori.type,
-                      items: Utils.getSoriTypeMenuItems(),
+                      items: Utils.getDropDownMenuItems(SoriType.values),
                       onChanged: (value) {
                         setState(() {
                           _sori = _sori.copyWith(type: value);
@@ -894,7 +895,7 @@ class NihontoFormState extends State<NihontoForm> {
           DropdownButtonFormField(
               decoration: FieldDecoration('Kissaki'),
               value: _kissakiType,
-              items: Utils.getKissakiTypeMenuItems(),
+              items: Utils.getDropDownMenuItems(KissakiType.values),
               onChanged: (value) {
                 setState(() {
                   _kissakiType = value;
@@ -910,7 +911,7 @@ class NihontoFormState extends State<NihontoForm> {
           DropdownButtonFormField(
               decoration: FieldDecoration('Mune'),
               value: _muneType,
-              items: Utils.getMuneTypeMenuItems(),
+              items: Utils.getDropDownMenuItems(MuneType.values),
               onChanged: (value) {
                 setState(() {
                   _muneType = value;
@@ -955,7 +956,7 @@ class NihontoFormState extends State<NihontoForm> {
           DropdownButtonFormField(
               decoration: FieldDecoration('Polish'),
               value: _polish,
-              items: Utils.getPolishMenuItems(),
+              items: Utils.getDropDownMenuItems(Polish.values),
               onChanged: (value) {
                 setState(() {
                   _polish = value;

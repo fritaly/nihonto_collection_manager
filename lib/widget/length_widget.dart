@@ -62,7 +62,7 @@ class LengthWidgetState extends State<LengthWidget> {
           value: _unit,
           key: Key(_unit
               .name), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
-          items: Utils.getLengthUnitMenuItems(),
+          items: Utils.getDropDownMenuItems(LengthUnit.values),
           onChanged: (value) {
             setState(() {
               _unit = value;
