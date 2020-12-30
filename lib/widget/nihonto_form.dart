@@ -56,7 +56,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   Money _price = Money(0, Currency.USD);
 
-  Length _nagasa, _totalLength, _kasane, _motokasane, _sakikasane, _motohaba;
+  Length _nagasa, _totalLength, _kasane, _motokasane, _sakikasane, _motohaba, _sakihaba;
 
   SoriInfo _sori = SoriInfo();
 
@@ -76,8 +76,6 @@ class NihontoFormState extends State<NihontoForm> {
 
   YasurimeInfo _yasurimeInfo = YasurimeInfo();
 
-  // TODO Add sakihaba
-
   NihontoFormState(Nihonto nihonto) {
     // The argument can be null
     if (nihonto != null) {
@@ -91,6 +89,7 @@ class NihontoFormState extends State<NihontoForm> {
       _motokasane = nihonto.motokasane;
       _sakikasane = nihonto.sakikasane;
       _motohaba = nihonto.motohaba;
+      _sakihaba = nihonto.sakihaba;
       _sori = nihonto.sori;
       _hada = nihonto.hada;
       _kissakiType = nihonto.kissakiType;
@@ -115,6 +114,7 @@ class NihontoFormState extends State<NihontoForm> {
         motokasane: _motokasane,
         sakikasane: _sakikasane,
         motohaba: _motohaba,
+        sakihaba: _sakihaba,
         sori: _sori,
         hada: _hada,
         kissakiType: _kissakiType,
@@ -139,6 +139,7 @@ class NihontoFormState extends State<NihontoForm> {
       _motokasane = null;
       _sakikasane = null;
       _motohaba = null;
+      _sakihaba = null;
       _sori = SoriInfo();
       _hada = HadaInfo();
       _kissakiType = null;
@@ -165,6 +166,7 @@ class NihontoFormState extends State<NihontoForm> {
       _motokasane = random.motokasane;
       _sakikasane = random.sakikasane;
       _motohaba = random.motohaba;
+      _sakihaba = random.sakihaba;
       _sori = random.sori;
       _hada = random.hada;
       _kissakiType = random.kissakiType;
@@ -739,6 +741,37 @@ class NihontoFormState extends State<NihontoForm> {
                     _motohaba = value;
 
                     print("Motohaba set to ${value}");
+                  });
+                } else {
+                  // The value is null if the user clicked "Cancel"
+                }
+              });
+            },
+          ),
+
+          // ================ //
+          // === Sakihaba === //
+          // ================ //
+
+          sizedBoxSpace,
+
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Sakihaba', border: OutlineInputBorder()),
+            readOnly: true,
+            initialValue: "${_sakihaba?.toText() ?? ''}",
+            key: Key(
+                'Sakihaba-${_sakihaba?.toText()}'),
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return _showLengthDialog(context, 'Set the sakihaba', _sakihaba);
+                  }).then((value) {
+                if (value != null) {
+                  setState(() {
+                    _sakihaba = value;
+
+                    print("Sakihaba set to ${value}");
                   });
                 } else {
                   // The value is null if the user clicked "Cancel"
