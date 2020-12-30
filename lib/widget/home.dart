@@ -21,15 +21,18 @@ class _HomeState extends State<Home> {
       ),
       body: Padding(
         padding: EdgeInsets.all(8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ElevatedButton(onPressed: _pushBrowse, child: Text('Browse collection')),
-            ElevatedButton(onPressed: _pushConverter, child: Text('Unit converter')),
-            ElevatedButton(onPressed: null, child: Text('Date converter')),
-            ElevatedButton(onPressed: null, child: Text('Wish list')),
-          ]
-      ),),
+        child: GridView.count(
+            crossAxisCount: 2,
+            padding: EdgeInsets.all(8),
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 8,
+            children: [
+            ElevatedButton(onPressed: _pushBrowse, child: Tile('Manage your\ncollection')),
+            ElevatedButton(onPressed: null, child: Tile('Length\nconverter')),
+            ElevatedButton(onPressed: null, child: Tile('Date\nconverter')),
+            ElevatedButton(onPressed: null, child: Tile('Manage your\nwish list'))
+        ])
+      ),
     );
   }
 
@@ -64,4 +67,9 @@ class _HomeState extends State<Home> {
 
     Navigator.of(context).push(route);
   }
+}
+
+class Tile extends Text {
+
+  Tile(String text): super(text, textAlign: TextAlign.center, style: TextStyle(fontSize: 20));
 }
