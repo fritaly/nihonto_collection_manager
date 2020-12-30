@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
 import 'package:nihonto_collection_manager/model/nakago.dart';
@@ -40,17 +39,6 @@ extension LengthUnitExtension on LengthUnit {
 }
 
 extension SoriExtension on SoriType {
-
-  String name() {
-    return this.toString().split('.').last;
-  }
-
-  String label() {
-    return name().capitalize().replaceAll(new RegExp("_"), " ");
-  }
-}
-
-extension KissakiTypeExtension on KissakiType {
 
   String name() {
     return this.toString().split('.').last;

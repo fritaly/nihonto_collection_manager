@@ -48,7 +48,7 @@ class Utils {
 
   static List<DropdownMenuItem> getKissakiTypeMenuItems() {
     return KissakiType.values.map((e) => DropdownMenuItem(
-        child: Text(e.label()),
+        child: Text(e.label),
         value: e
     )).toList(growable: false);
   }
