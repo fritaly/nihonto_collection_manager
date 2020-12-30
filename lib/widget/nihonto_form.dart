@@ -86,6 +86,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   SoriInfo _sori = SoriInfo();
 
+  String _soriOther;
+
   HadaInfo _hada = HadaInfo();
 
   String _hadaOther;
@@ -128,6 +130,7 @@ class NihontoFormState extends State<NihontoForm> {
       _sakihaba = nihonto.sakihaba;
       _weight = nihonto.weight;
       _sori = nihonto.sori;
+      _soriOther = nihonto.soriOther;
       _hada = nihonto.hada;
       _hadaOther = nihonto.hadaOther;
       _kissakiType = nihonto.kissakiType;
@@ -161,6 +164,7 @@ class NihontoFormState extends State<NihontoForm> {
         sakihaba: _sakihaba,
         weight: _weight,
         sori: _sori,
+        soriOther: _soriOther,
         hada: _hada,
         hadaOther: _hadaOther,
         kissakiType: _kissakiType,
@@ -195,6 +199,7 @@ class NihontoFormState extends State<NihontoForm> {
       _sakihaba = random.sakihaba;
       _weight = random.weight;
       _sori = random.sori;
+      _soriOther = random.soriOther;
       _hada = random.hada;
       _hadaOther = '';
       _kissakiType = random.kissakiType;
@@ -935,7 +940,7 @@ class NihontoFormState extends State<NihontoForm> {
             ))
           ]),
 
-          sizedBoxSpace,
+          sizedBoxSpace, Divider(), sizedBoxSpace,
 
           Row(
             children: [
@@ -981,11 +986,26 @@ class NihontoFormState extends State<NihontoForm> {
             ],
           ),
 
+          sizedBoxSpace,
+
+          TextFormField(
+            decoration: FieldDecoration('Sori (other)'),
+            initialValue: _soriOther ?? '',
+            minLines: 1,
+            maxLines: 25,
+            key: Key('Sori-Other-${_soriOther}'),
+            onChanged: (value) {
+              setState(() {
+                _soriOther = value;
+              });
+            },
+          ),
+
           // ==================== //
           // === Kissaki Type === //
           // ==================== //
 
-          sizedBoxSpace,
+          sizedBoxSpace, Divider(), sizedBoxSpace,
 
           DropdownButtonFormField(
               decoration: FieldDecoration('Kissaki'),
