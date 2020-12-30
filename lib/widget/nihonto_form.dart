@@ -64,6 +64,7 @@ class NihontoFormState extends State<NihontoForm> {
       _kasane,
       _motokasane,
       _sakikasane,
+      _mihaba,
       _motohaba,
       _sakihaba;
 
@@ -101,6 +102,7 @@ class NihontoFormState extends State<NihontoForm> {
       _kasane = nihonto.kasane;
       _motokasane = nihonto.motokasane;
       _sakikasane = nihonto.sakikasane;
+      _mihaba = nihonto.mihaba;
       _motohaba = nihonto.motohaba;
       _sakihaba = nihonto.sakihaba;
       _sori = nihonto.sori;
@@ -128,6 +130,7 @@ class NihontoFormState extends State<NihontoForm> {
         kasane: _kasane,
         motokasane: _motokasane,
         sakikasane: _sakikasane,
+        mihaba: _mihaba,
         motohaba: _motohaba,
         sakihaba: _sakihaba,
         sori: _sori,
@@ -154,6 +157,7 @@ class NihontoFormState extends State<NihontoForm> {
       _kasane = null;
       _motokasane = null;
       _sakikasane = null;
+      _mihaba = null;
       _motohaba = null;
       _sakihaba = null;
       _sori = SoriInfo();
@@ -183,6 +187,7 @@ class NihontoFormState extends State<NihontoForm> {
       _kasane = random.kasane;
       _motokasane = random.motokasane;
       _sakikasane = random.sakikasane;
+      _mihaba = random.mihaba;
       _motohaba = random.motohaba;
       _sakihaba = random.sakihaba;
       _sori = random.sori;
@@ -770,6 +775,40 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           Row(children: [
+            Expanded(
+              child:
+
+              // ================ //
+              // === Motohaba === //
+              // ================ //
+
+              TextFormField(
+                decoration: InputDecoration(
+                    labelText: 'Mihaba', border: OutlineInputBorder()),
+                readOnly: true,
+                initialValue: "${_mihaba?.toText() ?? ''}",
+                key: Key('Mihaba-${_mihaba?.toText()}'),
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return _showLengthDialog(
+                            context, 'Set the mihaba', _mihaba);
+                      }).then((value) {
+                    if (value != null) {
+                      setState(() {
+                        _mihaba = value;
+
+                        print("Mihaba set to ${value}");
+                      });
+                    } else {
+                      // The value is null if the user clicked "Cancel"
+                    }
+                  });
+                },
+              ),
+            ),
+            rowPadder,
             Expanded(
               child:
 
