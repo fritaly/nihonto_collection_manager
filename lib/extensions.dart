@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nihonto_collection_manager/model/boshi.dart';
-import 'package:nihonto_collection_manager/model/currency.dart';
 import 'package:nihonto_collection_manager/model/geometry.dart';
 import 'package:nihonto_collection_manager/model/hada.dart';
 import 'package:nihonto_collection_manager/model/hamon_type.dart';
@@ -23,13 +21,6 @@ extension WidgetExtension on Widget {
 
   Widget pad() {
     return new Container(padding: EdgeInsets.all(8.0), child: this);
-  }
-}
-
-extension CurrencyExtension on Currency {
-
-  String name() {
-    return this.toString().split('.').last;
   }
 }
 

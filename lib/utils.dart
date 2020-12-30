@@ -34,7 +34,7 @@ class Utils {
 
   static List<DropdownMenuItem> getCurrencyMenuItems() {
     return Currency.values.map((e) => DropdownMenuItem(
-        child: Text(e.name()),
+        child: Text(e.name),
         value: e
     )).toList(growable: false);
   }
