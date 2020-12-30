@@ -16,23 +16,21 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Nihonto Collection'),
-        actions: [
-        ],
+        actions: [],
       ),
       body: Padding(
-        padding: EdgeInsets.all(8),
-        child: GridView.count(
-            crossAxisCount: 2,
-            padding: EdgeInsets.all(8),
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 8,
-            children: [
-            ElevatedButton(onPressed: _pushBrowse, child: Tile('Manage your\ncollection')),
-            ElevatedButton(onPressed: null, child: Tile('Length\nconverter')),
-            ElevatedButton(onPressed: null, child: Tile('Date\nconverter')),
-            ElevatedButton(onPressed: null, child: Tile('Manage your\nwish list'))
-        ])
-      ),
+          padding: EdgeInsets.all(8),
+          child: GridView.count(
+              crossAxisCount: 2,
+              padding: EdgeInsets.all(8),
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+              children: [
+                Tile(text: 'Manage your\ncollection', onPressed: _pushBrowse),
+                Tile(text: 'Length\nconverter'),
+                Tile(text: 'Date\nconverter'),
+                Tile(text: 'Manage your\nwish list')
+              ])),
     );
   }
 
@@ -69,7 +67,10 @@ class _HomeState extends State<Home> {
   }
 }
 
-class Tile extends Text {
-
-  Tile(String text): super(text, textAlign: TextAlign.center, style: TextStyle(fontSize: 20));
+class Tile extends ElevatedButton {
+  Tile({String text, VoidCallback onPressed})
+      : super(
+            child: Text(text,
+                textAlign: TextAlign.center, style: TextStyle(fontSize: 20)),
+            onPressed: onPressed);
 }
