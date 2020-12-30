@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nihonto_collection_manager/model/hada.dart';
 import 'package:nihonto_collection_manager/model/hamon_type.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
@@ -42,17 +41,6 @@ extension LengthUnitExtension on LengthUnit {
 }
 
 extension SoriExtension on SoriType {
-
-  String name() {
-    return this.toString().split('.').last;
-  }
-
-  String label() {
-    return name().capitalize().replaceAll(new RegExp("_"), " ");
-  }
-}
-
-extension HadaExtension on Hada {
 
   String name() {
     return this.toString().split('.').last;
