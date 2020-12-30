@@ -22,7 +22,8 @@ class Length {
   }
 
   String toText() {
-    return "${value} ${unit.name}";
+    // Display the length unit in lower case
+    return "${value.toStringAsFixed(2)} ${unit.name.toLowerCase()}";
   }
 
   String toString() {
