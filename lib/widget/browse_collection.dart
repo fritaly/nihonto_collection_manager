@@ -75,13 +75,7 @@ class _BrowseCollectionState extends State<BrowseCollection> {
   void _pushAdd() async {
     var route = MaterialPageRoute<Nihonto>(
       builder: (BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text('Add a new nihonto'),
-            actions: [],
-          ),
-          body: NihontoForm(),
-        );
+        return NihontoForm();
       },
     );
 
@@ -102,13 +96,8 @@ class _BrowseCollectionState extends State<BrowseCollection> {
 
     var route = MaterialPageRoute<Nihonto>(
       builder: (BuildContext context) {
-        return Scaffold(
-            appBar: AppBar(
-              title: Text('Nihonto information'),
-              actions: [],
-            ),
-            body: NihontoForm(nihonto));
-      },
+        return NihontoForm(nihonto);
+      }
     );
 
     final result = await Navigator.of(context).push(route);

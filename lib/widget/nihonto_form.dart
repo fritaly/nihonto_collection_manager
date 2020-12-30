@@ -222,8 +222,6 @@ class NihontoFormState extends State<NihontoForm> {
       // If the form is valid, display a snackbar. In the real world,
       // you'd often call a server or save the information in a database.
 
-      Scaffold.of(context).showSnackBar(SnackBar(content: Text('Saved data')));
-
       // Pass the entry created to the navigator and display the previous screen
       var created = _createNihonto();
 
@@ -975,6 +973,14 @@ class NihontoFormState extends State<NihontoForm> {
         ])).pad();
 
     // Wrap the form into a list view to support scrolling
-    return ListView(children: [form]);
+    final listView = ListView(children: [form]);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Add a new nihonto'),
+        actions: [],
+      ),
+      body: listView,
+    );
   }
 }
