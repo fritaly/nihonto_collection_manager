@@ -56,7 +56,7 @@ class Nihonto {
       this.nagasa,
       this.sori,
       this.soriType,
-      this.hada = HadaInfo.DEFAULT,
+      this.hada,
       this.kissakiType,
       this.muneType,
       this.hamonInfo,
