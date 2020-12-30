@@ -29,6 +29,7 @@ import 'package:nihonto_collection_manager/model/yakiba_info.dart';
 import 'package:nihonto_collection_manager/model/yasurime.dart';
 import 'package:nihonto_collection_manager/model/yasurime_info.dart';
 import 'package:nihonto_collection_manager/utils.dart';
+import 'package:nihonto_collection_manager/widget/field_decoration.dart';
 import 'package:nihonto_collection_manager/widget/length_widget.dart';
 import 'package:nihonto_collection_manager/widget/money_widget.dart';
 import 'package:nihonto_collection_manager/widget/multiselect_formfield.dart';
@@ -52,6 +53,8 @@ class NihontoFormState extends State<NihontoForm> {
   //
   // Note: This is a `GlobalKey<FormState>`, not a GlobalKey<NihontoFormState>.
   final _formKey = GlobalKey<FormState>();
+
+  static const TextStyle _BOLD = TextStyle(fontWeight: FontWeight.bold);
 
   NihontoType _type;
 
@@ -481,8 +484,7 @@ class NihontoFormState extends State<NihontoForm> {
           // ============ //
 
           DropdownButtonFormField(
-              decoration: InputDecoration(
-                  labelText: 'Type', border: OutlineInputBorder()),
+              decoration: FieldDecoration('Type'),
               value: _type,
               items: Utils.getNihontoTypeMenuItems(),
               validator: (value) {
@@ -507,8 +509,7 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           DropdownButtonFormField(
-              decoration: InputDecoration(
-                  labelText: 'Sugata', border: OutlineInputBorder()),
+              decoration: FieldDecoration('Sugata'),
               value: _sugata,
               items: Utils.getSugataMenuItems(),
               onChanged: (value) {
@@ -526,8 +527,7 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           TextFormField(
-            decoration: InputDecoration(
-                labelText: 'Signature (romaji)', border: OutlineInputBorder()),
+            decoration: FieldDecoration('Signature (romaji)'),
             initialValue: _signature.romaji,
             key: Key(
                 'Signature-Romaji-${_signature.romaji}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
@@ -543,8 +543,7 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           TextFormField(
-            decoration: InputDecoration(
-                labelText: 'Signature (kanji)', border: OutlineInputBorder()),
+            decoration: FieldDecoration('Signature (kanji)'),
             initialValue: _signature.kanji,
             key: Key(
                 'Signature-Kanji-${_signature.kanji}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
@@ -568,8 +567,7 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           TextFormField(
-            decoration: InputDecoration(
-                labelText: 'Price', border: OutlineInputBorder()),
+            decoration: FieldDecoration('Price'),
             readOnly: true,
             initialValue: "${_price.toText()}",
             key: Key(
@@ -601,13 +599,8 @@ class NihontoFormState extends State<NihontoForm> {
               Expanded(
                   child:
 
-                      // ============== //
-                      // === Nagasa === //
-                      // ============== //
-
                       TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Nagasa', border: OutlineInputBorder()),
+                decoration: FieldDecoration('Nagasa'),
                 readOnly: true,
                 initialValue: "${_nagasa?.toText() ?? ''}",
                 key: Key(
@@ -635,14 +628,8 @@ class NihontoFormState extends State<NihontoForm> {
               rowPadder,
               Expanded(
                   child:
-
-                      // ==================== //
-                      // === Total length === //
-                      // ==================== //
-
                       TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Total length', border: OutlineInputBorder()),
+                decoration: FieldDecoration('Total length'),
                 readOnly: true,
                 initialValue: "${_totalLength?.toText() ?? ''}",
                 key: Key('TotalLength-${_totalLength?.toText()}'),
@@ -671,14 +658,10 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           Row(children: [
-            // ============== //
-            // === Kasane === //
-            // ============== //
 
             Expanded(
                 child: TextFormField(
-              decoration: InputDecoration(
-                  labelText: 'Kasane', border: OutlineInputBorder()),
+              decoration: FieldDecoration('Kasane'),
               readOnly: true,
               initialValue: "${_kasane?.toText() ?? ''}",
               key: Key('Kasane-${_kasane?.toText()}'),
@@ -704,14 +687,9 @@ class NihontoFormState extends State<NihontoForm> {
 
             rowPadder,
 
-            // ================== //
-            // === Motokasane === //
-            // ================== //
-
             Expanded(
                 child: TextFormField(
-              decoration: InputDecoration(
-                  labelText: 'Motokasane', border: OutlineInputBorder()),
+              decoration: FieldDecoration('Motokasane'),
               readOnly: true,
               initialValue: "${_motokasane?.toText() ?? ''}",
               key: Key('Motokasane-${_motokasane?.toText()}'),
@@ -737,14 +715,9 @@ class NihontoFormState extends State<NihontoForm> {
 
             rowPadder,
 
-            // ================== //
-            // === Sakikasane === //
-            // ================== //
-
             Expanded(
                 child: TextFormField(
-              decoration: InputDecoration(
-                  labelText: 'Sakikasane', border: OutlineInputBorder()),
+              decoration: FieldDecoration('Sakikasane'),
               readOnly: true,
               initialValue: "${_sakikasane?.toText() ?? ''}",
               key: Key('Sakikasane-${_sakikasane?.toText()}'),
@@ -780,8 +753,7 @@ class NihontoFormState extends State<NihontoForm> {
               // ================ //
 
               TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Mihaba', border: OutlineInputBorder()),
+                decoration: FieldDecoration('Mihaba'),
                 readOnly: true,
                 initialValue: "${_mihaba?.toText() ?? ''}",
                 key: Key('Mihaba-${_mihaba?.toText()}'),
@@ -814,8 +786,7 @@ class NihontoFormState extends State<NihontoForm> {
                   // ================ //
 
                   TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Motohaba', border: OutlineInputBorder()),
+                decoration: FieldDecoration('Motohaba'),
                 readOnly: true,
                 initialValue: "${_motohaba?.toText() ?? ''}",
                 key: Key('Motohaba-${_motohaba?.toText()}'),
@@ -843,13 +814,8 @@ class NihontoFormState extends State<NihontoForm> {
             Expanded(
                 child:
 
-                    // ================ //
-                    // === Sakihaba === //
-                    // ================ //
-
                     TextFormField(
-              decoration: InputDecoration(
-                  labelText: 'Sakihaba', border: OutlineInputBorder()),
+              decoration: FieldDecoration('Sakihaba'),
               readOnly: true,
               initialValue: "${_sakihaba?.toText() ?? ''}",
               key: Key('Sakihaba-${_sakihaba?.toText()}'),
@@ -880,8 +846,7 @@ class NihontoFormState extends State<NihontoForm> {
             children: [
               Expanded(
                   child: TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Sori', border: OutlineInputBorder()),
+                decoration: FieldDecoration('Sori'),
                 readOnly: true,
                 initialValue: "${_sori?.sori?.toText() ?? ''}",
                 key: Key(
@@ -909,8 +874,7 @@ class NihontoFormState extends State<NihontoForm> {
               rowPadder,
               Expanded(
                   child: DropdownButtonFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Sori type', border: OutlineInputBorder()),
+                      decoration: FieldDecoration('Sori type'),
                       value: _sori.type,
                       items: Utils.getSoriTypeMenuItems(),
                       onChanged: (value) {
@@ -928,8 +892,7 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           DropdownButtonFormField(
-              decoration: InputDecoration(
-                  labelText: 'Kissaki', border: OutlineInputBorder()),
+              decoration: FieldDecoration('Kissaki'),
               value: _kissakiType,
               items: Utils.getKissakiTypeMenuItems(),
               onChanged: (value) {
@@ -945,8 +908,7 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           DropdownButtonFormField(
-              decoration: InputDecoration(
-                  labelText: 'Mune', border: OutlineInputBorder()),
+              decoration: FieldDecoration('Mune'),
               value: _muneType,
               items: Utils.getMuneTypeMenuItems(),
               onChanged: (value) {
@@ -991,8 +953,7 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           DropdownButtonFormField(
-              decoration: InputDecoration(
-                  labelText: 'Polish', border: OutlineInputBorder()),
+              decoration: FieldDecoration('Polish'),
               value: _polish,
               items: Utils.getPolishMenuItems(),
               onChanged: (value) {
