@@ -210,16 +210,17 @@ class NihontoFormState extends State<NihontoForm> {
     return dialog;
   }
 
-  AlertDialog _showNagasaDialog(BuildContext context, Length length) {
+  AlertDialog _showLengthDialog(BuildContext context, String title, Length length) {
     // length can be null
     assert(context != null);
+    assert(title != null);
 
     final key = GlobalKey<LengthWidgetState>();
 
     var form = LengthWidget(length: length, key: key);
 
     final AlertDialog dialog = AlertDialog(
-      title: Text('Set the nagasa'),
+      title: Text(title),
       contentPadding: EdgeInsets.zero,
       content: form,
       actions: [
@@ -228,79 +229,11 @@ class NihontoFormState extends State<NihontoForm> {
           child: Text('Cancel'),
         ),
         ElevatedButton(
-          // Return the new price to the caller via the navigator stack
+          // Return the new value to the caller via the navigator stack
           onPressed: () {
             var data = key.currentState.getLength();
 
-            print('Data: ${data}');
-
-            return Navigator.pop(context, data);
-          },
-          child: Text('OK'),
-        ),
-      ],
-    );
-
-    return dialog;
-  }
-
-  AlertDialog _showTotalLengthDialog(BuildContext context, Length length) {
-    // length can be null
-    assert(context != null);
-
-    final key = GlobalKey<LengthWidgetState>();
-
-    var form = LengthWidget(length: length, key: key);
-
-    final AlertDialog dialog = AlertDialog(
-      title: Text('Set the total length'),
-      contentPadding: EdgeInsets.zero,
-      content: form,
-      actions: [
-        ElevatedButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text('Cancel'),
-        ),
-        ElevatedButton(
-          // Return the value to the caller via the navigator stack
-          onPressed: () {
-            var data = key.currentState.getLength();
-
-            print('Data: ${data}');
-
-            return Navigator.pop(context, data);
-          },
-          child: Text('OK'),
-        ),
-      ],
-    );
-
-    return dialog;
-  }
-
-  AlertDialog _showSoriDialog(BuildContext context, Length length) {
-    // length can be null
-    assert(context != null);
-
-    final key = GlobalKey<LengthWidgetState>();
-
-    var form = LengthWidget(length: length, key: key);
-
-    final AlertDialog dialog = AlertDialog(
-      title: Text('Set the sori'),
-      contentPadding: EdgeInsets.zero,
-      content: form,
-      actions: [
-        ElevatedButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text('Cancel'),
-        ),
-        ElevatedButton(
-          // Return the new price to the caller via the navigator stack
-          onPressed: () {
-            var data = key.currentState.getLength();
-
-            print('Data: ${data}');
+            print('New value: ${data}');
 
             return Navigator.pop(context, data);
           },
@@ -627,7 +560,7 @@ class NihontoFormState extends State<NihontoForm> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return _showTotalLengthDialog(context, _nagasa);
+                    return _showLengthDialog(context, 'Set the nagasa', _nagasa);
                   }).then((value) {
                 if (value != null) {
                   setState(() {
@@ -659,7 +592,7 @@ class NihontoFormState extends State<NihontoForm> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return _showNagasaDialog(context, _totalLength);
+                    return _showLengthDialog(context, 'Set the total length', _totalLength);
                   }).then((value) {
                 if (value != null) {
                   setState(() {
@@ -690,7 +623,7 @@ class NihontoFormState extends State<NihontoForm> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return _showSoriDialog(context, _sori.sori);
+                    return _showLengthDialog(context, 'Set the sori', _sori.sori);
                   }).then((value) {
                 if (value != null) {
                   setState(() {
