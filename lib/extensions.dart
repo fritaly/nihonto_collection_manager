@@ -13,10 +13,3 @@ extension WidgetExtension on Widget {
     return new Container(padding: EdgeInsets.all(8.0), child: this);
   }
 }
-
-extension LengthUnitExtension on LengthUnit {
-
-  String name() {
-    return this.toString().split('.').last;
-  }
-}

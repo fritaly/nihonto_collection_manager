@@ -31,7 +31,7 @@ class LengthWidgetState extends State<LengthWidget> {
     } else {
       // Default to 0 cm
       this._value = 0;
-      this._unit = LengthUnit.cm;
+      this._unit = LengthUnit.CM;
     }
   }
 
@@ -61,7 +61,7 @@ class LengthWidgetState extends State<LengthWidget> {
           decoration: InputDecoration(labelText: 'Unit'),
           value: _unit,
           key: Key(_unit
-              .name()), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+              .name), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
           items: Utils.getLengthUnitMenuItems(),
           onChanged: (value) {
             setState(() {
