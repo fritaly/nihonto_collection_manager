@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
-import 'package:nihonto_collection_manager/model/geometry.dart';
+import 'package:nihonto_collection_manager/model/sugata.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
@@ -18,8 +18,8 @@ class Utils {
     )).toList(growable: false);
   }
 
-  static List<DropdownMenuItem> getGeometryMenuItems() {
-    return Geometry.values.map((e) => DropdownMenuItem(
+  static List<DropdownMenuItem> getSugataMenuItems() {
+    return Sugata.values.map((e) => DropdownMenuItem(
         child: Text(e.label),
         value: e
     )).toList(growable: false);

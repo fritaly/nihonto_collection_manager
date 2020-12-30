@@ -1,5 +1,5 @@
 import 'package:nihonto_collection_manager/model/boshi_info.dart';
-import 'package:nihonto_collection_manager/model/geometry.dart';
+import 'package:nihonto_collection_manager/model/sugata.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
 import 'package:nihonto_collection_manager/model/hamon_info.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
@@ -20,7 +20,7 @@ class Nihonto {
   // The signature should never be null
   final Signature signature;
 
-  final Geometry geometry;
+  final Sugata sugata;
 
   final Money price;
 
@@ -48,7 +48,7 @@ class Nihonto {
 
   const Nihonto(
       {this.type,
-      this.geometry,
+      this.sugata,
       this.signature = Signature.EMPTY,
       this.price = Money.ZERO,
       this.nagasa,
@@ -77,7 +77,7 @@ class Nihonto {
 
     return Nihonto(
         type: NihontoType.random(),
-        geometry: Geometry.random(),
+        sugata: Sugata.random(),
         signature: Signature.random(),
         price: Money.random(),
         nagasa: nagasa,
@@ -101,10 +101,10 @@ class Nihonto {
   }
 
   String get description {
-    return "${type?.label} - ${geometry?.label} (${nagasa?.toText()})";
+    return "${type?.label} - ${sugata?.label} (${nagasa?.toText()})";
   }
 
   String toString() {
-    return "Nihonto[type: ${type}, signature: '${signature}', geometry: ${geometry}, price: ${price}, nagasa: ${nagasa}, sori: ${sori}, soriType: ${soriType}, hada: ${hada}, kissakiType: ${kissakiType}]";
+    return "Nihonto[type: ${type}, signature: '${signature}', sugata: ${sugata}, price: ${price}, nagasa: ${nagasa}, sori: ${sori}, soriType: ${soriType}, hada: ${hada}, kissakiType: ${kissakiType}]";
   }
 }

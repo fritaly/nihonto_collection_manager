@@ -4,7 +4,7 @@ import 'package:nihonto_collection_manager/extensions.dart';
 import 'package:nihonto_collection_manager/model/boshi.dart';
 import 'package:nihonto_collection_manager/model/boshi_info.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
-import 'package:nihonto_collection_manager/model/geometry.dart';
+import 'package:nihonto_collection_manager/model/sugata.dart';
 import 'package:nihonto_collection_manager/model/hada.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
 import 'package:nihonto_collection_manager/model/hamon_info.dart';
@@ -50,7 +50,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   NihontoType _type;
 
-  Geometry _geometry;
+  Sugata _sugata;
 
   Signature _signature = Signature.EMPTY;
 
@@ -80,7 +80,7 @@ class NihontoFormState extends State<NihontoForm> {
     // The argument can be null
     if (nihonto != null) {
       _type = nihonto.type;
-      _geometry = nihonto.geometry;
+      _sugata = nihonto.sugata;
       _signature = nihonto.signature;
       _price = nihonto.price;
       _nagasa = nihonto.nagasa;
@@ -105,7 +105,7 @@ class NihontoFormState extends State<NihontoForm> {
   Nihonto _createNihonto() {
     return Nihonto(
         type: _type,
-        geometry: _geometry,
+        sugata: _sugata,
         signature: _signature,
         price: _price,
         nagasa: _nagasa,
@@ -131,7 +131,7 @@ class NihontoFormState extends State<NihontoForm> {
     setState(() {
       _signature = Signature.EMPTY;
       _type = null;
-      _geometry = null;
+      _sugata = null;
       _price = Money.ZERO;
       _nagasa = null;
       _totalLength = null;
@@ -157,7 +157,7 @@ class NihontoFormState extends State<NihontoForm> {
       var random = Nihonto.random();
 
       _signature = random.signature;
-      _geometry = random.geometry;
+      _sugata = random.sugata;
       _type = random.type;
       _price = random.price;
       _nagasa = random.nagasa;
@@ -433,26 +433,19 @@ class NihontoFormState extends State<NihontoForm> {
                 _formKey.currentState.validate();
               }),
 
-          // ================ //
-          // === Geometry === //
-          // ================ //
+          // ============== //
+          // === Sugata === //
+          // ============== //
 
           sizedBoxSpace,
 
           DropdownButtonFormField(
-              decoration: InputDecoration(labelText: 'Geometry', border: OutlineInputBorder()),
-              value: _geometry,
-              items: Utils.getGeometryMenuItems(),
-              validator: (value) {
-                if (value == null) {
-                  return 'Required';
-                }
-
-                return null;
-              },
+              decoration: InputDecoration(labelText: 'Sugata', border: OutlineInputBorder()),
+              value: _sugata,
+              items: Utils.getSugataMenuItems(),
               onChanged: (value) {
                 setState(() {
-                  _geometry = value;
+                  _sugata = value;
                 });
 
                 _formKey.currentState.validate();
