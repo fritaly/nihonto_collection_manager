@@ -309,7 +309,7 @@ class NihontoFormState extends State<NihontoForm> {
       border: OutlineInputBorder(),
       title: 'Hamon',
       dataSource: HamonType.values
-          .map((e) => {'display': e.label(), 'value': e.name()})
+          .map((e) => {'display': e.label, 'value': e.name})
           .toList(),
       textField: 'display',
       valueField: 'value',
@@ -317,7 +317,7 @@ class NihontoFormState extends State<NihontoForm> {
       hintWidget: Text('Please choose one or more'),
       initialValue: HamonType.values
           .where((element) => _hamonInfo.getValue(element))
-          .map((e) => e.name())
+          .map((e) => e.name)
           .toList(),
       onSaved: (value) {
         print('Value=${value}');

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nihonto_collection_manager/model/hamon_type.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
@@ -63,17 +62,6 @@ extension KissakiTypeExtension on KissakiType {
 }
 
 extension MuneTypeExtension on MuneType {
-
-  String name() {
-    return this.toString().split('.').last;
-  }
-
-  String label() {
-    return name().capitalize().replaceAll(new RegExp("_"), " ");
-  }
-}
-
-extension HamonTypeExtension on HamonType {
 
   String name() {
     return this.toString().split('.').last;
