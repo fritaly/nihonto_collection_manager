@@ -8,6 +8,7 @@ import 'package:nihonto_collection_manager/model/money.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
 import 'package:nihonto_collection_manager/model/nakago_info.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
+import 'package:nihonto_collection_manager/model/period.dart';
 import 'package:nihonto_collection_manager/model/polish.dart';
 import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/signature_info.dart';
@@ -84,6 +85,8 @@ class Nihonto {
 
   final String polishOther;
 
+  final Period period;
+
   const Nihonto(
       {
       this.overallDescription,
@@ -124,7 +127,9 @@ class Nihonto {
       this.bohiInfo,
       this.bohiOther,
       this.polish,
-      this.polishOther});
+      this.polishOther,
+      this.period
+    });
 
   static Nihonto random() {
     final nagasa = Length.random(min: 25, max: 75);
@@ -171,7 +176,8 @@ class Nihonto {
         bohiInfo: BohiInfo.random(),
         bohiOther: '',
         polish: Polish.random(),
-        polishOther: ''
+        polishOther: '',
+        period: Period.random()
     );
   }
 

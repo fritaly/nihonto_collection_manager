@@ -17,6 +17,7 @@ import 'package:nihonto_collection_manager/model/nakago.dart';
 import 'package:nihonto_collection_manager/model/nakago_info.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
+import 'package:nihonto_collection_manager/model/period.dart';
 import 'package:nihonto_collection_manager/model/polish.dart';
 import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/signature_info.dart';
@@ -128,6 +129,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   String _polishOther;
 
+  Period _period;
+
   NihontoFormState(Nihonto nihonto) {
     // The argument can be null
     if (nihonto != null) {
@@ -169,6 +172,7 @@ class NihontoFormState extends State<NihontoForm> {
       _bohiOther = nihonto.bohiOther;
       _polish = nihonto.polish;
       _polishOther = nihonto.polishOther;
+      _period = nihonto.period;
     }
   }
 
@@ -211,7 +215,8 @@ class NihontoFormState extends State<NihontoForm> {
         bohiInfo: _bohiInfo,
         bohiOther: _bohiOther,
         polish: _polish,
-        polishOther: _polishOther
+        polishOther: _polishOther,
+        period: _period
     );
   }
 
@@ -257,6 +262,7 @@ class NihontoFormState extends State<NihontoForm> {
       _bohiOther = random.bohiOther;
       _polish = random.polish;
       _polishOther = random.polishOther;
+      _period = random.period;
     });
   }
 
@@ -1303,6 +1309,22 @@ class NihontoFormState extends State<NihontoForm> {
                 });
               },
             ),
+          ]),
+
+          // ============== //
+          // === Period === //
+          // ============== //
+
+          ExpansibleTile(text: 'Period', children: [
+            DropdownButtonFormField(
+                decoration: FieldDecoration('Period'),
+                value: _period,
+                items: Utils.getDropDownMenuItems(Period.values),
+                onChanged: (value) {
+                  setState(() {
+                    _period = value;
+                  });
+                }),
           ]),
 
         ]));
