@@ -35,6 +35,7 @@ import 'package:nihonto_collection_manager/widget/field_decoration.dart';
 import 'package:nihonto_collection_manager/widget/length_widget.dart';
 import 'package:nihonto_collection_manager/widget/money_widget.dart';
 import 'package:nihonto_collection_manager/widget/multiselect_formfield.dart';
+import 'package:nihonto_collection_manager/widget/separator.dart';
 import 'package:nihonto_collection_manager/widget/weight_widget.dart';
 
 class NihontoForm extends StatefulWidget {
@@ -565,7 +566,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Sugata === //
           // ============== //
 
-          sizedBoxSpace, Divider(), sizedBoxSpace,
+          Separator.text('Sugata'),
 
           DropdownButtonFormField(
               decoration: FieldDecoration('Sugata'),
@@ -596,7 +597,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Signature === //
           // ================= //
 
-          sizedBoxSpace, Divider(), sizedBoxSpace,
+          Separator.text('Signature'),
 
           TextFormField(
             decoration: FieldDecoration('Signature (romaji)'),
@@ -689,7 +690,7 @@ class NihontoFormState extends State<NihontoForm> {
           ],
           ),
 
-          sizedBoxSpace,
+          Separator.text('Dimensions'),
 
           Row(
             children: [
@@ -945,7 +946,7 @@ class NihontoFormState extends State<NihontoForm> {
             ))
           ]),
 
-          sizedBoxSpace, Divider(), sizedBoxSpace,
+          Separator.text('Sori'),
 
           Row(
             children: [
@@ -1006,11 +1007,11 @@ class NihontoFormState extends State<NihontoForm> {
             },
           ),
 
-          // ==================== //
-          // === Kissaki Type === //
-          // ==================== //
+          // =============== //
+          // === Kissaki === //
+          // =============== //
 
-          sizedBoxSpace, Divider(), sizedBoxSpace,
+          Separator.text('Kissaki'),
 
           DropdownButtonFormField(
               decoration: FieldDecoration('Kissaki'),
@@ -1037,11 +1038,11 @@ class NihontoFormState extends State<NihontoForm> {
             },
           ),
 
-          // ================= //
-          // === Mune Type === //
-          // ================= //
+          // ============ //
+          // === Mune === //
+          // ============ //
 
-          sizedBoxSpace, Divider(), sizedBoxSpace,
+          Separator.text('Mune'),
 
           DropdownButtonFormField(
               decoration: FieldDecoration('Mune'),
@@ -1057,7 +1058,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Hada === //
           // ============ //
 
-          sizedBoxSpace, Divider(), sizedBoxSpace,
+          Separator.text('Hada'),
 
           hadaWidget,
 
@@ -1080,30 +1081,35 @@ class NihontoFormState extends State<NihontoForm> {
           // === Hamon === //
           // ============= //
 
-          sizedBoxSpace, Divider(), sizedBoxSpace,
+          Separator.text('Hamon'),
 
           hamonWidget,
 
-          sizedBoxSpace,
+          Separator.text('Yakiba'),
+
           yakibaWidget,
 
-          sizedBoxSpace,
+          Separator.text('Boshi'),
+
           boshiWidget,
 
-          sizedBoxSpace,
+          Separator.text('Nakago'),
+
           nakagoWidget,
 
-          sizedBoxSpace,
+          Separator.text('Yasurime'),
+
           yasurimeWidget,
 
-          sizedBoxSpace,
+          Separator.text('Bohi'),
+
           bohiWidget,
 
           // ============== //
           // === Polish === //
           // ============== //
 
-          sizedBoxSpace,
+          Separator.text('Polish'),
 
           DropdownButtonFormField(
               decoration: FieldDecoration('Polish'),
