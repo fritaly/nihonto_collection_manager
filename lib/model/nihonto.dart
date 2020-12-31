@@ -66,13 +66,23 @@ class Nihonto {
 
   final BoshiInfo boshiInfo;
 
+  final String boshiOther;
+
   final NakagoInfo nakagoInfo;
+
+  final String nakagoOther;
 
   final YasurimeInfo yasurimeInfo;
 
+  final String yasurimeOther;
+
   final BohiInfo bohiInfo;
 
+  final String bohiOther;
+
   final Polish polish;
+
+  final String polishOther;
 
   const Nihonto(
       {
@@ -106,10 +116,15 @@ class Nihonto {
       this.yakibaInfo,
       this.yakibaOther,
       this.boshiInfo,
+      this.boshiOther,
       this.nakagoInfo,
+      this.nakagoOther,
       this.yasurimeInfo,
+      this.yasurimeOther,
       this.bohiInfo,
-      this.polish});
+      this.bohiOther,
+      this.polish,
+      this.polishOther});
 
   static Nihonto random() {
     final nagasa = Length.random(min: 25, max: 75);
@@ -148,10 +163,15 @@ class Nihonto {
         yakibaInfo: YakibaInfo.random(),
         yakibaOther: '',
         boshiInfo: BoshiInfo.random(),
+        boshiOther: '',
         nakagoInfo: NakagoInfo.random(),
+        nakagoOther: '',
         yasurimeInfo: YasurimeInfo.random(),
+        yasurimeOther: '',
         bohiInfo: BohiInfo.random(),
-        polish: Polish.random()
+        bohiOther: '',
+        polish: Polish.random(),
+        polishOther: ''
     );
   }
 

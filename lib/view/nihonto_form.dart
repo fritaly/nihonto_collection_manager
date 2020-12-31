@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nihonto_collection_manager/extensions.dart';
 import 'package:nihonto_collection_manager/model/bohi.dart';
 import 'package:nihonto_collection_manager/model/bohi_info.dart';
 import 'package:nihonto_collection_manager/model/boshi.dart';
@@ -36,8 +35,6 @@ import 'package:nihonto_collection_manager/widget/field_decoration.dart';
 import 'package:nihonto_collection_manager/widget/length_widget.dart';
 import 'package:nihonto_collection_manager/widget/money_widget.dart';
 import 'package:nihonto_collection_manager/widget/multiselect_formfield.dart';
-import 'package:nihonto_collection_manager/widget/section.dart';
-import 'package:nihonto_collection_manager/widget/separator.dart';
 import 'package:nihonto_collection_manager/widget/weight_widget.dart';
 
 class NihontoForm extends StatefulWidget {
@@ -113,13 +110,23 @@ class NihontoFormState extends State<NihontoForm> {
 
   BoshiInfo _boshiInfo = BoshiInfo();
 
+  String _boshiOther;
+
   NakagoInfo _nakagoInfo = NakagoInfo();
+
+  String _nakagoOther;
 
   YasurimeInfo _yasurimeInfo = YasurimeInfo();
 
+  String _yasurimeOther;
+
   BohiInfo _bohiInfo = BohiInfo();
 
+  String _bohiOther;
+
   Polish _polish;
+
+  String _polishOther;
 
   NihontoFormState(Nihonto nihonto) {
     // The argument can be null
@@ -153,10 +160,15 @@ class NihontoFormState extends State<NihontoForm> {
       _yakibaInfo = nihonto.yakibaInfo;
       _yakibaOther = nihonto.yakibaOther;
       _boshiInfo = nihonto.boshiInfo;
+      _boshiOther = nihonto.boshiOther;
       _nakagoInfo = nihonto.nakagoInfo;
+      _nakagoOther = nihonto.nakagoOther;
       _yasurimeInfo = nihonto.yasurimeInfo;
+      _yasurimeOther = nihonto.yasurimeOther;
       _bohiInfo = nihonto.bohiInfo;
+      _bohiOther = nihonto.bohiOther;
       _polish = nihonto.polish;
+      _polishOther = nihonto.polishOther;
     }
   }
 
@@ -191,10 +203,16 @@ class NihontoFormState extends State<NihontoForm> {
         yakibaInfo: _yakibaInfo,
         yakibaOther: _yakibaOther,
         boshiInfo: _boshiInfo,
+        boshiOther: _boshiOther,
         nakagoInfo: _nakagoInfo,
+        nakagoOther: _nakagoOther,
         yasurimeInfo: _yasurimeInfo,
+        yasurimeOther: _yasurimeOther,
         bohiInfo: _bohiInfo,
-        polish: _polish);
+        bohiOther: _bohiOther,
+        polish: _polish,
+        polishOther: _polishOther
+    );
   }
 
   void _randomize() {
@@ -230,10 +248,15 @@ class NihontoFormState extends State<NihontoForm> {
       _yakibaInfo = random.yakibaInfo;
       _yakibaOther = random.yakibaOther;
       _boshiInfo = random.boshiInfo;
+      _boshiOther = random.boshiOther;
       _nakagoInfo = random.nakagoInfo;
+      _nakagoOther = random.nakagoOther;
       _yasurimeInfo = random.yasurimeInfo;
+      _yasurimeOther = random.yasurimeOther;
       _bohiInfo = random.bohiInfo;
+      _bohiOther = random.bohiOther;
       _polish = random.polish;
+      _polishOther = random.polishOther;
     });
   }
 
@@ -1159,13 +1182,97 @@ class NihontoFormState extends State<NihontoForm> {
             ),
           ]),
 
-          ExpansibleTile(text: 'Boshi', children: [ boshiWidget ]),
+          // ============ //
+          // === Bohi === //
+          // ============ //
 
-          ExpansibleTile(text: 'Nakago', children: [ nakagoWidget ]),
+          ExpansibleTile(text: 'Boshi', children: [
+            boshiWidget,
 
-          ExpansibleTile(text: 'Yasurime', children: [ yasurimeWidget ]),
+            sizedBoxSpace,
 
-          ExpansibleTile(text: 'Bohi', children: [ bohiWidget ]),
+            TextFormField(
+              decoration: FieldDecoration('Other'),
+              initialValue: _boshiOther ?? '',
+              minLines: 1,
+              maxLines: 25,
+              key: Key('Boshi-Other-${_boshiOther}'),
+              onChanged: (value) {
+                setState(() {
+                  _boshiOther = value;
+                });
+              },
+            ),
+          ]),
+
+          // ============== //
+          // === Nakago === //
+          // ============== //
+
+          ExpansibleTile(text: 'Nakago', children: [
+            nakagoWidget,
+
+            sizedBoxSpace,
+
+            TextFormField(
+              decoration: FieldDecoration('Other'),
+              initialValue: _nakagoOther ?? '',
+              minLines: 1,
+              maxLines: 25,
+              key: Key('Nakago-Other-${_nakagoOther}'),
+              onChanged: (value) {
+                setState(() {
+                  _nakagoOther = value;
+                });
+              },
+            ),
+          ]),
+
+          // ================ //
+          // === Yasurime === //
+          // ================ //
+
+          ExpansibleTile(text: 'Yasurime', children: [
+            yasurimeWidget,
+
+            sizedBoxSpace,
+
+            TextFormField(
+              decoration: FieldDecoration('Other'),
+              initialValue: _yasurimeOther ?? '',
+              minLines: 1,
+              maxLines: 25,
+              key: Key('Yasurime-Other-${_yasurimeOther}'),
+              onChanged: (value) {
+                setState(() {
+                  _yasurimeOther = value;
+                });
+              },
+            ),
+          ]),
+
+          // ============ //
+          // === Bohi === //
+          // ============ //
+
+          ExpansibleTile(text: 'Bohi', children: [
+            bohiWidget,
+
+            sizedBoxSpace,
+
+            TextFormField(
+              decoration: FieldDecoration('Other'),
+              initialValue: _bohiOther ?? '',
+              minLines: 1,
+              maxLines: 25,
+              key: Key('Bohi-Other-${_bohiOther}'),
+              onChanged: (value) {
+                setState(() {
+                  _bohiOther = value;
+                });
+              },
+            ),
+          ]),
 
           // ============== //
           // === Polish === //
@@ -1181,6 +1288,21 @@ class NihontoFormState extends State<NihontoForm> {
                     _polish = value;
                   });
                 }),
+
+            sizedBoxSpace,
+
+            TextFormField(
+              decoration: FieldDecoration('Other'),
+              initialValue: _polishOther ?? '',
+              minLines: 1,
+              maxLines: 25,
+              key: Key('Polish-Other-${_polishOther}'),
+              onChanged: (value) {
+                setState(() {
+                  _polishOther = value;
+                });
+              },
+            ),
           ]),
 
         ]));
