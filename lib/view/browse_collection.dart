@@ -61,8 +61,7 @@ class _BrowseCollectionState extends State<BrowseCollection> {
         onSelected: (Action result) {
           switch (result) {
             case Action.view:
-              // TODO Add read-only mode
-              _pushEdit(nihonto);
+              _pushView(nihonto);
               break;
             case Action.edit:
               _pushEdit(nihonto);
@@ -104,7 +103,7 @@ class _BrowseCollectionState extends State<BrowseCollection> {
   void _pushAdd() async {
     var route = MaterialPageRoute<Nihonto>(
       builder: (BuildContext context) {
-        return NihontoForm();
+        return NihontoForm(Mode.WRITE);
       },
     );
 
@@ -129,7 +128,7 @@ class _BrowseCollectionState extends State<BrowseCollection> {
 
     var route = MaterialPageRoute<Nihonto>(
       builder: (BuildContext context) {
-        return NihontoForm(nihonto);
+        return NihontoForm(Mode.WRITE, nihonto);
       }
     );
 
@@ -149,6 +148,18 @@ class _BrowseCollectionState extends State<BrowseCollection> {
         Scaffold.of(context).showSnackBar(snackBar);
       });
     }
+  }
+
+  void _pushView(Nihonto nihonto) async {
+    assert(nihonto != null);
+
+    var route = MaterialPageRoute<Nihonto>(
+        builder: (BuildContext context) {
+          return NihontoForm(Mode.READ, nihonto);
+        }
+    );
+
+    await Navigator.of(context).push(route);
   }
 }
 

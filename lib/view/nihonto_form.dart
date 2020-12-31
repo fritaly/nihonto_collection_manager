@@ -38,18 +38,24 @@ import 'package:nihonto_collection_manager/widget/money_widget.dart';
 import 'package:nihonto_collection_manager/widget/multiselect_formfield.dart';
 import 'package:nihonto_collection_manager/widget/weight_widget.dart';
 
+enum Mode {
+  READ, WRITE
+}
+
 class NihontoForm extends StatefulWidget {
   static final TextInputFormatter decimalNumber =
       FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'));
 
   Nihonto _nihonto;
+  Mode _mode;
 
-  NihontoForm([Nihonto nihonto]) {
+  NihontoForm(Mode mode, [Nihonto nihonto]) {
     _nihonto = nihonto;
+    _mode = mode;
   }
 
   @override
-  NihontoFormState createState() => NihontoFormState(_nihonto);
+  NihontoFormState createState() => NihontoFormState(_mode, _nihonto);
 }
 
 class NihontoFormState extends State<NihontoForm> {
@@ -57,6 +63,8 @@ class NihontoFormState extends State<NihontoForm> {
   //
   // Note: This is a `GlobalKey<FormState>`, not a GlobalKey<NihontoFormState>.
   final _formKey = GlobalKey<FormState>();
+
+  Mode _mode;
 
   String _overallDescription;
 
@@ -129,7 +137,11 @@ class NihontoFormState extends State<NihontoForm> {
 
   Period _period;
 
-  NihontoFormState(Nihonto nihonto) {
+  NihontoFormState(Mode mode, Nihonto nihonto) {
+    assert (mode != null);
+
+    this._mode = mode;
+
     // The argument can be null
     if (nihonto != null) {
       _setNihonto(nihonto);
@@ -352,6 +364,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   @override
   Widget build(BuildContext context) {
+    final bool readOnly = (_mode == Mode.READ);
+
     final hadaWidget = MultiSelectFormField(
       key: Key('Hada-${_hada.toString()}'),
       autovalidate: false,
@@ -538,6 +552,7 @@ class NihontoFormState extends State<NihontoForm> {
             children: [
               TextFormField(
                 decoration: FieldDecoration('Overall description'),
+                readOnly: readOnly,
                 initialValue: _overallDescription ?? '',
                 minLines: 1,
                 maxLines: 25,
@@ -595,6 +610,7 @@ class NihontoFormState extends State<NihontoForm> {
 
             TextFormField(
               decoration: FieldDecoration('Other'),
+              readOnly: readOnly,
               initialValue: _sugataOther ?? '',
               minLines: 1,
               maxLines: 25,
@@ -614,6 +630,7 @@ class NihontoFormState extends State<NihontoForm> {
           ExpansibleTile(text: 'Signature', children: [
             TextFormField(
               decoration: FieldDecoration('Romaji'),
+              readOnly: readOnly,
               initialValue: _signature.romaji,
               key: Key('Signature-Romaji-${_signature.romaji}'),
               minLines: 1,
@@ -629,6 +646,7 @@ class NihontoFormState extends State<NihontoForm> {
 
             TextFormField(
               decoration: FieldDecoration('Kanji'),
+              readOnly: readOnly,
               initialValue: _signature.kanji,
               key: Key('Signature-Kanji-${_signature.kanji}'),
               minLines: 1,
@@ -652,9 +670,12 @@ class NihontoFormState extends State<NihontoForm> {
                 readOnly: true,
                 initialValue: "${_price.toText()}",
                 textAlign: TextAlign.end,
-                key: Key(
-                    'Price-${_price.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+                key: Key('Price-${_price.toText()}'),
                 onTap: () {
+                  if (readOnly) {
+                    return;
+                  }
+
                   showDialog(
                       context: context,
                       builder: (context) {
@@ -679,9 +700,12 @@ class NihontoFormState extends State<NihontoForm> {
                 readOnly: true,
                 initialValue: "${_weight?.toText() ?? ''}",
                 textAlign: TextAlign.end,
-                key: Key(
-                    'Weight-${_weight?.toText()}'),
+                key: Key('Weight-${_weight?.toText()}'),
                 onTap: () {
+                  if (readOnly) {
+                    return;
+                  }
+
                   showDialog(
                       context: context,
                       builder: (context) {
@@ -718,6 +742,10 @@ class NihontoFormState extends State<NihontoForm> {
                       key: Key(
                           'Nagasa-${_nagasa?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
                       onTap: () {
+                        if (readOnly) {
+                          return;
+                        }
+
                         showDialog(
                             context: context,
                             builder: (context) {
@@ -747,6 +775,10 @@ class NihontoFormState extends State<NihontoForm> {
                       textAlign: TextAlign.end,
                       key: Key('TotalLength-${_totalLength?.toText()}'),
                       onTap: () {
+                        if (readOnly) {
+                          return;
+                        }
+
                         showDialog(
                             context: context,
                             builder: (context) {
@@ -780,6 +812,10 @@ class NihontoFormState extends State<NihontoForm> {
                     textAlign: TextAlign.end,
                     key: Key('Kasane-${_kasane?.toText()}'),
                     onTap: () {
+                      if (readOnly) {
+                        return;
+                      }
+
                       showDialog(
                           context: context,
                           builder: (context) {
@@ -809,6 +845,10 @@ class NihontoFormState extends State<NihontoForm> {
                     textAlign: TextAlign.end,
                     key: Key('Motokasane-${_motokasane?.toText()}'),
                     onTap: () {
+                      if (readOnly) {
+                        return;
+                      }
+
                       showDialog(
                           context: context,
                           builder: (context) {
@@ -838,6 +878,10 @@ class NihontoFormState extends State<NihontoForm> {
                     textAlign: TextAlign.end,
                     key: Key('Sakikasane-${_sakikasane?.toText()}'),
                     onTap: () {
+                      if (readOnly) {
+                        return;
+                      }
+
                       showDialog(
                           context: context,
                           builder: (context) {
@@ -875,6 +919,10 @@ class NihontoFormState extends State<NihontoForm> {
                   textAlign: TextAlign.end,
                   key: Key('Mihaba-${_mihaba?.toText()}'),
                   onTap: () {
+                    if (readOnly) {
+                      return;
+                    }
+
                     showDialog(
                         context: context,
                         builder: (context) {
@@ -909,6 +957,10 @@ class NihontoFormState extends State<NihontoForm> {
                   textAlign: TextAlign.end,
                   key: Key('Motohaba-${_motohaba?.toText()}'),
                   onTap: () {
+                    if (readOnly) {
+                      return;
+                    }
+
                     showDialog(
                         context: context,
                         builder: (context) {
@@ -939,6 +991,10 @@ class NihontoFormState extends State<NihontoForm> {
                     textAlign: TextAlign.end,
                     key: Key('Sakihaba-${_sakihaba?.toText()}'),
                     onTap: () {
+                      if (readOnly) {
+                        return;
+                      }
+
                       showDialog(
                           context: context,
                           builder: (context) {
@@ -972,6 +1028,10 @@ class NihontoFormState extends State<NihontoForm> {
                       key: Key(
                           'Sori-${_sori?.sori?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
                       onTap: () {
+                        if (readOnly) {
+                          return;
+                        }
+
                         showDialog(
                             context: context,
                             builder: (context) {
@@ -1009,6 +1069,7 @@ class NihontoFormState extends State<NihontoForm> {
 
             TextFormField(
               decoration: FieldDecoration('Other'),
+              readOnly: readOnly,
               initialValue: _soriOther ?? '',
               minLines: 1,
               maxLines: 25,
@@ -1040,6 +1101,7 @@ class NihontoFormState extends State<NihontoForm> {
 
             TextFormField(
               decoration: FieldDecoration('Other'),
+              readOnly: readOnly,
               initialValue: _kissakiOther ?? '',
               minLines: 1,
               maxLines: 25,
@@ -1071,6 +1133,7 @@ class NihontoFormState extends State<NihontoForm> {
 
             TextFormField(
               decoration: FieldDecoration('Other'),
+              readOnly: readOnly,
               initialValue: _muneOther ?? '',
               minLines: 1,
               maxLines: 25,
@@ -1094,6 +1157,7 @@ class NihontoFormState extends State<NihontoForm> {
 
             TextFormField(
               decoration: FieldDecoration('Other'),
+              readOnly: readOnly,
               initialValue: _hadaOther ?? '',
               minLines: 1,
               maxLines: 25,
@@ -1117,6 +1181,7 @@ class NihontoFormState extends State<NihontoForm> {
 
             TextFormField(
               decoration: FieldDecoration('Other'),
+              readOnly: readOnly,
               initialValue: _hamonOther ?? '',
               minLines: 1,
               maxLines: 25,
@@ -1140,6 +1205,7 @@ class NihontoFormState extends State<NihontoForm> {
 
             TextFormField(
               decoration: FieldDecoration('Other'),
+              readOnly: readOnly,
               initialValue: _yakibaOther ?? '',
               minLines: 1,
               maxLines: 25,
@@ -1163,6 +1229,7 @@ class NihontoFormState extends State<NihontoForm> {
 
             TextFormField(
               decoration: FieldDecoration('Other'),
+              readOnly: readOnly,
               initialValue: _boshiOther ?? '',
               minLines: 1,
               maxLines: 25,
@@ -1186,6 +1253,7 @@ class NihontoFormState extends State<NihontoForm> {
 
             TextFormField(
               decoration: FieldDecoration('Other'),
+              readOnly: readOnly,
               initialValue: _nakagoOther ?? '',
               minLines: 1,
               maxLines: 25,
@@ -1209,6 +1277,7 @@ class NihontoFormState extends State<NihontoForm> {
 
             TextFormField(
               decoration: FieldDecoration('Other'),
+              readOnly: readOnly,
               initialValue: _yasurimeOther ?? '',
               minLines: 1,
               maxLines: 25,
@@ -1232,6 +1301,7 @@ class NihontoFormState extends State<NihontoForm> {
 
             TextFormField(
               decoration: FieldDecoration('Other'),
+              readOnly: readOnly,
               initialValue: _bohiOther ?? '',
               minLines: 1,
               maxLines: 25,
@@ -1263,6 +1333,7 @@ class NihontoFormState extends State<NihontoForm> {
 
             TextFormField(
               decoration: FieldDecoration('Other'),
+              readOnly: readOnly,
               initialValue: _polishOther ?? '',
               minLines: 1,
               maxLines: 25,
@@ -1293,13 +1364,18 @@ class NihontoFormState extends State<NihontoForm> {
 
         ]));
 
+    var actions = <Widget>[];
+
+    if (!readOnly) {
+      // Only display the actions in not in read-only mode
+      actions.add(TextButton(child: Icon(Icons.report_problem_outlined, color: Colors.white), onPressed: _randomize));
+      actions.add(TextButton(child: Icon(Icons.save, color: Colors.white), onPressed: _save));
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Nihonto information'),
-        actions: [
-          TextButton(child: Icon(Icons.report_problem_outlined, color: Colors.white), onPressed: _randomize),
-          TextButton(child: Icon(Icons.save, color: Colors.white), onPressed: _save)
-        ]
+        actions: actions
       ),
       body: ListView(children: [form]) // Wrap the form into a list view to support scrolling
     );
