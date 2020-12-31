@@ -521,7 +521,7 @@ class NihontoFormState extends State<NihontoForm> {
       },
     );
 
-    const sizedBoxSpace = SizedBox(height: 8);
+    const columnPadder = SizedBox(height: 8);
 
     const rowPadder = SizedBox(width: 8);
 
@@ -549,7 +549,7 @@ class NihontoFormState extends State<NihontoForm> {
                 },
               ),
 
-              sizedBoxSpace,
+              columnPadder,
 
               // ============ //
               // === Type === //
@@ -591,7 +591,7 @@ class NihontoFormState extends State<NihontoForm> {
                   });
                 }),
 
-            sizedBoxSpace,
+            columnPadder,
 
             TextFormField(
               decoration: FieldDecoration('Other'),
@@ -625,7 +625,7 @@ class NihontoFormState extends State<NihontoForm> {
               },
             ),
 
-            sizedBoxSpace,
+            columnPadder,
 
             TextFormField(
               decoration: FieldDecoration('Kanji'),
@@ -640,7 +640,7 @@ class NihontoFormState extends State<NihontoForm> {
               },
             ),
 
-            sizedBoxSpace,
+            columnPadder,
 
             signatureWidget,
           ]),
@@ -768,7 +768,7 @@ class NihontoFormState extends State<NihontoForm> {
               ],
             ),
 
-            sizedBoxSpace,
+            columnPadder,
 
             Row(children: [
 
@@ -858,7 +858,7 @@ class NihontoFormState extends State<NihontoForm> {
                   )),
             ]),
 
-            sizedBoxSpace,
+            columnPadder,
 
             Row(children: [
               Expanded(
@@ -1005,7 +1005,7 @@ class NihontoFormState extends State<NihontoForm> {
               ],
             ),
 
-            sizedBoxSpace,
+            columnPadder,
 
             TextFormField(
               decoration: FieldDecoration('Other'),
@@ -1036,7 +1036,7 @@ class NihontoFormState extends State<NihontoForm> {
                   });
                 }),
 
-            sizedBoxSpace,
+            columnPadder,
 
             TextFormField(
               decoration: FieldDecoration('Other'),
@@ -1067,7 +1067,7 @@ class NihontoFormState extends State<NihontoForm> {
                   });
                 }),
 
-            sizedBoxSpace,
+            columnPadder,
 
             TextFormField(
               decoration: FieldDecoration('Other'),
@@ -1090,7 +1090,7 @@ class NihontoFormState extends State<NihontoForm> {
           ExpansibleTile(text: 'Hada', children: [
             hadaWidget,
 
-            sizedBoxSpace,
+            columnPadder,
 
             TextFormField(
               decoration: FieldDecoration('Other'),
@@ -1113,7 +1113,7 @@ class NihontoFormState extends State<NihontoForm> {
           ExpansibleTile(text: 'Hamon', children: [
             hamonWidget,
 
-            sizedBoxSpace,
+            columnPadder,
 
             TextFormField(
               decoration: FieldDecoration('Other'),
@@ -1136,7 +1136,7 @@ class NihontoFormState extends State<NihontoForm> {
           ExpansibleTile(text: 'Yakiba', children: [
             yakibaWidget,
 
-            sizedBoxSpace,
+            columnPadder,
 
             TextFormField(
               decoration: FieldDecoration('Other'),
@@ -1159,7 +1159,7 @@ class NihontoFormState extends State<NihontoForm> {
           ExpansibleTile(text: 'Boshi', children: [
             boshiWidget,
 
-            sizedBoxSpace,
+            columnPadder,
 
             TextFormField(
               decoration: FieldDecoration('Other'),
@@ -1182,7 +1182,7 @@ class NihontoFormState extends State<NihontoForm> {
           ExpansibleTile(text: 'Nakago', children: [
             nakagoWidget,
 
-            sizedBoxSpace,
+            columnPadder,
 
             TextFormField(
               decoration: FieldDecoration('Other'),
@@ -1205,7 +1205,7 @@ class NihontoFormState extends State<NihontoForm> {
           ExpansibleTile(text: 'Yasurime', children: [
             yasurimeWidget,
 
-            sizedBoxSpace,
+            columnPadder,
 
             TextFormField(
               decoration: FieldDecoration('Other'),
@@ -1228,7 +1228,7 @@ class NihontoFormState extends State<NihontoForm> {
           ExpansibleTile(text: 'Bohi', children: [
             bohiWidget,
 
-            sizedBoxSpace,
+            columnPadder,
 
             TextFormField(
               decoration: FieldDecoration('Other'),
@@ -1259,7 +1259,7 @@ class NihontoFormState extends State<NihontoForm> {
                   });
                 }),
 
-            sizedBoxSpace,
+            columnPadder,
 
             TextFormField(
               decoration: FieldDecoration('Other'),
