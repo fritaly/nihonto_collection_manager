@@ -494,7 +494,7 @@ class NihontoFormState extends State<NihontoForm> {
       key: Key('SignatureInfo-${_signatureInfo.toString()}'),
       autovalidate: false,
       border: OutlineInputBorder(),
-      title: 'Signature features',
+      title: 'Features',
       dataSource:
       SignatureType.values.map((e) => {'display': e.label, 'value': e}).toList(),
       textField: 'display',
@@ -581,7 +581,7 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           TextFormField(
-            decoration: FieldDecoration('Sugata (other)'),
+            decoration: FieldDecoration('Other'),
             initialValue: _sugataOther ?? '',
             minLines: 1,
             maxLines: 25,
@@ -600,7 +600,7 @@ class NihontoFormState extends State<NihontoForm> {
           Separator.text('Signature'),
 
           TextFormField(
-            decoration: FieldDecoration('Signature (romaji)'),
+            decoration: FieldDecoration('Romaji'),
             initialValue: _signature.romaji,
             key: Key('Signature-Romaji-${_signature.romaji}'),
             minLines: 1,
@@ -615,7 +615,7 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           TextFormField(
-            decoration: FieldDecoration('Signature (kanji)'),
+            decoration: FieldDecoration('Kanji'),
             initialValue: _signature.kanji,
             key: Key('Signature-Kanji-${_signature.kanji}'),
             minLines: 1,
@@ -981,7 +981,7 @@ class NihontoFormState extends State<NihontoForm> {
               rowPadder,
               Expanded(
                   child: DropdownButtonFormField(
-                      decoration: FieldDecoration('Sori type'),
+                      decoration: FieldDecoration('Type'),
                       value: _sori.type,
                       items: Utils.getDropDownMenuItems(SoriType.values),
                       onChanged: (value) {
@@ -995,7 +995,7 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           TextFormField(
-            decoration: FieldDecoration('Sori (other)'),
+            decoration: FieldDecoration('Other'),
             initialValue: _soriOther ?? '',
             minLines: 1,
             maxLines: 25,
@@ -1026,7 +1026,7 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           TextFormField(
-            decoration: FieldDecoration('Kissaki (other)'),
+            decoration: FieldDecoration('Other'),
             initialValue: _kissakiOther ?? '',
             minLines: 1,
             maxLines: 25,
@@ -1065,7 +1065,7 @@ class NihontoFormState extends State<NihontoForm> {
           sizedBoxSpace,
 
           TextFormField(
-            decoration: FieldDecoration('Hada (other)'),
+            decoration: FieldDecoration('Other'),
             initialValue: _hadaOther ?? '',
             minLines: 1,
             maxLines: 25,
