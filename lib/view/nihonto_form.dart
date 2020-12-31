@@ -101,6 +101,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   HamonInfo _hamonInfo = HamonInfo();
 
+  String _hamonOther;
+
   YakibaInfo _yakibaInfo = YakibaInfo();
 
   BoshiInfo _boshiInfo = BoshiInfo();
@@ -140,6 +142,7 @@ class NihontoFormState extends State<NihontoForm> {
       _kissakiOther = nihonto.kissakiOther;
       _muneType = nihonto.muneType;
       _hamonInfo = nihonto.hamonInfo;
+      _hamonOther = nihonto.hamonOther;
       _yakibaInfo = nihonto.yakibaInfo;
       _boshiInfo = nihonto.boshiInfo;
       _nakagoInfo = nihonto.nakagoInfo;
@@ -175,6 +178,7 @@ class NihontoFormState extends State<NihontoForm> {
         kissakiOther: _kissakiOther,
         muneType: _muneType,
         hamonInfo: _hamonInfo,
+        hamonOther: _hamonOther,
         yakibaInfo: _yakibaInfo,
         boshiInfo: _boshiInfo,
         nakagoInfo: _nakagoInfo,
@@ -211,6 +215,7 @@ class NihontoFormState extends State<NihontoForm> {
       _kissakiOther = random.kissakiOther;
       _muneType = random.muneType;
       _hamonInfo = random.hamonInfo;
+      _hamonOther = random.hamonOther;
       _yakibaInfo = random.yakibaInfo;
       _boshiInfo = random.boshiInfo;
       _nakagoInfo = random.nakagoInfo;
@@ -1084,6 +1089,25 @@ class NihontoFormState extends State<NihontoForm> {
           Separator.text('Hamon'),
 
           hamonWidget,
+
+          sizedBoxSpace,
+
+          TextFormField(
+            decoration: FieldDecoration('Other'),
+            initialValue: _hamonOther ?? '',
+            minLines: 1,
+            maxLines: 25,
+            key: Key('Hamon-Other-${_hamonOther}'),
+            onChanged: (value) {
+              setState(() {
+                _hamonOther = value;
+              });
+            },
+          ),
+
+          // ============== //
+          // === Yakiba === //
+          // ============== //
 
           Separator.text('Yakiba'),
 
