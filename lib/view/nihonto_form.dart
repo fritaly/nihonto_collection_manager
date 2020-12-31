@@ -109,6 +109,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   YakibaInfo _yakibaInfo = YakibaInfo();
 
+  String _yakibaOther;
+
   BoshiInfo _boshiInfo = BoshiInfo();
 
   NakagoInfo _nakagoInfo = NakagoInfo();
@@ -149,6 +151,7 @@ class NihontoFormState extends State<NihontoForm> {
       _hamonInfo = nihonto.hamonInfo;
       _hamonOther = nihonto.hamonOther;
       _yakibaInfo = nihonto.yakibaInfo;
+      _yakibaOther = nihonto.yakibaOther;
       _boshiInfo = nihonto.boshiInfo;
       _nakagoInfo = nihonto.nakagoInfo;
       _yasurimeInfo = nihonto.yasurimeInfo;
@@ -186,6 +189,7 @@ class NihontoFormState extends State<NihontoForm> {
         hamonInfo: _hamonInfo,
         hamonOther: _hamonOther,
         yakibaInfo: _yakibaInfo,
+        yakibaOther: _yakibaOther,
         boshiInfo: _boshiInfo,
         nakagoInfo: _nakagoInfo,
         yasurimeInfo: _yasurimeInfo,
@@ -224,6 +228,7 @@ class NihontoFormState extends State<NihontoForm> {
       _hamonInfo = random.hamonInfo;
       _hamonOther = random.hamonOther;
       _yakibaInfo = random.yakibaInfo;
+      _yakibaOther = random.yakibaOther;
       _boshiInfo = random.boshiInfo;
       _nakagoInfo = random.nakagoInfo;
       _yasurimeInfo = random.yasurimeInfo;
@@ -1135,7 +1140,24 @@ class NihontoFormState extends State<NihontoForm> {
           // === Yakiba === //
           // ============== //
 
-          ExpansibleTile(text: 'Yakiba', children: [ yakibaWidget ]),
+          ExpansibleTile(text: 'Yakiba', children: [
+            yakibaWidget,
+
+            sizedBoxSpace,
+
+            TextFormField(
+              decoration: FieldDecoration('Other'),
+              initialValue: _yakibaOther ?? '',
+              minLines: 1,
+              maxLines: 25,
+              key: Key('Yakiba-Other-${_yakibaOther}'),
+              onChanged: (value) {
+                setState(() {
+                  _yakibaOther = value;
+                });
+              },
+            ),
+          ]),
 
           ExpansibleTile(text: 'Boshi', children: [ boshiWidget ]),
 

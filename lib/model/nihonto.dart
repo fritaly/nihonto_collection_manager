@@ -62,6 +62,8 @@ class Nihonto {
 
   final YakibaInfo yakibaInfo;
 
+  final String yakibaOther;
+
   final BoshiInfo boshiInfo;
 
   final NakagoInfo nakagoInfo;
@@ -102,6 +104,7 @@ class Nihonto {
       this.hamonInfo,
       this.hamonOther,
       this.yakibaInfo,
+      this.yakibaOther,
       this.boshiInfo,
       this.nakagoInfo,
       this.yasurimeInfo,
@@ -143,6 +146,7 @@ class Nihonto {
         hamonInfo: HamonInfo.random(),
         hamonOther: '',
         yakibaInfo: YakibaInfo.random(),
+        yakibaOther: '',
         boshiInfo: BoshiInfo.random(),
         nakagoInfo: NakagoInfo.random(),
         yasurimeInfo: YasurimeInfo.random(),
