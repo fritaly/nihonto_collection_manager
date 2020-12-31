@@ -44,7 +44,7 @@ class WeightWidgetState extends State<WeightWidget> {
   Widget build(BuildContext context) {
     return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
       TextFormField(
-        decoration: InputDecoration(labelText: 'Value'),
+        decoration: InputDecoration(labelText: 'Value', border: OutlineInputBorder()),
         initialValue: "${_value}",
         key: Key(_value.toString()),
         keyboardType: TextInputType.numberWithOptions(decimal: true),
@@ -57,8 +57,9 @@ class WeightWidgetState extends State<WeightWidget> {
           });
         },
       ),
+      SizedBox(height: 8),
       DropdownButtonFormField(
-          decoration: InputDecoration(labelText: 'Unit'),
+          decoration: InputDecoration(labelText: 'Unit', border: OutlineInputBorder()),
           value: _unit,
           key: Key(_unit.name),
           items: Utils.getDropDownMenuItems(WeightUnit.values),

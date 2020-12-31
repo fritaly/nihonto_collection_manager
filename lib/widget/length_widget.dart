@@ -43,10 +43,9 @@ class LengthWidgetState extends State<LengthWidget> {
   Widget build(BuildContext context) {
     return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
       TextFormField(
-        decoration: InputDecoration(labelText: 'Value'),
+        decoration: InputDecoration(labelText: 'Value', border: OutlineInputBorder()),
         initialValue: "${_value}",
-        key: Key(_value
-            .toString()), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+        key: Key(_value.toString()),
         keyboardType: TextInputType.numberWithOptions(decimal: true),
         inputFormatters: <TextInputFormatter>[
           LengthWidget.decimalNumber
@@ -57,11 +56,11 @@ class LengthWidgetState extends State<LengthWidget> {
           });
         },
       ),
+      SizedBox(height: 8),
       DropdownButtonFormField(
-          decoration: InputDecoration(labelText: 'Unit'),
+          decoration: InputDecoration(labelText: 'Unit', border: OutlineInputBorder()),
           value: _unit,
-          key: Key(_unit
-              .name), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+          key: Key(_unit.name),
           items: Utils.getDropDownMenuItems(LengthUnit.values),
           onChanged: (value) {
             setState(() {

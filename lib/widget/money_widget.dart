@@ -38,10 +38,9 @@ class MoneyWidgetState extends State<MoneyWidget> {
   Widget build(BuildContext context) {
     return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
       TextFormField(
-        decoration: InputDecoration(labelText: 'Price'),
+        decoration: InputDecoration(labelText: 'Price', border: OutlineInputBorder()),
         initialValue: "${_amount}",
-        key: Key(_amount
-            .toString()), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+        key: Key(_amount.toString()),
         keyboardType: TextInputType.number,
         inputFormatters: <TextInputFormatter>[
           FilteringTextInputFormatter.digitsOnly
@@ -52,11 +51,11 @@ class MoneyWidgetState extends State<MoneyWidget> {
           });
         },
       ),
+      SizedBox(height: 8),
       DropdownButtonFormField(
-          decoration: InputDecoration(labelText: 'Currency'),
+          decoration: InputDecoration(labelText: 'Currency', border: OutlineInputBorder()),
           value: _currency,
-          key: Key(_currency
-              .name), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+          key: Key(_currency.name),
           items: Utils.getCurrencyMenuItems(),
           onChanged: (value) {
             setState(() {
