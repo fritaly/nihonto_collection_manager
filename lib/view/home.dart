@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
-import 'package:nihonto_collection_manager/widget/browse_collection.dart';
-import 'package:nihonto_collection_manager/widget/unit_converter.dart';
+import 'package:nihonto_collection_manager/view/browse_collection.dart';
+import 'package:nihonto_collection_manager/view/unit_converter.dart';
 
 class Home extends StatefulWidget {
   @override
