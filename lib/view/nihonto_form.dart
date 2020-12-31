@@ -570,7 +570,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Overall description === //
           // =========================== //
 
-          ExpansibleTile(text: 'General',
+          ExpansibleTile(text: 'General', initiallyExpanded: true,
             children: [
               TextFormField(
                 decoration: FieldDecoration('Overall description'),
