@@ -57,11 +57,37 @@ class _BrowseCollectionState extends State<BrowseCollection> {
         nihonto.signature.romaji,
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
+      trailing: PopupMenuButton<Action>(
+        onSelected: (Action result) {
+          switch (result) {
+            case Action.view:
+              // TODO Add read-only mode
+              _pushEdit(nihonto);
+              break;
+            case Action.edit:
+              _pushEdit(nihonto);
+              break;
+            case Action.delete:
+              Scaffold.of(context).showSnackBar(SnackBar(content: Text('Not implemented yet !', textAlign: TextAlign.center), duration: ONE_SECOND));
+              break;
+          }
+        },
+        itemBuilder: (BuildContext context) => <PopupMenuEntry<Action>>[
+          const PopupMenuItem<Action>(
+            value: Action.view,
+            child: Text('View'),
+          ),
+          const PopupMenuItem<Action>(
+            value: Action.edit,
+            child: Text('Edit'),
+          ),
+          const PopupMenuItem<Action>(
+            value: Action.delete,
+            child: Text('Delete'),
+          ),
+        ],
+      ),
       subtitle: Text("${nihonto.description}"),
-      onTap: () {
-        // Display the nihonto form
-        _pushShow(nihonto);
-      },
     );
   }
 
@@ -98,7 +124,7 @@ class _BrowseCollectionState extends State<BrowseCollection> {
     }
   }
 
-  void _pushShow(Nihonto nihonto) async {
+  void _pushEdit(Nihonto nihonto) async {
     assert(nihonto != null);
 
     var route = MaterialPageRoute<Nihonto>(
@@ -125,3 +151,5 @@ class _BrowseCollectionState extends State<BrowseCollection> {
     }
   }
 }
+
+enum Action { view, edit, delete }
