@@ -16,6 +16,7 @@ class HamonType extends EnumWithLabel<HamonType> {
   static const NOKOGIRIBA = const HamonType._new('NOKOGIRIBA', 'Nokogiriba');
   static const FUJI = const HamonType._new('FUJI', 'Fuji');
   static const DORAN = const HamonType._new('DORAN', 'Doran');
+  static const OTHER = const HamonType._new('OTHER', 'Other');
 
   static const values = [
     SUGUHA,
@@ -31,7 +32,8 @@ class HamonType extends EnumWithLabel<HamonType> {
     JUZUBA,
     NOKOGIRIBA,
     FUJI,
-    DORAN
+    DORAN,
+    OTHER
   ];
 
   const HamonType._new(String name, String label) : super(name, label);

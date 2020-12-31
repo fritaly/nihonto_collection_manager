@@ -14,6 +14,7 @@ class Sugata extends EnumWithLabel<Sugata> {
   static const KANMURIOTOSHI_ZUKURI = const Sugata._new('KANMURIOTOSHI_ZUKURI', 'Kanmuriotoshi zukuri');
   static const KOGARASUMARU_ZUKURI = const Sugata._new('KOGARASUMARU_ZUKURI', 'Kogaratsumaru zukuri');
   static const OSORAKU_ZUKURI = const Sugata._new('OSORAKU_ZUKURI', 'Osoraku zukuri');
+  static const OTHER = const Sugata._new('OTHER', 'Other');
 
   static const values = [
     SHINOGI_ZUKURI,
@@ -26,7 +27,8 @@ class Sugata extends EnumWithLabel<Sugata> {
     TSUKURI_KOMI,
     KANMURIOTOSHI_ZUKURI,
     KOGARASUMARU_ZUKURI,
-    OSORAKU_ZUKURI
+    OSORAKU_ZUKURI,
+    OTHER
   ];
 
   const Sugata._new(String name, String label) : super(name, label);

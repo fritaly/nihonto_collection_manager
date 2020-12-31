@@ -20,6 +20,7 @@ class Boshi extends EnumWithLabel<Boshi> {
   static const KOMARU_NIERU = const Boshi._new('KOMARU_NIERU', 'Komaru nieru');
   static const NOTARE_KOMI = const Boshi._new('NOTARE_KOMI', 'Notare komi');
   static const ICHI_MAI = const Boshi._new('ICHI_MAI', 'Ichi mai');
+  static const OTHER = const Boshi._new('OTHER', 'Other');
 
   static const values = [
     OMARU,
@@ -39,7 +40,8 @@ class Boshi extends EnumWithLabel<Boshi> {
     ICHIMONJI_KAERI,
     KOMARU_NIERU,
     NOTARE_KOMI,
-    ICHI_MAI
+    ICHI_MAI,
+    OTHER
   ];
 
   const Boshi._new(String name, String label) : super(name, label);

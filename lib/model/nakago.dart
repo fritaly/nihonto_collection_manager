@@ -12,6 +12,7 @@ class Nakago extends EnumWithLabel<Nakago> {
   static const SURIAGE = const Nakago._new('SURIAGE', 'Suriage');
   static const O_SURIAGE = const Nakago._new('O_SURIAGE', 'O suriage');
   static const MACHI_OKURI = const Nakago._new('MACHI_OKURI', 'Machi okuri');
+  static const OTHER = const Nakago._new('OTHER', 'Other');
 
   static const values = [
     UBU,
@@ -23,7 +24,8 @@ class Nakago extends EnumWithLabel<Nakago> {
     FURISODE_GATA,
     SURIAGE,
     O_SURIAGE,
-    MACHI_OKURI
+    MACHI_OKURI,
+    OTHER
   ];
 
   const Nakago._new(String name, String label) : super(name, label);

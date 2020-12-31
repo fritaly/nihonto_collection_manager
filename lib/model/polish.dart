@@ -8,13 +8,15 @@ class Polish extends EnumWithLabel<Polish> {
   static const ORIGINAL = const Polish._new('ORIGINAL', 'Original (old)');
   static const HADORI = const Polish._new('HADORI', 'Hadori (modern aka keisho)');
   static const SASHIKOMI = const Polish._new('SASHIKOMI', 'Sashikomi (traditional)');
+  static const OTHER = const Polish._new('OTHER', 'Other');
 
   static const values = [
     NONE,
     ROUGH,
     ORIGINAL,
     HADORI,
-    SASHIKOMI
+    SASHIKOMI,
+    OTHER
   ];
 
   const Polish._new(String name, String label) : super(name, label);

@@ -9,6 +9,7 @@ class Hada extends EnumWithLabel<Hada> {
   static const NASHIJI = const Hada._new('NASHIJI', 'Nashiji');
   static const KONUKA = const Hada._new('KONUKA', 'Konuka');
   static const MUJI = const Hada._new('MUJI', 'Muji');
+  static const OTHER = const Hada._new('OTHER', 'Other');
 
   static const values = [
     ITAME,
@@ -17,7 +18,8 @@ class Hada extends EnumWithLabel<Hada> {
     AYASUGI,
     NASHIJI,
     KONUKA,
-    MUJI
+    MUJI,
+    OTHER
   ];
 
   const Hada._new(String name, String label) : super(name, label);

@@ -10,6 +10,7 @@ class Bohi extends EnumWithLabel<Bohi> {
   static const FUTASUJI_HI = const Bohi._new('FUTASUJI_HI', 'Futasuhi-hi');
   static const GOMABASHI = const Bohi._new('GOMABASHI', 'Gomabashi');
   static const BONJI_KANJI = const Bohi._new('BONJI_KANJI', 'Bonji / Kanji');
+  static const OTHER = const Bohi._new('OTHER', 'Other');
 
   static const values = [
     BO_HI,
@@ -19,7 +20,8 @@ class Bohi extends EnumWithLabel<Bohi> {
     KOSHI_BI,
     FUTASUJI_HI,
     GOMABASHI,
-    BONJI_KANJI
+    BONJI_KANJI,
+    OTHER
   ];
 
   const Bohi._new(String name, String label) : super(name, label);

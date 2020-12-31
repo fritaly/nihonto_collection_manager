@@ -15,6 +15,7 @@ class Yakiba extends EnumWithLabel<Yakiba> {
   static const ASHI = const Yakiba._new('ASHI', 'Ashi');
   static const NIJUBA = const Yakiba._new('NIJUBA', 'Nijuba');
   static const UTSURI = const Yakiba._new('UTSURI', 'Utsuri');
+  static const OTHER = const Yakiba._new('OTHER', 'Other');
 
   static const values = [
     NIE,
@@ -29,7 +30,8 @@ class Yakiba extends EnumWithLabel<Yakiba> {
     KINSUJI,
     YUBASHIRI,
     NIJUBA,
-    UTSURI
+    UTSURI,
+    OTHER
   ];
 
   const Yakiba._new(String name, String label) : super(name, label);

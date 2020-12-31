@@ -7,13 +7,15 @@ class Yasurime extends EnumWithLabel<Yasurime> {
   static const HIGAKI = const Yasurime._new('HIGAKI', 'Higaki');
   static const TAKANOHA = const Yasurime._new('TAKANOHA', 'Taka no ha');
   static const SUJIKAI = const Yasurime._new('SUJIKAI', 'Sujikai');
+  static const OTHER = const Yasurime._new('OTHER', 'Other');
 
   static const values = [
     KIRI,
     KATTESAGARI,
     HIGAKI,
     TAKANOHA,
-    SUJIKAI
+    SUJIKAI,
+    OTHER
   ];
 
   const Yasurime._new(String name, String label) : super(name, label);

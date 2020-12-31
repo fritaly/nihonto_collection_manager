@@ -9,6 +9,7 @@ class MuneType extends EnumWithLabel<MuneType> {
   static const HIRA = const MuneType._new('HIRA', 'Hira');
   static const MITSU = const MuneType._new('MITSU', 'Mitsu');
   static const MARU = const MuneType._new('MARU', 'Maru');
+  static const OTHER = const MuneType._new('OTHER', 'Other');
 
   static const values = [
     IORI,
@@ -16,7 +17,8 @@ class MuneType extends EnumWithLabel<MuneType> {
     HIKUSHI,
     HIRA,
     MITSU,
-    MARU
+    MARU,
+    OTHER
   ];
 
   const MuneType._new(String name, String label) : super(name, label);

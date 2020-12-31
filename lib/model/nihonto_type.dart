@@ -11,6 +11,7 @@ class NihontoType extends EnumWithLabel<NihontoType> {
   static const NAGAMAKI = const NihontoType._new('NAGAMAKI', 'Nagamaki');
   static const YARI = const NihontoType._new('YARI', 'Yari');
   static const KEN = const NihontoType._new('KEN', 'Ken');
+  static const OTHER = const NihontoType._new('OTHER', 'Other');
 
   static const values = [
     KATANA,
@@ -20,7 +21,8 @@ class NihontoType extends EnumWithLabel<NihontoType> {
     NAGINATA,
     NAGAMAKI,
     YARI,
-    KEN
+    KEN,
+    OTHER
   ];
 
   const NihontoType._new(String name, String label) : super(name, label);

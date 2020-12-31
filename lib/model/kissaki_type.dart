@@ -10,6 +10,7 @@ class KissakiType extends EnumWithLabel<KissakiType> {
   static const IKARI_KISSAKI = const KissakiType._new('IKARI_KISSAKI', 'Ikari kissaki');
   static const KAMASU_KISSAKI = const KissakiType._new('KAMASU_KISSAKI', 'Kamasu kissaki');
   static const MOROHA_KISSAKI = const KissakiType._new('MOROHA_KISSAKI', 'Moroha kissaki');
+  static const OTHER = const KissakiType._new('OTHER', 'Other');
 
   static const values = [
     KO_KISSAKI,
@@ -18,7 +19,8 @@ class KissakiType extends EnumWithLabel<KissakiType> {
     IKUBI_KISSAKI,
     IKARI_KISSAKI,
     KAMASU_KISSAKI,
-    MOROHA_KISSAKI
+    MOROHA_KISSAKI,
+    OTHER
   ];
 
   const KissakiType._new(String name, String label) : super(name, label);
