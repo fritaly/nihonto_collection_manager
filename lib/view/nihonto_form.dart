@@ -31,10 +31,12 @@ import 'package:nihonto_collection_manager/model/yakiba_info.dart';
 import 'package:nihonto_collection_manager/model/yasurime.dart';
 import 'package:nihonto_collection_manager/model/yasurime_info.dart';
 import 'package:nihonto_collection_manager/utils.dart';
+import 'package:nihonto_collection_manager/widget/expansible_tile.dart';
 import 'package:nihonto_collection_manager/widget/field_decoration.dart';
 import 'package:nihonto_collection_manager/widget/length_widget.dart';
 import 'package:nihonto_collection_manager/widget/money_widget.dart';
 import 'package:nihonto_collection_manager/widget/multiselect_formfield.dart';
+import 'package:nihonto_collection_manager/widget/section.dart';
 import 'package:nihonto_collection_manager/widget/separator.dart';
 import 'package:nihonto_collection_manager/widget/weight_widget.dart';
 
@@ -529,227 +531,165 @@ class NihontoFormState extends State<NihontoForm> {
           // === Overall description === //
           // =========================== //
 
-          TextFormField(
-            decoration: FieldDecoration('Overall description'),
-            initialValue: _overallDescription ?? '',
-            minLines: 1,
-            maxLines: 25,
-            key: Key('Overall-Description-${_overallDescription}'),
-            onChanged: (value) {
-              setState(() {
-                _overallDescription = value;
-              });
-            },
-          ),
+          ExpansibleTile(text: 'General',
+            children: [
+              TextFormField(
+                decoration: FieldDecoration('Overall description'),
+                initialValue: _overallDescription ?? '',
+                minLines: 1,
+                maxLines: 25,
+                key: Key('Overall-Description-${_overallDescription}'),
+                onChanged: (value) {
+                  setState(() {
+                    _overallDescription = value;
+                  });
+                },
+              ),
 
-          sizedBoxSpace,
+              sizedBoxSpace,
 
-          // ============ //
-          // === Type === //
-          // ============ //
+              // ============ //
+              // === Type === //
+              // ============ //
 
-          DropdownButtonFormField(
-              decoration: FieldDecoration('Type'),
-              value: _type,
-              items: Utils.getDropDownMenuItems(NihontoType.values),
-              validator: (value) {
-                if (value == null) {
-                  return 'Required';
-                }
+              DropdownButtonFormField(
+                  decoration: FieldDecoration('Type'),
+                  value: _type,
+                  items: Utils.getDropDownMenuItems(NihontoType.values),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Required';
+                    }
 
-                return null;
-              },
-              onChanged: (value) {
-                setState(() {
-                  _type = value;
-                });
+                    return null;
+                  },
+                  onChanged: (value) {
+                    setState(() {
+                      _type = value;
+                    });
 
-                _formKey.currentState.validate();
-              }),
+                    _formKey.currentState.validate();
+                  }),
+            ]),
 
           // ============== //
           // === Sugata === //
           // ============== //
 
-          Separator.text('Sugata'),
+          ExpansibleTile(text: 'Sugata',
+            children: [
+            DropdownButtonFormField(
+                decoration: FieldDecoration('Type'),
+                value: _sugata,
+                items: Utils.getDropDownMenuItems(Sugata.values),
+                onChanged: (value) {
+                  setState(() {
+                    _sugata = value;
+                  });
+                }),
 
-          DropdownButtonFormField(
-              decoration: FieldDecoration('Sugata'),
-              value: _sugata,
-              items: Utils.getDropDownMenuItems(Sugata.values),
+            sizedBoxSpace,
+
+            TextFormField(
+              decoration: FieldDecoration('Other'),
+              initialValue: _sugataOther ?? '',
+              minLines: 1,
+              maxLines: 25,
+              key: Key('Sugata-Other-${_sugataOther}'),
               onChanged: (value) {
                 setState(() {
-                  _sugata = value;
+                  _sugataOther = value;
                 });
-              }),
-
-          sizedBoxSpace,
-
-          TextFormField(
-            decoration: FieldDecoration('Other'),
-            initialValue: _sugataOther ?? '',
-            minLines: 1,
-            maxLines: 25,
-            key: Key('Sugata-Other-${_sugataOther}'),
-            onChanged: (value) {
-              setState(() {
-                _sugataOther = value;
-              });
-            },
-          ),
+              },
+            ),
+          ],),
 
           // ================= //
           // === Signature === //
           // ================= //
 
-          Separator.text('Signature'),
-
-          TextFormField(
-            decoration: FieldDecoration('Romaji'),
-            initialValue: _signature.romaji,
-            key: Key('Signature-Romaji-${_signature.romaji}'),
-            minLines: 1,
-            maxLines: 25,
-            onChanged: (value) {
-              setState(() {
-                _signature = _signature.copyWith(romaji: value);
-              });
-            },
-          ),
-
-          sizedBoxSpace,
-
-          TextFormField(
-            decoration: FieldDecoration('Kanji'),
-            initialValue: _signature.kanji,
-            key: Key('Signature-Kanji-${_signature.kanji}'),
-            minLines: 1,
-            maxLines: 25,
-            onChanged: (value) {
-              setState(() {
-                _signature = _signature.copyWith(kanji: value);
-              });
-            },
-          ),
-
-          sizedBoxSpace,
-
-          signatureWidget,
-
-          sizedBoxSpace, Divider(), sizedBoxSpace,
-
-          Row(children: [
-            Expanded(child: TextFormField(
-              decoration: FieldDecoration('Price'),
-              readOnly: true,
-              initialValue: "${_price.toText()}",
-              textAlign: TextAlign.end,
-              key: Key(
-                  'Price-${_price.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return _showPriceDialog(context, _price);
-                    }).then((value) {
-                  if (value != null) {
-                    setState(() {
-                      // Update the price based on the value returned by the dialog
-                      _price = value;
-
-                      print("Price set to ${value}");
-                    });
-                  } else {
-                    // The value is null if the user clicked "Cancel"
-                  }
+          ExpansibleTile(text: 'Signature', children: [
+            TextFormField(
+              decoration: FieldDecoration('Romaji'),
+              initialValue: _signature.romaji,
+              key: Key('Signature-Romaji-${_signature.romaji}'),
+              minLines: 1,
+              maxLines: 25,
+              onChanged: (value) {
+                setState(() {
+                  _signature = _signature.copyWith(romaji: value);
                 });
               },
-            ),),
-            rowPadder,
-            Expanded(child: TextFormField(
-              decoration: FieldDecoration('Weight'),
-              readOnly: true,
-              initialValue: "${_weight?.toText() ?? ''}",
-              textAlign: TextAlign.end,
-              key: Key(
-                  'Weight-${_weight?.toText()}'),
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return _showWeightDialog(
-                          context, 'Set the weight', _weight);
-                    }).then((value) {
-                  if (value != null) {
-                    setState(() {
-                      _weight = value;
+            ),
 
-                      print("Weight set to ${value}");
-                    });
-                  } else {
-                    // The value is null if the user clicked "Cancel"
-                  }
+            sizedBoxSpace,
+
+            TextFormField(
+              decoration: FieldDecoration('Kanji'),
+              initialValue: _signature.kanji,
+              key: Key('Signature-Kanji-${_signature.kanji}'),
+              minLines: 1,
+              maxLines: 25,
+              onChanged: (value) {
+                setState(() {
+                  _signature = _signature.copyWith(kanji: value);
                 });
               },
-            ))
-          ],
-          ),
+            ),
 
-          Separator.text('Dimensions'),
+            sizedBoxSpace,
 
-          Row(
-            children: [
-              Expanded(
-                  child:
+            signatureWidget,
+          ]),
 
-                      TextFormField(
-                decoration: FieldDecoration('Nagasa'),
+          ExpansibleTile(text: 'Miscellaneous', children: [
+            Row(children: [
+              Expanded(child: TextFormField(
+                decoration: FieldDecoration('Price'),
                 readOnly: true,
-                initialValue: "${_nagasa?.toText() ?? ''}",
+                initialValue: "${_price.toText()}",
                 textAlign: TextAlign.end,
                 key: Key(
-                    'Nagasa-${_nagasa?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+                    'Price-${_price.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
                 onTap: () {
                   showDialog(
                       context: context,
                       builder: (context) {
-                        return _showLengthDialog(
-                            context, 'Set the nagasa', _nagasa);
+                        return _showPriceDialog(context, _price);
                       }).then((value) {
                     if (value != null) {
                       setState(() {
-                        // Update the nagasa based on the value returned by the dialog
-                        _nagasa = value;
+                        // Update the price based on the value returned by the dialog
+                        _price = value;
 
-                        print("Nagasa set to ${value}");
+                        print("Price set to ${value}");
                       });
                     } else {
                       // The value is null if the user clicked "Cancel"
                     }
                   });
                 },
-              )),
+              ),),
               rowPadder,
-              Expanded(
-                  child:
-                      TextFormField(
-                decoration: FieldDecoration('Total length'),
+              Expanded(child: TextFormField(
+                decoration: FieldDecoration('Weight'),
                 readOnly: true,
-                initialValue: "${_totalLength?.toText() ?? ''}",
+                initialValue: "${_weight?.toText() ?? ''}",
                 textAlign: TextAlign.end,
-                key: Key('TotalLength-${_totalLength?.toText()}'),
+                key: Key(
+                    'Weight-${_weight?.toText()}'),
                 onTap: () {
                   showDialog(
                       context: context,
                       builder: (context) {
-                        return _showLengthDialog(
-                            context, 'Set the total length', _totalLength);
+                        return _showWeightDialog(
+                            context, 'Set the weight', _weight);
                       }).then((value) {
                     if (value != null) {
                       setState(() {
-                        _totalLength = value;
+                        _weight = value;
 
-                        print("Total length set to ${value}");
+                        print("Weight set to ${value}");
                       });
                     } else {
                       // The value is null if the user clicked "Cancel"
@@ -758,393 +698,450 @@ class NihontoFormState extends State<NihontoForm> {
                 },
               ))
             ],
-          ),
-
-          sizedBoxSpace,
-
-          Row(children: [
-
-            Expanded(
-                child: TextFormField(
-              decoration: FieldDecoration('Kasane'),
-              readOnly: true,
-              initialValue: "${_kasane?.toText() ?? ''}",
-              textAlign: TextAlign.end,
-              key: Key('Kasane-${_kasane?.toText()}'),
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return _showLengthDialog(
-                          context, 'Set the kasane', _kasane);
-                    }).then((value) {
-                  if (value != null) {
-                    setState(() {
-                      _kasane = value;
-
-                      print("Kasane set to ${value}");
-                    });
-                  } else {
-                    // The value is null if the user clicked "Cancel"
-                  }
-                });
-              },
-            )),
-
-            rowPadder,
-
-            Expanded(
-                child: TextFormField(
-              decoration: FieldDecoration('Motokasane'),
-              readOnly: true,
-              initialValue: "${_motokasane?.toText() ?? ''}",
-              textAlign: TextAlign.end,
-              key: Key('Motokasane-${_motokasane?.toText()}'),
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return _showLengthDialog(
-                          context, 'Set the motokasane', _motokasane);
-                    }).then((value) {
-                  if (value != null) {
-                    setState(() {
-                      _motokasane = value;
-
-                      print("Motokasane set to ${value}");
-                    });
-                  } else {
-                    // The value is null if the user clicked "Cancel"
-                  }
-                });
-              },
-            )),
-
-            rowPadder,
-
-            Expanded(
-                child: TextFormField(
-              decoration: FieldDecoration('Sakikasane'),
-              readOnly: true,
-              initialValue: "${_sakikasane?.toText() ?? ''}",
-              textAlign: TextAlign.end,
-              key: Key('Sakikasane-${_sakikasane?.toText()}'),
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return _showLengthDialog(
-                          context, 'Set the sakikasane', _sakikasane);
-                    }).then((value) {
-                  if (value != null) {
-                    setState(() {
-                      _sakikasane = value;
-
-                      print("Sakikasane set to ${value}");
-                    });
-                  } else {
-                    // The value is null if the user clicked "Cancel"
-                  }
-                });
-              },
-            )),
+            ),
           ]),
 
-          sizedBoxSpace,
-
-          Row(children: [
-            Expanded(
-              child:
-
-              // ================ //
-              // === Motohaba === //
-              // ================ //
-
-              TextFormField(
-                decoration: FieldDecoration('Mihaba'),
-                readOnly: true,
-                initialValue: "${_mihaba?.toText() ?? ''}",
-                textAlign: TextAlign.end,
-                key: Key('Mihaba-${_mihaba?.toText()}'),
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return _showLengthDialog(
-                            context, 'Set the mihaba', _mihaba);
-                      }).then((value) {
-                    if (value != null) {
-                      setState(() {
-                        _mihaba = value;
-
-                        print("Mihaba set to ${value}");
-                      });
-                    } else {
-                      // The value is null if the user clicked "Cancel"
-                    }
-                  });
-                },
-              ),
-            ),
-            rowPadder,
-            Expanded(
-              child:
-
-                  // ================ //
-                  // === Motohaba === //
-                  // ================ //
-
-                  TextFormField(
-                decoration: FieldDecoration('Motohaba'),
-                readOnly: true,
-                initialValue: "${_motohaba?.toText() ?? ''}",
-                textAlign: TextAlign.end,
-                key: Key('Motohaba-${_motohaba?.toText()}'),
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return _showLengthDialog(
-                            context, 'Set the motohaba', _motohaba);
-                      }).then((value) {
-                    if (value != null) {
-                      setState(() {
-                        _motohaba = value;
-
-                        print("Motohaba set to ${value}");
-                      });
-                    } else {
-                      // The value is null if the user clicked "Cancel"
-                    }
-                  });
-                },
-              ),
-            ),
-            rowPadder,
-            Expanded(
-                child:
+          ExpansibleTile(text: 'Dimensions', children: [
+            Row(
+              children: [
+                Expanded(
+                    child:
 
                     TextFormField(
-              decoration: FieldDecoration('Sakihaba'),
-              readOnly: true,
-              initialValue: "${_sakihaba?.toText() ?? ''}",
-              textAlign: TextAlign.end,
-              key: Key('Sakihaba-${_sakihaba?.toText()}'),
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return _showLengthDialog(
-                          context, 'Set the sakihaba', _sakihaba);
-                    }).then((value) {
-                  if (value != null) {
-                    setState(() {
-                      _sakihaba = value;
+                      decoration: FieldDecoration('Nagasa'),
+                      readOnly: true,
+                      initialValue: "${_nagasa?.toText() ?? ''}",
+                      textAlign: TextAlign.end,
+                      key: Key(
+                          'Nagasa-${_nagasa?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return _showLengthDialog(
+                                  context, 'Set the nagasa', _nagasa);
+                            }).then((value) {
+                          if (value != null) {
+                            setState(() {
+                              // Update the nagasa based on the value returned by the dialog
+                              _nagasa = value;
 
-                      print("Sakihaba set to ${value}");
-                    });
-                  } else {
-                    // The value is null if the user clicked "Cancel"
-                  }
-                });
-              },
-            ))
-          ]),
+                              print("Nagasa set to ${value}");
+                            });
+                          } else {
+                            // The value is null if the user clicked "Cancel"
+                          }
+                        });
+                      },
+                    )),
+                rowPadder,
+                Expanded(
+                    child:
+                    TextFormField(
+                      decoration: FieldDecoration('Total length'),
+                      readOnly: true,
+                      initialValue: "${_totalLength?.toText() ?? ''}",
+                      textAlign: TextAlign.end,
+                      key: Key('TotalLength-${_totalLength?.toText()}'),
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return _showLengthDialog(
+                                  context, 'Set the total length', _totalLength);
+                            }).then((value) {
+                          if (value != null) {
+                            setState(() {
+                              _totalLength = value;
 
-          Separator.text('Sori'),
+                              print("Total length set to ${value}");
+                            });
+                          } else {
+                            // The value is null if the user clicked "Cancel"
+                          }
+                        });
+                      },
+                    ))
+              ],
+            ),
 
-          Row(
-            children: [
+            sizedBoxSpace,
+
+            Row(children: [
+
               Expanded(
                   child: TextFormField(
-                decoration: FieldDecoration('Sori'),
-                readOnly: true,
-                initialValue: "${_sori?.sori?.toText() ?? ''}",
-                textAlign: TextAlign.end,
-                key: Key(
-                    'Sori-${_sori?.sori?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return _showLengthDialog(
-                            context, 'Set the sori', _sori.sori);
-                      }).then((value) {
-                    if (value != null) {
-                      setState(() {
-                        // Update the sori based on the value returned by the dialog
-                        _sori = _sori.copyWith(sori: value);
+                    decoration: FieldDecoration('Kasane'),
+                    readOnly: true,
+                    initialValue: "${_kasane?.toText() ?? ''}",
+                    textAlign: TextAlign.end,
+                    key: Key('Kasane-${_kasane?.toText()}'),
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return _showLengthDialog(
+                                context, 'Set the kasane', _kasane);
+                          }).then((value) {
+                        if (value != null) {
+                          setState(() {
+                            _kasane = value;
 
-                        print("Sori set to ${value}");
+                            print("Kasane set to ${value}");
+                          });
+                        } else {
+                          // The value is null if the user clicked "Cancel"
+                        }
                       });
-                    } else {
-                      // The value is null if the user clicked "Cancel"
-                    }
-                  });
-                },
-              )),
+                    },
+                  )),
+
+              rowPadder,
+
+              Expanded(
+                  child: TextFormField(
+                    decoration: FieldDecoration('Motokasane'),
+                    readOnly: true,
+                    initialValue: "${_motokasane?.toText() ?? ''}",
+                    textAlign: TextAlign.end,
+                    key: Key('Motokasane-${_motokasane?.toText()}'),
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return _showLengthDialog(
+                                context, 'Set the motokasane', _motokasane);
+                          }).then((value) {
+                        if (value != null) {
+                          setState(() {
+                            _motokasane = value;
+
+                            print("Motokasane set to ${value}");
+                          });
+                        } else {
+                          // The value is null if the user clicked "Cancel"
+                        }
+                      });
+                    },
+                  )),
+
+              rowPadder,
+
+              Expanded(
+                  child: TextFormField(
+                    decoration: FieldDecoration('Sakikasane'),
+                    readOnly: true,
+                    initialValue: "${_sakikasane?.toText() ?? ''}",
+                    textAlign: TextAlign.end,
+                    key: Key('Sakikasane-${_sakikasane?.toText()}'),
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return _showLengthDialog(
+                                context, 'Set the sakikasane', _sakikasane);
+                          }).then((value) {
+                        if (value != null) {
+                          setState(() {
+                            _sakikasane = value;
+
+                            print("Sakikasane set to ${value}");
+                          });
+                        } else {
+                          // The value is null if the user clicked "Cancel"
+                        }
+                      });
+                    },
+                  )),
+            ]),
+
+            sizedBoxSpace,
+
+            Row(children: [
+              Expanded(
+                child:
+
+                // ================ //
+                // === Motohaba === //
+                // ================ //
+
+                TextFormField(
+                  decoration: FieldDecoration('Mihaba'),
+                  readOnly: true,
+                  initialValue: "${_mihaba?.toText() ?? ''}",
+                  textAlign: TextAlign.end,
+                  key: Key('Mihaba-${_mihaba?.toText()}'),
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return _showLengthDialog(
+                              context, 'Set the mihaba', _mihaba);
+                        }).then((value) {
+                      if (value != null) {
+                        setState(() {
+                          _mihaba = value;
+
+                          print("Mihaba set to ${value}");
+                        });
+                      } else {
+                        // The value is null if the user clicked "Cancel"
+                      }
+                    });
+                  },
+                ),
+              ),
               rowPadder,
               Expanded(
-                  child: DropdownButtonFormField(
-                      decoration: FieldDecoration('Type'),
-                      value: _sori.type,
-                      items: Utils.getDropDownMenuItems(SoriType.values),
-                      onChanged: (value) {
+                child:
+
+                // ================ //
+                // === Motohaba === //
+                // ================ //
+
+                TextFormField(
+                  decoration: FieldDecoration('Motohaba'),
+                  readOnly: true,
+                  initialValue: "${_motohaba?.toText() ?? ''}",
+                  textAlign: TextAlign.end,
+                  key: Key('Motohaba-${_motohaba?.toText()}'),
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return _showLengthDialog(
+                              context, 'Set the motohaba', _motohaba);
+                        }).then((value) {
+                      if (value != null) {
                         setState(() {
-                          _sori = _sori.copyWith(type: value);
+                          _motohaba = value;
+
+                          print("Motohaba set to ${value}");
                         });
-                      }))
-            ],
-          ),
+                      } else {
+                        // The value is null if the user clicked "Cancel"
+                      }
+                    });
+                  },
+                ),
+              ),
+              rowPadder,
+              Expanded(
+                  child:
 
-          sizedBoxSpace,
+                  TextFormField(
+                    decoration: FieldDecoration('Sakihaba'),
+                    readOnly: true,
+                    initialValue: "${_sakihaba?.toText() ?? ''}",
+                    textAlign: TextAlign.end,
+                    key: Key('Sakihaba-${_sakihaba?.toText()}'),
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return _showLengthDialog(
+                                context, 'Set the sakihaba', _sakihaba);
+                          }).then((value) {
+                        if (value != null) {
+                          setState(() {
+                            _sakihaba = value;
 
-          TextFormField(
-            decoration: FieldDecoration('Other'),
-            initialValue: _soriOther ?? '',
-            minLines: 1,
-            maxLines: 25,
-            key: Key('Sori-Other-${_soriOther}'),
-            onChanged: (value) {
-              setState(() {
-                _soriOther = value;
-              });
-            },
-          ),
+                            print("Sakihaba set to ${value}");
+                          });
+                        } else {
+                          // The value is null if the user clicked "Cancel"
+                        }
+                      });
+                    },
+                  ))
+            ]),
+          ]),
+
+          ExpansibleTile(text: 'Sori', children: [
+            Row(
+              children: [
+                Expanded(
+                    child: TextFormField(
+                      decoration: FieldDecoration('Sori'),
+                      readOnly: true,
+                      initialValue: "${_sori?.sori?.toText() ?? ''}",
+                      textAlign: TextAlign.end,
+                      key: Key(
+                          'Sori-${_sori?.sori?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return _showLengthDialog(
+                                  context, 'Set the sori', _sori.sori);
+                            }).then((value) {
+                          if (value != null) {
+                            setState(() {
+                              // Update the sori based on the value returned by the dialog
+                              _sori = _sori.copyWith(sori: value);
+
+                              print("Sori set to ${value}");
+                            });
+                          } else {
+                            // The value is null if the user clicked "Cancel"
+                          }
+                        });
+                      },
+                    )),
+                rowPadder,
+                Expanded(
+                    child: DropdownButtonFormField(
+                        decoration: FieldDecoration('Type'),
+                        value: _sori.type,
+                        items: Utils.getDropDownMenuItems(SoriType.values),
+                        onChanged: (value) {
+                          setState(() {
+                            _sori = _sori.copyWith(type: value);
+                          });
+                        }))
+              ],
+            ),
+
+            sizedBoxSpace,
+
+            TextFormField(
+              decoration: FieldDecoration('Other'),
+              initialValue: _soriOther ?? '',
+              minLines: 1,
+              maxLines: 25,
+              key: Key('Sori-Other-${_soriOther}'),
+              onChanged: (value) {
+                setState(() {
+                  _soriOther = value;
+                });
+              },
+            ),
+          ]),
 
           // =============== //
           // === Kissaki === //
           // =============== //
 
-          Separator.text('Kissaki'),
+          ExpansibleTile(text: 'Kissaki', children: [
+            DropdownButtonFormField(
+                decoration: FieldDecoration('Kissaki'),
+                value: _kissakiType,
+                items: Utils.getDropDownMenuItems(KissakiType.values),
+                onChanged: (value) {
+                  setState(() {
+                    _kissakiType = value;
+                  });
+                }),
 
-          DropdownButtonFormField(
-              decoration: FieldDecoration('Kissaki'),
-              value: _kissakiType,
-              items: Utils.getDropDownMenuItems(KissakiType.values),
+            sizedBoxSpace,
+
+            TextFormField(
+              decoration: FieldDecoration('Other'),
+              initialValue: _kissakiOther ?? '',
+              minLines: 1,
+              maxLines: 25,
+              key: Key('Kissaki-Other-${_kissakiOther}'),
               onChanged: (value) {
                 setState(() {
-                  _kissakiType = value;
+                  _kissakiOther = value;
                 });
-              }),
-
-          sizedBoxSpace,
-
-          TextFormField(
-            decoration: FieldDecoration('Other'),
-            initialValue: _kissakiOther ?? '',
-            minLines: 1,
-            maxLines: 25,
-            key: Key('Kissaki-Other-${_kissakiOther}'),
-            onChanged: (value) {
-              setState(() {
-                _kissakiOther = value;
-              });
-            },
-          ),
+              },
+            ),
+          ]),
 
           // ============ //
           // === Mune === //
           // ============ //
 
-          Separator.text('Mune'),
-
-          DropdownButtonFormField(
-              decoration: FieldDecoration('Mune'),
-              value: _muneType,
-              items: Utils.getDropDownMenuItems(MuneType.values),
-              onChanged: (value) {
-                setState(() {
-                  _muneType = value;
-                });
-              }),
+          ExpansibleTile(text: 'Mune', children: [
+            DropdownButtonFormField(
+                decoration: FieldDecoration('Mune'),
+                value: _muneType,
+                items: Utils.getDropDownMenuItems(MuneType.values),
+                onChanged: (value) {
+                  setState(() {
+                    _muneType = value;
+                  });
+                }),
+          ]),
 
           // ============ //
           // === Hada === //
           // ============ //
 
-          Separator.text('Hada'),
+          ExpansibleTile(text: 'Hada', children: [
+            hadaWidget,
 
-          hadaWidget,
+            sizedBoxSpace,
 
-          sizedBoxSpace,
-
-          TextFormField(
-            decoration: FieldDecoration('Other'),
-            initialValue: _hadaOther ?? '',
-            minLines: 1,
-            maxLines: 25,
-            key: Key('Hada-Other-${_hadaOther}'),
-            onChanged: (value) {
-              setState(() {
-                _hadaOther = value;
-              });
-            },
-          ),
+            TextFormField(
+              decoration: FieldDecoration('Other'),
+              initialValue: _hadaOther ?? '',
+              minLines: 1,
+              maxLines: 25,
+              key: Key('Hada-Other-${_hadaOther}'),
+              onChanged: (value) {
+                setState(() {
+                  _hadaOther = value;
+                });
+              },
+            ),
+          ]),
 
           // ============= //
           // === Hamon === //
           // ============= //
 
-          Separator.text('Hamon'),
+          ExpansibleTile(text: 'Hamon', children: [
+            hamonWidget,
 
-          hamonWidget,
+            sizedBoxSpace,
 
-          sizedBoxSpace,
-
-          TextFormField(
-            decoration: FieldDecoration('Other'),
-            initialValue: _hamonOther ?? '',
-            minLines: 1,
-            maxLines: 25,
-            key: Key('Hamon-Other-${_hamonOther}'),
-            onChanged: (value) {
-              setState(() {
-                _hamonOther = value;
-              });
-            },
-          ),
+            TextFormField(
+              decoration: FieldDecoration('Other'),
+              initialValue: _hamonOther ?? '',
+              minLines: 1,
+              maxLines: 25,
+              key: Key('Hamon-Other-${_hamonOther}'),
+              onChanged: (value) {
+                setState(() {
+                  _hamonOther = value;
+                });
+              },
+            ),
+          ]),
 
           // ============== //
           // === Yakiba === //
           // ============== //
 
-          Separator.text('Yakiba'),
+          ExpansibleTile(text: 'Yakiba', children: [ yakibaWidget ]),
 
-          yakibaWidget,
+          ExpansibleTile(text: 'Boshi', children: [ boshiWidget ]),
 
-          Separator.text('Boshi'),
+          ExpansibleTile(text: 'Nakago', children: [ nakagoWidget ]),
 
-          boshiWidget,
+          ExpansibleTile(text: 'Yasurime', children: [ yasurimeWidget ]),
 
-          Separator.text('Nakago'),
-
-          nakagoWidget,
-
-          Separator.text('Yasurime'),
-
-          yasurimeWidget,
-
-          Separator.text('Bohi'),
-
-          bohiWidget,
+          ExpansibleTile(text: 'Bohi', children: [ bohiWidget ]),
 
           // ============== //
           // === Polish === //
           // ============== //
 
-          Separator.text('Polish'),
+          ExpansibleTile(text: 'Polish', children: [
+            DropdownButtonFormField(
+                decoration: FieldDecoration('Polish'),
+                value: _polish,
+                items: Utils.getDropDownMenuItems(Polish.values),
+                onChanged: (value) {
+                  setState(() {
+                    _polish = value;
+                  });
+                }),
+          ]),
 
-          DropdownButtonFormField(
-              decoration: FieldDecoration('Polish'),
-              value: _polish,
-              items: Utils.getDropDownMenuItems(Polish.values),
-              onChanged: (value) {
-                setState(() {
-                  _polish = value;
-                });
-              }),
-        ])).pad();
+        ]));
 
     return Scaffold(
       appBar: AppBar(
