@@ -101,6 +101,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   MuneType _muneType;
 
+  String _muneOther;
+
   HamonInfo _hamonInfo = HamonInfo();
 
   String _hamonOther;
@@ -143,6 +145,7 @@ class NihontoFormState extends State<NihontoForm> {
       _kissakiType = nihonto.kissakiType;
       _kissakiOther = nihonto.kissakiOther;
       _muneType = nihonto.muneType;
+      _muneOther = nihonto.muneOther;
       _hamonInfo = nihonto.hamonInfo;
       _hamonOther = nihonto.hamonOther;
       _yakibaInfo = nihonto.yakibaInfo;
@@ -179,6 +182,7 @@ class NihontoFormState extends State<NihontoForm> {
         kissakiType: _kissakiType,
         kissakiOther: _kissakiOther,
         muneType: _muneType,
+        muneOther: _muneOther,
         hamonInfo: _hamonInfo,
         hamonOther: _hamonOther,
         yakibaInfo: _yakibaInfo,
@@ -216,6 +220,7 @@ class NihontoFormState extends State<NihontoForm> {
       _kissakiType = random.kissakiType;
       _kissakiOther = random.kissakiOther;
       _muneType = random.muneType;
+      _muneOther = random.muneOther;
       _hamonInfo = random.hamonInfo;
       _hamonOther = random.hamonOther;
       _yakibaInfo = random.yakibaInfo;
@@ -1063,6 +1068,21 @@ class NihontoFormState extends State<NihontoForm> {
                     _muneType = value;
                   });
                 }),
+
+            sizedBoxSpace,
+
+            TextFormField(
+              decoration: FieldDecoration('Other'),
+              initialValue: _muneOther ?? '',
+              minLines: 1,
+              maxLines: 25,
+              key: Key('Mune-Other-${_muneOther}'),
+              onChanged: (value) {
+                setState(() {
+                  _muneOther = value;
+                });
+              },
+            ),
           ]),
 
           // ============ //
