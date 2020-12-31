@@ -594,7 +594,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Sugata === //
           // ============== //
 
-          ExpansibleTile(text: 'Sugata',
+          ExpansibleTile(text: 'Sugata', initiallyExpanded: readOnly,
             children: [
             DropdownButtonFormField(
                 decoration: FieldDecoration('Type'),
@@ -627,7 +627,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Signature === //
           // ================= //
 
-          ExpansibleTile(text: 'Signature', children: [
+          ExpansibleTile(text: 'Signature', initiallyExpanded: readOnly, children: [
             TextFormField(
               decoration: FieldDecoration('Romaji'),
               readOnly: readOnly,
@@ -663,7 +663,7 @@ class NihontoFormState extends State<NihontoForm> {
             signatureWidget,
           ]),
 
-          ExpansibleTile(text: 'Miscellaneous', children: [
+          ExpansibleTile(text: 'Miscellaneous', initiallyExpanded: readOnly, children: [
             Row(children: [
               Expanded(child: TextFormField(
                 decoration: FieldDecoration('Price'),
@@ -728,7 +728,7 @@ class NihontoFormState extends State<NihontoForm> {
             ),
           ]),
 
-          ExpansibleTile(text: 'Dimensions', children: [
+          ExpansibleTile(text: 'Dimensions', initiallyExpanded: readOnly, children: [
             Row(
               children: [
                 Expanded(
@@ -1016,7 +1016,7 @@ class NihontoFormState extends State<NihontoForm> {
             ]),
           ]),
 
-          ExpansibleTile(text: 'Sori', children: [
+          ExpansibleTile(text: 'Sori', initiallyExpanded: readOnly, children: [
             Row(
               children: [
                 Expanded(
@@ -1086,7 +1086,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Kissaki === //
           // =============== //
 
-          ExpansibleTile(text: 'Kissaki', children: [
+          ExpansibleTile(text: 'Kissaki', initiallyExpanded: readOnly, children: [
             DropdownButtonFormField(
                 decoration: FieldDecoration('Type'),
                 value: _kissakiType,
@@ -1118,7 +1118,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Mune === //
           // ============ //
 
-          ExpansibleTile(text: 'Mune', children: [
+          ExpansibleTile(text: 'Mune', initiallyExpanded: readOnly, children: [
             DropdownButtonFormField(
                 decoration: FieldDecoration('Type'),
                 value: _muneType,
@@ -1150,7 +1150,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Hada === //
           // ============ //
 
-          ExpansibleTile(text: 'Hada', children: [
+          ExpansibleTile(text: 'Hada', initiallyExpanded: readOnly, children: [
             hadaWidget,
 
             columnPadder,
@@ -1174,7 +1174,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Hamon === //
           // ============= //
 
-          ExpansibleTile(text: 'Hamon', children: [
+          ExpansibleTile(text: 'Hamon', initiallyExpanded: readOnly, children: [
             hamonWidget,
 
             columnPadder,
@@ -1198,7 +1198,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Yakiba === //
           // ============== //
 
-          ExpansibleTile(text: 'Yakiba', children: [
+          ExpansibleTile(text: 'Yakiba', initiallyExpanded: readOnly, children: [
             yakibaWidget,
 
             columnPadder,
@@ -1222,7 +1222,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Bohi === //
           // ============ //
 
-          ExpansibleTile(text: 'Boshi', children: [
+          ExpansibleTile(text: 'Boshi', initiallyExpanded: readOnly, children: [
             boshiWidget,
 
             columnPadder,
@@ -1246,7 +1246,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Nakago === //
           // ============== //
 
-          ExpansibleTile(text: 'Nakago', children: [
+          ExpansibleTile(text: 'Nakago', initiallyExpanded: readOnly, children: [
             nakagoWidget,
 
             columnPadder,
@@ -1270,7 +1270,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Yasurime === //
           // ================ //
 
-          ExpansibleTile(text: 'Yasurime', children: [
+          ExpansibleTile(text: 'Yasurime', initiallyExpanded: readOnly, children: [
             yasurimeWidget,
 
             columnPadder,
@@ -1294,7 +1294,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Bohi === //
           // ============ //
 
-          ExpansibleTile(text: 'Bohi', children: [
+          ExpansibleTile(text: 'Bohi', initiallyExpanded: readOnly, children: [
             bohiWidget,
 
             columnPadder,
@@ -1318,7 +1318,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Polish === //
           // ============== //
 
-          ExpansibleTile(text: 'Polish', children: [
+          ExpansibleTile(text: 'Polish', initiallyExpanded: readOnly, children: [
             DropdownButtonFormField(
                 decoration: FieldDecoration('Type'),
                 value: _polish,
@@ -1350,7 +1350,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Period === //
           // ============== //
 
-          ExpansibleTile(text: 'Period', children: [
+          ExpansibleTile(text: 'Period', initiallyExpanded: readOnly, children: [
             DropdownButtonFormField(
                 decoration: FieldDecoration('Period'),
                 value: _period,
