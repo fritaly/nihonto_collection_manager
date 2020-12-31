@@ -16,6 +16,9 @@ class BrowseCollection extends StatefulWidget {
 }
 
 class _BrowseCollectionState extends State<BrowseCollection> {
+
+  static const Duration ONE_SECOND = Duration(seconds: 1);
+
   List<Nihonto> _collection;
 
   _BrowseCollectionState(List<Nihonto> collection) {
@@ -87,6 +90,10 @@ class _BrowseCollectionState extends State<BrowseCollection> {
       setState(() {
         // Update the collection from setState() to refresh the UI
         _collection.add(data);
+
+        final snackBar = SnackBar(content: Text('Saved changes', textAlign: TextAlign.center), duration: ONE_SECOND);
+
+        Scaffold.of(context).showSnackBar(snackBar);
       });
     }
   }
@@ -110,6 +117,10 @@ class _BrowseCollectionState extends State<BrowseCollection> {
         final index = _collection.indexOf(nihonto);
 
         _collection.replaceRange(index, index+1, [ result ]);
+
+        final snackBar = SnackBar(content: Text('Saved changes', textAlign: TextAlign.center), duration: ONE_SECOND);
+
+        Scaffold.of(context).showSnackBar(snackBar);
       });
     }
   }
