@@ -4,17 +4,17 @@ import 'package:nihonto_collection_manager/utils.dart';
 class Polish extends EnumWithLabel<Polish> {
 
   static const NONE = const Polish._new('NONE', 'None');
-  static const ROUGH = const Polish._new('ROUGH', 'Rough / raw');
-  static const ORIGINAL = const Polish._new('ORIGINAL', 'Original / old');
-  static const MODERN = const Polish._new('MODERN', 'Modern / Keisho');
-  static const TRADITIONAL = const Polish._new('TRADITIONAL', 'Traditional / sashikomi');
+  static const ROUGH = const Polish._new('ROUGH', 'Rough (raw)');
+  static const ORIGINAL = const Polish._new('ORIGINAL', 'Original (old)');
+  static const HADORI = const Polish._new('HADORI', 'Hadori (modern aka keisho)');
+  static const SASHIKOMI = const Polish._new('SASHIKOMI', 'Sashikomi (traditional)');
 
   static const values = [
     NONE,
     ROUGH,
     ORIGINAL,
-    MODERN,
-    TRADITIONAL
+    HADORI,
+    SASHIKOMI
   ];
 
   const Polish._new(String name, String label) : super(name, label);
