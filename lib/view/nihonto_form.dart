@@ -353,7 +353,7 @@ class NihontoFormState extends State<NihontoForm> {
       key: Key('Hada-${_hada.toString()}'),
       autovalidate: false,
       border: OutlineInputBorder(),
-      title: 'Hada',
+      title: 'Type',
       dataSource:
           Hada.values.map((e) => {'display': e.label, 'value': e}).toList(),
       textField: 'display',
@@ -374,7 +374,7 @@ class NihontoFormState extends State<NihontoForm> {
       key: Key('Hamon-${_hamonInfo.toString()}'),
       autovalidate: false,
       border: OutlineInputBorder(),
-      title: 'Hamon',
+      title: 'Type',
       dataSource: HamonType.values
           .map((e) => {'display': e.label, 'value': e})
           .toList(),
@@ -396,7 +396,7 @@ class NihontoFormState extends State<NihontoForm> {
       key: Key('Yakiba-${_yakibaInfo.toString()}'),
       autovalidate: false,
       border: OutlineInputBorder(),
-      title: 'Yakiba',
+      title: 'Type',
       dataSource:
           Yakiba.values.map((e) => {'display': e.label, 'value': e}).toList(),
       textField: 'display',
@@ -417,7 +417,7 @@ class NihontoFormState extends State<NihontoForm> {
       key: Key('Boshi-${_boshiInfo.toString()}'),
       autovalidate: false,
       border: OutlineInputBorder(),
-      title: 'Boshi',
+      title: 'Type',
       dataSource:
           Boshi.values.map((e) => {'display': e.label, 'value': e}).toList(),
       textField: 'display',
@@ -438,7 +438,7 @@ class NihontoFormState extends State<NihontoForm> {
       key: Key('Nakago-${_nakagoInfo.toString()}'),
       autovalidate: false,
       border: OutlineInputBorder(),
-      title: 'Nakago',
+      title: 'Type',
       dataSource:
           Nakago.values.map((e) => {'display': e.label, 'value': e}).toList(),
       textField: 'display',
@@ -459,7 +459,7 @@ class NihontoFormState extends State<NihontoForm> {
       key: Key('Yasurime-${_yasurimeInfo.toString()}'),
       autovalidate: false,
       border: OutlineInputBorder(),
-      title: 'Yasurime',
+      title: 'Type',
       dataSource:
           Yasurime.values.map((e) => {'display': e.label, 'value': e}).toList(),
       textField: 'display',
@@ -480,7 +480,7 @@ class NihontoFormState extends State<NihontoForm> {
       key: Key('Bohi-${_hada.toString()}'),
       autovalidate: false,
       border: OutlineInputBorder(),
-      title: 'Bohi',
+      title: 'Type',
       dataSource:
           Bohi.values.map((e) => {'display': e.label, 'value': e}).toList(),
       textField: 'display',
@@ -1024,7 +1024,7 @@ class NihontoFormState extends State<NihontoForm> {
 
           ExpansibleTile(text: 'Kissaki', children: [
             DropdownButtonFormField(
-                decoration: FieldDecoration('Kissaki'),
+                decoration: FieldDecoration('Type'),
                 value: _kissakiType,
                 items: Utils.getDropDownMenuItems(KissakiType.values),
                 onChanged: (value) {
@@ -1055,7 +1055,7 @@ class NihontoFormState extends State<NihontoForm> {
 
           ExpansibleTile(text: 'Mune', children: [
             DropdownButtonFormField(
-                decoration: FieldDecoration('Mune'),
+                decoration: FieldDecoration('Type'),
                 value: _muneType,
                 items: Utils.getDropDownMenuItems(MuneType.values),
                 onChanged: (value) {
@@ -1131,7 +1131,7 @@ class NihontoFormState extends State<NihontoForm> {
 
           ExpansibleTile(text: 'Polish', children: [
             DropdownButtonFormField(
-                decoration: FieldDecoration('Polish'),
+                decoration: FieldDecoration('Type'),
                 value: _polish,
                 items: Utils.getDropDownMenuItems(Polish.values),
                 onChanged: (value) {
