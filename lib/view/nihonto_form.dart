@@ -58,8 +58,6 @@ class NihontoFormState extends State<NihontoForm> {
   // Note: This is a `GlobalKey<FormState>`, not a GlobalKey<NihontoFormState>.
   final _formKey = GlobalKey<FormState>();
 
-  static const TextStyle _BOLD = TextStyle(fontWeight: FontWeight.bold);
-
   String _overallDescription;
 
   NihontoType _type;
@@ -134,46 +132,52 @@ class NihontoFormState extends State<NihontoForm> {
   NihontoFormState(Nihonto nihonto) {
     // The argument can be null
     if (nihonto != null) {
-      _overallDescription = nihonto.overallDescription;
-      _type = nihonto.type;
-      _sugata = nihonto.sugata;
-      _sugataOther = nihonto.sugataOther;
-      _signature = nihonto.signature;
-      _signatureInfo = nihonto.signatureInfo;
-      _price = nihonto.price;
-      _nagasa = nihonto.nagasa;
-      _totalLength = nihonto.totalLength;
-      _kasane = nihonto.kasane;
-      _motokasane = nihonto.motokasane;
-      _sakikasane = nihonto.sakikasane;
-      _mihaba = nihonto.mihaba;
-      _motohaba = nihonto.motohaba;
-      _sakihaba = nihonto.sakihaba;
-      _weight = nihonto.weight;
-      _sori = nihonto.sori;
-      _soriOther = nihonto.soriOther;
-      _hada = nihonto.hada;
-      _hadaOther = nihonto.hadaOther;
-      _kissakiType = nihonto.kissakiType;
-      _kissakiOther = nihonto.kissakiOther;
-      _muneType = nihonto.muneType;
-      _muneOther = nihonto.muneOther;
-      _hamonInfo = nihonto.hamonInfo;
-      _hamonOther = nihonto.hamonOther;
-      _yakibaInfo = nihonto.yakibaInfo;
-      _yakibaOther = nihonto.yakibaOther;
-      _boshiInfo = nihonto.boshiInfo;
-      _boshiOther = nihonto.boshiOther;
-      _nakagoInfo = nihonto.nakagoInfo;
-      _nakagoOther = nihonto.nakagoOther;
-      _yasurimeInfo = nihonto.yasurimeInfo;
-      _yasurimeOther = nihonto.yasurimeOther;
-      _bohiInfo = nihonto.bohiInfo;
-      _bohiOther = nihonto.bohiOther;
-      _polish = nihonto.polish;
-      _polishOther = nihonto.polishOther;
-      _period = nihonto.period;
+      _setNihonto(nihonto);
     }
+  }
+
+  void _setNihonto(Nihonto nihonto) {
+    assert (nihonto != null);
+
+    _overallDescription = nihonto.overallDescription;
+    _type = nihonto.type;
+    _sugata = nihonto.sugata;
+    _sugataOther = nihonto.sugataOther;
+    _signature = nihonto.signature;
+    _signatureInfo = nihonto.signatureInfo;
+    _price = nihonto.price;
+    _nagasa = nihonto.nagasa;
+    _totalLength = nihonto.totalLength;
+    _kasane = nihonto.kasane;
+    _motokasane = nihonto.motokasane;
+    _sakikasane = nihonto.sakikasane;
+    _mihaba = nihonto.mihaba;
+    _motohaba = nihonto.motohaba;
+    _sakihaba = nihonto.sakihaba;
+    _weight = nihonto.weight;
+    _sori = nihonto.sori;
+    _soriOther = nihonto.soriOther;
+    _hada = nihonto.hada;
+    _hadaOther = nihonto.hadaOther;
+    _kissakiType = nihonto.kissakiType;
+    _kissakiOther = nihonto.kissakiOther;
+    _muneType = nihonto.muneType;
+    _muneOther = nihonto.muneOther;
+    _hamonInfo = nihonto.hamonInfo;
+    _hamonOther = nihonto.hamonOther;
+    _yakibaInfo = nihonto.yakibaInfo;
+    _yakibaOther = nihonto.yakibaOther;
+    _boshiInfo = nihonto.boshiInfo;
+    _boshiOther = nihonto.boshiOther;
+    _nakagoInfo = nihonto.nakagoInfo;
+    _nakagoOther = nihonto.nakagoOther;
+    _yasurimeInfo = nihonto.yasurimeInfo;
+    _yasurimeOther = nihonto.yasurimeOther;
+    _bohiInfo = nihonto.bohiInfo;
+    _bohiOther = nihonto.bohiOther;
+    _polish = nihonto.polish;
+    _polishOther = nihonto.polishOther;
+    _period = nihonto.period;
   }
 
   Nihonto _createNihonto() {
@@ -222,47 +226,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   void _randomize() {
     setState(() {
-      var random = Nihonto.random();
-
-      _overallDescription = random.overallDescription;
-      _signature = random.signature;
-      _signatureInfo = random.signatureInfo;
-      _sugata = random.sugata;
-      _sugataOther = random.sugataOther;
-      _type = random.type;
-      _price = random.price;
-      _nagasa = random.nagasa;
-      _totalLength = random.totalLength;
-      _kasane = random.kasane;
-      _motokasane = random.motokasane;
-      _sakikasane = random.sakikasane;
-      _mihaba = random.mihaba;
-      _motohaba = random.motohaba;
-      _sakihaba = random.sakihaba;
-      _weight = random.weight;
-      _sori = random.sori;
-      _soriOther = random.soriOther;
-      _hada = random.hada;
-      _hadaOther = '';
-      _kissakiType = random.kissakiType;
-      _kissakiOther = random.kissakiOther;
-      _muneType = random.muneType;
-      _muneOther = random.muneOther;
-      _hamonInfo = random.hamonInfo;
-      _hamonOther = random.hamonOther;
-      _yakibaInfo = random.yakibaInfo;
-      _yakibaOther = random.yakibaOther;
-      _boshiInfo = random.boshiInfo;
-      _boshiOther = random.boshiOther;
-      _nakagoInfo = random.nakagoInfo;
-      _nakagoOther = random.nakagoOther;
-      _yasurimeInfo = random.yasurimeInfo;
-      _yasurimeOther = random.yasurimeOther;
-      _bohiInfo = random.bohiInfo;
-      _bohiOther = random.bohiOther;
-      _polish = random.polish;
-      _polishOther = random.polishOther;
-      _period = random.period;
+      _setNihonto(Nihonto.random());
     });
   }
 
