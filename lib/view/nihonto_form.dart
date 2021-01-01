@@ -90,9 +90,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   SoriInfo _soriInfo = SoriInfo.DEFAULT;
 
-  HadaInfo _hada = HadaInfo();
-
-  String _hadaOther;
+  HadaInfo _hadaInfo = HadaInfo.DEFAULT;
 
   KissakiInfo _kissakiInfo = KissakiInfo.DEFAULT;
 
@@ -145,8 +143,7 @@ class NihontoFormState extends State<NihontoForm> {
     _measurements = nihonto.measurements;
     _weight = nihonto.weight;
     _soriInfo = nihonto.soriInfo;
-    _hada = nihonto.hada;
-    _hadaOther = nihonto.hadaOther;
+    _hadaInfo = nihonto.hada;
     _kissakiInfo = nihonto.kissakiInfo;
     _muneInfo = nihonto.muneInfo;
     _hamonInfo = nihonto.hamonInfo;
@@ -174,8 +171,7 @@ class NihontoFormState extends State<NihontoForm> {
         measurements: _measurements,
         weight: _weight,
         soriInfo: _soriInfo,
-        hada: _hada,
-        hadaOther: _hadaOther,
+        hada: _hadaInfo,
         kissakiInfo: _kissakiInfo,
         muneInfo: _muneInfo,
         hamonInfo: _hamonInfo,
@@ -324,7 +320,7 @@ class NihontoFormState extends State<NihontoForm> {
     final bool readOnly = (_mode == Mode.READ);
 
     final hadaWidget = MultiSelectFormField(
-      key: Key('Hada-${_hada}'),
+      key: Key('Hada-${_hadaInfo.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Type',
@@ -334,12 +330,10 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _hada.values(),
+      initialValue: _hadaInfo.types.values(),
       onSaved: (value) {
-        print('Value=${value}');
-
         setState(() {
-          _hada = HadaInfo(value);
+          _hadaInfo = _hadaInfo.copyWith(types: EnumSet.from(value.cast<HadaType>()));
         });
       },
     );
@@ -1106,7 +1100,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Hada === //
           // ============ //
 
-          ExpansibleTile(text: 'Hada', initiallyExpanded: readOnly, children: [
+          ExpansibleTile(text: 'Hada', initiallyExpanded: !_hadaInfo.isBlank(), children: [
             hadaWidget,
 
             columnPadder,
@@ -1114,13 +1108,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _hadaOther ?? '',
+              initialValue: _hadaInfo.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Hada-Other-${_hadaOther}'),
+              key: Key('Hada-Other-${_hadaInfo.other}'),
               onChanged: (value) {
                 setState(() {
-                  _hadaOther = value;
+                  _hadaInfo = _hadaInfo.copyWith(other: value);
                 });
               },
             ),
@@ -1250,7 +1244,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Bohi === //
           // ============ //
 
-          ExpansibleTile(text: 'Bohi', initiallyExpanded: readOnly, children: [
+          ExpansibleTile(text: 'Bohi', initiallyExpanded: !_bohiInfo.isBlank(), children: [
             bohiWidget,
 
             columnPadder,

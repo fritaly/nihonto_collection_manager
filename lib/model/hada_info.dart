@@ -1,21 +1,35 @@
-import 'dart:math';
-
 import 'package:nihonto_collection_manager/Aggregate.dart';
 import 'package:nihonto_collection_manager/enum_set.dart';
 import 'package:nihonto_collection_manager/model/hada_type.dart';
 
-class HadaInfo extends EnumSet<HadaType> with Aggregate {
+class HadaInfo with Aggregate {
 
-  HadaInfo([ Iterable<HadaType> args ]): super(args);
+  static const DEFAULT = HadaInfo();
+
+  final EnumSet<HadaType> types;
+
+  final String other;
+
+  const HadaInfo({ this.types = const EnumSet.empty(), this.other = '' });
+
+  HadaInfo copyWith({EnumSet<HadaType> types, String other}) {
+    return HadaInfo(
+      types: types ?? this.types,
+      other: other ?? this.other,
+    );
+  }
 
   static HadaInfo random() {
-    final random = Random();
-
-    return HadaInfo(HadaType.values.where((element) => random.nextBool()).toList());
+    return HadaInfo(types: EnumSet.random(HadaType.values), other: '');
   }
 
   @override
   bool isBlank() {
-    return isEmpty();
+    return types.isEmpty() && (other.isEmpty);
+  }
+
+  @override
+  String toString() {
+    return 'HadaInfo[types: $types, other: $other]';
   }
 }

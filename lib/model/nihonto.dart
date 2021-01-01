@@ -39,8 +39,6 @@ class Nihonto {
 
   final HadaInfo hada;
 
-  final String hadaOther;
-
   final SoriInfo soriInfo;
 
   final KissakiInfo kissakiInfo;
@@ -84,8 +82,7 @@ class Nihonto {
       this.measurements = Measurements.DEFAULT,
       this.weight,
       this.soriInfo = SoriInfo.DEFAULT,
-      this.hada,
-      this.hadaOther,
+      this.hada = HadaInfo.DEFAULT,
       this.kissakiInfo = KissakiInfo.DEFAULT,
       this.muneInfo = MuneInfo.DEFAULT,
       this.hamonInfo,
@@ -120,7 +117,6 @@ class Nihonto {
         weight: Weight.random(650, 1200),
         soriInfo: SoriInfo.random(),
         hada: HadaInfo.random(),
-        hadaOther: '',
         kissakiInfo: KissakiInfo.random(),
         muneInfo: MuneInfo.random(),
         hamonInfo: HamonInfo.random(),
