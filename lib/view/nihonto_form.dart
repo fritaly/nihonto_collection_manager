@@ -25,6 +25,7 @@ import 'package:nihonto_collection_manager/model/signature_type.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/model/sugata.dart';
+import 'package:nihonto_collection_manager/model/sugata_info.dart';
 import 'package:nihonto_collection_manager/model/weight.dart';
 import 'package:nihonto_collection_manager/model/yakiba.dart';
 import 'package:nihonto_collection_manager/model/yakiba_info.dart';
@@ -70,9 +71,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   NihontoType _type;
 
-  Sugata _sugata;
-
-  String _sugataOther;
+  SugataInfo _sugataInfo = SugataInfo.DEFAULT;
 
   Signature _signature = Signature.EMPTY;
 
@@ -153,8 +152,7 @@ class NihontoFormState extends State<NihontoForm> {
 
     _overallDescription = nihonto.overallDescription;
     _type = nihonto.type;
-    _sugata = nihonto.sugata;
-    _sugataOther = nihonto.sugataOther;
+    _sugataInfo = nihonto.sugataInfo;
     _signature = nihonto.signature;
     _signatureInfo = nihonto.signatureInfo;
     _price = nihonto.price;
@@ -196,8 +194,7 @@ class NihontoFormState extends State<NihontoForm> {
     return Nihonto(
         overallDescription: _overallDescription,
         type: _type,
-        sugata: _sugata,
-        sugataOther: _sugataOther,
+        sugataInfo: _sugataInfo,
         signature: _signature,
         signatureInfo: _signatureInfo,
         price: _price,
@@ -594,15 +591,15 @@ class NihontoFormState extends State<NihontoForm> {
           // === Sugata === //
           // ============== //
 
-          ExpansibleTile(text: 'Sugata', initiallyExpanded: readOnly,
+          ExpansibleTile(text: 'Sugata', initiallyExpanded: !_sugataInfo.isBlank(),
             children: [
             DropdownButtonFormField(
                 decoration: FieldDecoration('Type'),
-                value: _sugata,
+                value: _sugataInfo.type,
                 items: Utils.getDropDownMenuItems(Sugata.values),
                 onChanged: (value) {
                   setState(() {
-                    _sugata = value;
+                    _sugataInfo = _sugataInfo.copyWith(type: value);
                   });
                 }),
 
@@ -611,13 +608,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _sugataOther ?? '',
+              initialValue: _sugataInfo.other ?? '',
               minLines: 1,
               maxLines: 25,
-              key: Key('Sugata-Other-${_sugataOther}'),
+              key: Key('Sugata-Other-${_sugataInfo.other}'),
               onChanged: (value) {
                 setState(() {
-                  _sugataOther = value;
+                  _sugataInfo = _sugataInfo.copyWith(other: value);
                 });
               },
             ),

@@ -14,7 +14,7 @@ import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/signature_info.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
-import 'package:nihonto_collection_manager/model/sugata.dart';
+import 'package:nihonto_collection_manager/model/sugata_info.dart';
 import 'package:nihonto_collection_manager/model/weight.dart';
 import 'package:nihonto_collection_manager/model/yakiba_info.dart';
 import 'package:nihonto_collection_manager/model/yasurime_info.dart';
@@ -29,9 +29,7 @@ class Nihonto {
 
   final SignatureInfo signatureInfo;
 
-  final Sugata sugata;
-
-  final String sugataOther;
+  final SugataInfo sugataInfo;
 
   final Money price;
 
@@ -91,8 +89,7 @@ class Nihonto {
       {
       this.overallDescription,
       this.type,
-      this.sugata,
-      this.sugataOther = '',
+      this.sugataInfo = SugataInfo.DEFAULT,
       this.signature = Signature.EMPTY,
       this.signatureInfo,
       this.price = Money.ZERO,
@@ -140,8 +137,7 @@ class Nihonto {
     return Nihonto(
         overallDescription: 'Description goes here...\nDescription goes here...\nDescription goes here...',
         type: NihontoType.random(),
-        sugata: Sugata.random(),
-        sugataOther: '',
+        sugataInfo: SugataInfo.random(),
         signature: Signature.random(),
         signatureInfo: SignatureInfo.random(),
         price: Money.random(),
@@ -182,10 +178,10 @@ class Nihonto {
   }
 
   String get description {
-    return "${type?.label} - ${sugata?.label} (${nagasa?.toText()})";
+    return "${type?.label} - ${sugataInfo?.type.label} (${nagasa?.toText()})";
   }
 
   String toString() {
-    return "Nihonto[type: ${type}, signature: '${signature}', sugata: ${sugata}, price: ${price}, nagasa: ${nagasa}, sori: ${sori}, soriType: ${soriType}, hada: ${hada}, kissakiType: ${kissakiType}]";
+    return "Nihonto[type: ${type}, signature: '${signature}', price: ${price}, nagasa: ${nagasa}, sori: ${sori}, soriType: ${soriType}, hada: ${hada}, kissakiType: ${kissakiType}]";
   }
 }
