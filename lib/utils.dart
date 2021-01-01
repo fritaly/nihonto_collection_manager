@@ -28,6 +28,14 @@ class Utils {
     return list[Random().nextInt(list.length)];
   }
 
+  static List<T> randomSublist<T>(List<T> list) {
+    assert (list != null);
+
+    final random = Random();
+
+    return list.where((element) => random.nextBool()).toList();
+  }
+
   static String randomSignature() {
     return Utils.random([
       'Masamune',
