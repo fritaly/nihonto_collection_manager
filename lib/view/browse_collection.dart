@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
+import 'package:nihonto_collection_manager/view/nihonto_card.dart';
 import 'package:nihonto_collection_manager/view/nihonto_form.dart';
 
 class BrowseCollection extends StatefulWidget {
@@ -49,8 +50,23 @@ class _BrowseCollectionState extends State<BrowseCollection> {
         });
   }
 
+  void _delete(Nihonto nihonto) {
+    assert (nihonto != null);
+
+    Scaffold.of(context).showSnackBar(SnackBar(content: Text('Not implemented yet !', textAlign: TextAlign.center), duration: ONE_SECOND));
+  }
+
   Widget _buildRow(Nihonto nihonto) {
     assert(nihonto != null);
+
+    if (1 == 1) {
+      return NihontoCard(
+        nihonto,
+        onView: () { _pushView(nihonto); },
+        onEdit: () { _pushEdit(nihonto); },
+        onDelete: () { _delete(nihonto); },
+      );
+    }
 
     return ListTile(
       title: Text(
@@ -67,22 +83,22 @@ class _BrowseCollectionState extends State<BrowseCollection> {
               _pushEdit(nihonto);
               break;
             case Action.delete:
-              Scaffold.of(context).showSnackBar(SnackBar(content: Text('Not implemented yet !', textAlign: TextAlign.center), duration: ONE_SECOND));
+              _delete(nihonto);
               break;
           }
         },
         itemBuilder: (BuildContext context) => <PopupMenuEntry<Action>>[
           const PopupMenuItem<Action>(
             value: Action.view,
-            child: Text('View'),
+            child: const Text('View'),
           ),
           const PopupMenuItem<Action>(
             value: Action.edit,
-            child: Text('Edit'),
+            child: const Text('Edit'),
           ),
           const PopupMenuItem<Action>(
             value: Action.delete,
-            child: Text('Delete'),
+            child: const Text('Delete'),
           ),
         ],
       ),
