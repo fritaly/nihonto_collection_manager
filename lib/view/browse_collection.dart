@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
-import 'package:nihonto_collection_manager/view/nihonto_card.dart';
 import 'package:nihonto_collection_manager/view/nihonto_form.dart';
 
 class BrowseCollection extends StatefulWidget {
@@ -58,15 +57,6 @@ class _BrowseCollectionState extends State<BrowseCollection> {
 
   Widget _buildRow(Nihonto nihonto) {
     assert(nihonto != null);
-
-    if (1 == 1) {
-      return NihontoCard(
-        nihonto,
-        onView: () { _pushView(nihonto); },
-        onEdit: () { _pushEdit(nihonto); },
-        onDelete: () { _delete(nihonto); },
-      );
-    }
 
     return ListTile(
       title: Text(
