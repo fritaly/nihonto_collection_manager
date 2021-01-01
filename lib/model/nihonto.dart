@@ -3,7 +3,6 @@ import 'package:nihonto_collection_manager/model/boshi_info.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
 import 'package:nihonto_collection_manager/model/hamon_info.dart';
 import 'package:nihonto_collection_manager/model/kissaki_info.dart';
-import 'package:nihonto_collection_manager/model/length.dart';
 import 'package:nihonto_collection_manager/model/measurements.dart';
 import 'package:nihonto_collection_manager/model/money.dart';
 import 'package:nihonto_collection_manager/model/mune_info.dart';
@@ -47,8 +46,6 @@ class Nihonto {
 
   final HamonInfo hamonInfo;
 
-  final String hamonOther;
-
   final YakibaInfo yakibaInfo;
 
   final String yakibaOther;
@@ -85,8 +82,7 @@ class Nihonto {
       this.hada = HadaInfo.DEFAULT,
       this.kissakiInfo = KissakiInfo.DEFAULT,
       this.muneInfo = MuneInfo.DEFAULT,
-      this.hamonInfo,
-      this.hamonOther,
+      this.hamonInfo = HamonInfo.DEFAULT,
       this.yakibaInfo,
       this.yakibaOther,
       this.boshiInfo = BoshiInfo.DEFAULT,
@@ -101,11 +97,6 @@ class Nihonto {
     });
 
   static Nihonto random() {
-    final nagasa = Length.random(min: 25, max: 75);
-    final nakagoLength = Length.random(min: 15, max: 30);
-    final kasane = Length.random(min: 0.5, max: 0.9);
-    final motohaba = Length.random(min: 2.7, max: 3.6);
-
     return Nihonto(
         overallDescription: 'Description goes here...\nDescription goes here...\nDescription goes here...',
         type: NihontoType.random(),
@@ -120,7 +111,6 @@ class Nihonto {
         kissakiInfo: KissakiInfo.random(),
         muneInfo: MuneInfo.random(),
         hamonInfo: HamonInfo.random(),
-        hamonOther: '',
         yakibaInfo: YakibaInfo.random(),
         yakibaOther: '',
         boshiInfo: BoshiInfo.random(),

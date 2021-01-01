@@ -1,21 +1,35 @@
-import 'dart:math';
-
 import 'package:nihonto_collection_manager/Aggregate.dart';
 import 'package:nihonto_collection_manager/enum_set.dart';
 import 'package:nihonto_collection_manager/model/hamon_type.dart';
 
-class HamonInfo extends EnumSet<HamonType> with Aggregate {
+class HamonInfo with Aggregate {
 
-  HamonInfo([ Iterable<HamonType> args ]): super(args);
+  static const DEFAULT = HamonInfo();
+
+  final EnumSet<HamonType> types;
+
+  final String other;
+
+  const HamonInfo({ this.types = const EnumSet.empty(), this.other = '' });
+
+  HamonInfo copyWith({EnumSet<HamonType> types, String other}) {
+    return HamonInfo(
+      types: types ?? this.types,
+      other: other ?? this.other,
+    );
+  }
 
   static HamonInfo random() {
-    final random = Random();
-
-    return HamonInfo(HamonType.values.where((element) => random.nextBool()).toList());
+    return HamonInfo(types: EnumSet.random(HamonType.values), other: '');
   }
 
   @override
   bool isBlank() {
-    return isEmpty();
+    return types.isEmpty() && (other.isEmpty);
+  }
+
+  @override
+  String toString() {
+    return 'HamonInfo[types: $types, other: $other]';
   }
 }

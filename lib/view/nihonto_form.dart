@@ -96,9 +96,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   MuneInfo _muneInfo = MuneInfo.DEFAULT;
 
-  HamonInfo _hamonInfo = HamonInfo();
-
-  String _hamonOther;
+  HamonInfo _hamonInfo = HamonInfo.DEFAULT;
 
   YakibaInfo _yakibaInfo = YakibaInfo();
 
@@ -147,7 +145,6 @@ class NihontoFormState extends State<NihontoForm> {
     _kissakiInfo = nihonto.kissakiInfo;
     _muneInfo = nihonto.muneInfo;
     _hamonInfo = nihonto.hamonInfo;
-    _hamonOther = nihonto.hamonOther;
     _yakibaInfo = nihonto.yakibaInfo;
     _yakibaOther = nihonto.yakibaOther;
     _boshiInfo = nihonto.boshiInfo;
@@ -175,7 +172,6 @@ class NihontoFormState extends State<NihontoForm> {
         kissakiInfo: _kissakiInfo,
         muneInfo: _muneInfo,
         hamonInfo: _hamonInfo,
-        hamonOther: _hamonOther,
         yakibaInfo: _yakibaInfo,
         yakibaOther: _yakibaOther,
         boshiInfo: _boshiInfo,
@@ -339,7 +335,7 @@ class NihontoFormState extends State<NihontoForm> {
     );
 
     final hamonWidget = MultiSelectFormField(
-      key: Key('Hamon-${_hamonInfo.toString()}'),
+      key: Key('Hamon-${_hamonInfo.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Type',
@@ -350,12 +346,12 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _hamonInfo.values(),
+      initialValue: _hamonInfo.types.values(),
       onSaved: (value) {
         print('Value=${value}');
 
         setState(() {
-          _hamonInfo = HamonInfo(value);
+          _hamonInfo = _hamonInfo.copyWith(types: EnumSet.from(value.cast<HamonType>()));
         });
       },
     );
@@ -1132,13 +1128,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _hamonOther ?? '',
+              initialValue: _hamonInfo.other ?? '',
               minLines: 1,
               maxLines: 25,
-              key: Key('Hamon-Other-${_hamonOther}'),
+              key: Key('Hamon-Other-${_hamonInfo.other}'),
               onChanged: (value) {
                 setState(() {
-                  _hamonOther = value;
+                  _hamonInfo = _hamonInfo.copyWith(other: value);
                 });
               },
             ),
