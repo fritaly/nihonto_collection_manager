@@ -24,7 +24,6 @@ import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/period.dart';
 import 'package:nihonto_collection_manager/model/polish_info.dart';
 import 'package:nihonto_collection_manager/model/polish_type.dart';
-import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/signature_info.dart';
 import 'package:nihonto_collection_manager/model/signature_type.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';

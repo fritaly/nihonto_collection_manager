@@ -46,8 +46,6 @@ class Nihonto {
 
   final BoshiInfo boshi;
 
-  final String boshiOther;
-
   final NakagoInfo nakago;
 
   final YasurimeInfo yasurime;
@@ -60,7 +58,7 @@ class Nihonto {
 
   const Nihonto(
       {
-      this.overallDescription,
+      this.overallDescription = '',
       this.type,
       this.sugata = SugataInfo.DEFAULT,
       this.signature = SignatureInfo.DEFAULT,
@@ -74,7 +72,6 @@ class Nihonto {
       this.hamon = HamonInfo.DEFAULT,
       this.yakiba = YakibaInfo.DEFAULT,
       this.boshi = BoshiInfo.DEFAULT,
-      this.boshiOther,
       this.nakago = NakagoInfo.DEFAULT,
       this.yasurime = YasurimeInfo.DEFAULT,
       this.bohi = BohiInfo.DEFAULT,
@@ -98,7 +95,6 @@ class Nihonto {
         hamon: HamonInfo.random(),
         yakiba: YakibaInfo.random(),
         boshi: BoshiInfo.random(),
-        boshiOther: '',
         nakago: NakagoInfo.random(),
         yasurime: YasurimeInfo.random(),
         bohi: BohiInfo.random(),
