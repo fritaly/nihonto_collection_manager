@@ -1,3 +1,5 @@
+import 'package:nihonto_collection_manager/utils.dart';
+
 class EnumSet<T> {
 
   final _set = Set<T>();
@@ -9,6 +11,9 @@ class EnumSet<T> {
   }
 
   EnumSet.from(Iterable<T> args): this(args);
+
+  /// Returns an EnumSet containing values randomly chosen from the given iterable
+  EnumSet.random(Iterable<T> args): this(Utils.randomSublist(args));
 
   EnumSet<T> operator +(T value) {
     assert (value != null);
