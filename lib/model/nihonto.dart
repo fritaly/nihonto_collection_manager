@@ -69,8 +69,6 @@ class Nihonto {
 
   final BohiInfo bohiInfo;
 
-  final String bohiOther;
-
   final PolishInfo polishInfo;
 
   final Period period;
@@ -94,14 +92,13 @@ class Nihonto {
       this.hamonOther,
       this.yakibaInfo,
       this.yakibaOther,
-      this.boshiInfo,
+      this.boshiInfo = BoshiInfo.DEFAULT,
       this.boshiOther,
       this.nakagoInfo,
       this.nakagoOther,
       this.yasurimeInfo,
       this.yasurimeOther,
-      this.bohiInfo,
-      this.bohiOther,
+      this.bohiInfo = BohiInfo.DEFAULT,
       this.polishInfo = PolishInfo.DEFAULT,
       this.period
     });
@@ -137,7 +134,6 @@ class Nihonto {
         yasurimeInfo: YasurimeInfo.random(),
         yasurimeOther: '',
         bohiInfo: BohiInfo.random(),
-        bohiOther: '',
         polishInfo: PolishInfo.random(),
         period: Period.random()
     );

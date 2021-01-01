@@ -106,7 +106,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   String _yakibaOther;
 
-  BoshiInfo _boshiInfo = BoshiInfo();
+  BoshiInfo _boshiInfo = BoshiInfo.DEFAULT;
 
   NakagoInfo _nakagoInfo = NakagoInfo();
 
@@ -116,11 +116,9 @@ class NihontoFormState extends State<NihontoForm> {
 
   String _yasurimeOther;
 
-  BohiInfo _bohiInfo = BohiInfo();
+  BohiInfo _bohiInfo = BohiInfo.DEFAULT;
 
-  String _bohiOther;
-
-  PolishInfo _polishInfo = PolishInfo();
+  PolishInfo _polishInfo = PolishInfo.DEFAULT;
 
   Period _period;
 
@@ -161,7 +159,6 @@ class NihontoFormState extends State<NihontoForm> {
     _yasurimeInfo = nihonto.yasurimeInfo;
     _yasurimeOther = nihonto.yasurimeOther;
     _bohiInfo = nihonto.bohiInfo;
-    _bohiOther = nihonto.bohiOther;
     _polishInfo = nihonto.polishInfo;
     _period = nihonto.period;
   }
@@ -191,7 +188,6 @@ class NihontoFormState extends State<NihontoForm> {
         yasurimeInfo: _yasurimeInfo,
         yasurimeOther: _yasurimeOther,
         bohiInfo: _bohiInfo,
-        bohiOther: _bohiOther,
         polishInfo: _polishInfo,
         period: _period
     );
@@ -453,7 +449,7 @@ class NihontoFormState extends State<NihontoForm> {
     );
 
     final bohiWidget = MultiSelectFormField(
-      key: Key('Bohi-${_hada}'),
+      key: Key('Bohi-${_bohiInfo.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Type',
@@ -463,12 +459,10 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _bohiInfo.values(),
+      initialValue: _bohiInfo.types.values(),
       onSaved: (value) {
-        print('Bohi=${value}');
-
         setState(() {
-          _bohiInfo = BohiInfo(value);
+          _bohiInfo = _bohiInfo.copyWith(types: EnumSet.from(value.cast<Bohi>()));
         });
       },
     );
@@ -1264,13 +1258,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _bohiOther ?? '',
+              initialValue: _bohiInfo.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Bohi-Other-${_bohiOther}'),
+              key: Key('Bohi-Other-${_bohiInfo.other}'),
               onChanged: (value) {
                 setState(() {
-                  _bohiOther = value;
+                  _bohiInfo = _bohiInfo.copyWith(other: value);
                 });
               },
             ),

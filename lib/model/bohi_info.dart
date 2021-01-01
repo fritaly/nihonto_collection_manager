@@ -1,21 +1,35 @@
-import 'dart:math';
-
 import 'package:nihonto_collection_manager/Aggregate.dart';
 import 'package:nihonto_collection_manager/enum_set.dart';
 import 'package:nihonto_collection_manager/model/bohi.dart';
 
-class BohiInfo extends EnumSet<Bohi> with Aggregate {
+class BohiInfo with Aggregate {
 
-  BohiInfo([ Iterable<Bohi> args ]): super(args);
+  static const DEFAULT = BohiInfo();
+
+  final EnumSet<Bohi> types;
+
+  final String other;
+
+  const BohiInfo({ this.types = const EnumSet.empty(), this.other = '' });
+
+  BohiInfo copyWith({EnumSet<Bohi> types, String other}) {
+    return BohiInfo(
+      types: types ?? this.types,
+      other: other ?? this.other,
+    );
+  }
 
   static BohiInfo random() {
-    final random = Random();
-
-    return BohiInfo(Bohi.values.where((element) => random.nextBool()).toList());
+    return BohiInfo(types: EnumSet.random(Bohi.values), other: '');
   }
 
   @override
   bool isBlank() {
-    return isEmpty();
+    return types.isEmpty() && (other.isEmpty);
+  }
+
+  @override
+  String toString() {
+    return 'BohiInfo[types: $types, other: $other]';
   }
 }
