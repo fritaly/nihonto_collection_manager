@@ -104,9 +104,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   NakagoInfo _nakagoInfo = NakagoInfo.DEFAULT;
 
-  YasurimeInfo _yasurimeInfo = YasurimeInfo();
-
-  String _yasurimeOther;
+  YasurimeInfo _yasurimeInfo = YasurimeInfo.DEFAULT;
 
   BohiInfo _bohiInfo = BohiInfo.DEFAULT;
 
@@ -145,7 +143,6 @@ class NihontoFormState extends State<NihontoForm> {
     _boshiInfo = nihonto.boshiInfo;
     _nakagoInfo = nihonto.nakagoInfo;
     _yasurimeInfo = nihonto.yasurimeInfo;
-    _yasurimeOther = nihonto.yasurimeOther;
     _bohiInfo = nihonto.bohiInfo;
     _polishInfo = nihonto.polishInfo;
     _period = nihonto.period;
@@ -170,7 +167,6 @@ class NihontoFormState extends State<NihontoForm> {
         boshiInfo: _boshiInfo,
         nakagoInfo: _nakagoInfo,
         yasurimeInfo: _yasurimeInfo,
-        yasurimeOther: _yasurimeOther,
         bohiInfo: _bohiInfo,
         polishInfo: _polishInfo,
         period: _period
@@ -406,7 +402,7 @@ class NihontoFormState extends State<NihontoForm> {
     );
 
     final yasurimeWidget = MultiSelectFormField(
-      key: Key('Yasurime-${_yasurimeInfo.toString()}'),
+      key: Key('Yasurime-${_yasurimeInfo.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Type',
@@ -416,12 +412,12 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _yasurimeInfo.values(),
+      initialValue: _yasurimeInfo.types.values(),
       onSaved: (value) {
         print('Value=${value}');
 
         setState(() {
-          _yasurimeInfo = YasurimeInfo(value);
+          _yasurimeInfo = _yasurimeInfo.copyWith(types: EnumSet.from(value.cast<Yasurime>()));
         });
       },
     );
@@ -1212,13 +1208,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _yasurimeOther ?? '',
+              initialValue: _yasurimeInfo.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Yasurime-Other-${_yasurimeOther}'),
+              key: Key('Yasurime-Other-${_yasurimeInfo.other}'),
               onChanged: (value) {
                 setState(() {
-                  _yasurimeOther = value;
+                  _yasurimeInfo = _yasurimeInfo.copyWith(other: value);
                 });
               },
             ),

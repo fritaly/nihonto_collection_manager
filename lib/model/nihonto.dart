@@ -56,8 +56,6 @@ class Nihonto {
 
   final YasurimeInfo yasurimeInfo;
 
-  final String yasurimeOther;
-
   final BohiInfo bohiInfo;
 
   final PolishInfo polishInfo;
@@ -83,8 +81,7 @@ class Nihonto {
       this.boshiInfo = BoshiInfo.DEFAULT,
       this.boshiOther,
       this.nakagoInfo = NakagoInfo.DEFAULT,
-      this.yasurimeInfo,
-      this.yasurimeOther,
+      this.yasurimeInfo = YasurimeInfo.DEFAULT,
       this.bohiInfo = BohiInfo.DEFAULT,
       this.polishInfo = PolishInfo.DEFAULT,
       this.period
@@ -110,7 +107,6 @@ class Nihonto {
         boshiOther: '',
         nakagoInfo: NakagoInfo.random(),
         yasurimeInfo: YasurimeInfo.random(),
-        yasurimeOther: '',
         bohiInfo: BohiInfo.random(),
         polishInfo: PolishInfo.random(),
         period: Period.random()
