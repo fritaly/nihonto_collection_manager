@@ -121,7 +121,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   String _bohiOther;
 
-  PolishInfo _polishInfo;
+  PolishInfo _polishInfo = PolishInfo();
 
   Period _period;
 
