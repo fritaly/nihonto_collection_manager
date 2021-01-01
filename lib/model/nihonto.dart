@@ -4,6 +4,7 @@ import 'package:nihonto_collection_manager/model/hada_info.dart';
 import 'package:nihonto_collection_manager/model/hamon_info.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/length.dart';
+import 'package:nihonto_collection_manager/model/measurements.dart';
 import 'package:nihonto_collection_manager/model/money.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
 import 'package:nihonto_collection_manager/model/nakago_info.dart';
@@ -33,7 +34,7 @@ class Nihonto {
 
   final Money price;
 
-  final Length nagasa, totalLength, kasane, motokasane, sakikasane, mihaba, motohaba, sakihaba;
+  final Measurements measurements;
 
   final Weight weight;
 
@@ -93,14 +94,7 @@ class Nihonto {
       this.signature = Signature.EMPTY,
       this.signatureInfo,
       this.price = Money.ZERO,
-      this.nagasa,
-      this.totalLength,
-      this.kasane,
-      this.motokasane,
-      this.sakikasane,
-      this.mihaba,
-      this.motohaba,
-      this.sakihaba,
+      this.measurements = Measurements.DEFAULT,
       this.weight,
       this.sori,
       this.soriType,
@@ -141,14 +135,7 @@ class Nihonto {
         signature: Signature.random(),
         signatureInfo: SignatureInfo.random(),
         price: Money.random(),
-        nagasa: nagasa,
-        totalLength: nagasa + nakagoLength,
-        kasane: kasane,
-        motokasane: kasane,
-        sakikasane: kasane,
-        mihaba: motohaba,
-        motohaba: motohaba,
-        sakihaba: motohaba,
+        measurements: Measurements.random(),
         weight: Weight.random(650, 1200),
         sori: SoriInfo.random(),
         soriType: SoriType.random(),
@@ -178,10 +165,10 @@ class Nihonto {
   }
 
   String get description {
-    return "${type?.label} - ${sugataInfo?.type.label} (${nagasa?.toText()})";
+    return "${type?.label} - ${sugataInfo?.type?.label} (${measurements?.nagasa?.toText()})";
   }
 
   String toString() {
-    return "Nihonto[type: ${type}, signature: '${signature}', price: ${price}, nagasa: ${nagasa}, sori: ${sori}, soriType: ${soriType}, hada: ${hada}, kissakiType: ${kissakiType}]";
+    return "Nihonto[type: ${type}, signature: '${signature}', price: ${price}, sori: ${sori}, soriType: ${soriType}, hada: ${hada}, kissakiType: ${kissakiType}]";
   }
 }
