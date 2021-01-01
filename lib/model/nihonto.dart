@@ -7,11 +7,10 @@ import 'package:nihonto_collection_manager/model/length.dart';
 import 'package:nihonto_collection_manager/model/measurements.dart';
 import 'package:nihonto_collection_manager/model/money.dart';
 import 'package:nihonto_collection_manager/model/mune_info.dart';
-import 'package:nihonto_collection_manager/model/mune_type.dart';
 import 'package:nihonto_collection_manager/model/nakago_info.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/period.dart';
-import 'package:nihonto_collection_manager/model/polish_type.dart';
+import 'package:nihonto_collection_manager/model/polish_info.dart';
 import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/signature_info.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
@@ -72,9 +71,7 @@ class Nihonto {
 
   final String bohiOther;
 
-  final PolishType polish;
-
-  final String polishOther;
+  final PolishInfo polishInfo;
 
   final Period period;
 
@@ -105,8 +102,7 @@ class Nihonto {
       this.yasurimeOther,
       this.bohiInfo,
       this.bohiOther,
-      this.polish,
-      this.polishOther,
+      this.polishInfo = PolishInfo.DEFAULT,
       this.period
     });
 
@@ -142,8 +138,7 @@ class Nihonto {
         yasurimeOther: '',
         bohiInfo: BohiInfo.random(),
         bohiOther: '',
-        polish: PolishType.random(),
-        polishOther: '',
+        polishInfo: PolishInfo.random(),
         period: Period.random()
     );
   }

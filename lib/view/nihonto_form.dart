@@ -21,6 +21,7 @@ import 'package:nihonto_collection_manager/model/nakago_info.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/period.dart';
+import 'package:nihonto_collection_manager/model/polish_info.dart';
 import 'package:nihonto_collection_manager/model/polish_type.dart';
 import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/signature_info.dart';
@@ -120,9 +121,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   String _bohiOther;
 
-  PolishType _polish;
-
-  String _polishOther;
+  PolishInfo _polishInfo;
 
   Period _period;
 
@@ -165,8 +164,7 @@ class NihontoFormState extends State<NihontoForm> {
     _yasurimeOther = nihonto.yasurimeOther;
     _bohiInfo = nihonto.bohiInfo;
     _bohiOther = nihonto.bohiOther;
-    _polish = nihonto.polish;
-    _polishOther = nihonto.polishOther;
+    _polishInfo = nihonto.polishInfo;
     _period = nihonto.period;
   }
 
@@ -197,8 +195,7 @@ class NihontoFormState extends State<NihontoForm> {
         yasurimeOther: _yasurimeOther,
         bohiInfo: _bohiInfo,
         bohiOther: _bohiOther,
-        polish: _polish,
-        polishOther: _polishOther,
+        polishInfo: _polishInfo,
         period: _period
     );
   }
@@ -1288,14 +1285,14 @@ class NihontoFormState extends State<NihontoForm> {
           // === Polish === //
           // ============== //
 
-          ExpansibleTile(text: 'Polish', initiallyExpanded: readOnly, children: [
+          ExpansibleTile(text: 'Polish', initiallyExpanded: !_polishInfo.isBlank(), children: [
             DropdownButtonFormField(
                 decoration: FieldDecoration('Type'),
-                value: _polish,
+                value: _polishInfo.type,
                 items: Utils.getDropDownMenuItems(PolishType.values),
                 onChanged: (value) {
                   setState(() {
-                    _polish = value;
+                    _polishInfo = _polishInfo.copyWith(type: value);
                   });
                 }),
 
@@ -1304,13 +1301,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _polishOther ?? '',
+              initialValue: _polishInfo.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Polish-Other-${_polishOther}'),
+              key: Key('Polish-Other-${_polishInfo.other}'),
               onChanged: (value) {
                 setState(() {
-                  _polishOther = value;
+                  _polishInfo = _polishInfo.copyWith(other: value);
                 });
               },
             ),
