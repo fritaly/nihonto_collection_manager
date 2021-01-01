@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nihonto_collection_manager/enum.dart';
 import 'package:nihonto_collection_manager/enum_set.dart';
 import 'package:nihonto_collection_manager/model/bohi.dart';
 import 'package:nihonto_collection_manager/model/bohi_info.dart';
@@ -294,6 +295,25 @@ class NihontoFormState extends State<NihontoForm> {
     return dialog;
   }
 
+  DropdownButtonFormField<T> _buildDropDownField<T extends EnumWithLabel<T>>({ @required String label,
+    @required T value,
+    @required List<DropdownMenuItem<T>> items,
+    @required bool readOnly,
+    @required ValueChanged<T> onChanged }) {
+
+    // The only way to disable a drop down button is set to the property "onChanged"
+    // to null but then the widget is empty. To fix this issue, we use the property
+    // "disabledHint" which gets displayed when the widget is disabled.
+    // 1) Widget enabled -> (onChanged != null) && (disabledHint == null)
+    // 2) Widget disabled -> (onChanged == null) && (disabledHint != null)
+    return DropdownButtonFormField<T>(
+        decoration: FieldDecoration(label),
+        value: value,
+        items: items,
+        disabledHint: (readOnly && (value != null)) ? Text(value.label) : null,
+        onChanged: readOnly ? null: onChanged);
+  }
+
   @override
   Widget build(BuildContext context) {
     final bool readOnly = (_mode == Mode.READ);
@@ -490,24 +510,15 @@ class NihontoFormState extends State<NihontoForm> {
               // === Type === //
               // ============ //
 
-              DropdownButtonFormField(
-                  decoration: FieldDecoration('Type'),
+              _buildDropDownField<NihontoType>(label: 'Type',
                   value: _type,
                   items: Utils.getDropDownMenuItems(NihontoType.values),
-                  validator: (value) {
-                    if (value == null) {
-                      return 'Required';
-                    }
-
-                    return null;
-                  },
+                  readOnly: readOnly,
                   onChanged: (value) {
                     setState(() {
                       _type = value;
                     });
-
-                    _formKey.currentState.validate();
-                  }),
+                  })
             ]),
 
           // ============== //
@@ -516,15 +527,15 @@ class NihontoFormState extends State<NihontoForm> {
 
           ExpansibleTile(text: 'Sugata', initiallyExpanded: !_sugata.isBlank(),
             children: [
-            DropdownButtonFormField(
-                decoration: FieldDecoration('Type'),
-                value: _sugata.type,
-                items: Utils.getDropDownMenuItems(Sugata.values),
-                onChanged: (value) {
-                  setState(() {
-                    _sugata = _sugata.copyWith(type: value);
-                  });
-                }),
+              _buildDropDownField<Sugata>(label: 'Type',
+                  value: _sugata.type,
+                  items: Utils.getDropDownMenuItems(Sugata.values),
+                  readOnly: readOnly,
+                  onChanged: (value) {
+                    setState(() {
+                      _sugata = _sugata.copyWith(type: value);
+                    });
+                  }),
 
             columnPadder,
 
@@ -992,15 +1003,15 @@ class NihontoFormState extends State<NihontoForm> {
                     )),
                 rowPadder,
                 Expanded(
-                    child: DropdownButtonFormField(
-                        decoration: FieldDecoration('Type'),
+                    child: _buildDropDownField<SoriType>(label: 'Type',
                         value: _sori.type,
                         items: Utils.getDropDownMenuItems(SoriType.values),
+                        readOnly: readOnly,
                         onChanged: (value) {
                           setState(() {
                             _sori = _sori.copyWith(type: value);
                           });
-                        }))
+                        })),
               ],
             ),
 
@@ -1026,10 +1037,10 @@ class NihontoFormState extends State<NihontoForm> {
           // =============== //
 
           ExpansibleTile(text: 'Kissaki', initiallyExpanded: !_kissaki.isBlank(), children: [
-            DropdownButtonFormField(
-                decoration: FieldDecoration('Type'),
+            _buildDropDownField<KissakiType>(label: 'Type',
                 value: _kissaki.type,
                 items: Utils.getDropDownMenuItems(KissakiType.values),
+                readOnly: readOnly,
                 onChanged: (value) {
                   setState(() {
                     _kissaki = _kissaki.copyWith(type: value);
@@ -1058,10 +1069,10 @@ class NihontoFormState extends State<NihontoForm> {
           // ============ //
 
           ExpansibleTile(text: 'Mune', initiallyExpanded: !_mune.isBlank(), children: [
-            DropdownButtonFormField(
-                decoration: FieldDecoration('Type'),
+            _buildDropDownField<MuneType>(label: 'Type',
                 value: _mune.type,
                 items: Utils.getDropDownMenuItems(MuneType.values),
+                readOnly: readOnly,
                 onChanged: (value) {
                   setState(() {
                     _mune = _mune.copyWith(type: value);
@@ -1258,10 +1269,10 @@ class NihontoFormState extends State<NihontoForm> {
           // ============== //
 
           ExpansibleTile(text: 'Polish', initiallyExpanded: !_polish.isBlank(), children: [
-            DropdownButtonFormField(
-                decoration: FieldDecoration('Type'),
+            _buildDropDownField<PolishType>(label: 'Type',
                 value: _polish.type,
                 items: Utils.getDropDownMenuItems(PolishType.values),
+                readOnly: readOnly,
                 onChanged: (value) {
                   setState(() {
                     _polish = _polish.copyWith(type: value);
@@ -1290,10 +1301,10 @@ class NihontoFormState extends State<NihontoForm> {
           // ============== //
 
           ExpansibleTile(text: 'Period', initiallyExpanded: readOnly, children: [
-            DropdownButtonFormField(
-                decoration: FieldDecoration('Period'),
+            _buildDropDownField<Period>(label: 'Period',
                 value: _period,
                 items: Utils.getDropDownMenuItems(Period.values),
+                readOnly: readOnly,
                 onChanged: (value) {
                   setState(() {
                     _period = value;

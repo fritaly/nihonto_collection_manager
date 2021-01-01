@@ -6,7 +6,7 @@ import 'package:nihonto_collection_manager/model/currency.dart';
 
 class Utils {
 
-  static List<DropdownMenuItem> getDropDownMenuItems(List<EnumWithLabel> values) {
+  static List<DropdownMenuItem<T>> getDropDownMenuItems<T extends EnumWithLabel<T>>(List<T> values) {
     assert (values != null);
 
     return values.map((e) => DropdownMenuItem(

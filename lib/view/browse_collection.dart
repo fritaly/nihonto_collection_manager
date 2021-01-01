@@ -83,7 +83,7 @@ class _BrowseCollectionState extends State<BrowseCollection> {
     });
 
     // Display the message for 2 seconds to let the end user revert the deletion if necessary
-    Scaffold.of(context).showSnackBar(SnackBar(content: Text('Nihonto deleted', textAlign: TextAlign.center), duration: TWO_SECONDS));
+    Scaffold.of(context).showSnackBar(SnackBar(content: Text('Entry deleted', textAlign: TextAlign.center), duration: TWO_SECONDS));
   }
 
   Widget _buildRow(Nihonto nihonto) {
