@@ -126,22 +126,22 @@ class NihontoFormState extends State<NihontoForm> {
 
     _overallDescription = nihonto.overallDescription;
     _type = nihonto.type;
-    _sugataInfo = nihonto.sugataInfo;
-    _signatureInfo = nihonto.signatureInfo;
+    _sugataInfo = nihonto.sugata;
+    _signatureInfo = nihonto.signature;
     _price = nihonto.price;
     _measurements = nihonto.measurements;
     _weight = nihonto.weight;
-    _soriInfo = nihonto.soriInfo;
+    _soriInfo = nihonto.sori;
     _hadaInfo = nihonto.hada;
-    _kissakiInfo = nihonto.kissakiInfo;
-    _muneInfo = nihonto.muneInfo;
-    _hamonInfo = nihonto.hamonInfo;
-    _yakibaInfo = nihonto.yakibaInfo;
-    _boshiInfo = nihonto.boshiInfo;
-    _nakagoInfo = nihonto.nakagoInfo;
-    _yasurimeInfo = nihonto.yasurimeInfo;
-    _bohiInfo = nihonto.bohiInfo;
-    _polishInfo = nihonto.polishInfo;
+    _kissakiInfo = nihonto.kissaki;
+    _muneInfo = nihonto.mune;
+    _hamonInfo = nihonto.hamon;
+    _yakibaInfo = nihonto.yakiba;
+    _boshiInfo = nihonto.boshi;
+    _nakagoInfo = nihonto.nakago;
+    _yasurimeInfo = nihonto.yasurime;
+    _bohiInfo = nihonto.bohi;
+    _polishInfo = nihonto.polish;
     _period = nihonto.period;
   }
 
@@ -149,22 +149,22 @@ class NihontoFormState extends State<NihontoForm> {
     return Nihonto(
         overallDescription: _overallDescription,
         type: _type,
-        sugataInfo: _sugataInfo,
-        signatureInfo: _signatureInfo,
+        sugata: _sugataInfo,
+        signature: _signatureInfo,
         price: _price,
         measurements: _measurements,
         weight: _weight,
-        soriInfo: _soriInfo,
+        sori: _soriInfo,
         hada: _hadaInfo,
-        kissakiInfo: _kissakiInfo,
-        muneInfo: _muneInfo,
-        hamonInfo: _hamonInfo,
-        yakibaInfo: _yakibaInfo,
-        boshiInfo: _boshiInfo,
-        nakagoInfo: _nakagoInfo,
-        yasurimeInfo: _yasurimeInfo,
-        bohiInfo: _bohiInfo,
-        polishInfo: _polishInfo,
+        kissaki: _kissakiInfo,
+        mune: _muneInfo,
+        hamon: _hamonInfo,
+        yakiba: _yakibaInfo,
+        boshi: _boshiInfo,
+        nakago: _nakagoInfo,
+        yasurime: _yasurimeInfo,
+        bohi: _bohiInfo,
+        polish: _polishInfo,
         period: _period
     );
   }

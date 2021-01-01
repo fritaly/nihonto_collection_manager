@@ -22,9 +22,9 @@ class Nihonto {
 
   final NihontoType type;
 
-  final SignatureInfo signatureInfo;
+  final SignatureInfo signature;
 
-  final SugataInfo sugataInfo;
+  final SugataInfo sugata;
 
   final Money price;
 
@@ -34,27 +34,27 @@ class Nihonto {
 
   final HadaInfo hada;
 
-  final SoriInfo soriInfo;
+  final SoriInfo sori;
 
-  final KissakiInfo kissakiInfo;
+  final KissakiInfo kissaki;
 
-  final MuneInfo muneInfo;
+  final MuneInfo mune;
 
-  final HamonInfo hamonInfo;
+  final HamonInfo hamon;
 
-  final YakibaInfo yakibaInfo;
+  final YakibaInfo yakiba;
 
-  final BoshiInfo boshiInfo;
+  final BoshiInfo boshi;
 
   final String boshiOther;
 
-  final NakagoInfo nakagoInfo;
+  final NakagoInfo nakago;
 
-  final YasurimeInfo yasurimeInfo;
+  final YasurimeInfo yasurime;
 
-  final BohiInfo bohiInfo;
+  final BohiInfo bohi;
 
-  final PolishInfo polishInfo;
+  final PolishInfo polish;
 
   final Period period;
 
@@ -62,23 +62,23 @@ class Nihonto {
       {
       this.overallDescription,
       this.type,
-      this.sugataInfo = SugataInfo.DEFAULT,
-      this.signatureInfo = SignatureInfo.DEFAULT,
+      this.sugata = SugataInfo.DEFAULT,
+      this.signature = SignatureInfo.DEFAULT,
       this.price = Money.ZERO,
       this.measurements = Measurements.DEFAULT,
       this.weight,
-      this.soriInfo = SoriInfo.DEFAULT,
+      this.sori = SoriInfo.DEFAULT,
       this.hada = HadaInfo.DEFAULT,
-      this.kissakiInfo = KissakiInfo.DEFAULT,
-      this.muneInfo = MuneInfo.DEFAULT,
-      this.hamonInfo = HamonInfo.DEFAULT,
-      this.yakibaInfo = YakibaInfo.DEFAULT,
-      this.boshiInfo = BoshiInfo.DEFAULT,
+      this.kissaki = KissakiInfo.DEFAULT,
+      this.mune = MuneInfo.DEFAULT,
+      this.hamon = HamonInfo.DEFAULT,
+      this.yakiba = YakibaInfo.DEFAULT,
+      this.boshi = BoshiInfo.DEFAULT,
       this.boshiOther,
-      this.nakagoInfo = NakagoInfo.DEFAULT,
-      this.yasurimeInfo = YasurimeInfo.DEFAULT,
-      this.bohiInfo = BohiInfo.DEFAULT,
-      this.polishInfo = PolishInfo.DEFAULT,
+      this.nakago = NakagoInfo.DEFAULT,
+      this.yasurime = YasurimeInfo.DEFAULT,
+      this.bohi = BohiInfo.DEFAULT,
+      this.polish = PolishInfo.DEFAULT,
       this.period
     });
 
@@ -86,29 +86,29 @@ class Nihonto {
     return Nihonto(
         overallDescription: 'Description goes here...\nDescription goes here...\nDescription goes here...',
         type: NihontoType.random(),
-        sugataInfo: SugataInfo.random(),
-        signatureInfo: SignatureInfo.random(),
+        sugata: SugataInfo.random(),
+        signature: SignatureInfo.random(),
         price: Money.random(),
         measurements: Measurements.random(),
         weight: Weight.random(650, 1200),
-        soriInfo: SoriInfo.random(),
+        sori: SoriInfo.random(),
         hada: HadaInfo.random(),
-        kissakiInfo: KissakiInfo.random(),
-        muneInfo: MuneInfo.random(),
-        hamonInfo: HamonInfo.random(),
-        yakibaInfo: YakibaInfo.random(),
-        boshiInfo: BoshiInfo.random(),
+        kissaki: KissakiInfo.random(),
+        mune: MuneInfo.random(),
+        hamon: HamonInfo.random(),
+        yakiba: YakibaInfo.random(),
+        boshi: BoshiInfo.random(),
         boshiOther: '',
-        nakagoInfo: NakagoInfo.random(),
-        yasurimeInfo: YasurimeInfo.random(),
-        bohiInfo: BohiInfo.random(),
-        polishInfo: PolishInfo.random(),
+        nakago: NakagoInfo.random(),
+        yasurime: YasurimeInfo.random(),
+        bohi: BohiInfo.random(),
+        polish: PolishInfo.random(),
         period: Period.random()
     );
   }
 
   String get description {
-    return "${type?.label} - ${sugataInfo?.type?.label} (${measurements?.nagasa?.toText()})";
+    return "${type?.label} - ${sugata?.type?.label} (${measurements?.nagasa?.toText()})";
   }
 
   String toString() {

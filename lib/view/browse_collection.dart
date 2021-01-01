@@ -91,7 +91,7 @@ class _BrowseCollectionState extends State<BrowseCollection> {
 
     return ListTile(
       title: Text(
-        nihonto.signatureInfo.romaji,
+        nihonto.signature.romaji,
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       trailing: PopupMenuButton<Action>(
