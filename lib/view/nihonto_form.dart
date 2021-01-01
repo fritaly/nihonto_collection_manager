@@ -98,9 +98,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   HamonInfo _hamonInfo = HamonInfo.DEFAULT;
 
-  YakibaInfo _yakibaInfo = YakibaInfo();
-
-  String _yakibaOther;
+  YakibaInfo _yakibaInfo = YakibaInfo.DEFAULT;
 
   BoshiInfo _boshiInfo = BoshiInfo.DEFAULT;
 
@@ -144,7 +142,6 @@ class NihontoFormState extends State<NihontoForm> {
     _muneInfo = nihonto.muneInfo;
     _hamonInfo = nihonto.hamonInfo;
     _yakibaInfo = nihonto.yakibaInfo;
-    _yakibaOther = nihonto.yakibaOther;
     _boshiInfo = nihonto.boshiInfo;
     _nakagoInfo = nihonto.nakagoInfo;
     _yasurimeInfo = nihonto.yasurimeInfo;
@@ -170,7 +167,6 @@ class NihontoFormState extends State<NihontoForm> {
         muneInfo: _muneInfo,
         hamonInfo: _hamonInfo,
         yakibaInfo: _yakibaInfo,
-        yakibaOther: _yakibaOther,
         boshiInfo: _boshiInfo,
         nakagoInfo: _nakagoInfo,
         yasurimeInfo: _yasurimeInfo,
@@ -353,7 +349,7 @@ class NihontoFormState extends State<NihontoForm> {
     );
 
     final yakibaWidget = MultiSelectFormField(
-      key: Key('Yakiba-${_yakibaInfo.toString()}'),
+      key: Key('Yakiba-${_yakibaInfo.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Type',
@@ -363,12 +359,10 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _yakibaInfo.values(),
+      initialValue: _yakibaInfo.types.values(),
       onSaved: (value) {
-        print('Value=${value}');
-
         setState(() {
-          _yakibaInfo = YakibaInfo(value);
+          _yakibaInfo = _yakibaInfo.copyWith(types: EnumSet.from(value.cast<Yakiba>()));
         });
       },
     );
@@ -1138,7 +1132,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Yakiba === //
           // ============== //
 
-          ExpansibleTile(text: 'Yakiba', initiallyExpanded: readOnly, children: [
+          ExpansibleTile(text: 'Yakiba', initiallyExpanded: !_yakibaInfo.isBlank(), children: [
             yakibaWidget,
 
             columnPadder,
@@ -1146,13 +1140,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _yakibaOther ?? '',
+              initialValue: _yakibaInfo.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Yakiba-Other-${_yakibaOther}'),
+              key: Key('Yakiba-Other-${_yakibaInfo.other}'),
               onChanged: (value) {
                 setState(() {
-                  _yakibaOther = value;
+                  _yakibaInfo = _yakibaInfo.copyWith(other: value);
                 });
               },
             ),

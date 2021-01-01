@@ -48,8 +48,6 @@ class Nihonto {
 
   final YakibaInfo yakibaInfo;
 
-  final String yakibaOther;
-
   final BoshiInfo boshiInfo;
 
   final String boshiOther;
@@ -81,8 +79,7 @@ class Nihonto {
       this.kissakiInfo = KissakiInfo.DEFAULT,
       this.muneInfo = MuneInfo.DEFAULT,
       this.hamonInfo = HamonInfo.DEFAULT,
-      this.yakibaInfo,
-      this.yakibaOther,
+      this.yakibaInfo = YakibaInfo.DEFAULT,
       this.boshiInfo = BoshiInfo.DEFAULT,
       this.boshiOther,
       this.nakagoInfo = NakagoInfo.DEFAULT,
@@ -109,7 +106,6 @@ class Nihonto {
         muneInfo: MuneInfo.random(),
         hamonInfo: HamonInfo.random(),
         yakibaInfo: YakibaInfo.random(),
-        yakibaOther: '',
         boshiInfo: BoshiInfo.random(),
         boshiOther: '',
         nakagoInfo: NakagoInfo.random(),
