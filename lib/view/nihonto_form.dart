@@ -624,7 +624,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Signature === //
           // ================= //
 
-          ExpansibleTile(text: 'Signature', initiallyExpanded: readOnly, children: [
+          ExpansibleTile(text: 'Signature', initiallyExpanded: !_signature.isBlank(), children: [
             TextFormField(
               decoration: FieldDecoration('Romaji'),
               readOnly: readOnly,
