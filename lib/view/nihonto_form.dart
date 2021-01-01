@@ -586,6 +586,22 @@ class NihontoFormState extends State<NihontoForm> {
             columnPadder,
 
             signatureWidget,
+
+            columnPadder,
+
+            TextFormField(
+              decoration: FieldDecoration('Other'),
+              readOnly: readOnly,
+              initialValue: _signatureInfo.other,
+              minLines: 1,
+              maxLines: 25,
+              key: Key('Signature-Other-${_signatureInfo.other}'),
+              onChanged: (value) {
+                setState(() {
+                  _signatureInfo = _signatureInfo.copyWith(other: value);
+                });
+              },
+            ),
           ]),
 
           ExpansibleTile(text: 'Miscellaneous', initiallyExpanded: readOnly, children: [
@@ -1102,7 +1118,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Hamon === //
           // ============= //
 
-          ExpansibleTile(text: 'Hamon', initiallyExpanded: readOnly, children: [
+          ExpansibleTile(text: 'Hamon', initiallyExpanded: !_hamonInfo.isBlank(), children: [
             hamonWidget,
 
             columnPadder,
@@ -1150,7 +1166,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Bohi === //
           // ============ //
 
-          ExpansibleTile(text: 'Boshi', initiallyExpanded: readOnly, children: [
+          ExpansibleTile(text: 'Boshi', initiallyExpanded: !_boshiInfo.isBlank(), children: [
             boshiWidget,
 
             columnPadder,
@@ -1198,7 +1214,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Yasurime === //
           // ================ //
 
-          ExpansibleTile(text: 'Yasurime', initiallyExpanded: readOnly, children: [
+          ExpansibleTile(text: 'Yasurime', initiallyExpanded: !_yasurimeInfo.isBlank(), children: [
             yasurimeWidget,
 
             columnPadder,
