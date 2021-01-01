@@ -10,7 +10,6 @@ import 'package:nihonto_collection_manager/model/nakago_info.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/period.dart';
 import 'package:nihonto_collection_manager/model/polish_info.dart';
-import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/signature_info.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
 import 'package:nihonto_collection_manager/model/sugata_info.dart';
@@ -22,9 +21,6 @@ class Nihonto {
   final String overallDescription;
 
   final NihontoType type;
-
-  // The signature should never be null
-  final Signature signature;
 
   final SignatureInfo signatureInfo;
 
@@ -67,7 +63,6 @@ class Nihonto {
       this.overallDescription,
       this.type,
       this.sugataInfo = SugataInfo.DEFAULT,
-      this.signature = Signature.EMPTY,
       this.signatureInfo = SignatureInfo.DEFAULT,
       this.price = Money.ZERO,
       this.measurements = Measurements.DEFAULT,
@@ -92,7 +87,6 @@ class Nihonto {
         overallDescription: 'Description goes here...\nDescription goes here...\nDescription goes here...',
         type: NihontoType.random(),
         sugataInfo: SugataInfo.random(),
-        signature: Signature.random(),
         signatureInfo: SignatureInfo.random(),
         price: Money.random(),
         measurements: Measurements.random(),
@@ -118,6 +112,6 @@ class Nihonto {
   }
 
   String toString() {
-    return "Nihonto[type: ${type}, signature: '${signature}', price: ${price}, hada: ${hada}]";
+    return "Nihonto[type: ${type}, price: ${price}, hada: ${hada}]";
   }
 }

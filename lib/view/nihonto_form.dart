@@ -78,8 +78,6 @@ class NihontoFormState extends State<NihontoForm> {
 
   SugataInfo _sugataInfo = SugataInfo.DEFAULT;
 
-  Signature _signature = Signature.EMPTY;
-
   SignatureInfo _signatureInfo = SignatureInfo.DEFAULT;
 
   Money _price = Money(0, Currency.USD);
@@ -129,7 +127,6 @@ class NihontoFormState extends State<NihontoForm> {
     _overallDescription = nihonto.overallDescription;
     _type = nihonto.type;
     _sugataInfo = nihonto.sugataInfo;
-    _signature = nihonto.signature;
     _signatureInfo = nihonto.signatureInfo;
     _price = nihonto.price;
     _measurements = nihonto.measurements;
@@ -153,7 +150,6 @@ class NihontoFormState extends State<NihontoForm> {
         overallDescription: _overallDescription,
         type: _type,
         sugataInfo: _sugataInfo,
-        signature: _signature,
         signatureInfo: _signatureInfo,
         price: _price,
         measurements: _measurements,
@@ -552,17 +548,17 @@ class NihontoFormState extends State<NihontoForm> {
           // === Signature === //
           // ================= //
 
-          ExpansibleTile(text: 'Signature', initiallyExpanded: !_signature.isBlank(), children: [
+          ExpansibleTile(text: 'Signature', initiallyExpanded: !_signatureInfo.isBlank(), children: [
             TextFormField(
               decoration: FieldDecoration('Romaji'),
               readOnly: readOnly,
-              initialValue: _signature.romaji,
-              key: Key('Signature-Romaji-${_signature.romaji}'),
+              initialValue: _signatureInfo.romaji,
+              key: Key('Signature-Romaji-${_signatureInfo.romaji}'),
               minLines: 1,
               maxLines: 25,
               onChanged: (value) {
                 setState(() {
-                  _signature = _signature.copyWith(romaji: value);
+                  _signatureInfo = _signatureInfo.copyWith(romaji: value);
                 });
               },
             ),
@@ -572,13 +568,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Kanji'),
               readOnly: readOnly,
-              initialValue: _signature.kanji,
-              key: Key('Signature-Kanji-${_signature.kanji}'),
+              initialValue: _signatureInfo.kanji,
+              key: Key('Signature-Kanji-${_signatureInfo.kanji}'),
               minLines: 1,
               maxLines: 25,
               onChanged: (value) {
                 setState(() {
-                  _signature = _signature.copyWith(kanji: value);
+                  _signatureInfo = _signatureInfo.copyWith(kanji: value);
                 });
               },
             ),
