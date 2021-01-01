@@ -32,6 +32,12 @@ class EnumSet<T> {
     return _set.contains(value);
   }
 
+  /// Returns the number of elements in the set
+  int get length => _set.length;
+
+  /// Tells whether the set is empty.
+  bool isEmpty() => _set.isEmpty;
+
   List<T> values() {
     return _set.toList();
   }
