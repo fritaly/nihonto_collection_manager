@@ -2,7 +2,7 @@ import 'package:nihonto_collection_manager/model/bohi_info.dart';
 import 'package:nihonto_collection_manager/model/boshi_info.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
 import 'package:nihonto_collection_manager/model/hamon_info.dart';
-import 'package:nihonto_collection_manager/model/kissaki_type.dart';
+import 'package:nihonto_collection_manager/model/kissaki_info.dart';
 import 'package:nihonto_collection_manager/model/length.dart';
 import 'package:nihonto_collection_manager/model/measurements.dart';
 import 'package:nihonto_collection_manager/model/money.dart';
@@ -43,9 +43,7 @@ class Nihonto {
 
   final SoriInfo soriInfo;
 
-  final KissakiType kissakiType;
-
-  final String kissakiOther;
+  final KissakiInfo kissakiInfo;
 
   final MuneType muneType;
 
@@ -91,11 +89,10 @@ class Nihonto {
       this.price = Money.ZERO,
       this.measurements = Measurements.DEFAULT,
       this.weight,
-      this.soriInfo,
+      this.soriInfo = SoriInfo.DEFAULT,
       this.hada,
       this.hadaOther,
-      this.kissakiType,
-      this.kissakiOther,
+      this.kissakiInfo = KissakiInfo.DEFAULT,
       this.muneType,
       this.muneOther,
       this.hamonInfo,
@@ -133,8 +130,7 @@ class Nihonto {
         soriInfo: SoriInfo.random(),
         hada: HadaInfo.random(),
         hadaOther: '',
-        kissakiType: KissakiType.random(),
-        kissakiOther: '',
+        kissakiInfo: KissakiInfo.random(),
         muneType: MuneType.random(),
         muneOther: '',
         hamonInfo: HamonInfo.random(),
@@ -160,6 +156,6 @@ class Nihonto {
   }
 
   String toString() {
-    return "Nihonto[type: ${type}, signature: '${signature}', price: ${price}, hada: ${hada}, kissakiType: ${kissakiType}]";
+    return "Nihonto[type: ${type}, signature: '${signature}', price: ${price}, hada: ${hada}]";
   }
 }
