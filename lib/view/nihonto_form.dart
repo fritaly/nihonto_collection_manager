@@ -21,7 +21,7 @@ import 'package:nihonto_collection_manager/model/nakago_info.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/period.dart';
-import 'package:nihonto_collection_manager/model/polish.dart';
+import 'package:nihonto_collection_manager/model/polish_type.dart';
 import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/signature_info.dart';
 import 'package:nihonto_collection_manager/model/signature_type.dart';
@@ -120,7 +120,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   String _bohiOther;
 
-  Polish _polish;
+  PolishType _polish;
 
   String _polishOther;
 
@@ -1292,7 +1292,7 @@ class NihontoFormState extends State<NihontoForm> {
             DropdownButtonFormField(
                 decoration: FieldDecoration('Type'),
                 value: _polish,
-                items: Utils.getDropDownMenuItems(Polish.values),
+                items: Utils.getDropDownMenuItems(PolishType.values),
                 onChanged: (value) {
                   setState(() {
                     _polish = value;
