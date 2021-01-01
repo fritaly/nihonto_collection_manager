@@ -51,15 +51,39 @@ class _BrowseCollectionState extends State<BrowseCollection> {
         });
   }
 
+  void _showDeleteDialog(Nihonto nihonto) {
+    assert (nihonto != null);
+
+    final AlertDialog dialog = AlertDialog(
+      title: Text('Delete the entry ?'),
+      content:
+      Text("You're about to delete an entry from your collection."),
+      actions: [
+        FlatButton(
+          textColor: Color(0xFF6200EE),
+          onPressed: () => { Navigator.pop(context) },
+          child: Text('CANCEL'),
+        ),
+        FlatButton(
+          textColor: Color(0xFF6200EE),
+          onPressed: () { Navigator.pop(context); _delete(nihonto); },
+          child: Text('ACCEPT'),
+        ),
+      ],
+    );
+
+    showDialog<void>(context: context, builder: (context) => dialog);
+  }
+
   void _delete(Nihonto nihonto) {
     assert (nihonto != null);
 
     setState(() {
       _collection.remove(nihonto);
-
-      // Display the message for 2 seconds to let the end user revert the deletion if necessary
-      Scaffold.of(context).showSnackBar(SnackBar(content: Text('Nihonto deleted', textAlign: TextAlign.center), duration: TWO_SECONDS));
     });
+
+    // Display the message for 2 seconds to let the end user revert the deletion if necessary
+    Scaffold.of(context).showSnackBar(SnackBar(content: Text('Nihonto deleted', textAlign: TextAlign.center), duration: TWO_SECONDS));
   }
 
   Widget _buildRow(Nihonto nihonto) {
@@ -80,7 +104,7 @@ class _BrowseCollectionState extends State<BrowseCollection> {
               _pushEdit(nihonto);
               break;
             case Action.delete:
-              _delete(nihonto);
+              _showDeleteDialog(nihonto);
               break;
           }
         },
