@@ -330,6 +330,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: _hada.types.values(),
+      enabled: !readOnly,
       onSaved: (value) {
         setState(() {
           _hada = _hada.copyWith(types: EnumSet.from(value.cast<HadaType>()));
@@ -350,6 +351,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: _hamon.types.values(),
+      enabled: !readOnly,
       onSaved: (value) {
         print('Value=${value}');
 
@@ -371,6 +373,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: _yakiba.types.values(),
+      enabled: !readOnly,
       onSaved: (value) {
         setState(() {
           _yakiba = _yakiba.copyWith(types: EnumSet.from(value.cast<Yakiba>()));
@@ -390,6 +393,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: _boshi.types.values(),
+      enabled: !readOnly,
       onSaved: (value) {
         setState(() {
           _boshi = _boshi.copyWith(types: EnumSet.from(value.cast<Boshi>()));
@@ -409,6 +413,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: _nakago.types.values(),
+      enabled: !readOnly,
       onSaved: (value) {
         setState(() {
           _boshi = _boshi.copyWith(types: EnumSet.from(value.cast<Nakago>()));
@@ -428,6 +433,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: _yasurime.types.values(),
+      enabled: !readOnly,
       onSaved: (value) {
         print('Value=${value}');
 
@@ -449,6 +455,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: _bohi.types.values(),
+      enabled: !readOnly,
       onSaved: (value) {
         setState(() {
           _bohi = _bohi.copyWith(types: EnumSet.from(value.cast<Bohi>()));
@@ -468,6 +475,7 @@ class NihontoFormState extends State<NihontoForm> {
       // required: true,
       hintWidget: Text('Please choose one or more'),
       initialValue: _signature.types.values(),
+      enabled: !readOnly,
       onSaved: (value) {
         setState(() {
           _signature = _signature.copyWith(types: EnumSet.from(value.cast<SignatureType>()));
