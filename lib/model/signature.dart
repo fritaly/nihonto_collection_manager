@@ -1,6 +1,7 @@
+import 'package:nihonto_collection_manager/Aggregate.dart';
 import 'package:nihonto_collection_manager/Utils.dart';
 
-class Signature {
+class Signature with Aggregate {
   static const Signature EMPTY = Signature();
 
   /// Should never be null
@@ -18,5 +19,10 @@ class Signature {
 
   String toString() {
     return "Signature[kanji: '${kanji}', romaji: '${romaji}']";
+  }
+
+  @override
+  bool isBlank() {
+    return kanji.isEmpty && romaji.isEmpty;
   }
 }
