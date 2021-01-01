@@ -84,9 +84,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   Weight _weight;
 
-  SoriInfo _sori = SoriInfo();
-
-  String _soriOther;
+  SoriInfo _soriInfo = SoriInfo.DEFAULT;
 
   HadaInfo _hada = HadaInfo();
 
@@ -152,8 +150,7 @@ class NihontoFormState extends State<NihontoForm> {
     _price = nihonto.price;
     _measurements = nihonto.measurements;
     _weight = nihonto.weight;
-    _sori = nihonto.sori;
-    _soriOther = nihonto.soriOther;
+    _soriInfo = nihonto.soriInfo;
     _hada = nihonto.hada;
     _hadaOther = nihonto.hadaOther;
     _kissakiType = nihonto.kissakiType;
@@ -187,8 +184,7 @@ class NihontoFormState extends State<NihontoForm> {
         price: _price,
         measurements: _measurements,
         weight: _weight,
-        sori: _sori,
-        soriOther: _soriOther,
+        soriInfo: _soriInfo,
         hada: _hada,
         hadaOther: _hadaOther,
         kissakiType: _kissakiType,
@@ -997,17 +993,16 @@ class NihontoFormState extends State<NihontoForm> {
           // === Sori === //
           // ============ //
 
-          ExpansibleTile(text: 'Sori', initiallyExpanded: readOnly, children: [
+          ExpansibleTile(text: 'Sori', initiallyExpanded: !_soriInfo.isBlank(), children: [
             Row(
               children: [
                 Expanded(
                     child: TextFormField(
                       decoration: FieldDecoration('Sori'),
                       readOnly: true,
-                      initialValue: "${_sori?.sori?.toText() ?? ''}",
+                      initialValue: "${_soriInfo?.sori?.toText() ?? ''}",
                       textAlign: TextAlign.end,
-                      key: Key(
-                          'Sori-${_sori?.sori?.toText()}'), // <-- https://stackoverflow.com/questions/58053956/setstate-does-not-update-textformfield-when-use-initialvalue
+                      key: Key('Sori-${_soriInfo?.sori?.toText()}'),
                       onTap: () {
                         if (readOnly) {
                           return;
@@ -1017,12 +1012,12 @@ class NihontoFormState extends State<NihontoForm> {
                             context: context,
                             builder: (context) {
                               return _showLengthDialog(
-                                  context, 'Set the sori', _sori.sori);
+                                  context, 'Set the sori', _soriInfo.sori);
                             }).then((value) {
                           if (value != null) {
                             setState(() {
                               // Update the sori based on the value returned by the dialog
-                              _sori = _sori.copyWith(sori: value);
+                              _soriInfo = _soriInfo.copyWith(sori: value);
 
                               print("Sori set to ${value}");
                             });
@@ -1036,11 +1031,11 @@ class NihontoFormState extends State<NihontoForm> {
                 Expanded(
                     child: DropdownButtonFormField(
                         decoration: FieldDecoration('Type'),
-                        value: _sori.type,
+                        value: _soriInfo.type,
                         items: Utils.getDropDownMenuItems(SoriType.values),
                         onChanged: (value) {
                           setState(() {
-                            _sori = _sori.copyWith(type: value);
+                            _soriInfo = _soriInfo.copyWith(type: value);
                           });
                         }))
               ],
@@ -1051,13 +1046,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _soriOther ?? '',
+              initialValue: _soriInfo.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Sori-Other-${_soriOther}'),
+              key: Key('Sori-Other-${_soriInfo.other}'),
               onChanged: (value) {
                 setState(() {
-                  _soriOther = value;
+                  _soriInfo = _soriInfo.copyWith(other: value);
                 });
               },
             ),

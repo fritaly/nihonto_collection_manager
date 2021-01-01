@@ -14,7 +14,6 @@ import 'package:nihonto_collection_manager/model/polish.dart';
 import 'package:nihonto_collection_manager/model/signature.dart';
 import 'package:nihonto_collection_manager/model/signature_info.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
-import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/model/sugata_info.dart';
 import 'package:nihonto_collection_manager/model/weight.dart';
 import 'package:nihonto_collection_manager/model/yakiba_info.dart';
@@ -38,15 +37,11 @@ class Nihonto {
 
   final Weight weight;
 
-  final SoriType soriType;
-
-  final String soriOther;
-
   final HadaInfo hada;
 
   final String hadaOther;
 
-  final SoriInfo sori;
+  final SoriInfo soriInfo;
 
   final KissakiType kissakiType;
 
@@ -96,9 +91,7 @@ class Nihonto {
       this.price = Money.ZERO,
       this.measurements = Measurements.DEFAULT,
       this.weight,
-      this.sori,
-      this.soriType,
-      this.soriOther,
+      this.soriInfo,
       this.hada,
       this.hadaOther,
       this.kissakiType,
@@ -137,9 +130,7 @@ class Nihonto {
         price: Money.random(),
         measurements: Measurements.random(),
         weight: Weight.random(650, 1200),
-        sori: SoriInfo.random(),
-        soriType: SoriType.random(),
-        soriOther: '',
+        soriInfo: SoriInfo.random(),
         hada: HadaInfo.random(),
         hadaOther: '',
         kissakiType: KissakiType.random(),
@@ -169,6 +160,6 @@ class Nihonto {
   }
 
   String toString() {
-    return "Nihonto[type: ${type}, signature: '${signature}', price: ${price}, sori: ${sori}, soriType: ${soriType}, hada: ${hada}, kissakiType: ${kissakiType}]";
+    return "Nihonto[type: ${type}, signature: '${signature}', price: ${price}, hada: ${hada}, kissakiType: ${kissakiType}]";
   }
 }
