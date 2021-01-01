@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/enum.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 class WeightUnit extends EnumWithLabel<WeightUnit> {
 
@@ -22,5 +23,9 @@ class WeightUnit extends EnumWithLabel<WeightUnit> {
     }
 
     return found;
+  }
+
+  static WeightUnit random() {
+    return Utils.random(values);
   }
 }

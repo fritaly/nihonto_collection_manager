@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/enum.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 class Hada extends EnumWithLabel<Hada> {
 
@@ -34,5 +35,9 @@ class Hada extends EnumWithLabel<Hada> {
     }
 
     return found;
+  }
+
+  static Hada random() {
+    return Utils.random(values);
   }
 }

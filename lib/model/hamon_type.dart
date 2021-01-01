@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/enum.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 class HamonType extends EnumWithLabel<HamonType> {
 
@@ -48,5 +49,9 @@ class HamonType extends EnumWithLabel<HamonType> {
     }
 
     return found;
+  }
+
+  static HamonType random() {
+    return Utils.random(values);
   }
 }

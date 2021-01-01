@@ -68,6 +68,6 @@ class Period extends EnumWithLabel<Period> {
   }
 
   static Period random() {
-    return Utils.random(Period.values);
+    return Utils.random(values);
   }
 }

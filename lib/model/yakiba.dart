@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/enum.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 class Yakiba extends EnumWithLabel<Yakiba> {
 
@@ -46,5 +47,9 @@ class Yakiba extends EnumWithLabel<Yakiba> {
     }
 
     return found;
+  }
+
+  static Yakiba random() {
+    return Utils.random(values);
   }
 }

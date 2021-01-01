@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/enum.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 class Yasurime extends EnumWithLabel<Yasurime> {
 
@@ -30,5 +31,9 @@ class Yasurime extends EnumWithLabel<Yasurime> {
     }
 
     return found;
+  }
+
+  static Yasurime random() {
+    return Utils.random(values);
   }
 }

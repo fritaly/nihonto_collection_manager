@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/enum.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 class SignatureType extends EnumWithLabel<SignatureType> {
 
@@ -26,5 +27,9 @@ class SignatureType extends EnumWithLabel<SignatureType> {
     }
 
     return found;
+  }
+
+  static SignatureType random() {
+    return Utils.random(values);
   }
 }

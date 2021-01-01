@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:nihonto_collection_manager/Utils.dart';
 
 class Signature {
@@ -15,8 +13,6 @@ class Signature {
   }
 
   static Signature random() {
-    var random = Random();
-
     return new Signature(romaji: Utils.randomSignature());
   }
 

@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/enum.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 class Bohi extends EnumWithLabel<Bohi> {
 
@@ -36,5 +37,9 @@ class Bohi extends EnumWithLabel<Bohi> {
     }
 
     return found;
+  }
+
+  static Bohi random() {
+    return Utils.random(values);
   }
 }

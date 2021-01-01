@@ -34,6 +34,6 @@ class Polish extends EnumWithLabel<Polish> {
   }
 
   static Polish random() {
-    return Utils.random(Polish.values);
+    return Utils.random(values);
   }
 }

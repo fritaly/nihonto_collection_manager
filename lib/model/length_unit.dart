@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/enum.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 class LengthUnit extends EnumWithLabel<LengthUnit> {
 
@@ -24,5 +25,9 @@ class LengthUnit extends EnumWithLabel<LengthUnit> {
     }
 
     return found;
+  }
+
+  static LengthUnit random() {
+    return Utils.random(values);
   }
 }

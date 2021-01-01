@@ -1,4 +1,5 @@
 import 'package:nihonto_collection_manager/enum.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 class Nakago extends EnumWithLabel<Nakago> {
 
@@ -40,5 +41,9 @@ class Nakago extends EnumWithLabel<Nakago> {
     }
 
     return found;
+  }
+
+  static Nakago random() {
+    return Utils.random(values);
   }
 }
