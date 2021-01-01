@@ -75,9 +75,9 @@ class NihontoFormState extends State<NihontoForm> {
 
   NihontoType _type;
 
-  SugataInfo _sugataInfo = SugataInfo.DEFAULT;
+  SugataInfo _sugata = SugataInfo.DEFAULT;
 
-  SignatureInfo _signatureInfo = SignatureInfo.DEFAULT;
+  SignatureInfo _signature = SignatureInfo.DEFAULT;
 
   Money _price = Money(0, Currency.USD);
 
@@ -85,27 +85,27 @@ class NihontoFormState extends State<NihontoForm> {
 
   Weight _weight;
 
-  SoriInfo _soriInfo = SoriInfo.DEFAULT;
+  SoriInfo _sori = SoriInfo.DEFAULT;
 
-  HadaInfo _hadaInfo = HadaInfo.DEFAULT;
+  HadaInfo _hada = HadaInfo.DEFAULT;
 
-  KissakiInfo _kissakiInfo = KissakiInfo.DEFAULT;
+  KissakiInfo _kissaki = KissakiInfo.DEFAULT;
 
-  MuneInfo _muneInfo = MuneInfo.DEFAULT;
+  MuneInfo _mune = MuneInfo.DEFAULT;
 
-  HamonInfo _hamonInfo = HamonInfo.DEFAULT;
+  HamonInfo _hamon = HamonInfo.DEFAULT;
 
-  YakibaInfo _yakibaInfo = YakibaInfo.DEFAULT;
+  YakibaInfo _yakiba = YakibaInfo.DEFAULT;
 
-  BoshiInfo _boshiInfo = BoshiInfo.DEFAULT;
+  BoshiInfo _boshi = BoshiInfo.DEFAULT;
 
-  NakagoInfo _nakagoInfo = NakagoInfo.DEFAULT;
+  NakagoInfo _nakago = NakagoInfo.DEFAULT;
 
-  YasurimeInfo _yasurimeInfo = YasurimeInfo.DEFAULT;
+  YasurimeInfo _yasurime = YasurimeInfo.DEFAULT;
 
-  BohiInfo _bohiInfo = BohiInfo.DEFAULT;
+  BohiInfo _bohi = BohiInfo.DEFAULT;
 
-  PolishInfo _polishInfo = PolishInfo.DEFAULT;
+  PolishInfo _polish = PolishInfo.DEFAULT;
 
   Period _period;
 
@@ -125,22 +125,22 @@ class NihontoFormState extends State<NihontoForm> {
 
     _overallDescription = nihonto.overallDescription;
     _type = nihonto.type;
-    _sugataInfo = nihonto.sugata;
-    _signatureInfo = nihonto.signature;
+    _sugata = nihonto.sugata;
+    _signature = nihonto.signature;
     _price = nihonto.price;
     _measurements = nihonto.measurements;
     _weight = nihonto.weight;
-    _soriInfo = nihonto.sori;
-    _hadaInfo = nihonto.hada;
-    _kissakiInfo = nihonto.kissaki;
-    _muneInfo = nihonto.mune;
-    _hamonInfo = nihonto.hamon;
-    _yakibaInfo = nihonto.yakiba;
-    _boshiInfo = nihonto.boshi;
-    _nakagoInfo = nihonto.nakago;
-    _yasurimeInfo = nihonto.yasurime;
-    _bohiInfo = nihonto.bohi;
-    _polishInfo = nihonto.polish;
+    _sori = nihonto.sori;
+    _hada = nihonto.hada;
+    _kissaki = nihonto.kissaki;
+    _mune = nihonto.mune;
+    _hamon = nihonto.hamon;
+    _yakiba = nihonto.yakiba;
+    _boshi = nihonto.boshi;
+    _nakago = nihonto.nakago;
+    _yasurime = nihonto.yasurime;
+    _bohi = nihonto.bohi;
+    _polish = nihonto.polish;
     _period = nihonto.period;
   }
 
@@ -148,22 +148,22 @@ class NihontoFormState extends State<NihontoForm> {
     return Nihonto(
         overallDescription: _overallDescription,
         type: _type,
-        sugata: _sugataInfo,
-        signature: _signatureInfo,
+        sugata: _sugata,
+        signature: _signature,
         price: _price,
         measurements: _measurements,
         weight: _weight,
-        sori: _soriInfo,
-        hada: _hadaInfo,
-        kissaki: _kissakiInfo,
-        mune: _muneInfo,
-        hamon: _hamonInfo,
-        yakiba: _yakibaInfo,
-        boshi: _boshiInfo,
-        nakago: _nakagoInfo,
-        yasurime: _yasurimeInfo,
-        bohi: _bohiInfo,
-        polish: _polishInfo,
+        sori: _sori,
+        hada: _hada,
+        kissaki: _kissaki,
+        mune: _mune,
+        hamon: _hamon,
+        yakiba: _yakiba,
+        boshi: _boshi,
+        nakago: _nakago,
+        yasurime: _yasurime,
+        bohi: _bohi,
+        polish: _polish,
         period: _period
     );
   }
@@ -299,7 +299,7 @@ class NihontoFormState extends State<NihontoForm> {
     final bool readOnly = (_mode == Mode.READ);
 
     final hadaWidget = MultiSelectFormField(
-      key: Key('Hada-${_hadaInfo.types}'),
+      key: Key('Hada-${_hada.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Type',
@@ -309,16 +309,16 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _hadaInfo.types.values(),
+      initialValue: _hada.types.values(),
       onSaved: (value) {
         setState(() {
-          _hadaInfo = _hadaInfo.copyWith(types: EnumSet.from(value.cast<HadaType>()));
+          _hada = _hada.copyWith(types: EnumSet.from(value.cast<HadaType>()));
         });
       },
     );
 
     final hamonWidget = MultiSelectFormField(
-      key: Key('Hamon-${_hamonInfo.types}'),
+      key: Key('Hamon-${_hamon.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Type',
@@ -329,18 +329,18 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _hamonInfo.types.values(),
+      initialValue: _hamon.types.values(),
       onSaved: (value) {
         print('Value=${value}');
 
         setState(() {
-          _hamonInfo = _hamonInfo.copyWith(types: EnumSet.from(value.cast<HamonType>()));
+          _hamon = _hamon.copyWith(types: EnumSet.from(value.cast<HamonType>()));
         });
       },
     );
 
     final yakibaWidget = MultiSelectFormField(
-      key: Key('Yakiba-${_yakibaInfo.types}'),
+      key: Key('Yakiba-${_yakiba.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Type',
@@ -350,16 +350,16 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _yakibaInfo.types.values(),
+      initialValue: _yakiba.types.values(),
       onSaved: (value) {
         setState(() {
-          _yakibaInfo = _yakibaInfo.copyWith(types: EnumSet.from(value.cast<Yakiba>()));
+          _yakiba = _yakiba.copyWith(types: EnumSet.from(value.cast<Yakiba>()));
         });
       },
     );
 
     final boshiWidget = MultiSelectFormField(
-      key: Key('Boshi-${_boshiInfo.toString()}'),
+      key: Key('Boshi-${_boshi.toString()}'),
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Type',
@@ -369,16 +369,16 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _boshiInfo.types.values(),
+      initialValue: _boshi.types.values(),
       onSaved: (value) {
         setState(() {
-          _boshiInfo = _boshiInfo.copyWith(types: EnumSet.from(value.cast<Boshi>()));
+          _boshi = _boshi.copyWith(types: EnumSet.from(value.cast<Boshi>()));
         });
       },
     );
 
     final nakagoWidget = MultiSelectFormField(
-      key: Key('Nakago-${_nakagoInfo.types}'),
+      key: Key('Nakago-${_nakago.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Type',
@@ -388,16 +388,16 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _nakagoInfo.types.values(),
+      initialValue: _nakago.types.values(),
       onSaved: (value) {
         setState(() {
-          _boshiInfo = _boshiInfo.copyWith(types: EnumSet.from(value.cast<Nakago>()));
+          _boshi = _boshi.copyWith(types: EnumSet.from(value.cast<Nakago>()));
         });
       },
     );
 
     final yasurimeWidget = MultiSelectFormField(
-      key: Key('Yasurime-${_yasurimeInfo.types}'),
+      key: Key('Yasurime-${_yasurime.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Type',
@@ -407,18 +407,18 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _yasurimeInfo.types.values(),
+      initialValue: _yasurime.types.values(),
       onSaved: (value) {
         print('Value=${value}');
 
         setState(() {
-          _yasurimeInfo = _yasurimeInfo.copyWith(types: EnumSet.from(value.cast<Yasurime>()));
+          _yasurime = _yasurime.copyWith(types: EnumSet.from(value.cast<Yasurime>()));
         });
       },
     );
 
     final bohiWidget = MultiSelectFormField(
-      key: Key('Bohi-${_bohiInfo.types}'),
+      key: Key('Bohi-${_bohi.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Type',
@@ -428,16 +428,16 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _bohiInfo.types.values(),
+      initialValue: _bohi.types.values(),
       onSaved: (value) {
         setState(() {
-          _bohiInfo = _bohiInfo.copyWith(types: EnumSet.from(value.cast<Bohi>()));
+          _bohi = _bohi.copyWith(types: EnumSet.from(value.cast<Bohi>()));
         });
       },
     );
 
     final signatureWidget = MultiSelectFormField(
-      key: Key('SignatureInfo-${_signatureInfo.types}'),
+      key: Key('SignatureInfo-${_signature.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Features',
@@ -447,10 +447,10 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _signatureInfo.types.values(),
+      initialValue: _signature.types.values(),
       onSaved: (value) {
         setState(() {
-          _signatureInfo = _signatureInfo.copyWith(types: EnumSet.from(value.cast<SignatureType>()));
+          _signature = _signature.copyWith(types: EnumSet.from(value.cast<SignatureType>()));
         });
       },
     );
@@ -514,15 +514,15 @@ class NihontoFormState extends State<NihontoForm> {
           // === Sugata === //
           // ============== //
 
-          ExpansibleTile(text: 'Sugata', initiallyExpanded: !_sugataInfo.isBlank(),
+          ExpansibleTile(text: 'Sugata', initiallyExpanded: !_sugata.isBlank(),
             children: [
             DropdownButtonFormField(
                 decoration: FieldDecoration('Type'),
-                value: _sugataInfo.type,
+                value: _sugata.type,
                 items: Utils.getDropDownMenuItems(Sugata.values),
                 onChanged: (value) {
                   setState(() {
-                    _sugataInfo = _sugataInfo.copyWith(type: value);
+                    _sugata = _sugata.copyWith(type: value);
                   });
                 }),
 
@@ -531,13 +531,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _sugataInfo.other ?? '',
+              initialValue: _sugata.other ?? '',
               minLines: 1,
               maxLines: 25,
-              key: Key('Sugata-Other-${_sugataInfo.other}'),
+              key: Key('Sugata-Other-${_sugata.other}'),
               onChanged: (value) {
                 setState(() {
-                  _sugataInfo = _sugataInfo.copyWith(other: value);
+                  _sugata = _sugata.copyWith(other: value);
                 });
               },
             ),
@@ -547,17 +547,17 @@ class NihontoFormState extends State<NihontoForm> {
           // === Signature === //
           // ================= //
 
-          ExpansibleTile(text: 'Signature', initiallyExpanded: !_signatureInfo.isBlank(), children: [
+          ExpansibleTile(text: 'Signature', initiallyExpanded: !_signature.isBlank(), children: [
             TextFormField(
               decoration: FieldDecoration('Romaji'),
               readOnly: readOnly,
-              initialValue: _signatureInfo.romaji,
-              key: Key('Signature-Romaji-${_signatureInfo.romaji}'),
+              initialValue: _signature.romaji,
+              key: Key('Signature-Romaji-${_signature.romaji}'),
               minLines: 1,
               maxLines: 25,
               onChanged: (value) {
                 setState(() {
-                  _signatureInfo = _signatureInfo.copyWith(romaji: value);
+                  _signature = _signature.copyWith(romaji: value);
                 });
               },
             ),
@@ -567,13 +567,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Kanji'),
               readOnly: readOnly,
-              initialValue: _signatureInfo.kanji,
-              key: Key('Signature-Kanji-${_signatureInfo.kanji}'),
+              initialValue: _signature.kanji,
+              key: Key('Signature-Kanji-${_signature.kanji}'),
               minLines: 1,
               maxLines: 25,
               onChanged: (value) {
                 setState(() {
-                  _signatureInfo = _signatureInfo.copyWith(kanji: value);
+                  _signature = _signature.copyWith(kanji: value);
                 });
               },
             ),
@@ -587,13 +587,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _signatureInfo.other,
+              initialValue: _signature.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Signature-Other-${_signatureInfo.other}'),
+              key: Key('Signature-Other-${_signature.other}'),
               onChanged: (value) {
                 setState(() {
-                  _signatureInfo = _signatureInfo.copyWith(other: value);
+                  _signature = _signature.copyWith(other: value);
                 });
               },
             ),
@@ -956,16 +956,16 @@ class NihontoFormState extends State<NihontoForm> {
           // === Sori === //
           // ============ //
 
-          ExpansibleTile(text: 'Sori', initiallyExpanded: !_soriInfo.isBlank(), children: [
+          ExpansibleTile(text: 'Sori', initiallyExpanded: !_sori.isBlank(), children: [
             Row(
               children: [
                 Expanded(
                     child: TextFormField(
                       decoration: FieldDecoration('Sori'),
                       readOnly: true,
-                      initialValue: "${_soriInfo?.sori?.toText() ?? ''}",
+                      initialValue: "${_sori?.sori?.toText() ?? ''}",
                       textAlign: TextAlign.end,
-                      key: Key('Sori-${_soriInfo?.sori?.toText()}'),
+                      key: Key('Sori-${_sori?.sori?.toText()}'),
                       onTap: () {
                         if (readOnly) {
                           return;
@@ -975,12 +975,12 @@ class NihontoFormState extends State<NihontoForm> {
                             context: context,
                             builder: (context) {
                               return _showLengthDialog(
-                                  context, 'Set the sori', _soriInfo.sori);
+                                  context, 'Set the sori', _sori.sori);
                             }).then((value) {
                           if (value != null) {
                             setState(() {
                               // Update the sori based on the value returned by the dialog
-                              _soriInfo = _soriInfo.copyWith(sori: value);
+                              _sori = _sori.copyWith(sori: value);
 
                               print("Sori set to ${value}");
                             });
@@ -994,11 +994,11 @@ class NihontoFormState extends State<NihontoForm> {
                 Expanded(
                     child: DropdownButtonFormField(
                         decoration: FieldDecoration('Type'),
-                        value: _soriInfo.type,
+                        value: _sori.type,
                         items: Utils.getDropDownMenuItems(SoriType.values),
                         onChanged: (value) {
                           setState(() {
-                            _soriInfo = _soriInfo.copyWith(type: value);
+                            _sori = _sori.copyWith(type: value);
                           });
                         }))
               ],
@@ -1009,13 +1009,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _soriInfo.other,
+              initialValue: _sori.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Sori-Other-${_soriInfo.other}'),
+              key: Key('Sori-Other-${_sori.other}'),
               onChanged: (value) {
                 setState(() {
-                  _soriInfo = _soriInfo.copyWith(other: value);
+                  _sori = _sori.copyWith(other: value);
                 });
               },
             ),
@@ -1025,14 +1025,14 @@ class NihontoFormState extends State<NihontoForm> {
           // === Kissaki === //
           // =============== //
 
-          ExpansibleTile(text: 'Kissaki', initiallyExpanded: !_kissakiInfo.isBlank(), children: [
+          ExpansibleTile(text: 'Kissaki', initiallyExpanded: !_kissaki.isBlank(), children: [
             DropdownButtonFormField(
                 decoration: FieldDecoration('Type'),
-                value: _kissakiInfo.type,
+                value: _kissaki.type,
                 items: Utils.getDropDownMenuItems(KissakiType.values),
                 onChanged: (value) {
                   setState(() {
-                    _kissakiInfo = _kissakiInfo.copyWith(type: value);
+                    _kissaki = _kissaki.copyWith(type: value);
                   });
                 }),
 
@@ -1041,13 +1041,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _kissakiInfo.other,
+              initialValue: _kissaki.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Kissaki-Other-${_kissakiInfo.other}'),
+              key: Key('Kissaki-Other-${_kissaki.other}'),
               onChanged: (value) {
                 setState(() {
-                  _kissakiInfo = _kissakiInfo.copyWith(other: value);
+                  _kissaki = _kissaki.copyWith(other: value);
                 });
               },
             ),
@@ -1057,14 +1057,14 @@ class NihontoFormState extends State<NihontoForm> {
           // === Mune === //
           // ============ //
 
-          ExpansibleTile(text: 'Mune', initiallyExpanded: !_muneInfo.isBlank(), children: [
+          ExpansibleTile(text: 'Mune', initiallyExpanded: !_mune.isBlank(), children: [
             DropdownButtonFormField(
                 decoration: FieldDecoration('Type'),
-                value: _muneInfo.type,
+                value: _mune.type,
                 items: Utils.getDropDownMenuItems(MuneType.values),
                 onChanged: (value) {
                   setState(() {
-                    _muneInfo = _muneInfo.copyWith(type: value);
+                    _mune = _mune.copyWith(type: value);
                   });
                 }),
 
@@ -1073,13 +1073,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _muneInfo.other,
+              initialValue: _mune.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Mune-Other-${_muneInfo.other}'),
+              key: Key('Mune-Other-${_mune.other}'),
               onChanged: (value) {
                 setState(() {
-                  _muneInfo = _muneInfo.copyWith(other: value);
+                  _mune = _mune.copyWith(other: value);
                 });
               },
             ),
@@ -1089,7 +1089,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Hada === //
           // ============ //
 
-          ExpansibleTile(text: 'Hada', initiallyExpanded: !_hadaInfo.isBlank(), children: [
+          ExpansibleTile(text: 'Hada', initiallyExpanded: !_hada.isBlank(), children: [
             hadaWidget,
 
             columnPadder,
@@ -1097,13 +1097,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _hadaInfo.other,
+              initialValue: _hada.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Hada-Other-${_hadaInfo.other}'),
+              key: Key('Hada-Other-${_hada.other}'),
               onChanged: (value) {
                 setState(() {
-                  _hadaInfo = _hadaInfo.copyWith(other: value);
+                  _hada = _hada.copyWith(other: value);
                 });
               },
             ),
@@ -1113,7 +1113,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Hamon === //
           // ============= //
 
-          ExpansibleTile(text: 'Hamon', initiallyExpanded: !_hamonInfo.isBlank(), children: [
+          ExpansibleTile(text: 'Hamon', initiallyExpanded: !_hamon.isBlank(), children: [
             hamonWidget,
 
             columnPadder,
@@ -1121,13 +1121,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _hamonInfo.other ?? '',
+              initialValue: _hamon.other ?? '',
               minLines: 1,
               maxLines: 25,
-              key: Key('Hamon-Other-${_hamonInfo.other}'),
+              key: Key('Hamon-Other-${_hamon.other}'),
               onChanged: (value) {
                 setState(() {
-                  _hamonInfo = _hamonInfo.copyWith(other: value);
+                  _hamon = _hamon.copyWith(other: value);
                 });
               },
             ),
@@ -1137,7 +1137,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Yakiba === //
           // ============== //
 
-          ExpansibleTile(text: 'Yakiba', initiallyExpanded: !_yakibaInfo.isBlank(), children: [
+          ExpansibleTile(text: 'Yakiba', initiallyExpanded: !_yakiba.isBlank(), children: [
             yakibaWidget,
 
             columnPadder,
@@ -1145,13 +1145,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _yakibaInfo.other,
+              initialValue: _yakiba.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Yakiba-Other-${_yakibaInfo.other}'),
+              key: Key('Yakiba-Other-${_yakiba.other}'),
               onChanged: (value) {
                 setState(() {
-                  _yakibaInfo = _yakibaInfo.copyWith(other: value);
+                  _yakiba = _yakiba.copyWith(other: value);
                 });
               },
             ),
@@ -1161,7 +1161,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Bohi === //
           // ============ //
 
-          ExpansibleTile(text: 'Boshi', initiallyExpanded: !_boshiInfo.isBlank(), children: [
+          ExpansibleTile(text: 'Boshi', initiallyExpanded: !_boshi.isBlank(), children: [
             boshiWidget,
 
             columnPadder,
@@ -1169,13 +1169,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _boshiInfo.other,
+              initialValue: _boshi.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Boshi-Other-${_boshiInfo.other}'),
+              key: Key('Boshi-Other-${_boshi.other}'),
               onChanged: (value) {
                 setState(() {
-                  _boshiInfo = _boshiInfo.copyWith(other: value);
+                  _boshi = _boshi.copyWith(other: value);
                 });
               },
             ),
@@ -1185,7 +1185,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Nakago === //
           // ============== //
 
-          ExpansibleTile(text: 'Nakago', initiallyExpanded: !_nakagoInfo.isBlank(), children: [
+          ExpansibleTile(text: 'Nakago', initiallyExpanded: !_nakago.isBlank(), children: [
             nakagoWidget,
 
             columnPadder,
@@ -1193,13 +1193,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _nakagoInfo.other,
+              initialValue: _nakago.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Nakago-Other-${_nakagoInfo.other}'),
+              key: Key('Nakago-Other-${_nakago.other}'),
               onChanged: (value) {
                 setState(() {
-                  _nakagoInfo = _nakagoInfo.copyWith(other: value);
+                  _nakago = _nakago.copyWith(other: value);
                 });
               },
             ),
@@ -1209,7 +1209,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Yasurime === //
           // ================ //
 
-          ExpansibleTile(text: 'Yasurime', initiallyExpanded: !_yasurimeInfo.isBlank(), children: [
+          ExpansibleTile(text: 'Yasurime', initiallyExpanded: !_yasurime.isBlank(), children: [
             yasurimeWidget,
 
             columnPadder,
@@ -1217,13 +1217,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _yasurimeInfo.other,
+              initialValue: _yasurime.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Yasurime-Other-${_yasurimeInfo.other}'),
+              key: Key('Yasurime-Other-${_yasurime.other}'),
               onChanged: (value) {
                 setState(() {
-                  _yasurimeInfo = _yasurimeInfo.copyWith(other: value);
+                  _yasurime = _yasurime.copyWith(other: value);
                 });
               },
             ),
@@ -1233,7 +1233,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Bohi === //
           // ============ //
 
-          ExpansibleTile(text: 'Bohi', initiallyExpanded: !_bohiInfo.isBlank(), children: [
+          ExpansibleTile(text: 'Bohi', initiallyExpanded: !_bohi.isBlank(), children: [
             bohiWidget,
 
             columnPadder,
@@ -1241,13 +1241,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _bohiInfo.other,
+              initialValue: _bohi.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Bohi-Other-${_bohiInfo.other}'),
+              key: Key('Bohi-Other-${_bohi.other}'),
               onChanged: (value) {
                 setState(() {
-                  _bohiInfo = _bohiInfo.copyWith(other: value);
+                  _bohi = _bohi.copyWith(other: value);
                 });
               },
             ),
@@ -1257,14 +1257,14 @@ class NihontoFormState extends State<NihontoForm> {
           // === Polish === //
           // ============== //
 
-          ExpansibleTile(text: 'Polish', initiallyExpanded: !_polishInfo.isBlank(), children: [
+          ExpansibleTile(text: 'Polish', initiallyExpanded: !_polish.isBlank(), children: [
             DropdownButtonFormField(
                 decoration: FieldDecoration('Type'),
-                value: _polishInfo.type,
+                value: _polish.type,
                 items: Utils.getDropDownMenuItems(PolishType.values),
                 onChanged: (value) {
                   setState(() {
-                    _polishInfo = _polishInfo.copyWith(type: value);
+                    _polish = _polish.copyWith(type: value);
                   });
                 }),
 
@@ -1273,13 +1273,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _polishInfo.other,
+              initialValue: _polish.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Polish-Other-${_polishInfo.other}'),
+              key: Key('Polish-Other-${_polish.other}'),
               onChanged: (value) {
                 setState(() {
-                  _polishInfo = _polishInfo.copyWith(other: value);
+                  _polish = _polish.copyWith(other: value);
                 });
               },
             ),
