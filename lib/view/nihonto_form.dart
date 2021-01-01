@@ -104,9 +104,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   BoshiInfo _boshiInfo = BoshiInfo.DEFAULT;
 
-  NakagoInfo _nakagoInfo = NakagoInfo();
-
-  String _nakagoOther;
+  NakagoInfo _nakagoInfo = NakagoInfo.DEFAULT;
 
   YasurimeInfo _yasurimeInfo = YasurimeInfo();
 
@@ -149,7 +147,6 @@ class NihontoFormState extends State<NihontoForm> {
     _yakibaOther = nihonto.yakibaOther;
     _boshiInfo = nihonto.boshiInfo;
     _nakagoInfo = nihonto.nakagoInfo;
-    _nakagoOther = nihonto.nakagoOther;
     _yasurimeInfo = nihonto.yasurimeInfo;
     _yasurimeOther = nihonto.yasurimeOther;
     _bohiInfo = nihonto.bohiInfo;
@@ -176,7 +173,6 @@ class NihontoFormState extends State<NihontoForm> {
         yakibaOther: _yakibaOther,
         boshiInfo: _boshiInfo,
         nakagoInfo: _nakagoInfo,
-        nakagoOther: _nakagoOther,
         yasurimeInfo: _yasurimeInfo,
         yasurimeOther: _yasurimeOther,
         bohiInfo: _bohiInfo,
@@ -397,7 +393,7 @@ class NihontoFormState extends State<NihontoForm> {
     );
 
     final nakagoWidget = MultiSelectFormField(
-      key: Key('Nakago-${_nakagoInfo.toString()}'),
+      key: Key('Nakago-${_nakagoInfo.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Type',
@@ -407,12 +403,10 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _nakagoInfo.values(),
+      initialValue: _nakagoInfo.types.values(),
       onSaved: (value) {
-        print('Value=${value}');
-
         setState(() {
-          _nakagoInfo = NakagoInfo(value);
+          _boshiInfo = _boshiInfo.copyWith(types: EnumSet.from(value.cast<Nakago>()));
         });
       },
     );
@@ -1192,7 +1186,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Nakago === //
           // ============== //
 
-          ExpansibleTile(text: 'Nakago', initiallyExpanded: readOnly, children: [
+          ExpansibleTile(text: 'Nakago', initiallyExpanded: !_nakagoInfo.isBlank(), children: [
             nakagoWidget,
 
             columnPadder,
@@ -1200,13 +1194,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _nakagoOther ?? '',
+              initialValue: _nakagoInfo.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Nakago-Other-${_nakagoOther}'),
+              key: Key('Nakago-Other-${_nakagoInfo.other}'),
               onChanged: (value) {
                 setState(() {
-                  _nakagoOther = value;
+                  _nakagoInfo = _nakagoInfo.copyWith(other: value);
                 });
               },
             ),

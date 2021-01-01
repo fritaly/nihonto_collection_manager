@@ -1,21 +1,35 @@
-import 'dart:math';
-
 import 'package:nihonto_collection_manager/Aggregate.dart';
 import 'package:nihonto_collection_manager/enum_set.dart';
 import 'package:nihonto_collection_manager/model/nakago.dart';
 
-class NakagoInfo extends EnumSet<Nakago> with Aggregate {
+class NakagoInfo with Aggregate {
 
-  NakagoInfo([ Iterable<Nakago> args ]): super(args);
+  static const DEFAULT = NakagoInfo();
+
+  final EnumSet<Nakago> types;
+
+  final String other;
+
+  const NakagoInfo({ this.types = const EnumSet.empty(), this.other = '' });
+
+  NakagoInfo copyWith({EnumSet<Nakago> types, String other}) {
+    return NakagoInfo(
+      types: types ?? this.types,
+      other: other ?? this.other,
+    );
+  }
 
   static NakagoInfo random() {
-    final random = Random();
-
-    return NakagoInfo(Nakago.values.where((element) => random.nextBool()).toList());
+    return NakagoInfo(types: EnumSet.random(Nakago.values), other: '');
   }
 
   @override
   bool isBlank() {
-    return isEmpty();
+    return types.isEmpty() && (other.isEmpty);
+  }
+
+  @override
+  String toString() {
+    return 'NakagoInfo[types: $types, other: $other]';
   }
 }

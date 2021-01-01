@@ -56,8 +56,6 @@ class Nihonto {
 
   final NakagoInfo nakagoInfo;
 
-  final String nakagoOther;
-
   final YasurimeInfo yasurimeInfo;
 
   final String yasurimeOther;
@@ -87,8 +85,7 @@ class Nihonto {
       this.yakibaOther,
       this.boshiInfo = BoshiInfo.DEFAULT,
       this.boshiOther,
-      this.nakagoInfo,
-      this.nakagoOther,
+      this.nakagoInfo = NakagoInfo.DEFAULT,
       this.yasurimeInfo,
       this.yasurimeOther,
       this.bohiInfo = BohiInfo.DEFAULT,
@@ -116,7 +113,6 @@ class Nihonto {
         boshiInfo: BoshiInfo.random(),
         boshiOther: '',
         nakagoInfo: NakagoInfo.random(),
-        nakagoOther: '',
         yasurimeInfo: YasurimeInfo.random(),
         yasurimeOther: '',
         bohiInfo: BohiInfo.random(),
