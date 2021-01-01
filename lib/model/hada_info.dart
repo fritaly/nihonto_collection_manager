@@ -2,16 +2,16 @@ import 'dart:math';
 
 import 'package:nihonto_collection_manager/Aggregate.dart';
 import 'package:nihonto_collection_manager/enum_set.dart';
-import 'package:nihonto_collection_manager/model/hada.dart';
+import 'package:nihonto_collection_manager/model/hada_type.dart';
 
-class HadaInfo extends EnumSet<Hada> with Aggregate {
+class HadaInfo extends EnumSet<HadaType> with Aggregate {
 
-  HadaInfo([ Iterable<Hada> args ]): super(args);
+  HadaInfo([ Iterable<HadaType> args ]): super(args);
 
   static HadaInfo random() {
     final random = Random();
 
-    return HadaInfo(Hada.values.where((element) => random.nextBool()).toList());
+    return HadaInfo(HadaType.values.where((element) => random.nextBool()).toList());
   }
 
   @override

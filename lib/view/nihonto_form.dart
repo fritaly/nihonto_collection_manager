@@ -5,7 +5,7 @@ import 'package:nihonto_collection_manager/model/bohi_info.dart';
 import 'package:nihonto_collection_manager/model/boshi.dart';
 import 'package:nihonto_collection_manager/model/boshi_info.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
-import 'package:nihonto_collection_manager/model/hada.dart';
+import 'package:nihonto_collection_manager/model/hada_type.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
 import 'package:nihonto_collection_manager/model/hamon_info.dart';
 import 'package:nihonto_collection_manager/model/hamon_type.dart';
@@ -331,12 +331,12 @@ class NihontoFormState extends State<NihontoForm> {
     final bool readOnly = (_mode == Mode.READ);
 
     final hadaWidget = MultiSelectFormField(
-      key: Key('Hada-${_hada.toString()}'),
+      key: Key('Hada-${_hada}'),
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Type',
       dataSource:
-          Hada.values.map((e) => {'display': e.label, 'value': e}).toList(),
+          HadaType.values.map((e) => {'display': e.label, 'value': e}).toList(),
       textField: 'display',
       valueField: 'value',
       // required: true,
@@ -458,7 +458,7 @@ class NihontoFormState extends State<NihontoForm> {
     );
 
     final bohiWidget = MultiSelectFormField(
-      key: Key('Bohi-${_hada.toString()}'),
+      key: Key('Bohi-${_hada}'),
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Type',
