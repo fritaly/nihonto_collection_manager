@@ -19,6 +19,8 @@ class _BrowseCollectionState extends State<BrowseCollection> {
 
   static const Duration ONE_SECOND = Duration(seconds: 1);
 
+  static const Duration TWO_SECONDS = Duration(seconds: 2);
+
   List<Nihonto> _collection;
 
   _BrowseCollectionState(List<Nihonto> collection) {
@@ -52,7 +54,12 @@ class _BrowseCollectionState extends State<BrowseCollection> {
   void _delete(Nihonto nihonto) {
     assert (nihonto != null);
 
-    Scaffold.of(context).showSnackBar(SnackBar(content: Text('Not implemented yet !', textAlign: TextAlign.center), duration: ONE_SECOND));
+    setState(() {
+      _collection.remove(nihonto);
+
+      // Display the message for 2 seconds to let the end user revert the deletion if necessary
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text('Nihonto deleted', textAlign: TextAlign.center), duration: TWO_SECONDS));
+    });
   }
 
   Widget _buildRow(Nihonto nihonto) {
