@@ -68,7 +68,7 @@ class Nihonto {
       this.type,
       this.sugataInfo = SugataInfo.DEFAULT,
       this.signature = Signature.EMPTY,
-      this.signatureInfo,
+      this.signatureInfo = SignatureInfo.DEFAULT,
       this.price = Money.ZERO,
       this.measurements = Measurements.DEFAULT,
       this.weight,

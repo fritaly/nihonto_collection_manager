@@ -80,7 +80,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   Signature _signature = Signature.EMPTY;
 
-  SignatureInfo _signatureInfo = SignatureInfo();
+  SignatureInfo _signatureInfo = SignatureInfo.DEFAULT;
 
   Money _price = Money(0, Currency.USD);
 
@@ -442,7 +442,7 @@ class NihontoFormState extends State<NihontoForm> {
     );
 
     final signatureWidget = MultiSelectFormField(
-      key: Key('SignatureInfo-${_signatureInfo.toString()}'),
+      key: Key('SignatureInfo-${_signatureInfo.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
       title: 'Features',
@@ -452,12 +452,10 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _signatureInfo.values(),
+      initialValue: _signatureInfo.types.values(),
       onSaved: (value) {
-        print('SignatureInfo=${value}');
-
         setState(() {
-          _signatureInfo = SignatureInfo(value);
+          _signatureInfo = _signatureInfo.copyWith(types: EnumSet.from(value.cast<SignatureType>()));
         });
       },
     );
