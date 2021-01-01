@@ -14,6 +14,7 @@ import 'package:nihonto_collection_manager/model/kissaki_type.dart';
 import 'package:nihonto_collection_manager/model/length.dart';
 import 'package:nihonto_collection_manager/model/measurements.dart';
 import 'package:nihonto_collection_manager/model/money.dart';
+import 'package:nihonto_collection_manager/model/mune_info.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
 import 'package:nihonto_collection_manager/model/nakago.dart';
 import 'package:nihonto_collection_manager/model/nakago_info.dart';
@@ -93,9 +94,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   KissakiInfo _kissakiInfo = KissakiInfo.DEFAULT;
 
-  MuneType _muneType;
-
-  String _muneOther;
+  MuneInfo _muneInfo = MuneInfo.DEFAULT;
 
   HamonInfo _hamonInfo = HamonInfo();
 
@@ -153,8 +152,7 @@ class NihontoFormState extends State<NihontoForm> {
     _hada = nihonto.hada;
     _hadaOther = nihonto.hadaOther;
     _kissakiInfo = nihonto.kissakiInfo;
-    _muneType = nihonto.muneType;
-    _muneOther = nihonto.muneOther;
+    _muneInfo = nihonto.muneInfo;
     _hamonInfo = nihonto.hamonInfo;
     _hamonOther = nihonto.hamonOther;
     _yakibaInfo = nihonto.yakibaInfo;
@@ -186,8 +184,7 @@ class NihontoFormState extends State<NihontoForm> {
         hada: _hada,
         hadaOther: _hadaOther,
         kissakiInfo: _kissakiInfo,
-        muneType: _muneType,
-        muneOther: _muneOther,
+        muneInfo: _muneInfo,
         hamonInfo: _hamonInfo,
         hamonOther: _hamonOther,
         yakibaInfo: _yakibaInfo,
@@ -1091,14 +1088,14 @@ class NihontoFormState extends State<NihontoForm> {
           // === Mune === //
           // ============ //
 
-          ExpansibleTile(text: 'Mune', initiallyExpanded: readOnly, children: [
+          ExpansibleTile(text: 'Mune', initiallyExpanded: !_muneInfo.isBlank(), children: [
             DropdownButtonFormField(
                 decoration: FieldDecoration('Type'),
-                value: _muneType,
+                value: _muneInfo.type,
                 items: Utils.getDropDownMenuItems(MuneType.values),
                 onChanged: (value) {
                   setState(() {
-                    _muneType = value;
+                    _muneInfo = _muneInfo.copyWith(type: value);
                   });
                 }),
 
@@ -1107,13 +1104,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _muneOther ?? '',
+              initialValue: _muneInfo.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Mune-Other-${_muneOther}'),
+              key: Key('Mune-Other-${_muneInfo.other}'),
               onChanged: (value) {
                 setState(() {
-                  _muneOther = value;
+                  _muneInfo = _muneInfo.copyWith(other: value);
                 });
               },
             ),

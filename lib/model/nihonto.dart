@@ -6,6 +6,7 @@ import 'package:nihonto_collection_manager/model/kissaki_info.dart';
 import 'package:nihonto_collection_manager/model/length.dart';
 import 'package:nihonto_collection_manager/model/measurements.dart';
 import 'package:nihonto_collection_manager/model/money.dart';
+import 'package:nihonto_collection_manager/model/mune_info.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
 import 'package:nihonto_collection_manager/model/nakago_info.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
@@ -45,9 +46,7 @@ class Nihonto {
 
   final KissakiInfo kissakiInfo;
 
-  final MuneType muneType;
-
-  final String muneOther;
+  final MuneInfo muneInfo;
 
   final HamonInfo hamonInfo;
 
@@ -93,8 +92,7 @@ class Nihonto {
       this.hada,
       this.hadaOther,
       this.kissakiInfo = KissakiInfo.DEFAULT,
-      this.muneType,
-      this.muneOther,
+      this.muneInfo = MuneInfo.DEFAULT,
       this.hamonInfo,
       this.hamonOther,
       this.yakibaInfo,
@@ -131,8 +129,7 @@ class Nihonto {
         hada: HadaInfo.random(),
         hadaOther: '',
         kissakiInfo: KissakiInfo.random(),
-        muneType: MuneType.random(),
-        muneOther: '',
+        muneInfo: MuneInfo.random(),
         hamonInfo: HamonInfo.random(),
         hamonOther: '',
         yakibaInfo: YakibaInfo.random(),
