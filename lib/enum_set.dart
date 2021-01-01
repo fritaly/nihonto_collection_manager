@@ -2,9 +2,11 @@ import 'package:nihonto_collection_manager/utils.dart';
 
 class EnumSet<T> {
 
-  final _set = Set<T>();
+  final Set<T> _set;
 
-  EnumSet([ Iterable<T> args ]) {
+  const EnumSet.empty(): _set = const {};
+
+  EnumSet([ Iterable<T> args ]): _set = Set() {
     if (args != null) {
       _set.addAll(args);
     }

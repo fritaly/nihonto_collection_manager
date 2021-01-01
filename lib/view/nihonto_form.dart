@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nihonto_collection_manager/enum_set.dart';
 import 'package:nihonto_collection_manager/model/bohi.dart';
 import 'package:nihonto_collection_manager/model/bohi_info.dart';
 import 'package:nihonto_collection_manager/model/boshi.dart';
@@ -107,8 +108,6 @@ class NihontoFormState extends State<NihontoForm> {
 
   BoshiInfo _boshiInfo = BoshiInfo();
 
-  String _boshiOther;
-
   NakagoInfo _nakagoInfo = NakagoInfo();
 
   String _nakagoOther;
@@ -157,7 +156,6 @@ class NihontoFormState extends State<NihontoForm> {
     _yakibaInfo = nihonto.yakibaInfo;
     _yakibaOther = nihonto.yakibaOther;
     _boshiInfo = nihonto.boshiInfo;
-    _boshiOther = nihonto.boshiOther;
     _nakagoInfo = nihonto.nakagoInfo;
     _nakagoOther = nihonto.nakagoOther;
     _yasurimeInfo = nihonto.yasurimeInfo;
@@ -188,7 +186,6 @@ class NihontoFormState extends State<NihontoForm> {
         yakibaInfo: _yakibaInfo,
         yakibaOther: _yakibaOther,
         boshiInfo: _boshiInfo,
-        boshiOther: _boshiOther,
         nakagoInfo: _nakagoInfo,
         nakagoOther: _nakagoOther,
         yasurimeInfo: _yasurimeInfo,
@@ -405,12 +402,10 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _boshiInfo.values(),
+      initialValue: _boshiInfo.types.values(),
       onSaved: (value) {
-        print('Value=${value}');
-
         setState(() {
-          _boshiInfo = BoshiInfo(value);
+          _boshiInfo = _boshiInfo.copyWith(types: EnumSet.from(value.cast<Boshi>()));
         });
       },
     );
@@ -1197,13 +1192,13 @@ class NihontoFormState extends State<NihontoForm> {
             TextFormField(
               decoration: FieldDecoration('Other'),
               readOnly: readOnly,
-              initialValue: _boshiOther ?? '',
+              initialValue: _boshiInfo.other,
               minLines: 1,
               maxLines: 25,
-              key: Key('Boshi-Other-${_boshiOther}'),
+              key: Key('Boshi-Other-${_boshiInfo.other}'),
               onChanged: (value) {
                 setState(() {
-                  _boshiOther = value;
+                  _boshiInfo = _boshiInfo.copyWith(other: value);
                 });
               },
             ),
