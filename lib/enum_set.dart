@@ -8,6 +8,8 @@ class EnumSet<T> {
     }
   }
 
+  EnumSet.from(Iterable<T> args): this(args);
+
   EnumSet<T> operator +(T value) {
     assert (value != null);
 
