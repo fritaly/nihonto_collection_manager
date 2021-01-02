@@ -110,6 +110,41 @@ class NihontoFormState extends State<NihontoForm> {
     }
   }
 
+  void _back() {
+    if (_hasChanges()) {
+      final AlertDialog dialog = AlertDialog(
+        title: Text('Discard changes ?'),
+        content:
+        Text("You're about to lose some pending changes."),
+        actions: [
+          FlatButton(
+            textColor: Color(0xFF6200EE),
+            onPressed: () {
+              // Hide the dialog
+              Navigator.pop(context); },
+            child: Text('CANCEL'),
+          ),
+          FlatButton(
+            textColor: Color(0xFF6200EE),
+            onPressed: () {
+              // Hide the dialog
+              Navigator.pop(context);
+
+              // Display the previous page
+              Navigator.pop(context);
+            },
+            child: Text('ACCEPT'),
+          ),
+        ],
+      );
+
+      showDialog<void>(context: context, builder: (context) => dialog);
+    } else {
+      // Display the previous page
+      Navigator.pop(context);
+    }
+  }
+
   AlertDialog _showPriceDialog(BuildContext context, Money money) {
     // Money can be null
     assert(context != null);
@@ -1298,6 +1333,7 @@ class NihontoFormState extends State<NihontoForm> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Nihonto information'),
+        leading: TextButton(child: Icon(Icons.arrow_back_ios, color: Colors.white), onPressed: _back),
         actions: actions
       ),
       body: ListView(children: [form]) // Wrap the form into a list view to support scrolling
