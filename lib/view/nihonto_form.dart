@@ -87,7 +87,17 @@ class NihontoFormState extends State<NihontoForm> {
     });
   }
 
+  bool _hasChanges() {
+    return _current != _backup;
+  }
+
   void _save() {
+    if (!_hasChanges()) {
+      print('No change to save');
+
+      return;
+    }
+
     // Validate returns true if the form is valid, otherwise false.
     if (_formKey.currentState.validate()) {
       // If the form is valid, display a snackbar. In the real world,
@@ -1280,7 +1290,9 @@ class NihontoFormState extends State<NihontoForm> {
     if (!readOnly) {
       // Only display the actions in not in read-only mode
       actions.add(TextButton(child: Icon(Icons.report_problem_outlined, color: Colors.white), onPressed: _randomize));
-      actions.add(TextButton(child: Icon(Icons.save, color: Colors.white), onPressed: _save));
+
+      // Grey out the SAVE action if the form doesn't have changes
+      actions.add(TextButton(child: Icon(Icons.save, color: _hasChanges() ? Colors.white : const Color(0xFFD0D0D0)), onPressed: _save));
     }
 
     return Scaffold(
