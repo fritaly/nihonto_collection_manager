@@ -11,9 +11,10 @@ class NihontoCard extends Card {
   NihontoCard(Nihonto nihonto, { VoidCallback onView, VoidCallback onEdit, VoidCallback onDelete }): super(child: Column(
     mainAxisSize: MainAxisSize.min,
     children: <Widget>[
-      Expanded(child: CachedNetworkImage(
-        imageUrl: nihonto.imageUri?.toString()
-      )),
+      // Open the item in read-only mode if the user clicks on the image
+      Expanded(child: FlatButton(child: CachedNetworkImage(
+          imageUrl: nihonto.imageUri?.toString()
+      ), onPressed: onView,)),
       Divider(),
       ListTile(
         // leading: Icon(Icons.album),
