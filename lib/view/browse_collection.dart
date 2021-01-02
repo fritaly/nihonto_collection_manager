@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
 import 'package:nihonto_collection_manager/view/nihonto_form.dart';
+import 'package:nihonto_collection_manager/widget/nihonto_card.dart';
 
 class BrowseCollection extends StatefulWidget {
   List<Nihonto> _collection;
@@ -32,10 +33,10 @@ class _BrowseCollectionState extends State<BrowseCollection> {
   Widget _buildWidget() {
     // Generate a ListView listing the swords in the collection
     return ListView.builder(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(8.0),
         itemBuilder: (context, i) {
           if (i.isOdd) {
-            return Divider();
+            return SizedBox(height: 8);
           }
 
           // Compute the index of the entry in the collection (0, 0, 1, 1, 2, 2...)
@@ -89,41 +90,11 @@ class _BrowseCollectionState extends State<BrowseCollection> {
   Widget _buildRow(Nihonto nihonto) {
     assert(nihonto != null);
 
-    return ListTile(
-      title: Text(
-        "${nihonto.referenceNumber} - ${nihonto.signature.romaji}",
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      trailing: PopupMenuButton<Action>(
-        onSelected: (Action result) {
-          switch (result) {
-            case Action.view:
-              _pushView(nihonto);
-              break;
-            case Action.edit:
-              _pushEdit(nihonto);
-              break;
-            case Action.delete:
-              _showDeleteDialog(nihonto);
-              break;
-          }
-        },
-        itemBuilder: (BuildContext context) => <PopupMenuEntry<Action>>[
-          const PopupMenuItem<Action>(
-            value: Action.view,
-            child: const Text('View'),
-          ),
-          const PopupMenuItem<Action>(
-            value: Action.edit,
-            child: const Text('Edit'),
-          ),
-          const PopupMenuItem<Action>(
-            value: Action.delete,
-            child: const Text('Delete'),
-          ),
-        ],
-      ),
-      subtitle: Text("${nihonto.description}"),
+    return NihontoCard(
+      nihonto,
+      onView: () { _pushView(nihonto); },
+      onEdit: () { _pushEdit(nihonto); },
+      onDelete: () { _showDeleteDialog(nihonto); },
     );
   }
 
@@ -199,5 +170,3 @@ class _BrowseCollectionState extends State<BrowseCollection> {
     await Navigator.of(context).push(route);
   }
 }
-
-enum Action { view, edit, delete }
