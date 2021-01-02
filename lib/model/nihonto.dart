@@ -116,6 +116,80 @@ class Nihonto {
     );
   }
 
+  Nihonto copyWith({
+    String referenceNumber,
+    String overallDescription,
+    NihontoType type,
+    SignatureInfo signature,
+    SugataInfo sugata,
+    Money price,
+    Measurements measurements,
+    Weight weight,
+    HadaInfo hada,
+    SoriInfo sori,
+    KissakiInfo kissaki,
+    MuneInfo mune,
+    HamonInfo hamon,
+    YakibaInfo yakiba,
+    BoshiInfo boshi,
+    NakagoInfo nakago,
+    YasurimeInfo yasurime,
+    BohiInfo bohi,
+    PolishInfo polish,
+    Period period,
+    SchoolInfo school,
+  }) {
+    if ((referenceNumber == null ||
+            identical(referenceNumber, this.referenceNumber)) &&
+        (overallDescription == null ||
+            identical(overallDescription, this.overallDescription)) &&
+        (type == null || identical(type, this.type)) &&
+        (signature == null || identical(signature, this.signature)) &&
+        (sugata == null || identical(sugata, this.sugata)) &&
+        (price == null || identical(price, this.price)) &&
+        (measurements == null || identical(measurements, this.measurements)) &&
+        (weight == null || identical(weight, this.weight)) &&
+        (hada == null || identical(hada, this.hada)) &&
+        (sori == null || identical(sori, this.sori)) &&
+        (kissaki == null || identical(kissaki, this.kissaki)) &&
+        (mune == null || identical(mune, this.mune)) &&
+        (hamon == null || identical(hamon, this.hamon)) &&
+        (yakiba == null || identical(yakiba, this.yakiba)) &&
+        (boshi == null || identical(boshi, this.boshi)) &&
+        (nakago == null || identical(nakago, this.nakago)) &&
+        (yasurime == null || identical(yasurime, this.yasurime)) &&
+        (bohi == null || identical(bohi, this.bohi)) &&
+        (polish == null || identical(polish, this.polish)) &&
+        (period == null || identical(period, this.period)) &&
+        (school == null || identical(school, this.school))) {
+      return this;
+    }
+
+    return new Nihonto(
+      referenceNumber: referenceNumber ?? this.referenceNumber,
+      overallDescription: overallDescription ?? this.overallDescription,
+      type: type ?? this.type,
+      signature: signature ?? this.signature,
+      sugata: sugata ?? this.sugata,
+      price: price ?? this.price,
+      measurements: measurements ?? this.measurements,
+      weight: weight ?? this.weight,
+      hada: hada ?? this.hada,
+      sori: sori ?? this.sori,
+      kissaki: kissaki ?? this.kissaki,
+      mune: mune ?? this.mune,
+      hamon: hamon ?? this.hamon,
+      yakiba: yakiba ?? this.yakiba,
+      boshi: boshi ?? this.boshi,
+      nakago: nakago ?? this.nakago,
+      yasurime: yasurime ?? this.yasurime,
+      bohi: bohi ?? this.bohi,
+      polish: polish ?? this.polish,
+      period: period ?? this.period,
+      school: school ?? this.school,
+    );
+  }
+
   String get description {
     return "${type?.label} - ${sugata?.type?.label} (${measurements?.nagasa?.toText()})";
   }
