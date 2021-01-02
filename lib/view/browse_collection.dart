@@ -56,7 +56,7 @@ class _BrowseCollectionState extends State<BrowseCollection> {
     return GridView.count(padding: EdgeInsets.all(8),
       mainAxisSpacing: 8,
       crossAxisSpacing: 8,
-      crossAxisCount: 2,
+      crossAxisCount: 1,
       children: _collection.map((e) => _buildRow(e)).toList()
     );
   }

@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 enum Action { view, edit, delete }
 
@@ -9,10 +11,13 @@ class NihontoCard extends Card {
   NihontoCard(Nihonto nihonto, { VoidCallback onView, VoidCallback onEdit, VoidCallback onDelete }): super(child: Column(
     mainAxisSize: MainAxisSize.min,
     children: <Widget>[
+      Expanded(child: CachedNetworkImage(
+        imageUrl: Utils.randomImageUri().toString(),
+      )),
       ListTile(
         // leading: Icon(Icons.album),
-        title: Text("${nihonto.referenceNumber} ${nihonto.signature.romaji}", style: TextStyle(fontWeight: FontWeight.bold),),
-        subtitle: Text(nihonto.description),
+        title: Text("${nihonto.referenceNumber}", style: TextStyle(fontWeight: FontWeight.bold),),
+        subtitle: Text("${nihonto.type.label} by ${nihonto.signature.romaji}"),
           trailing: PopupMenuButton<Action>(
             onSelected: (Action result) {
               switch (result) {
