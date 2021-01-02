@@ -63,4 +63,8 @@ class Utils {
       return false;
     }
   }
+
+  static Uri randomImageUri() {
+    return Uri.parse('https://picsum.photos/250?image=${Random().nextInt(100)}');
+  }
 }
