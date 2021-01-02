@@ -15,9 +15,8 @@ class NihontoCard extends Card {
       Expanded(child: FlatButton(child: CachedNetworkImage(
           imageUrl: nihonto.imageUri?.toString()
       ), onPressed: onView,)),
-      Divider(),
+      Divider(color: Colors.grey, thickness: 1,),
       ListTile(
-        // leading: Icon(Icons.album),
         title: Text("${nihonto.referenceNumber}", style: TextStyle(fontWeight: FontWeight.bold),),
         subtitle: Text("${nihonto.type.label} by ${nihonto.signature.romaji}"),
           trailing: PopupMenuButton<Action>(
