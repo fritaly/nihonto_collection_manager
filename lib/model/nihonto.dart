@@ -101,7 +101,7 @@ class Nihonto {
 
   static Nihonto random() {
     return Nihonto(
-        imageUri: Utils.randomImageUri(),
+        imageUri: Utils.randomImageUri(500),
         referenceNumber: '#${Random().nextInt(100)}',
         overallDescription: 'Description goes here...\nDescription goes here...\nDescription goes here...',
         type: NihontoType.random(),
