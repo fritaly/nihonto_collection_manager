@@ -60,7 +60,7 @@ class NihontoFormState extends State<NihontoForm> {
   final _formKey = GlobalKey<FormState>();
 
   Mode _mode;
-  
+
   Nihonto _current = Nihonto.DEFAULT, _backup;
 
   NihontoFormState(Mode mode, Nihonto nihonto) {
@@ -1343,25 +1343,26 @@ class NihontoFormState extends State<NihontoForm> {
 
         ]));
 
-    var actions = <Widget>[];
+    var footerButtons = <Widget>[];
 
     if (!readOnly) {
-      // Only display the actions if not in read-only mode
-      actions.add(TextButton(child: Icon(Icons.report_problem_outlined, color: Colors.white), onPressed: _randomize));
+      // Only display the footerButtons if not in read-only mode
+      footerButtons.add(RaisedButton(elevation: 8, color: Colors.green, child: Icon(Icons.report_problem_outlined, color: Colors.white), onPressed: _randomize));
 
-      actions.add(TextButton(child: Icon(Icons.undo_outlined, color: _hasChanges() ? Colors.white : const Color(0xFFD0D0D0), semanticLabel: 'Undo changes'), onPressed: _undo));
+      // Grey out the UNDO action if the form doesn't have changes
+      footerButtons.add(RaisedButton(elevation: 8, color: Colors.green, child: Icon(Icons.undo_outlined, color: _hasChanges() ? Colors.white : const Color(0xFFD0D0D0), semanticLabel: 'Undo changes'), onPressed: _undo));
 
       // Grey out the SAVE action if the form doesn't have changes
-      actions.add(TextButton(child: Icon(Icons.save, color: _hasChanges() ? Colors.white : const Color(0xFFD0D0D0), semanticLabel: 'Save changes'), onPressed: _save));
+      footerButtons.add(RaisedButton(elevation: 8, color: Colors.green, child: Icon(Icons.save, color: _hasChanges() ? Colors.white : const Color(0xFFD0D0D0), semanticLabel: 'Save changes'), onPressed: _save));
     }
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Nihonto information'),
         leading: TextButton(child: Icon(Icons.arrow_back_ios, color: Colors.white), onPressed: _back),
-        actions: actions
       ),
-      body: ListView(children: [form]) // Wrap the form into a list view to support scrolling
+      body: ListView(children: [form]), // Wrap the form into a list view to support scrolling
+      persistentFooterButtons: footerButtons.isEmpty ? null : footerButtons,
     );
   }
 }
