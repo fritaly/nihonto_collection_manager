@@ -10,6 +10,7 @@ import 'package:nihonto_collection_manager/model/nakago_info.dart';
 import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/period.dart';
 import 'package:nihonto_collection_manager/model/polish_info.dart';
+import 'package:nihonto_collection_manager/model/school_info.dart';
 import 'package:nihonto_collection_manager/model/signature_info.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
 import 'package:nihonto_collection_manager/model/sugata_info.dart';
@@ -56,6 +57,8 @@ class Nihonto {
 
   final Period period;
 
+  final SchoolInfo school;
+
   const Nihonto(
       {
       this.overallDescription = '',
@@ -76,7 +79,8 @@ class Nihonto {
       this.yasurime = YasurimeInfo.DEFAULT,
       this.bohi = BohiInfo.DEFAULT,
       this.polish = PolishInfo.DEFAULT,
-      this.period
+      this.period,
+      this.school = SchoolInfo.DEFAULT
     });
 
   static Nihonto random() {
@@ -99,7 +103,8 @@ class Nihonto {
         yasurime: YasurimeInfo.random(),
         bohi: BohiInfo.random(),
         polish: PolishInfo.random(),
-        period: Period.random()
+        period: Period.random(),
+        school: SchoolInfo.random()
     );
   }
 

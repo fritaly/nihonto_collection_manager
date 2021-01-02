@@ -25,6 +25,7 @@ import 'package:nihonto_collection_manager/model/nihonto_type.dart';
 import 'package:nihonto_collection_manager/model/period.dart';
 import 'package:nihonto_collection_manager/model/polish_info.dart';
 import 'package:nihonto_collection_manager/model/polish_type.dart';
+import 'package:nihonto_collection_manager/model/school_info.dart';
 import 'package:nihonto_collection_manager/model/signature_info.dart';
 import 'package:nihonto_collection_manager/model/signature_type.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
@@ -110,6 +111,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   Period _period;
 
+  SchoolInfo _school = SchoolInfo.DEFAULT;
+
   NihontoFormState(Mode mode, Nihonto nihonto) {
     assert (mode != null);
 
@@ -143,6 +146,7 @@ class NihontoFormState extends State<NihontoForm> {
     _bohi = nihonto.bohi;
     _polish = nihonto.polish;
     _period = nihonto.period;
+    _school = nihonto.school;
   }
 
   Nihonto _createNihonto() {
@@ -165,7 +169,8 @@ class NihontoFormState extends State<NihontoForm> {
         yasurime: _yasurime,
         bohi: _bohi,
         polish: _polish,
-        period: _period
+        period: _period,
+        school: _school
     );
   }
 
@@ -1308,7 +1313,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Period === //
           // ============== //
 
-          ExpansibleTile(text: 'Period', initiallyExpanded: readOnly, children: [
+          ExpansibleTile(text: 'Period', initiallyExpanded: (_period != null), children: [
             _buildDropDownField<Period>(label: 'Period',
                 value: _period,
                 items: Utils.getDropDownMenuItems(Period.values),
@@ -1318,6 +1323,26 @@ class NihontoFormState extends State<NihontoForm> {
                     _period = value;
                   });
                 }),
+          ]),
+
+          // ============== //
+          // === School === //
+          // ============== //
+
+          ExpansibleTile(text: 'School', initiallyExpanded: !_school.isBlank(), children: [
+            TextFormField(
+              decoration: FieldDecoration('School'),
+              readOnly: readOnly,
+              initialValue: _school.school,
+              minLines: 1,
+              maxLines: 25,
+              key: Key('School-School-${_school.school}'),
+              onChanged: (value) {
+                setState(() {
+                  _school = _school.copyWith(school: value);
+                });
+              },
+            ),
           ]),
 
         ]));
