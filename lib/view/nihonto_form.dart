@@ -473,15 +473,13 @@ class NihontoFormState extends State<NihontoForm> {
         key: _formKey,
         child: Column(children: <Widget>[
 
-          // ============= //
-          // === Image === //
-          // ============= //
-
-          // Only display the image if defined
+          // Only display the image if defined. Display a black border around the image
           if (_current.imageUri != null)
-            CachedNetworkImage(
+            new Container(padding: const EdgeInsets.all(8),
+              margin: const EdgeInsets.all(8),
+              child: CachedNetworkImage(
                 imageUrl: _current.imageUri.toString()
-            ),
+            ), decoration: BoxDecoration(border: Border.all(color: Colors.black), borderRadius: BorderRadius.circular(4)),), columnPadder,
 
           // =========================== //
           // === Overall description === //
