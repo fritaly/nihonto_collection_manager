@@ -34,13 +34,17 @@ enum Mode {
 }
 
 class NihontoForm extends StatefulWidget {
+
   static final TextInputFormatter decimalNumber =
       FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'));
 
   Nihonto _nihonto;
   Mode _mode;
 
-  NihontoForm(Mode mode, [Nihonto nihonto]) {
+  NihontoForm(Mode mode, Nihonto nihonto) {
+    assert (mode != null);
+    assert (nihonto != null);
+
     _nihonto = nihonto;
     _mode = mode;
   }
@@ -61,29 +65,16 @@ class NihontoFormState extends State<NihontoForm> {
 
   NihontoFormState(Mode mode, Nihonto nihonto) {
     assert (mode != null);
-
-    this._mode = mode;
-
-    // The argument can be null
-    if (nihonto != null) {
-      _setNihonto(nihonto);
-    }
-  }
-
-  void _setNihonto(Nihonto nihonto) {
     assert (nihonto != null);
 
-    _backup = nihonto;
-    _current = nihonto;
-  }
-  
-  Nihonto _createNihonto() {
-    return _current;
+    this._mode = mode;
+    this._backup = nihonto;
+    this._current = nihonto;
   }
 
   void _randomize() {
     setState(() {
-      _setNihonto(Nihonto.random());
+      _current = Nihonto.random();
     });
   }
 
@@ -104,9 +95,7 @@ class NihontoFormState extends State<NihontoForm> {
       // you'd often call a server or save the information in a database.
 
       // Pass the entry created to the navigator and display the previous screen
-      var created = _createNihonto();
-
-      Navigator.pop(context, created);
+      Navigator.pop(context, _current);
     }
   }
 
