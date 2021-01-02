@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:nihonto_collection_manager/Aggregate.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
 
+@immutable
 class MuneInfo with Aggregate {
   static const DEFAULT = MuneInfo();
 

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:nihonto_collection_manager/model/bohi_info.dart';
 import 'package:nihonto_collection_manager/model/boshi_info.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
@@ -20,6 +21,7 @@ import 'package:nihonto_collection_manager/model/weight.dart';
 import 'package:nihonto_collection_manager/model/yakiba_info.dart';
 import 'package:nihonto_collection_manager/model/yasurime_info.dart';
 
+@immutable
 class Nihonto {
   final String referenceNumber;
 

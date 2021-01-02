@@ -1,3 +1,6 @@
+import 'package:flutter/foundation.dart';
+
+@immutable
 abstract class Enum<T> {
 
   final String _name;

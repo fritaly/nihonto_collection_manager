@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:nihonto_collection_manager/Aggregate.dart';
 import 'package:nihonto_collection_manager/model/length.dart';
 
+@immutable
 class Measurements with Aggregate {
 
   static const Measurements DEFAULT = Measurements();

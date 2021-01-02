@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:nihonto_collection_manager/Aggregate.dart';
 import 'package:nihonto_collection_manager/enum_set.dart';
 import 'package:nihonto_collection_manager/model/boshi.dart';
 
+@immutable
 class BoshiInfo with Aggregate {
 
   static const DEFAULT = BoshiInfo();

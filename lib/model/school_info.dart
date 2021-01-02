@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:nihonto_collection_manager/Aggregate.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
+@immutable
 class SchoolInfo with Aggregate {
 
   static const DEFAULT = SchoolInfo();

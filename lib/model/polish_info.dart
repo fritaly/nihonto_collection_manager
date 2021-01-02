@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:nihonto_collection_manager/Aggregate.dart';
 import 'package:nihonto_collection_manager/model/polish_type.dart';
 
+@immutable
 class PolishInfo with Aggregate {
   static const DEFAULT = PolishInfo();
 

@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:nihonto_collection_manager/Aggregate.dart';
 import 'package:nihonto_collection_manager/enum_set.dart';
 import 'package:nihonto_collection_manager/model/signature_type.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
+@immutable
 class SignatureInfo with Aggregate {
 
   static const DEFAULT = SignatureInfo();

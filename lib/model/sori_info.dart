@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:nihonto_collection_manager/Aggregate.dart';
 import 'package:nihonto_collection_manager/model/length.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 
+@immutable
 class SoriInfo with Aggregate {
 
   static const DEFAULT = SoriInfo();
