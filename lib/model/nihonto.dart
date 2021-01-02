@@ -23,6 +23,9 @@ import 'package:nihonto_collection_manager/model/yasurime_info.dart';
 
 @immutable
 class Nihonto {
+
+  static const DEFAULT = Nihonto();
+
   final String referenceNumber;
 
   final String overallDescription;
