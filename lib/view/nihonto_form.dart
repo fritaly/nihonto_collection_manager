@@ -479,7 +479,7 @@ class NihontoFormState extends State<NihontoForm> {
               margin: const EdgeInsets.all(8),
               child: CachedNetworkImage(
                 imageUrl: _current.imageUri.toString()
-            ), decoration: BoxDecoration(border: Border.all(color: Colors.black), borderRadius: BorderRadius.circular(4)),), columnPadder,
+            ), /* decoration: BoxDecoration(border: Border.all(color: Colors.black), borderRadius: BorderRadius.circular(4)) */), columnPadder,
 
           // =========================== //
           // === Overall description === //

@@ -72,5 +72,8 @@ class Tile extends ElevatedButton {
       : super(
             child: Text(text,
                 textAlign: TextAlign.center, style: TextStyle(fontSize: 20)),
-            onPressed: onPressed);
+            onPressed: onPressed,
+            style: ButtonStyle(
+                side: MaterialStateProperty.all(
+                    BorderSide(color: Colors.black, width: 2))));
 }
