@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:nihonto_collection_manager/Aggregate.dart';
 import 'package:nihonto_collection_manager/model/length.dart';
+import 'package:nihonto_collection_manager/model/weight.dart';
 
 @immutable
 class Measurements with Aggregate {
@@ -16,6 +17,8 @@ class Measurements with Aggregate {
       motohaba,
       sakihaba;
 
+  final Weight weight;
+
   const Measurements(
       {this.nagasa,
       this.totalLength,
@@ -24,7 +27,8 @@ class Measurements with Aggregate {
       this.sakikasane,
       this.mihaba,
       this.motohaba,
-      this.sakihaba});
+      this.sakihaba,
+        this.weight});
 
   Measurements copyWith(
       {Length nagasa,
@@ -34,7 +38,9 @@ class Measurements with Aggregate {
       Length sakikasane,
       Length mihaba,
       Length motohaba,
-      Length sakihaba}) {
+      Length sakihaba,
+      Weight weight}) {
+
     return Measurements(
         nagasa: nagasa ?? this.nagasa,
         totalLength: totalLength ?? this.totalLength,
@@ -43,7 +49,9 @@ class Measurements with Aggregate {
         sakikasane: sakikasane ?? this.sakikasane,
         mihaba: mihaba ?? this.mihaba,
         motohaba: motohaba ?? this.motohaba,
-        sakihaba: sakihaba ?? this.sakihaba);
+        sakihaba: sakihaba ?? this.sakihaba,
+      weight: weight ?? this.weight,
+    );
   }
 
   static Measurements random() {
@@ -60,7 +68,9 @@ class Measurements with Aggregate {
         sakikasane: kasane,
         mihaba: mihaba,
         motohaba: mihaba,
-        sakihaba: mihaba);
+        sakihaba: mihaba,
+        weight: Weight.random(700, 1200)
+    );
   }
 
   @override
@@ -72,7 +82,8 @@ class Measurements with Aggregate {
         (sakikasane == null) &&
         (mihaba == null) &&
         (motohaba == null) &&
-        (sakihaba == null);
+        (sakihaba == null) &&
+        (weight == null);
   }
 
   @override
@@ -87,7 +98,8 @@ class Measurements with Aggregate {
           sakikasane == other.sakikasane &&
           mihaba == other.mihaba &&
           motohaba == other.motohaba &&
-          sakihaba == other.sakihaba;
+          sakihaba == other.sakihaba &&
+          weight == other.weight;
 
   @override
   int get hashCode =>
@@ -98,5 +110,6 @@ class Measurements with Aggregate {
       sakikasane.hashCode ^
       mihaba.hashCode ^
       motohaba.hashCode ^
-      sakihaba.hashCode;
+      sakihaba.hashCode ^
+      weight.hashCode;
 }

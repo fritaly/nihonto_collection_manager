@@ -654,39 +654,11 @@ class NihontoFormState extends State<NihontoForm> {
                   });
                 },
               ),),
-              rowPadder,
-              Expanded(child: TextFormField(
-                decoration: FieldDecoration('Weight'),
-                readOnly: true,
-                initialValue: "${_current.weight?.toText() ?? ''}",
-                textAlign: TextAlign.end,
-                key: Key('Weight-${_current.weight?.toText()}'),
-                onTap: () {
-                  if (readOnly) {
-                    return;
-                  }
-
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return _showWeightDialog(
-                            context, 'Set the weight', _current.weight);
-                      }).then((value) {
-                    if (value != null) {
-                      setState(() {
-                        _current = _current.copyWith(weight: value);
-                      });
-                    } else {
-                      // The value is null if the user clicked "Cancel"
-                    }
-                  });
-                },
-              ))
             ],
             ),
           ]),
 
-          ExpansibleTile(text: 'Dimensions', initiallyExpanded: !_current.measurements.isBlank(), children: [
+          ExpansibleTile(text: 'Measurements', initiallyExpanded: !_current.measurements.isBlank(), children: [
             Row(
               children: [
                 Expanded(
@@ -752,7 +724,35 @@ class NihontoFormState extends State<NihontoForm> {
                           }
                         });
                       },
-                    ))
+                    )),
+                rowPadder,
+                Expanded(child: TextFormField(
+                  decoration: FieldDecoration('Weight'),
+                  readOnly: true,
+                  initialValue: "${_current.measurements.weight?.toText() ?? ''}",
+                  textAlign: TextAlign.end,
+                  key: Key('Weight-${_current.measurements.weight?.toText()}'),
+                  onTap: () {
+                    if (readOnly) {
+                      return;
+                    }
+
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return _showWeightDialog(
+                              context, 'Set the weight', _current.measurements.weight);
+                        }).then((value) {
+                      if (value != null) {
+                        setState(() {
+                          _current = _current.copyWith(measurements: _current.measurements.copyWith(weight: value));
+                        });
+                      } else {
+                        // The value is null if the user clicked "Cancel"
+                      }
+                    });
+                  },
+                ))
               ],
             ),
 

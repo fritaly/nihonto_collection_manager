@@ -40,8 +40,6 @@ class Nihonto {
 
   final Measurements measurements;
 
-  final Weight weight;
-
   final HadaInfo hada;
 
   final SoriInfo sori;
@@ -77,7 +75,6 @@ class Nihonto {
       this.signature = SignatureInfo.DEFAULT,
       this.price = Money.ZERO,
       this.measurements = Measurements.DEFAULT,
-      this.weight,
       this.sori = SoriInfo.DEFAULT,
       this.hada = HadaInfo.DEFAULT,
       this.kissaki = KissakiInfo.DEFAULT,
@@ -102,7 +99,6 @@ class Nihonto {
         signature: SignatureInfo.random(),
         price: Money.random(),
         measurements: Measurements.random(),
-        weight: Weight.random(650, 1200),
         sori: SoriInfo.random(),
         hada: HadaInfo.random(),
         kissaki: KissakiInfo.random(),
@@ -127,7 +123,6 @@ class Nihonto {
     SugataInfo sugata,
     Money price,
     Measurements measurements,
-    Weight weight,
     HadaInfo hada,
     SoriInfo sori,
     KissakiInfo kissaki,
@@ -151,7 +146,6 @@ class Nihonto {
         (sugata == null || identical(sugata, this.sugata)) &&
         (price == null || identical(price, this.price)) &&
         (measurements == null || identical(measurements, this.measurements)) &&
-        (weight == null || identical(weight, this.weight)) &&
         (hada == null || identical(hada, this.hada)) &&
         (sori == null || identical(sori, this.sori)) &&
         (kissaki == null || identical(kissaki, this.kissaki)) &&
@@ -176,7 +170,6 @@ class Nihonto {
       sugata: sugata ?? this.sugata,
       price: price ?? this.price,
       measurements: measurements ?? this.measurements,
-      weight: weight ?? this.weight,
       hada: hada ?? this.hada,
       sori: sori ?? this.sori,
       kissaki: kissaki ?? this.kissaki,
@@ -213,7 +206,6 @@ class Nihonto {
           sugata == other.sugata &&
           price == other.price &&
           measurements == other.measurements &&
-          weight == other.weight &&
           hada == other.hada &&
           sori == other.sori &&
           kissaki == other.kissaki &&
@@ -237,7 +229,6 @@ class Nihonto {
       sugata.hashCode ^
       price.hashCode ^
       measurements.hashCode ^
-      weight.hashCode ^
       hada.hashCode ^
       sori.hashCode ^
       kissaki.hashCode ^
