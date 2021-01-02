@@ -32,4 +32,15 @@ class NakagoInfo with Aggregate {
   String toString() {
     return 'NakagoInfo[types: $types, other: $other]';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is NakagoInfo &&
+          runtimeType == other.runtimeType &&
+          types == other.types &&
+          other == other.other;
+
+  @override
+  int get hashCode => types.hashCode ^ other.hashCode;
 }

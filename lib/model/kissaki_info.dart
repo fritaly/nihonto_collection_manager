@@ -31,4 +31,15 @@ class KissakiInfo with Aggregate {
   String toString() {
     return 'KissakiInfo[type: $type, other: ${other}]';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is KissakiInfo &&
+          runtimeType == other.runtimeType &&
+          type == other.type &&
+          other == other.other;
+
+  @override
+  int get hashCode => type.hashCode ^ other.hashCode;
 }

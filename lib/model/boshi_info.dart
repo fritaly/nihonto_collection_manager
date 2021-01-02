@@ -32,4 +32,15 @@ class BoshiInfo with Aggregate {
   String toString() {
     return 'BoshiInfo[types: $types, other: $other]';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is BoshiInfo &&
+          runtimeType == other.runtimeType &&
+          types == other.types &&
+          other == other.other;
+
+  @override
+  int get hashCode => types.hashCode ^ other.hashCode;
 }

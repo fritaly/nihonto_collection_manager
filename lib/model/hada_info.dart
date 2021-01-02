@@ -32,4 +32,15 @@ class HadaInfo with Aggregate {
   String toString() {
     return 'HadaInfo[types: $types, other: $other]';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HadaInfo &&
+          runtimeType == other.runtimeType &&
+          types == other.types &&
+          other == other.other;
+
+  @override
+  int get hashCode => types.hashCode ^ other.hashCode;
 }

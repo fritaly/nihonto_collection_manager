@@ -30,4 +30,15 @@ class PolishInfo with Aggregate {
   String toString() {
     return 'PolishInfo[type: $type, other: ${other}]';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PolishInfo &&
+          runtimeType == other.runtimeType &&
+          type == other.type &&
+          other == other.other;
+
+  @override
+  int get hashCode => type.hashCode ^ other.hashCode;
 }

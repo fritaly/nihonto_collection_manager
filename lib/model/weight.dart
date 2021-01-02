@@ -36,4 +36,15 @@ class Weight {
 
     return Weight(((Random().nextInt((span * 10).toInt()).toDouble() / 10) + min).toDouble(), WeightUnit.GRAM);
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Weight &&
+          runtimeType == other.runtimeType &&
+          value == other.value &&
+          unit == other.unit;
+
+  @override
+  int get hashCode => value.hashCode ^ unit.hashCode;
 }

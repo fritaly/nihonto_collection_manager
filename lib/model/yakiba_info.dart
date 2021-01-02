@@ -32,4 +32,15 @@ class YakibaInfo with Aggregate {
   String toString() {
     return 'YakibaInfo[types: $types, other: $other]';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is YakibaInfo &&
+          runtimeType == other.runtimeType &&
+          types == other.types &&
+          other == other.other;
+
+  @override
+  int get hashCode => types.hashCode ^ other.hashCode;
 }

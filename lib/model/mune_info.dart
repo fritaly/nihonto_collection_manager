@@ -30,4 +30,15 @@ class MuneInfo with Aggregate {
   String toString() {
     return 'MuneInfo[type: $type, other: ${other}]';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MuneInfo &&
+          runtimeType == other.runtimeType &&
+          type == other.type &&
+          other == other.other;
+
+  @override
+  int get hashCode => type.hashCode ^ other.hashCode;
 }

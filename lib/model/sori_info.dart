@@ -40,4 +40,16 @@ class SoriInfo with Aggregate {
   String toString() {
     return 'SoriInfo[type: $type, sori: $sori, other: ${other}]';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SoriInfo &&
+          runtimeType == other.runtimeType &&
+          type == other.type &&
+          sori == other.sori &&
+          other == other.other;
+
+  @override
+  int get hashCode => type.hashCode ^ sori.hashCode ^ other.hashCode;
 }

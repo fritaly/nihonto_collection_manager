@@ -23,4 +23,15 @@ class Money {
   static Money random() {
     return Money((Random().nextInt(100) * 50) + 1500, Currency.USD);
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Money &&
+          runtimeType == other.runtimeType &&
+          amount == other.amount &&
+          currency == other.currency;
+
+  @override
+  int get hashCode => amount.hashCode ^ currency.hashCode;
 }

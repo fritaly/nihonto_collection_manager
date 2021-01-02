@@ -28,4 +28,14 @@ class SchoolInfo with Aggregate {
   String toString() {
     return 'SchoolInfo[school: $school]';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SchoolInfo &&
+          runtimeType == other.runtimeType &&
+          school == other.school;
+
+  @override
+  int get hashCode => school.hashCode;
 }

@@ -121,4 +121,55 @@ class Nihonto {
   String toString() {
     return "Nihonto[type: ${type}, price: ${price}, hada: ${hada}]";
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Nihonto &&
+          runtimeType == other.runtimeType &&
+          referenceNumber == other.referenceNumber &&
+          overallDescription == other.overallDescription &&
+          type == other.type &&
+          signature == other.signature &&
+          sugata == other.sugata &&
+          price == other.price &&
+          measurements == other.measurements &&
+          weight == other.weight &&
+          hada == other.hada &&
+          sori == other.sori &&
+          kissaki == other.kissaki &&
+          mune == other.mune &&
+          hamon == other.hamon &&
+          yakiba == other.yakiba &&
+          boshi == other.boshi &&
+          nakago == other.nakago &&
+          yasurime == other.yasurime &&
+          bohi == other.bohi &&
+          polish == other.polish &&
+          period == other.period &&
+          school == other.school;
+
+  @override
+  int get hashCode =>
+      referenceNumber.hashCode ^
+      overallDescription.hashCode ^
+      type.hashCode ^
+      signature.hashCode ^
+      sugata.hashCode ^
+      price.hashCode ^
+      measurements.hashCode ^
+      weight.hashCode ^
+      hada.hashCode ^
+      sori.hashCode ^
+      kissaki.hashCode ^
+      mune.hashCode ^
+      hamon.hashCode ^
+      yakiba.hashCode ^
+      boshi.hashCode ^
+      nakago.hashCode ^
+      yasurime.hashCode ^
+      bohi.hashCode ^
+      polish.hashCode ^
+      period.hashCode ^
+      school.hashCode;
 }

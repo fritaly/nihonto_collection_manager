@@ -37,4 +37,18 @@ class SignatureInfo with Aggregate {
   String toString() {
     return "SignatureInfo[kanji: '$kanji', romaji: '$romaji', types: $types, other: '$other']";
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SignatureInfo &&
+          runtimeType == other.runtimeType &&
+          kanji == other.kanji &&
+          romaji == other.romaji &&
+          types == other.types &&
+          other == other.other;
+
+  @override
+  int get hashCode =>
+      kanji.hashCode ^ romaji.hashCode ^ types.hashCode ^ other.hashCode;
 }

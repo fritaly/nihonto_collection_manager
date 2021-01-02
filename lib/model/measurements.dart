@@ -72,4 +72,29 @@ class Measurements with Aggregate {
         (motohaba == null) &&
         (sakihaba == null);
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Measurements &&
+          runtimeType == other.runtimeType &&
+          nagasa == other.nagasa &&
+          totalLength == other.totalLength &&
+          kasane == other.kasane &&
+          motokasane == other.motokasane &&
+          sakikasane == other.sakikasane &&
+          mihaba == other.mihaba &&
+          motohaba == other.motohaba &&
+          sakihaba == other.sakihaba;
+
+  @override
+  int get hashCode =>
+      nagasa.hashCode ^
+      totalLength.hashCode ^
+      kasane.hashCode ^
+      motokasane.hashCode ^
+      sakikasane.hashCode ^
+      mihaba.hashCode ^
+      motohaba.hashCode ^
+      sakihaba.hashCode;
 }

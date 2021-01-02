@@ -23,4 +23,15 @@ class SugataInfo with Aggregate {
   bool isBlank() {
     return (type == null) && (other.isEmpty);
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SugataInfo &&
+          runtimeType == other.runtimeType &&
+          type == other.type &&
+          other == other.other;
+
+  @override
+  int get hashCode => type.hashCode ^ other.hashCode;
 }

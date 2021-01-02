@@ -85,4 +85,15 @@ class Length {
 
     return Length(((Random().nextInt((span * 10).toInt()).toDouble() / 10) + min).toDouble(), LengthUnit.CM);
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Length &&
+          runtimeType == other.runtimeType &&
+          value == other.value &&
+          unit == other.unit;
+
+  @override
+  int get hashCode => value.hashCode ^ unit.hashCode;
 }
