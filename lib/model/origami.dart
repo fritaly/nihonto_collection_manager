@@ -4,6 +4,8 @@ import 'package:nihonto_collection_manager/model/organization.dart';
 @immutable
 class Origami {
 
+  static const DEFAULT = Origami();
+
   final Organization issuer;
 
   final String type;
@@ -12,7 +14,7 @@ class Origami {
 
   final String other;
 
-  Origami({this.issuer, this.type, this.issuedAt, this.other});
+  const Origami({this.issuer, this.type = '', this.issuedAt, this.other = ''});
 
   @override
   String toString() {
