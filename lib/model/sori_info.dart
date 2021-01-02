@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:nihonto_collection_manager/Aggregate.dart';
 import 'package:nihonto_collection_manager/model/length.dart';
+import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 
 @immutable
@@ -30,7 +31,7 @@ class SoriInfo with Aggregate {
   }
 
   static SoriInfo random() {
-    return SoriInfo(type: SoriType.random(), sori: Length.random(min: 0, max: 3), other: '');
+    return SoriInfo(type: SoriType.random(), sori: Length.random(LengthUnit.CM, min: 0, max: 3), other: '');
   }
 
   @override

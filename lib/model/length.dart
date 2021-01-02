@@ -77,13 +77,14 @@ class Length {
     return JapaneseLength(shaku, sun, bu, rin);
   }
 
-  static Length random({ double min = 25, double max = 75 }) {
+  static Length random(LengthUnit unit, { double min = 25, double max = 75 }) {
+    assert (unit != null);
     assert (min >= 0);
     assert (min < max);
 
     var span = max - min;
 
-    return Length(((Random().nextInt((span * 10).toInt()).toDouble() / 10) + min).toDouble(), LengthUnit.CM);
+    return Length(((Random().nextInt((span * 10).toInt()).toDouble() / 10) + min).toDouble(), unit);
   }
 
   @override
