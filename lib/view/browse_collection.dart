@@ -31,25 +31,34 @@ class _BrowseCollectionState extends State<BrowseCollection> {
   }
 
   Widget _buildWidget() {
-    // Generate a ListView listing the swords in the collection
-    return ListView.builder(
-        padding: EdgeInsets.all(8.0),
-        itemBuilder: (context, i) {
-          if (i.isOdd) {
-            return SizedBox(height: 8);
-          }
+    if (false) {
+      // Generate a ListView listing the swords in the collection
+      return ListView.builder(
+          padding: EdgeInsets.all(8.0),
+          itemBuilder: (context, i) {
+            if (i.isOdd) {
+              return SizedBox(height: 8);
+            }
 
-          // Compute the index of the entry in the collection (0, 0, 1, 1, 2, 2...)
-          var index = i ~/ 2;
+            // Compute the index of the entry in the collection (0, 0, 1, 1, 2, 2...)
+            var index = i ~/ 2;
 
-          if (index >= _collection.length) {
-            return null;
-          }
+            if (index >= _collection.length) {
+              return null;
+            }
 
-          print("Collection = ${_collection}");
+            print("Collection = ${_collection}");
 
-          return _buildRow(_collection[index]);
-        });
+            return _buildRow(_collection[index]);
+          });
+    }
+
+    return GridView.count(padding: EdgeInsets.all(8),
+      mainAxisSpacing: 8,
+      crossAxisSpacing: 8,
+      crossAxisCount: 2,
+      children: _collection.map((e) => _buildRow(e)).toList()
+    );
   }
 
   void _showDeleteDialog(Nihonto nihonto) {
