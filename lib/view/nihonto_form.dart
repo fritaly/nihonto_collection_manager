@@ -99,19 +99,53 @@ class NihontoFormState extends State<NihontoForm> {
     }
   }
 
+  void _undo() {
+    if (_hasChanges()) {
+      final AlertDialog dialog = AlertDialog(
+        title: Text('Discard changes ?'),
+        content:
+        const Text("You're about to undo some pending changes."),
+        actions: [
+          FlatButton(
+            textColor: Color(0xFF6200EE),
+            onPressed: () {
+              // Hide the dialog and do nothing
+              Navigator.pop(context);
+            },
+            child: const Text('CANCEL'),
+          ),
+          FlatButton(
+            textColor: Color(0xFF6200EE),
+            onPressed: () {
+              // Hide the dialog and undo the changes
+              Navigator.pop(context);
+
+              setState(() {
+                _current = _backup;
+              });
+            },
+            child: const Text('ACCEPT'),
+          ),
+        ],
+      );
+
+      showDialog<void>(context: context, builder: (context) => dialog);
+    }
+  }
+
   void _back() {
     if (_hasChanges()) {
       final AlertDialog dialog = AlertDialog(
         title: Text('Discard changes ?'),
         content:
-        Text("You're about to lose some pending changes."),
+        const Text("You're about to lose some pending changes."),
         actions: [
           FlatButton(
             textColor: Color(0xFF6200EE),
             onPressed: () {
               // Hide the dialog
               Navigator.pop(context); },
-            child: Text('CANCEL'),
+            child: const Text('CANCEL'),
           ),
           FlatButton(
             textColor: Color(0xFF6200EE),
@@ -122,7 +156,7 @@ class NihontoFormState extends State<NihontoForm> {
               // Display the previous page
               Navigator.pop(context);
             },
-            child: Text('ACCEPT'),
+            child: const Text('ACCEPT'),
           ),
         ],
       );
@@ -1312,11 +1346,13 @@ class NihontoFormState extends State<NihontoForm> {
     var actions = <Widget>[];
 
     if (!readOnly) {
-      // Only display the actions in not in read-only mode
+      // Only display the actions if not in read-only mode
       actions.add(TextButton(child: Icon(Icons.report_problem_outlined, color: Colors.white), onPressed: _randomize));
 
+      actions.add(TextButton(child: Icon(Icons.undo_outlined, color: _hasChanges() ? Colors.white : const Color(0xFFD0D0D0), semanticLabel: 'Undo changes'), onPressed: _undo));
+
       // Grey out the SAVE action if the form doesn't have changes
-      actions.add(TextButton(child: Icon(Icons.save, color: _hasChanges() ? Colors.white : const Color(0xFFD0D0D0)), onPressed: _save));
+      actions.add(TextButton(child: Icon(Icons.save, color: _hasChanges() ? Colors.white : const Color(0xFFD0D0D0), semanticLabel: 'Save changes'), onPressed: _save));
     }
 
     return Scaffold(
