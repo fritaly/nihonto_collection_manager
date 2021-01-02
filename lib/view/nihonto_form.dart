@@ -634,39 +634,6 @@ class NihontoFormState extends State<NihontoForm> {
             ),
           ]),
 
-          ExpansibleTile(text: 'Miscellaneous', initiallyExpanded: readOnly, children: [
-            Row(children: [
-              Expanded(child: TextFormField(
-                decoration: FieldDecoration('Price'),
-                readOnly: true,
-                initialValue: "${_current.price.toText()}",
-                textAlign: TextAlign.end,
-                key: Key('Price-${_current.price.toText()}'),
-                onTap: () {
-                  if (readOnly) {
-                    return;
-                  }
-
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return _showPriceDialog(context, _current.price);
-                      }).then((value) {
-                    if (value != null) {
-                      setState(() {
-                        // Update the price based on the value returned by the dialog
-                        _current = _current.copyWith(price: value);
-                      });
-                    } else {
-                      // The value is null if the user clicked "Cancel"
-                    }
-                  });
-                },
-              ),),
-            ],
-            ),
-          ]),
-
           ExpansibleTile(text: 'Measurements', initiallyExpanded: !_current.measurements.isBlank(), children: [
             Row(
               children: [
@@ -1387,6 +1354,39 @@ class NihontoFormState extends State<NihontoForm> {
                   _current = _current.copyWith(other: value);
                 });
               },
+            ),
+          ]),
+
+          ExpansibleTile(text: 'Miscellaneous', initiallyExpanded: readOnly, children: [
+            Row(children: [
+              Expanded(child: TextFormField(
+                decoration: FieldDecoration('Asking price'),
+                readOnly: true,
+                initialValue: "${_current.price.toText()}",
+                textAlign: TextAlign.end,
+                key: Key('Price-${_current.price.toText()}'),
+                onTap: () {
+                  if (readOnly) {
+                    return;
+                  }
+
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return _showPriceDialog(context, _current.price);
+                      }).then((value) {
+                    if (value != null) {
+                      setState(() {
+                        // Update the price based on the value returned by the dialog
+                        _current = _current.copyWith(price: value);
+                      });
+                    } else {
+                      // The value is null if the user clicked "Cancel"
+                    }
+                  });
+                },
+              ),),
+            ],
             ),
           ]),
 
