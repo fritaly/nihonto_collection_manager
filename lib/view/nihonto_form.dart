@@ -1370,6 +1370,26 @@ class NihontoFormState extends State<NihontoForm> {
             ),
           ]),
 
+          // ================== //
+          // === Other Info === //
+          // ================== //
+
+          ExpansibleTile(text: 'Other', initiallyExpanded: !_current.other.isEmpty, children: [
+            TextFormField(
+              decoration: FieldDecoration('Other information'),
+              readOnly: readOnly,
+              initialValue: _current.other,
+              minLines: 1,
+              maxLines: 25,
+              key: Key('Other-Information-${_current.other}'),
+              onChanged: (value) {
+                setState(() {
+                  _current = _current.copyWith(other: value);
+                });
+              },
+            ),
+          ]),
+
         ]));
 
     var footerButtons = <Widget>[];

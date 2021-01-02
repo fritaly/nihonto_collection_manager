@@ -70,6 +70,8 @@ class Nihonto {
 
   final String attribution;
 
+  final String other;
+
   const Nihonto(
       {
       this.imageUri,
@@ -93,7 +95,8 @@ class Nihonto {
       this.polish = PolishInfo.DEFAULT,
       this.period,
       this.school = SchoolInfo.DEFAULT,
-      this.attribution = ''
+      this.attribution = '',
+      this.other = ''
     });
 
   static Nihonto random() {
@@ -119,7 +122,8 @@ class Nihonto {
         polish: PolishInfo.random(),
         period: Period.random(),
         school: SchoolInfo.random(),
-        attribution: ''
+        attribution: '',
+        other: ''
     );
   }
 
@@ -146,6 +150,7 @@ class Nihonto {
     Period period,
     SchoolInfo school,
     String attribution,
+    String other,
   }) {
     if ((referenceNumber == null ||
             identical(referenceNumber, this.referenceNumber)) &&
@@ -170,7 +175,8 @@ class Nihonto {
         (polish == null || identical(polish, this.polish)) &&
         (period == null || identical(period, this.period)) &&
         (school == null || identical(school, this.school)) &&
-        (attribution == null || identical(attribution, this.attribution))) {
+        (attribution == null || identical(attribution, this.attribution)) &&
+        (other == null || identical(other, this.other))) {
       return this;
     }
 
@@ -197,6 +203,7 @@ class Nihonto {
       period: period ?? this.period,
       school: school ?? this.school,
       attribution: attribution ?? this.attribution,
+      other: other ?? this.other,
     );
   }
 
@@ -234,7 +241,8 @@ class Nihonto {
           polish == other.polish &&
           period == other.period &&
           school == other.school &&
-          attribution == other.attribution;
+          attribution == other.attribution &&
+          this.other == other.other;
 
   @override
   int get hashCode =>
@@ -259,5 +267,6 @@ class Nihonto {
       polish.hashCode ^
       period.hashCode ^
       school.hashCode ^
-      attribution.hashCode;
+      attribution.hashCode ^
+      other.hashCode;
 }
