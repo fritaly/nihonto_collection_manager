@@ -12,8 +12,9 @@ class NihontoCard extends Card {
     mainAxisSize: MainAxisSize.min,
     children: <Widget>[
       Expanded(child: CachedNetworkImage(
-        imageUrl: Utils.randomImageUri().toString(),
+        imageUrl: nihonto.imageUri?.toString()
       )),
+      Divider(),
       ListTile(
         // leading: Icon(Icons.album),
         title: Text("${nihonto.referenceNumber}", style: TextStyle(fontWeight: FontWeight.bold),),

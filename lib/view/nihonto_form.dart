@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nihonto_collection_manager/enum.dart';
@@ -471,6 +472,16 @@ class NihontoFormState extends State<NihontoForm> {
     final form = Form(
         key: _formKey,
         child: Column(children: <Widget>[
+
+          // ============= //
+          // === Image === //
+          // ============= //
+
+          // Only display the image if defined
+          if (_current.imageUri != null)
+            CachedNetworkImage(
+                imageUrl: _current.imageUri.toString()
+            ),
 
           // =========================== //
           // === Overall description === //

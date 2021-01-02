@@ -17,9 +17,9 @@ import 'package:nihonto_collection_manager/model/school_info.dart';
 import 'package:nihonto_collection_manager/model/signature_info.dart';
 import 'package:nihonto_collection_manager/model/sori_info.dart';
 import 'package:nihonto_collection_manager/model/sugata_info.dart';
-import 'package:nihonto_collection_manager/model/weight.dart';
 import 'package:nihonto_collection_manager/model/yakiba_info.dart';
 import 'package:nihonto_collection_manager/model/yasurime_info.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
 @immutable
 class Nihonto {
@@ -27,6 +27,8 @@ class Nihonto {
   static const DEFAULT = Nihonto();
 
   final String referenceNumber;
+
+  final Uri imageUri;
 
   final String overallDescription;
 
@@ -68,6 +70,7 @@ class Nihonto {
 
   const Nihonto(
       {
+      this.imageUri,
       this.referenceNumber = '',
       this.overallDescription = '',
       this.type,
@@ -92,6 +95,7 @@ class Nihonto {
 
   static Nihonto random() {
     return Nihonto(
+        imageUri: Utils.randomImageUri(),
         referenceNumber: '#${Random().nextInt(100)}',
         overallDescription: 'Description goes here...\nDescription goes here...\nDescription goes here...',
         type: NihontoType.random(),
@@ -117,6 +121,7 @@ class Nihonto {
 
   Nihonto copyWith({
     String referenceNumber,
+    Uri imageUri,
     String overallDescription,
     NihontoType type,
     SignatureInfo signature,
@@ -139,6 +144,7 @@ class Nihonto {
   }) {
     if ((referenceNumber == null ||
             identical(referenceNumber, this.referenceNumber)) &&
+        (imageUri == null || identical(imageUri, this.imageUri)) &&
         (overallDescription == null ||
             identical(overallDescription, this.overallDescription)) &&
         (type == null || identical(type, this.type)) &&
@@ -164,6 +170,7 @@ class Nihonto {
 
     return new Nihonto(
       referenceNumber: referenceNumber ?? this.referenceNumber,
+      imageUri: imageUri ?? this.imageUri,
       overallDescription: overallDescription ?? this.overallDescription,
       type: type ?? this.type,
       signature: signature ?? this.signature,
@@ -200,6 +207,7 @@ class Nihonto {
       other is Nihonto &&
           runtimeType == other.runtimeType &&
           referenceNumber == other.referenceNumber &&
+          imageUri == other.imageUri &&
           overallDescription == other.overallDescription &&
           type == other.type &&
           signature == other.signature &&
@@ -223,6 +231,7 @@ class Nihonto {
   @override
   int get hashCode =>
       referenceNumber.hashCode ^
+      imageUri.hashCode ^
       overallDescription.hashCode ^
       type.hashCode ^
       signature.hashCode ^
