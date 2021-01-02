@@ -68,6 +68,8 @@ class Nihonto {
 
   final SchoolInfo school;
 
+  final String attribution;
+
   const Nihonto(
       {
       this.imageUri,
@@ -90,7 +92,8 @@ class Nihonto {
       this.bohi = BohiInfo.DEFAULT,
       this.polish = PolishInfo.DEFAULT,
       this.period,
-      this.school = SchoolInfo.DEFAULT
+      this.school = SchoolInfo.DEFAULT,
+      this.attribution = ''
     });
 
   static Nihonto random() {
@@ -115,7 +118,8 @@ class Nihonto {
         bohi: BohiInfo.random(),
         polish: PolishInfo.random(),
         period: Period.random(),
-        school: SchoolInfo.random()
+        school: SchoolInfo.random(),
+        attribution: ''
     );
   }
 
@@ -141,6 +145,7 @@ class Nihonto {
     PolishInfo polish,
     Period period,
     SchoolInfo school,
+    String attribution,
   }) {
     if ((referenceNumber == null ||
             identical(referenceNumber, this.referenceNumber)) &&
@@ -164,7 +169,8 @@ class Nihonto {
         (bohi == null || identical(bohi, this.bohi)) &&
         (polish == null || identical(polish, this.polish)) &&
         (period == null || identical(period, this.period)) &&
-        (school == null || identical(school, this.school))) {
+        (school == null || identical(school, this.school)) &&
+        (attribution == null || identical(attribution, this.attribution))) {
       return this;
     }
 
@@ -190,6 +196,7 @@ class Nihonto {
       polish: polish ?? this.polish,
       period: period ?? this.period,
       school: school ?? this.school,
+      attribution: attribution ?? this.attribution,
     );
   }
 
@@ -226,7 +233,8 @@ class Nihonto {
           bohi == other.bohi &&
           polish == other.polish &&
           period == other.period &&
-          school == other.school;
+          school == other.school &&
+          attribution == other.attribution;
 
   @override
   int get hashCode =>
@@ -250,5 +258,6 @@ class Nihonto {
       bohi.hashCode ^
       polish.hashCode ^
       period.hashCode ^
-      school.hashCode;
+      school.hashCode ^
+      attribution.hashCode;
 }

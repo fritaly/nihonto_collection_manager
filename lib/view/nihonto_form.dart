@@ -1350,6 +1350,26 @@ class NihontoFormState extends State<NihontoForm> {
             ),
           ]),
 
+          // =================== //
+          // === Attribution === //
+          // =================== //
+
+          ExpansibleTile(text: 'Attribution', initiallyExpanded: !_current.attribution.isEmpty, children: [
+            TextFormField(
+              decoration: FieldDecoration('Attribution'),
+              readOnly: readOnly,
+              initialValue: _current.attribution,
+              minLines: 1,
+              maxLines: 25,
+              key: Key('Attribution-${_current.attribution}'),
+              onChanged: (value) {
+                setState(() {
+                  _current = _current.copyWith(attribution: value);
+                });
+              },
+            ),
+          ]),
+
         ]));
 
     var footerButtons = <Widget>[];
