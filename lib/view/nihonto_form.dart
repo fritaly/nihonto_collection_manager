@@ -73,6 +73,8 @@ class NihontoFormState extends State<NihontoForm> {
 
   Mode _mode;
 
+  String _referenceNumber;
+
   String _overallDescription;
 
   NihontoType _type;
@@ -127,6 +129,7 @@ class NihontoFormState extends State<NihontoForm> {
   void _setNihonto(Nihonto nihonto) {
     assert (nihonto != null);
 
+    _referenceNumber = nihonto.referenceNumber;
     _overallDescription = nihonto.overallDescription;
     _type = nihonto.type;
     _sugata = nihonto.sugata;
@@ -151,6 +154,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   Nihonto _createNihonto() {
     return Nihonto(
+        referenceNumber: _referenceNumber,
         overallDescription: _overallDescription,
         type: _type,
         sugata: _sugata,
@@ -503,6 +507,33 @@ class NihontoFormState extends State<NihontoForm> {
 
           ExpansibleTile(text: 'General', initiallyExpanded: true,
             children: [
+              TextFormField(
+                decoration: FieldDecoration('Reference number'),
+                readOnly: readOnly,
+                initialValue: _referenceNumber,
+                key: Key('Overall-ReferenceNumber-${_referenceNumber}'),
+                validator: (value) {
+                  final regexp = new RegExp(
+                    r"^#?[A-Z0-9_-]{1,3}",
+                    caseSensitive: false,
+                    multiLine: false,
+                  );
+
+                  if (!regexp.hasMatch(value)) {
+                    return "The reference number isn't valid";
+                  }
+
+                  return null;
+                },
+                onChanged: (value) {
+                  setState(() {
+                    _overallDescription = value;
+                  });
+                },
+              ),
+
+              columnPadder,
+
               TextFormField(
                 decoration: FieldDecoration('Overall description'),
                 readOnly: readOnly,

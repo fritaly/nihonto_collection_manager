@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:nihonto_collection_manager/model/bohi_info.dart';
 import 'package:nihonto_collection_manager/model/boshi_info.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
@@ -19,6 +21,8 @@ import 'package:nihonto_collection_manager/model/yakiba_info.dart';
 import 'package:nihonto_collection_manager/model/yasurime_info.dart';
 
 class Nihonto {
+  final String referenceNumber;
+
   final String overallDescription;
 
   final NihontoType type;
@@ -61,6 +65,7 @@ class Nihonto {
 
   const Nihonto(
       {
+      this.referenceNumber = '',
       this.overallDescription = '',
       this.type,
       this.sugata = SugataInfo.DEFAULT,
@@ -85,6 +90,7 @@ class Nihonto {
 
   static Nihonto random() {
     return Nihonto(
+        referenceNumber: '#${Random().nextInt(100)}',
         overallDescription: 'Description goes here...\nDescription goes here...\nDescription goes here...',
         type: NihontoType.random(),
         sugata: SugataInfo.random(),
