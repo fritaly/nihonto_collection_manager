@@ -991,8 +991,7 @@ class NihontoFormState extends State<NihontoForm> {
                           if (value != null) {
                             setState(() {
                               // Update the sori based on the value returned by the dialog
-                              _current = _current.rebuild((builder) => builder
-                                ..sori = _current.sori.copyWith(sori: value));
+                              _current = _current.rebuild((builder) => builder.sori.sori = value);
 
                               print("Sori set to ${value}");
                             });
@@ -1010,8 +1009,7 @@ class NihontoFormState extends State<NihontoForm> {
                         readOnly: readOnly,
                         onChanged: (value) {
                           setState(() {
-                            _current = _current.rebuild((builder) => builder
-                              ..sori = _current.sori.copyWith(type: value));
+                            _current = _current.rebuild((builder) => builder.sori.type = value);
                           });
                         })),
               ],
@@ -1028,8 +1026,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Sori-Other-${_current.sori.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.rebuild((builder) => builder
-                    ..sori = _current.sori.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.sori.other = value);
                 });
               },
             ),
