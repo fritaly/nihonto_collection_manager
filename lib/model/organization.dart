@@ -1,35 +1,39 @@
-import 'package:nihonto_collection_manager/enum.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-class Organization extends EnumWithLabel<Organization> {
+part 'organization.g.dart';
 
-  static const NBTHK = const Organization._new('NBTHK', 'NBTHK');
-  static const NTHK = const Organization._new('NTHK', 'NTHK');
-  static const NTHK_NPO = const Organization._new('NTHK_NPO', 'NTHK-NPO');
-  static const OTHER = const Organization._new('OTHER', 'Other');
+class Organization extends EnumClass {
 
-  static const values = [
-    NBTHK,
-    NTHK,
-    NTHK_NPO,
-    OTHER
-  ];
+  static Serializer<Organization> get serializer => _$organizationSerializer;
 
-  const Organization._new(String name, String label) : super(name, label);
+  static const Organization NBTHK = _$NBTHK;
+  static const Organization NTHK = _$NTHK;
+  static const Organization NTHK_NPO = _$NTHK_NPO;
+  static const Organization OTHER = _$OTHER;
 
-  static Organization valueOf(String name) {
-    assert (name != null);
+  const Organization._(String name) : super(name);
 
-    var found = values.firstWhere((element) => element.name == name);
+  static BuiltSet<Organization> get values => _$values;
+  static Organization valueOf(String name) => _$valueOf(name);
 
-    if (found == null) {
-      throw Exception("No enum found with name '${name}'");
+  String get label {
+    switch(this) {
+      case NBTHK:
+        return 'NBTHK';
+      case NTHK:
+        return 'NTHK';
+      case NTHK_NPO:
+        return 'NTHK-NPO';
+      case OTHER:
+        return 'Other';
+
+      default:
+        throw Exception('Unsupported value: ${this}');
     }
-
-    return found;
   }
 
-  static Organization random() {
-    return Utils.random(values);
-  }
+  static Organization random() => Utils.random(values.toList());
 }
