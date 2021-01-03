@@ -1,16 +1,17 @@
 import 'dart:math';
 
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
 import 'package:flutter/material.dart';
-import 'package:nihonto_collection_manager/enum.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
 
 class Utils {
 
-  static List<DropdownMenuItem<T>> getDropDownMenuItems<T extends EnumWithLabel<T>>(List<T> values) {
+  static List<DropdownMenuItem<T>> getDropDownMenuItems<T extends EnumClass>(BuiltSet<T> values) {
     assert (values != null);
 
     return values.map((e) => DropdownMenuItem(
-        child: Text(e.label),
+        child: Text(e.name),
         value: e
     )).toList(growable: false);
   }
