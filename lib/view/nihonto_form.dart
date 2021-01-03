@@ -62,7 +62,7 @@ class NihontoFormState extends State<NihontoForm> {
 
   Mode _mode;
 
-  Nihonto _current = Nihonto.DEFAULT, _backup;
+  Nihonto _current = Nihonto(), _backup;
 
   NihontoFormState(Mode mode, Nihonto nihonto) {
     assert (mode != null);
@@ -310,11 +310,11 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _current.hada.types.values(),
+      initialValue: _current.hada.types.toList(),
       enabled: !readOnly,
       onSaved: (value) {
         setState(() {
-          _current = _current.copyWith(hada: _current.hada.copyWith(types: EnumSet.from(value.cast<HadaType>())));
+          _current = _current.rebuild((builder) => builder.hada.types.replace(value));
         });
       },
     );
@@ -331,13 +331,13 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _current.hamon.types.values(),
+      initialValue: _current.hamon.types.toList(),
       enabled: !readOnly,
       onSaved: (value) {
         print('Value=${value}');
 
         setState(() {
-          _current = _current.copyWith(hamon: _current.hamon.copyWith(types: EnumSet.from(value.cast<HamonType>())));
+          _current = _current.rebuild((builder) => builder.hamon.types.replace(value));
         });
       },
     );
@@ -353,11 +353,11 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _current.yakiba.types.values(),
+      initialValue: _current.yakiba.types.toList(),
       enabled: !readOnly,
       onSaved: (value) {
         setState(() {
-          _current = _current.copyWith(yakiba: _current.yakiba.copyWith(types: EnumSet.from(value.cast<Yakiba>())));
+          _current = _current.rebuild((builder) => builder.yakiba.types.replace(value));
         });
       },
     );
@@ -373,11 +373,11 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _current.boshi.types.values(),
+      initialValue: _current.boshi.types.toList(),
       enabled: !readOnly,
       onSaved: (value) {
         setState(() {
-          _current = _current.copyWith(boshi: _current.boshi.copyWith(types: EnumSet.from(value.cast<Boshi>())));
+          _current = _current.rebuild((builder) => builder.boshi.types.replace(value));
         });
       },
     );
@@ -393,11 +393,11 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _current.nakago.types.values(),
+      initialValue: _current.nakago.types.toList(),
       enabled: !readOnly,
       onSaved: (value) {
         setState(() {
-          _current = _current.copyWith(boshi: _current.boshi.copyWith(types: EnumSet.from(value.cast<Nakago>())));
+          _current = _current.rebuild((builder) => builder.nakago.types.replace(value));
         });
       },
     );
@@ -413,13 +413,11 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _current.yasurime.types.values(),
+      initialValue: _current.yasurime.types.toList(),
       enabled: !readOnly,
       onSaved: (value) {
-        print('Value=${value}');
-
         setState(() {
-          _current = _current.copyWith(yasurime: _current.yasurime.copyWith(types: EnumSet.from(value.cast<Yasurime>())));
+          _current = _current.rebuild((builder) => builder.yasurime.types = value);
         });
       },
     );
@@ -435,11 +433,12 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _current.bohi.types.values(),
+      initialValue: _current.bohi.types.toList(),
       enabled: !readOnly,
       onSaved: (value) {
         setState(() {
-          _current = _current.copyWith(bohi: _current.bohi.copyWith(types: EnumSet.from(value.cast<Bohi>())));
+          _current = _current.rebuild((builder) => builder
+            .bohi.types.replace(value.cast<Bohi>()));
         });
       },
     );
@@ -455,11 +454,11 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _current.signature.types.values(),
+      initialValue: _current.signature.types.toList(),
       enabled: !readOnly,
       onSaved: (value) {
         setState(() {
-          _current = _current.copyWith(signature: _current.signature.copyWith(types: EnumSet.from(value.cast<SignatureType>())));
+          _current = _current.rebuild((builder) => builder.signature.types.replace(value));
         });
       },
     );
@@ -490,7 +489,7 @@ class NihontoFormState extends State<NihontoForm> {
               TextFormField(
                 decoration: FieldDecoration('Reference number'),
                 readOnly: readOnly,
-                initialValue: _current.referenceNumber,
+                initialValue: _current.referenceNumber ?? '',
                 key: Key('Overall-ReferenceNumber-${_current.referenceNumber}'),
                 validator: (value) {
                   final regexp = new RegExp(
@@ -507,7 +506,8 @@ class NihontoFormState extends State<NihontoForm> {
                 },
                 onChanged: (value) {
                   setState(() {
-                    _current = _current.copyWith(referenceNumber: value);
+                    _current = _current.rebuild((builder) => builder
+                      ..referenceNumber = value);
                   });
                 },
               ),
@@ -517,13 +517,14 @@ class NihontoFormState extends State<NihontoForm> {
               TextFormField(
                 decoration: FieldDecoration('Overall description'),
                 readOnly: readOnly,
-                initialValue: _current.overallDescription,
+                initialValue: _current.overallDescription ?? '',
                 minLines: 1,
                 maxLines: 25,
                 key: Key('Overall-Description-${_current.overallDescription}'),
                 onChanged: (value) {
                   setState(() {
-                    _current = _current.copyWith(overallDescription: value);
+                    _current = _current.rebuild((builder) => builder
+                      ..overallDescription = value);
                   });
                 },
               ),
@@ -540,7 +541,8 @@ class NihontoFormState extends State<NihontoForm> {
                   readOnly: readOnly,
                   onChanged: (value) {
                     setState(() {
-                      _current = _current.copyWith(type: value);
+                      _current = _current.rebuild((builder) => builder
+                        ..type = value);
                     });
                   })
             ]),
@@ -557,7 +559,7 @@ class NihontoFormState extends State<NihontoForm> {
                   readOnly: readOnly,
                   onChanged: (value) {
                     setState(() {
-                      _current = _current.copyWith(sugata: _current.sugata.copyWith(type: value));
+                      _current = _current.rebuild((builder) => builder.sugata.type = value);
                     });
                   }),
 
@@ -572,7 +574,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Sugata-Other-${_current.sugata.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(sugata: _current.sugata.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.sugata.other = value);
                 });
               },
             ),
@@ -592,7 +594,7 @@ class NihontoFormState extends State<NihontoForm> {
               maxLines: 25,
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(signature: _current.signature.copyWith(romaji: value));
+                  _current = _current.rebuild((builder) => builder.signature.romaji = value);
                 });
               },
             ),
@@ -608,7 +610,7 @@ class NihontoFormState extends State<NihontoForm> {
               maxLines: 25,
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(signature: _current.signature.copyWith(kanji: value));
+                  _current = _current.rebuild((builder) => builder.signature.kanji = value);
                 });
               },
             ),
@@ -628,7 +630,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Signature-Other-${_current.signature.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(signature: _current.signature.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.signature.other = value);
                 });
               },
             ),
@@ -661,7 +663,7 @@ class NihontoFormState extends State<NihontoForm> {
                           if (value != null) {
                             setState(() {
                               // Update the nagasa based on the value returned by the dialog
-                              _current = _current.copyWith(measurements: _current.measurements.copyWith(nagasa: value));
+                              _current = _current.rebuild((builder) => builder.measurements.nagasa = value);
                             });
                           } else {
                             // The value is null if the user clicked "Cancel"
@@ -691,7 +693,7 @@ class NihontoFormState extends State<NihontoForm> {
                             }).then((value) {
                           if (value != null) {
                             setState(() {
-                              _current = _current.copyWith(measurements: _current.measurements.copyWith(totalLength: value));
+                              _current = _current.rebuild((builder) => builder.measurements.totalLength = value);
 
                               print("Total length set to ${value}");
                             });
@@ -721,7 +723,7 @@ class NihontoFormState extends State<NihontoForm> {
                         }).then((value) {
                       if (value != null) {
                         setState(() {
-                          _current = _current.copyWith(measurements: _current.measurements.copyWith(weight: value));
+                          _current = _current.rebuild((builder) => builder.measurements.weight = value);
                         });
                       } else {
                         // The value is null if the user clicked "Cancel"
@@ -756,7 +758,7 @@ class NihontoFormState extends State<NihontoForm> {
                           }).then((value) {
                         if (value != null) {
                           setState(() {
-                            _current = _current.copyWith(measurements: _current.measurements.copyWith(kasane: value));
+                            _current = _current.rebuild((builder) => builder.measurements.kasane = value);
 
                             print("Kasane set to ${value}");
                           });
@@ -789,7 +791,7 @@ class NihontoFormState extends State<NihontoForm> {
                           }).then((value) {
                         if (value != null) {
                           setState(() {
-                            _current = _current.copyWith(measurements: _current.measurements.copyWith(motokasane: value));
+                            _current = _current.rebuild((builder) => builder.measurements.motokasane = value);
 
                             print("Motokasane set to ${value}");
                           });
@@ -822,7 +824,7 @@ class NihontoFormState extends State<NihontoForm> {
                           }).then((value) {
                         if (value != null) {
                           setState(() {
-                            _current = _current.copyWith(measurements: _current.measurements.copyWith(sakikasane: value));
+                            _current = _current.rebuild((builder) => builder.measurements.sakikasane = value);
 
                             print("Sakikasane set to ${value}");
                           });
@@ -863,7 +865,7 @@ class NihontoFormState extends State<NihontoForm> {
                         }).then((value) {
                       if (value != null) {
                         setState(() {
-                          _current = _current.copyWith(measurements: _current.measurements.copyWith(mihaba: value));
+                          _current = _current.rebuild((builder) => builder.measurements.mihaba = value);
 
                           print("Mihaba set to ${value}");
                         });
@@ -901,7 +903,7 @@ class NihontoFormState extends State<NihontoForm> {
                         }).then((value) {
                       if (value != null) {
                         setState(() {
-                          _current = _current.copyWith(measurements: _current.measurements.copyWith(motohaba: value));
+                          _current = _current.rebuild((builder) => builder.measurements.motohaba = value);
 
                           print("Motohaba set to ${value}");
                         });
@@ -935,7 +937,7 @@ class NihontoFormState extends State<NihontoForm> {
                           }).then((value) {
                         if (value != null) {
                           setState(() {
-                            _current = _current.copyWith(measurements: _current.measurements.copyWith(sakihaba: value));
+                            _current = _current.rebuild((builder) => builder.measurements.sakihaba = value);
 
                             print("Sakihaba set to ${value}");
                           });
@@ -976,7 +978,7 @@ class NihontoFormState extends State<NihontoForm> {
                           if (value != null) {
                             setState(() {
                               // Update the sori based on the value returned by the dialog
-                              _current = _current.copyWith(sori: _current.sori.copyWith(sori: value));
+                              _current = _current.rebuild((builder) => builder.sori.sori = value);
 
                               print("Sori set to ${value}");
                             });
@@ -994,7 +996,7 @@ class NihontoFormState extends State<NihontoForm> {
                         readOnly: readOnly,
                         onChanged: (value) {
                           setState(() {
-                            _current = _current.copyWith(sori: _current.sori.copyWith(type: value));
+                            _current = _current.rebuild((builder) => builder.sori.type = value);
                           });
                         })),
               ],
@@ -1011,7 +1013,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Sori-Other-${_current.sori.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(sori: _current.sori.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.sori.other = value);
                 });
               },
             ),
@@ -1028,7 +1030,7 @@ class NihontoFormState extends State<NihontoForm> {
                 readOnly: readOnly,
                 onChanged: (value) {
                   setState(() {
-                    _current = _current.copyWith(kissaki: _current.kissaki.copyWith(type: value));
+                    _current = _current.rebuild((builder) => builder.kissaki.type = value);
                   });
                 }),
 
@@ -1043,7 +1045,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Kissaki-Other-${_current.kissaki.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(kissaki: _current.kissaki.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.kissaki.other = value);
                 });
               },
             ),
@@ -1060,7 +1062,7 @@ class NihontoFormState extends State<NihontoForm> {
                 readOnly: readOnly,
                 onChanged: (value) {
                   setState(() {
-                    _current = _current.copyWith(mune: _current.mune.copyWith(type: value));
+                    _current = _current.rebuild((builder) => builder.mune.type = value);
                   });
                 }),
 
@@ -1075,7 +1077,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Mune-Other-${_current.mune.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(mune: _current.mune.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.mune.other = value);
                 });
               },
             ),
@@ -1099,7 +1101,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Hada-Other-${_current.hada.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(hada: _current.hada.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.hada.other = value);
                 });
               },
             ),
@@ -1123,7 +1125,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Hamon-Other-${_current.hamon.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(hamon: _current.hamon.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.hamon.other = value);
                 });
               },
             ),
@@ -1147,7 +1149,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Yakiba-Other-${_current.yakiba.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(yakiba: _current.yakiba.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.yakiba.other = value);
                 });
               },
             ),
@@ -1171,7 +1173,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Boshi-Other-${_current.boshi.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(boshi: _current.boshi.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.boshi.other = value);
                 });
               },
             ),
@@ -1195,7 +1197,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Nakago-Other-${_current.nakago.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(nakago: _current.nakago.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.nakago.other = value);
                 });
               },
             ),
@@ -1219,7 +1221,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Yasurime-Other-${_current.yasurime.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(yasurime: _current.yasurime.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.yasurime.other = value);
                 });
               },
             ),
@@ -1243,7 +1245,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Bohi-Other-${_current.bohi.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(bohi: _current.bohi.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.bohi.other = value);
                 });
               },
             ),
@@ -1260,7 +1262,7 @@ class NihontoFormState extends State<NihontoForm> {
                 readOnly: readOnly,
                 onChanged: (value) {
                   setState(() {
-                    _current = _current.copyWith(polish: _current.polish.copyWith(type: value));
+                    _current = _current.rebuild((builder) => builder.polish.type = value);
                   });
                 }),
 
@@ -1275,7 +1277,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Polish-Other-${_current.polish.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(polish: _current.polish.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.polish.other = value);
                 });
               },
             ),
@@ -1292,7 +1294,8 @@ class NihontoFormState extends State<NihontoForm> {
                 readOnly: readOnly,
                 onChanged: (value) {
                   setState(() {
-                    _current = _current.copyWith(period: value);
+                    _current = _current.rebuild((builder) => builder
+                      ..period = value);
                   });
                 }),
           ]),
@@ -1311,7 +1314,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('School-School-${_current.school.school}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(school: _current.school.copyWith(school: value));
+                  _current = _current.rebuild((builder) => builder.school.school = value);
                 });
               },
             ),
@@ -1321,7 +1324,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Attribution === //
           // =================== //
 
-          ExpansibleTile(text: 'Attribution', initiallyExpanded: !_current.attribution.isEmpty, children: [
+          ExpansibleTile(text: 'Attribution', initiallyExpanded: (_current.attribution != null) && !_current.attribution.isEmpty, children: [
             TextFormField(
               decoration: FieldDecoration('Attribution'),
               readOnly: readOnly,
@@ -1331,7 +1334,8 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Attribution-${_current.attribution}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(attribution: value);
+                  _current = _current.rebuild((builder) => builder
+                    ..attribution = value);
                 });
               },
             ),
@@ -1341,7 +1345,7 @@ class NihontoFormState extends State<NihontoForm> {
           // === Other Info === //
           // ================== //
 
-          ExpansibleTile(text: 'Other', initiallyExpanded: !_current.other.isEmpty, children: [
+          ExpansibleTile(text: 'Other', initiallyExpanded: (_current.other != null) && !_current.other.isEmpty, children: [
             TextFormField(
               decoration: FieldDecoration('Other information'),
               readOnly: readOnly,
@@ -1351,7 +1355,8 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Other-Information-${_current.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.copyWith(other: value);
+                  _current = _current.rebuild((builder) => builder
+                    ..other = value);
                 });
               },
             ),
@@ -1362,9 +1367,9 @@ class NihontoFormState extends State<NihontoForm> {
               Expanded(child: TextFormField(
                 decoration: FieldDecoration('Asking price'),
                 readOnly: true,
-                initialValue: "${_current.price.toText()}",
+                initialValue: "${_current.price?.toText() ?? ''}",
                 textAlign: TextAlign.end,
-                key: Key('Price-${_current.price.toText()}'),
+                key: Key('Price-${_current.price?.toText()}'),
                 onTap: () {
                   if (readOnly) {
                     return;
@@ -1378,7 +1383,7 @@ class NihontoFormState extends State<NihontoForm> {
                     if (value != null) {
                       setState(() {
                         // Update the price based on the value returned by the dialog
-                        _current = _current.copyWith(price: value);
+                        _current = _current.rebuild((builder) => builder.price.replace(value));
                       });
                     } else {
                       // The value is null if the user clicked "Cancel"

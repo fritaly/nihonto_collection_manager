@@ -1,48 +1,34 @@
-import 'package:flutter/foundation.dart';
+
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
 import 'package:nihonto_collection_manager/aggregate.dart';
-import 'package:nihonto_collection_manager/enum_set.dart';
 import 'package:nihonto_collection_manager/model/nakago.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
-@immutable
-class NakagoInfo with Aggregate {
+part 'nakago_info.g.dart';
 
-  static const DEFAULT = NakagoInfo();
+abstract class NakagoInfo with Aggregate implements Built<NakagoInfo, NakagoInfoBuilder> {
 
-  final EnumSet<Nakago> types;
+  // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
+  static void _initializeBuilder(NakagoInfoBuilder builder) => builder
+    ..other = '';
 
-  final String other;
+  NakagoInfo._();
 
-  const NakagoInfo({ this.types = const EnumSet.empty(), this.other = '' });
+  factory NakagoInfo([updates(NakagoInfoBuilder b)]) = _$NakagoInfo;
 
-  NakagoInfo copyWith({EnumSet<Nakago> types, String other}) {
-    return NakagoInfo(
-      types: types ?? this.types,
-      other: other ?? this.other,
-    );
-  }
+  String get other;
+
+  BuiltSet<Nakago> get types;
 
   static NakagoInfo random() {
-    return NakagoInfo(types: EnumSet.random(Nakago.values), other: '');
+    return NakagoInfo((builder) => builder
+      ..types.addAll(Utils.randomIterable(Nakago.values))
+      ..other = '');
   }
 
   @override
   bool isBlank() {
-    return types.isEmpty() && (other.isEmpty);
+    return types.isEmpty && other.isEmpty;
   }
-
-  @override
-  String toString() {
-    return 'NakagoInfo[types: $types, other: $other]';
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is NakagoInfo &&
-          runtimeType == other.runtimeType &&
-          types == other.types &&
-          other == other.other;
-
-  @override
-  int get hashCode => types.hashCode ^ other.hashCode;
 }

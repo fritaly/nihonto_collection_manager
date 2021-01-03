@@ -1,56 +1,42 @@
-import 'package:flutter/foundation.dart';
+
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
 import 'package:nihonto_collection_manager/aggregate.dart';
-import 'package:nihonto_collection_manager/enum_set.dart';
 import 'package:nihonto_collection_manager/model/signature_type.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-@immutable
-class SignatureInfo with Aggregate {
+part 'signature_info.g.dart';
 
-  static const DEFAULT = SignatureInfo();
+abstract class SignatureInfo with Aggregate implements Built<SignatureInfo, SignatureInfoBuilder> {
 
-  final String kanji, romaji;
+  // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
+  static void _initializeBuilder(SignatureInfoBuilder builder) => builder
+    ..kanji = ''
+    ..romaji = ''
+    ..other = '';
 
-  final EnumSet<SignatureType> types;
+  SignatureInfo._();
 
-  final String other;
+  factory SignatureInfo([updates(SignatureInfoBuilder b)]) = _$SignatureInfo;
 
-  const SignatureInfo({ this.kanji = '', this.romaji = '', this.types = const EnumSet.empty(), this.other = '' });
+  String get kanji;
 
-  SignatureInfo copyWith({ String kanji, String romaji, EnumSet<SignatureType> types, String other}) {
-    return SignatureInfo(
-      kanji: kanji ?? this.kanji,
-      romaji: romaji ?? this.romaji,
-      types: types ?? this.types,
-      other: other ?? this.other,
-    );
-  }
+  String get romaji;
+
+  BuiltSet<SignatureType> get types;
+
+  String get other;
 
   static SignatureInfo random() {
-    return SignatureInfo(romaji: Utils.randomSignature(), types: EnumSet.random(SignatureType.values), other: '');
+    return SignatureInfo((builder) => builder
+      ..types.addAll(Utils.randomIterable(SignatureType.values))
+      ..romaji = Utils.randomSignature()
+      ..kanji = ''
+      ..other = '');
   }
 
   @override
   bool isBlank() {
-    return types.isEmpty() && (other.isEmpty) && kanji.isEmpty && romaji.isEmpty;
+    return types.isEmpty && (other.isEmpty) && kanji.isEmpty && romaji.isEmpty;
   }
-
-  @override
-  String toString() {
-    return "SignatureInfo[kanji: '$kanji', romaji: '$romaji', types: $types, other: '$other']";
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is SignatureInfo &&
-          runtimeType == other.runtimeType &&
-          kanji == other.kanji &&
-          romaji == other.romaji &&
-          types == other.types &&
-          other == other.other;
-
-  @override
-  int get hashCode =>
-      kanji.hashCode ^ romaji.hashCode ^ types.hashCode ^ other.hashCode;
 }

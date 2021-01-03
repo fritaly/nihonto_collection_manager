@@ -1,48 +1,34 @@
-import 'package:flutter/foundation.dart';
+
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
 import 'package:nihonto_collection_manager/aggregate.dart';
-import 'package:nihonto_collection_manager/enum_set.dart';
 import 'package:nihonto_collection_manager/model/hada_type.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
-@immutable
-class HadaInfo with Aggregate {
+part 'hada_info.g.dart';
 
-  static const DEFAULT = HadaInfo();
+abstract class HadaInfo with Aggregate implements Built<HadaInfo, HadaInfoBuilder> {
 
-  final EnumSet<HadaType> types;
+  // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
+  static void _initializeBuilder(HadaInfoBuilder builder) => builder
+    ..other = '';
 
-  final String other;
+  HadaInfo._();
 
-  const HadaInfo({ this.types = const EnumSet.empty(), this.other = '' });
+  factory HadaInfo([updates(HadaInfoBuilder b)]) = _$HadaInfo;
 
-  HadaInfo copyWith({EnumSet<HadaType> types, String other}) {
-    return HadaInfo(
-      types: types ?? this.types,
-      other: other ?? this.other,
-    );
-  }
+  String get other;
+
+  BuiltSet<HadaType> get types;
 
   static HadaInfo random() {
-    return HadaInfo(types: EnumSet.random(HadaType.values), other: '');
+    return HadaInfo((builder) => builder
+      ..types.addAll(Utils.randomIterable(HadaType.values))
+      ..other = '');
   }
 
   @override
   bool isBlank() {
-    return types.isEmpty() && (other.isEmpty);
+    return types.isEmpty && other.isEmpty;
   }
-
-  @override
-  String toString() {
-    return 'HadaInfo[types: $types, other: $other]';
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is HadaInfo &&
-          runtimeType == other.runtimeType &&
-          types == other.types &&
-          other == other.other;
-
-  @override
-  int get hashCode => types.hashCode ^ other.hashCode;
 }

@@ -1,59 +1,47 @@
-import 'package:flutter/foundation.dart';
+
+import 'package:built_value/built_value.dart';
 import 'package:nihonto_collection_manager/aggregate.dart';
 import 'package:nihonto_collection_manager/model/length.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/weight.dart';
 
-@immutable
-class Measurements with Aggregate {
+part 'measurements.g.dart';
 
-  static const Measurements DEFAULT = Measurements();
+abstract class Measurements with Aggregate implements Built<Measurements, MeasurementsBuilder> {
 
-  final Length nagasa,
-      totalLength,
-      kasane,
-      motokasane,
-      sakikasane,
-      mihaba,
-      motohaba,
-      sakihaba;
+  // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
+  static void _initializeBuilder(MeasurementsBuilder builder) => builder;
 
-  final Weight weight;
+  Measurements._();
 
-  const Measurements(
-      {this.nagasa,
-      this.totalLength,
-      this.kasane,
-      this.motokasane,
-      this.sakikasane,
-      this.mihaba,
-      this.motohaba,
-      this.sakihaba,
-        this.weight});
+  factory Measurements([updates(MeasurementsBuilder b)]) = _$Measurements;
 
-  Measurements copyWith(
-      {Length nagasa,
-      Length totalLength,
-      Length kasane,
-      Length motokasane,
-      Length sakikasane,
-      Length mihaba,
-      Length motohaba,
-      Length sakihaba,
-      Weight weight}) {
+  @nullable
+  Length get nagasa;
 
-    return Measurements(
-        nagasa: nagasa ?? this.nagasa,
-        totalLength: totalLength ?? this.totalLength,
-        kasane: kasane ?? this.kasane,
-        motokasane: motokasane ?? this.motokasane,
-        sakikasane: sakikasane ?? this.sakikasane,
-        mihaba: mihaba ?? this.mihaba,
-        motohaba: motohaba ?? this.motohaba,
-        sakihaba: sakihaba ?? this.sakihaba,
-      weight: weight ?? this.weight,
-    );
-  }
+  @nullable
+  Length get totalLength;
+
+  @nullable
+  Length get kasane;
+
+  @nullable
+  Length get motokasane;
+
+  @nullable
+  Length get sakikasane;
+
+  @nullable
+  Length get mihaba;
+
+  @nullable
+  Length get motohaba;
+
+  @nullable
+  Length get sakihaba;
+
+  @nullable
+  Weight get weight;
 
   static Measurements random() {
     final nagasa = Length.random(LengthUnit.CM, min: 25, max: 75);
@@ -61,16 +49,16 @@ class Measurements with Aggregate {
     final kasane = Length.random(LengthUnit.CM, min: 0.5, max: 0.9);
     final mihaba = Length.random(LengthUnit.CM, min: 2.7, max: 3.6);
 
-    return new Measurements(
-        nagasa: nagasa,
-        totalLength: nagasa + nakagoLength,
-        kasane: kasane,
-        motokasane: kasane,
-        sakikasane: kasane,
-        mihaba: mihaba,
-        motohaba: mihaba,
-        sakihaba: mihaba,
-        weight: Weight.random(700, 1200)
+    return new Measurements((builder) => builder
+        ..nagasa = nagasa
+        ..totalLength = nagasa + nakagoLength
+        ..kasane = kasane
+        ..motokasane = kasane
+        ..sakikasane = kasane
+        ..mihaba = mihaba
+        ..motohaba = mihaba
+        ..sakihaba = mihaba
+        ..weight = Weight.random(700, 1200)
     );
   }
 
@@ -86,31 +74,4 @@ class Measurements with Aggregate {
         (sakihaba == null) &&
         (weight == null);
   }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Measurements &&
-          runtimeType == other.runtimeType &&
-          nagasa == other.nagasa &&
-          totalLength == other.totalLength &&
-          kasane == other.kasane &&
-          motokasane == other.motokasane &&
-          sakikasane == other.sakikasane &&
-          mihaba == other.mihaba &&
-          motohaba == other.motohaba &&
-          sakihaba == other.sakihaba &&
-          weight == other.weight;
-
-  @override
-  int get hashCode =>
-      nagasa.hashCode ^
-      totalLength.hashCode ^
-      kasane.hashCode ^
-      motokasane.hashCode ^
-      sakikasane.hashCode ^
-      mihaba.hashCode ^
-      motohaba.hashCode ^
-      sakihaba.hashCode ^
-      weight.hashCode;
 }

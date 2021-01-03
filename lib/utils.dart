@@ -46,6 +46,14 @@ class Utils {
     return list.where((element) => random.nextBool()).toList();
   }
 
+  static Iterable<T> randomIterable<T>(Iterable<T> iterable) {
+    assert (iterable != null);
+
+    final random = Random();
+
+    return iterable.where((element) => random.nextBool());
+  }
+
   static String randomSignature() {
     return Utils.random([
       'Masamune',

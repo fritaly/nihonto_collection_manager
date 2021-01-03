@@ -9,9 +9,10 @@ class MoneyWidget extends StatefulWidget {
   static final TextInputFormatter decimalNumber =
       FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'));
 
+  // Can be null
   Money _money;
 
-  MoneyWidget({Key key, Money money = Money.ZERO}) : super(key: key) {
+  MoneyWidget({Key key, Money money}) : super(key: key) {
     _money = money;
   }
 
@@ -23,15 +24,19 @@ class MoneyWidgetState extends State<MoneyWidget> {
   int _amount;
   Currency _currency;
 
-  MoneyWidgetState([Money money = Money.ZERO]) {
-    assert(money != null);
+  MoneyWidgetState([Money money]) {
 
-    this._amount = money.amount;
-    this._currency = money.currency;
+    if (money != null) {
+      this._amount = money.amount;
+      this._currency = money.currency;
+    }
   }
 
   Money getMoney() {
-    return Money(_amount, _currency);
+    return Money((builder) => builder
+      ..amount = _amount
+      ..currency = _currency
+    );
   }
 
   @override

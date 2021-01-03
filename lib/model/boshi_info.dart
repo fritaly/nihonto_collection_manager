@@ -1,48 +1,34 @@
-import 'package:flutter/foundation.dart';
+
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
 import 'package:nihonto_collection_manager/aggregate.dart';
-import 'package:nihonto_collection_manager/enum_set.dart';
 import 'package:nihonto_collection_manager/model/boshi.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
-@immutable
-class BoshiInfo with Aggregate {
+part 'boshi_info.g.dart';
 
-  static const DEFAULT = BoshiInfo();
+abstract class BoshiInfo with Aggregate implements Built<BoshiInfo, BoshiInfoBuilder> {
 
-  final EnumSet<Boshi> types;
+  // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
+  static void _initializeBuilder(BoshiInfoBuilder builder) => builder
+    ..other = '';
 
-  final String other;
+  BoshiInfo._();
 
-  const BoshiInfo({ this.types = const EnumSet.empty(), this.other = '' });
+  factory BoshiInfo([updates(BoshiInfoBuilder b)]) = _$BoshiInfo;
 
-  BoshiInfo copyWith({EnumSet<Boshi> types, String other}) {
-    return BoshiInfo(
-      types: types ?? this.types,
-      other: other ?? this.other,
-    );
-  }
+  String get other;
+
+  BuiltSet<Boshi> get types;
 
   static BoshiInfo random() {
-    return BoshiInfo(types: EnumSet.random(Boshi.values), other: '');
+    return BoshiInfo((builder) => builder
+      ..types.addAll(Utils.randomIterable(Boshi.values))
+      ..other = '');
   }
 
   @override
   bool isBlank() {
-    return types.isEmpty() && (other.isEmpty);
+    return types.isEmpty && other.isEmpty;
   }
-
-  @override
-  String toString() {
-    return 'BoshiInfo[types: $types, other: $other]';
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is BoshiInfo &&
-          runtimeType == other.runtimeType &&
-          types == other.types &&
-          other == other.other;
-
-  @override
-  int get hashCode => types.hashCode ^ other.hashCode;
 }

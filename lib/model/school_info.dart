@@ -1,43 +1,29 @@
-import 'package:flutter/foundation.dart';
+
+import 'package:built_value/built_value.dart';
 import 'package:nihonto_collection_manager/aggregate.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-@immutable
-class SchoolInfo with Aggregate {
+part 'school_info.g.dart';
 
-  static const DEFAULT = SchoolInfo();
+abstract class SchoolInfo with Aggregate implements Built<SchoolInfo, SchoolInfoBuilder> {
 
-  final String school;
+  // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
+  static void _initializeBuilder(SchoolInfoBuilder builder) => builder
+    ..school = '';
 
-  const SchoolInfo({ this.school = '' });
+  SchoolInfo._();
 
-  SchoolInfo copyWith({String school}) {
-    return SchoolInfo(
-      school: school ?? this.school,
-    );
-  }
+  factory SchoolInfo([updates(SchoolInfoBuilder b)]) = _$SchoolInfo;
+
+  String get school;
 
   static SchoolInfo random() {
-    return SchoolInfo(school: Utils.random([ 'Uda', 'Bizen', 'Yamashiro', 'Mizuta', 'Soshu', 'Mino', 'Yamato' ]));
+    return SchoolInfo((builder) => builder
+      ..school = Utils.random([ 'Uda', 'Bizen', 'Yamashiro', 'Mizuta', 'Soshu', 'Mino', 'Yamato' ]));
   }
 
   @override
   bool isBlank() {
-    return (school.isEmpty);
+    return school.isEmpty;
   }
-
-  @override
-  String toString() {
-    return 'SchoolInfo[school: $school]';
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is SchoolInfo &&
-          runtimeType == other.runtimeType &&
-          school == other.school;
-
-  @override
-  int get hashCode => school.hashCode;
 }

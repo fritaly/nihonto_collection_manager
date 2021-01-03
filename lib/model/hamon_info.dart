@@ -1,48 +1,35 @@
-import 'package:flutter/foundation.dart';
+
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
 import 'package:nihonto_collection_manager/aggregate.dart';
-import 'package:nihonto_collection_manager/enum_set.dart';
+import 'package:nihonto_collection_manager/model/boshi.dart';
 import 'package:nihonto_collection_manager/model/hamon_type.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
-@immutable
-class HamonInfo with Aggregate {
+part 'hamon_info.g.dart';
 
-  static const DEFAULT = HamonInfo();
+abstract class HamonInfo with Aggregate implements Built<HamonInfo, HamonInfoBuilder> {
 
-  final EnumSet<HamonType> types;
+  // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
+  static void _initializeBuilder(HamonInfoBuilder builder) => builder
+    ..other = '';
 
-  final String other;
+  HamonInfo._();
 
-  const HamonInfo({ this.types = const EnumSet.empty(), this.other = '' });
+  factory HamonInfo([updates(HamonInfoBuilder b)]) = _$HamonInfo;
 
-  HamonInfo copyWith({EnumSet<HamonType> types, String other}) {
-    return HamonInfo(
-      types: types ?? this.types,
-      other: other ?? this.other,
-    );
-  }
+  String get other;
+
+  BuiltSet<HamonType> get types;
 
   static HamonInfo random() {
-    return HamonInfo(types: EnumSet.random(HamonType.values), other: '');
+    return HamonInfo((builder) => builder
+      ..types.addAll(Utils.randomIterable(HamonType.values))
+      ..other = '');
   }
 
   @override
   bool isBlank() {
-    return types.isEmpty() && (other.isEmpty);
+    return types.isEmpty && other.isEmpty;
   }
-
-  @override
-  String toString() {
-    return 'HamonInfo[types: $types, other: $other]';
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is HamonInfo &&
-          runtimeType == other.runtimeType &&
-          types == other.types &&
-          other == other.other;
-
-  @override
-  int get hashCode => types.hashCode ^ other.hashCode;
 }

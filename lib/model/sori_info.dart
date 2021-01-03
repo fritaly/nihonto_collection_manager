@@ -1,58 +1,39 @@
-import 'package:flutter/foundation.dart';
+
+import 'package:built_value/built_value.dart';
 import 'package:nihonto_collection_manager/aggregate.dart';
 import 'package:nihonto_collection_manager/model/length.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 
-@immutable
-class SoriInfo with Aggregate {
+part 'sori_info.g.dart';
 
-  static const DEFAULT = SoriInfo();
+abstract class SoriInfo with Aggregate implements Built<SoriInfo, SoriInfoBuilder> {
 
-  final SoriType type;
+  // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
+  static void _initializeBuilder(SoriInfoBuilder builder) => builder
+    ..other = '';
 
-  final Length sori;
+  SoriInfo._();
 
-  final String other;
+  factory SoriInfo([updates(SoriInfoBuilder b)]) = _$SoriInfo;
 
-  const SoriInfo(
-      {this.type,
-      this.sori,
-      this.other = ''});
+  @nullable
+  SoriType get type;
 
-  SoriInfo copyWith(
-      {SoriType type, Length sori, String other}) {
+  @nullable
+  Length get sori;
 
-    return SoriInfo(
-        type: type ?? this.type,
-        sori: sori ?? this.sori,
-        other: other ?? this.other,
-    );
-  }
+  String get other;
 
   static SoriInfo random() {
-    return SoriInfo(type: SoriType.random(), sori: Length.random(LengthUnit.CM, min: 0, max: 3), other: '');
+    return SoriInfo((builder) => builder
+      ..type = SoriType.random()
+      ..sori = Length.random(LengthUnit.CM, min: 0, max: 3)
+      ..other = '');
   }
 
   @override
   bool isBlank() {
     return (type == null) && (sori == null) && (other.isEmpty);
   }
-
-  @override
-  String toString() {
-    return 'SoriInfo[type: $type, sori: $sori, other: ${other}]';
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is SoriInfo &&
-          runtimeType == other.runtimeType &&
-          type == other.type &&
-          sori == other.sori &&
-          other == other.other;
-
-  @override
-  int get hashCode => type.hashCode ^ sori.hashCode ^ other.hashCode;
 }

@@ -1,39 +1,33 @@
-import 'package:flutter/foundation.dart';
+
+import 'package:built_value/built_value.dart';
 import 'package:nihonto_collection_manager/aggregate.dart';
 import 'package:nihonto_collection_manager/model/sugata.dart';
 
-@immutable
-class SugataInfo with Aggregate {
+part 'sugata_info.g.dart';
 
-  static const DEFAULT = SugataInfo();
+abstract class SugataInfo with Aggregate implements Built<SugataInfo, SugataInfoBuilder> {
 
-  final Sugata type;
+  // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
+  static void _initializeBuilder(SugataInfoBuilder builder) => builder
+    ..other = '';
 
-  final String other;
+  SugataInfo._();
 
-  const SugataInfo({Sugata this.type, String this.other = ''});
+  factory SugataInfo([updates(SugataInfoBuilder b)]) = _$SugataInfo;
 
-  SugataInfo copyWith({Sugata type, String other}) {
-    return SugataInfo(type: type ?? this.type, other: other ?? this.other);
-  }
+  @nullable
+  Sugata get type;
+
+  String get other;
 
   static SugataInfo random() {
-    return SugataInfo(type: Sugata.random(), other: '');
+    return SugataInfo((builder) => builder
+      ..type = Sugata.random()
+      ..other = '');
   }
 
   @override
   bool isBlank() {
-    return (type == null) && (other.isEmpty);
+    return (type == null) && other.isEmpty;
   }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is SugataInfo &&
-          runtimeType == other.runtimeType &&
-          type == other.type &&
-          other == other.other;
-
-  @override
-  int get hashCode => type.hashCode ^ other.hashCode;
 }

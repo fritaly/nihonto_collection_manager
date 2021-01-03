@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
 import 'package:nihonto_collection_manager/model/bohi_info.dart';
 import 'package:nihonto_collection_manager/model/boshi_info.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
@@ -21,252 +20,112 @@ import 'package:nihonto_collection_manager/model/yakiba_info.dart';
 import 'package:nihonto_collection_manager/model/yasurime_info.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-@immutable
-class Nihonto {
+import 'package:built_value/built_value.dart';
 
-  static const DEFAULT = Nihonto();
+part 'nihonto.g.dart';
 
-  final String referenceNumber;
+abstract class Nihonto implements Built<Nihonto, NihontoBuilder> {
 
-  final Uri imageUri;
+  // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
+  static void _initializeBuilder(NihontoBuilder builder) => builder
+    ..referenceNumber = ''
+    ..overallDescription = ''
+    ..attribution = ''
+    ..other = ''
+    ..signature.replace(SignatureInfo())
+    ..sugata.replace(SugataInfo())
+    ..measurements.replace(Measurements())
+    ..hada.replace(HadaInfo())
+    ..sori.replace(SoriInfo())
+    ..kissaki.replace(KissakiInfo())
+    ..mune.replace(MuneInfo())
+    ..hamon.replace(HamonInfo())
+    ..yakiba.replace(YakibaInfo())
+    ..boshi.replace(BoshiInfo())
+    ..nakago.replace(NakagoInfo())
+    ..yasurime.replace(YasurimeInfo())
+    ..polish.replace(PolishInfo())
+    ..school.replace(SchoolInfo());
 
-  final String overallDescription;
+  Nihonto._();
 
-  final NihontoType type;
+  factory Nihonto([updates(NihontoBuilder b)]) = _$Nihonto;
 
-  final SignatureInfo signature;
+  String get referenceNumber;
 
-  final SugataInfo sugata;
+  @nullable
+  Uri get imageUri;
 
-  final Money price;
+  String get overallDescription;
 
-  final Measurements measurements;
+  @nullable
+  NihontoType get type;
 
-  final HadaInfo hada;
+  SignatureInfo get signature;
 
-  final SoriInfo sori;
+  SugataInfo get sugata;
 
-  final KissakiInfo kissaki;
+  @nullable
+  Money get price;
 
-  final MuneInfo mune;
+  Measurements get measurements;
 
-  final HamonInfo hamon;
+  HadaInfo get hada;
 
-  final YakibaInfo yakiba;
+  SoriInfo get sori;
 
-  final BoshiInfo boshi;
+  KissakiInfo get kissaki;
 
-  final NakagoInfo nakago;
+  MuneInfo get mune;
 
-  final YasurimeInfo yasurime;
+  HamonInfo get hamon;
 
-  final BohiInfo bohi;
+  YakibaInfo get yakiba;
 
-  final PolishInfo polish;
+  BoshiInfo get boshi;
 
-  final Period period;
+  NakagoInfo get nakago;
 
-  final SchoolInfo school;
+  YasurimeInfo get yasurime;
 
-  final String attribution;
+  BohiInfo get bohi;
 
-  final String other;
+  PolishInfo get polish;
 
-  const Nihonto(
-      {
-      this.imageUri,
-      this.referenceNumber = '',
-      this.overallDescription = '',
-      this.type,
-      this.sugata = SugataInfo.DEFAULT,
-      this.signature = SignatureInfo.DEFAULT,
-      this.price = Money.ZERO,
-      this.measurements = Measurements.DEFAULT,
-      this.sori = SoriInfo.DEFAULT,
-      this.hada = HadaInfo.DEFAULT,
-      this.kissaki = KissakiInfo.DEFAULT,
-      this.mune = MuneInfo.DEFAULT,
-      this.hamon = HamonInfo.DEFAULT,
-      this.yakiba = YakibaInfo.DEFAULT,
-      this.boshi = BoshiInfo.DEFAULT,
-      this.nakago = NakagoInfo.DEFAULT,
-      this.yasurime = YasurimeInfo.DEFAULT,
-      this.bohi = BohiInfo.DEFAULT,
-      this.polish = PolishInfo.DEFAULT,
-      this.period,
-      this.school = SchoolInfo.DEFAULT,
-      this.attribution = '',
-      this.other = ''
-    });
+  @nullable
+  Period get period;
+
+  SchoolInfo get school;
+
+  String get attribution;
+
+  String get other;
 
   static Nihonto random() {
-    return Nihonto(
-        imageUri: Utils.randomImageUri(500),
-        referenceNumber: '#${Random().nextInt(100)}',
-        overallDescription: 'Description goes here...\nDescription goes here...\nDescription goes here...',
-        type: NihontoType.random(),
-        sugata: SugataInfo.random(),
-        signature: SignatureInfo.random(),
-        price: Money.random(),
-        measurements: Measurements.random(),
-        sori: SoriInfo.random(),
-        hada: HadaInfo.random(),
-        kissaki: KissakiInfo.random(),
-        mune: MuneInfo.random(),
-        hamon: HamonInfo.random(),
-        yakiba: YakibaInfo.random(),
-        boshi: BoshiInfo.random(),
-        nakago: NakagoInfo.random(),
-        yasurime: YasurimeInfo.random(),
-        bohi: BohiInfo.random(),
-        polish: PolishInfo.random(),
-        period: Period.random(),
-        school: SchoolInfo.random(),
-        attribution: '',
-        other: ''
-    );
+    return Nihonto((builder) => builder
+      ..imageUri = Utils.randomImageUri(500)
+      ..referenceNumber = '#${Random().nextInt(100)}'
+      ..overallDescription =
+          'Description goes here...\nDescription goes here...\nDescription goes here...'
+      ..type = NihontoType.random()
+      ..sugata.replace(SugataInfo.random())
+      ..signature.replace(SignatureInfo.random())
+      ..price.replace(Money.random())
+      ..measurements.replace(Measurements.random())
+      ..sori.replace(SoriInfo.random())
+      ..hada.replace(HadaInfo.random())
+      ..kissaki.replace(KissakiInfo.random())
+      ..mune.replace(MuneInfo.random())
+      ..hamon.replace(HamonInfo.random())
+      ..yakiba.replace(YakibaInfo.random())
+      ..boshi.replace(BoshiInfo.random())
+      ..nakago.replace(NakagoInfo.random())
+      ..yasurime.replace(YasurimeInfo.random())
+      ..bohi.replace(BohiInfo.random())
+      ..polish.replace(PolishInfo.random())
+      ..period = Period.random()
+      ..school.replace(SchoolInfo.random())
+      ..attribution = ''
+      ..other = '');
   }
-
-  Nihonto copyWith({
-    String referenceNumber,
-    Uri imageUri,
-    String overallDescription,
-    NihontoType type,
-    SignatureInfo signature,
-    SugataInfo sugata,
-    Money price,
-    Measurements measurements,
-    HadaInfo hada,
-    SoriInfo sori,
-    KissakiInfo kissaki,
-    MuneInfo mune,
-    HamonInfo hamon,
-    YakibaInfo yakiba,
-    BoshiInfo boshi,
-    NakagoInfo nakago,
-    YasurimeInfo yasurime,
-    BohiInfo bohi,
-    PolishInfo polish,
-    Period period,
-    SchoolInfo school,
-    String attribution,
-    String other,
-  }) {
-    if ((referenceNumber == null ||
-            identical(referenceNumber, this.referenceNumber)) &&
-        (imageUri == null || identical(imageUri, this.imageUri)) &&
-        (overallDescription == null ||
-            identical(overallDescription, this.overallDescription)) &&
-        (type == null || identical(type, this.type)) &&
-        (signature == null || identical(signature, this.signature)) &&
-        (sugata == null || identical(sugata, this.sugata)) &&
-        (price == null || identical(price, this.price)) &&
-        (measurements == null || identical(measurements, this.measurements)) &&
-        (hada == null || identical(hada, this.hada)) &&
-        (sori == null || identical(sori, this.sori)) &&
-        (kissaki == null || identical(kissaki, this.kissaki)) &&
-        (mune == null || identical(mune, this.mune)) &&
-        (hamon == null || identical(hamon, this.hamon)) &&
-        (yakiba == null || identical(yakiba, this.yakiba)) &&
-        (boshi == null || identical(boshi, this.boshi)) &&
-        (nakago == null || identical(nakago, this.nakago)) &&
-        (yasurime == null || identical(yasurime, this.yasurime)) &&
-        (bohi == null || identical(bohi, this.bohi)) &&
-        (polish == null || identical(polish, this.polish)) &&
-        (period == null || identical(period, this.period)) &&
-        (school == null || identical(school, this.school)) &&
-        (attribution == null || identical(attribution, this.attribution)) &&
-        (other == null || identical(other, this.other))) {
-      return this;
-    }
-
-    return new Nihonto(
-      referenceNumber: referenceNumber ?? this.referenceNumber,
-      imageUri: imageUri ?? this.imageUri,
-      overallDescription: overallDescription ?? this.overallDescription,
-      type: type ?? this.type,
-      signature: signature ?? this.signature,
-      sugata: sugata ?? this.sugata,
-      price: price ?? this.price,
-      measurements: measurements ?? this.measurements,
-      hada: hada ?? this.hada,
-      sori: sori ?? this.sori,
-      kissaki: kissaki ?? this.kissaki,
-      mune: mune ?? this.mune,
-      hamon: hamon ?? this.hamon,
-      yakiba: yakiba ?? this.yakiba,
-      boshi: boshi ?? this.boshi,
-      nakago: nakago ?? this.nakago,
-      yasurime: yasurime ?? this.yasurime,
-      bohi: bohi ?? this.bohi,
-      polish: polish ?? this.polish,
-      period: period ?? this.period,
-      school: school ?? this.school,
-      attribution: attribution ?? this.attribution,
-      other: other ?? this.other,
-    );
-  }
-
-  String get description {
-    return "${type?.label} - ${sugata?.type?.label} (${measurements?.nagasa?.toText()})";
-  }
-
-  String toString() {
-    return "Nihonto[type: ${type}, price: ${price}, hada: ${hada}]";
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Nihonto &&
-          runtimeType == other.runtimeType &&
-          referenceNumber == other.referenceNumber &&
-          imageUri == other.imageUri &&
-          overallDescription == other.overallDescription &&
-          type == other.type &&
-          signature == other.signature &&
-          sugata == other.sugata &&
-          price == other.price &&
-          measurements == other.measurements &&
-          hada == other.hada &&
-          sori == other.sori &&
-          kissaki == other.kissaki &&
-          mune == other.mune &&
-          hamon == other.hamon &&
-          yakiba == other.yakiba &&
-          boshi == other.boshi &&
-          nakago == other.nakago &&
-          yasurime == other.yasurime &&
-          bohi == other.bohi &&
-          polish == other.polish &&
-          period == other.period &&
-          school == other.school &&
-          attribution == other.attribution &&
-          this.other == other.other;
-
-  @override
-  int get hashCode =>
-      referenceNumber.hashCode ^
-      imageUri.hashCode ^
-      overallDescription.hashCode ^
-      type.hashCode ^
-      signature.hashCode ^
-      sugata.hashCode ^
-      price.hashCode ^
-      measurements.hashCode ^
-      hada.hashCode ^
-      sori.hashCode ^
-      kissaki.hashCode ^
-      mune.hashCode ^
-      hamon.hashCode ^
-      yakiba.hashCode ^
-      boshi.hashCode ^
-      nakago.hashCode ^
-      yasurime.hashCode ^
-      bohi.hashCode ^
-      polish.hashCode ^
-      period.hashCode ^
-      school.hashCode ^
-      attribution.hashCode ^
-      other.hashCode;
 }
