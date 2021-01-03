@@ -1,6 +1,7 @@
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 import 'package:nihonto_collection_manager/aggregate.dart';
 import 'package:nihonto_collection_manager/model/bohi.dart';
 import 'package:nihonto_collection_manager/utils.dart';
@@ -8,6 +9,8 @@ import 'package:nihonto_collection_manager/utils.dart';
 part 'bohi_info.g.dart';
 
 abstract class BohiInfo with Aggregate implements Built<BohiInfo, BohiInfoBuilder> {
+
+  static Serializer<BohiInfo> get serializer => _$bohiInfoSerializer;
 
   // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
   static void _initializeBuilder(BohiInfoBuilder builder) => builder

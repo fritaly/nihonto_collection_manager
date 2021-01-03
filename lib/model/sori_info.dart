@@ -1,5 +1,6 @@
 
 import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 import 'package:nihonto_collection_manager/aggregate.dart';
 import 'package:nihonto_collection_manager/model/length.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
@@ -8,6 +9,8 @@ import 'package:nihonto_collection_manager/model/sori_type.dart';
 part 'sori_info.g.dart';
 
 abstract class SoriInfo with Aggregate implements Built<SoriInfo, SoriInfoBuilder> {
+
+  static Serializer<SoriInfo> get serializer => _$soriInfoSerializer;
 
   // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
   static void _initializeBuilder(SoriInfoBuilder builder) => builder

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:built_value/serializer.dart';
 import 'package:nihonto_collection_manager/model/bohi_info.dart';
 import 'package:nihonto_collection_manager/model/boshi_info.dart';
 import 'package:nihonto_collection_manager/model/hada_info.dart';
@@ -25,6 +26,8 @@ import 'package:built_value/built_value.dart';
 part 'nihonto.g.dart';
 
 abstract class Nihonto implements Built<Nihonto, NihontoBuilder> {
+
+  static Serializer<Nihonto> get serializer => _$nihontoSerializer;
 
   // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
   static void _initializeBuilder(NihontoBuilder builder) => builder

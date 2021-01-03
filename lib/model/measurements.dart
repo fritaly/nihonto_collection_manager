@@ -1,5 +1,6 @@
 
 import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 import 'package:nihonto_collection_manager/aggregate.dart';
 import 'package:nihonto_collection_manager/model/length.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
@@ -8,6 +9,8 @@ import 'package:nihonto_collection_manager/model/weight.dart';
 part 'measurements.g.dart';
 
 abstract class Measurements with Aggregate implements Built<Measurements, MeasurementsBuilder> {
+
+  static Serializer<Measurements> get serializer => _$measurementsSerializer;
 
   // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
   static void _initializeBuilder(MeasurementsBuilder builder) => builder;

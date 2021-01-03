@@ -1,5 +1,7 @@
+import 'package:built_value/serializer.dart';
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
+import 'package:nihonto_collection_manager/serialization/serializers.dart';
 import 'package:nihonto_collection_manager/view/nihonto_form.dart';
 import 'package:nihonto_collection_manager/widget/nihonto_card.dart';
 
@@ -51,6 +53,12 @@ class _BrowseCollectionState extends State<BrowseCollection> {
 
             return _buildRow(_collection[index]);
           });
+    }
+
+    if (_collection.isEmpty) {
+      // Return an empty container because of a bug in the GridView when it's
+      // empty
+      return Container();
     }
 
     return GridView.count(padding: EdgeInsets.all(8),
@@ -127,6 +135,8 @@ class _BrowseCollectionState extends State<BrowseCollection> {
     final data = await Navigator.of(context).push(route);
 
     print("Nihonto added: ${data}");
+
+    print('JSON: ${serializers.serialize(data)}');
 
     if (data != null) {
       setState(() {
