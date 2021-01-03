@@ -1,37 +1,32 @@
+
 import 'dart:math';
 
-import 'package:nihonto_collection_manager/extensions.dart';
+import 'package:built_value/built_value.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
 
-class Money {
+part 'money.g.dart';
 
-  static const ZERO = Money(0, Currency.USD);
+abstract class Money implements Built<Money, MoneyBuilder> {
 
-  final int amount;
-  final Currency currency;
+  // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
+  static void _initializeBuilder(MoneyBuilder builder) => builder
+    ..amount = 0;
 
-  const Money(this.amount, this.currency);
+  Money._();
+
+  factory Money([updates(MoneyBuilder b)]) = _$Money;
+
+  int get amount;
+
+  Currency get currency;
 
   String toText() {
     return "${amount} ${currency.name}";
   }
 
-  String toString() {
-    return toText();
-  }
-
   static Money random() {
-    return Money((Random().nextInt(100) * 50) + 1500, Currency.USD);
+    return Money((builder) => builder
+      ..amount = (Random().nextInt(100) * 50) + 1500
+      ..currency = Currency.USD);
   }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Money &&
-          runtimeType == other.runtimeType &&
-          amount == other.amount &&
-          currency == other.currency;
-
-  @override
-  int get hashCode => amount.hashCode ^ currency.hashCode;
 }

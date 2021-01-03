@@ -15,6 +15,7 @@ abstract class MuneInfo with Aggregate implements Built<MuneInfo, MuneInfoBuilde
 
   factory MuneInfo([updates(MuneInfoBuilder b)]) = _$MuneInfo;
 
+  @nullable
   MuneType get type;
 
   String get other;

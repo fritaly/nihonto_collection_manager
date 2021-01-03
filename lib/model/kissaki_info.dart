@@ -15,6 +15,7 @@ abstract class KissakiInfo with Aggregate implements Built<KissakiInfo, KissakiI
 
   factory KissakiInfo([updates(KissakiInfoBuilder b)]) = _$KissakiInfo;
 
+  @nullable
   KissakiType get type;
 
   String get other;

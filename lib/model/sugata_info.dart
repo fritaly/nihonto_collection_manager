@@ -15,6 +15,7 @@ abstract class SugataInfo with Aggregate implements Built<SugataInfo, SugataInfo
 
   factory SugataInfo([updates(SugataInfoBuilder b)]) = _$SugataInfo;
 
+  @nullable
   Sugata get type;
 
   String get other;

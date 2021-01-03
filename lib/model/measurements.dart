@@ -16,15 +16,31 @@ abstract class Measurements with Aggregate implements Built<Measurements, Measur
 
   factory Measurements([updates(MeasurementsBuilder b)]) = _$Measurements;
 
+  @nullable
   Length get nagasa;
+
+  @nullable
   Length get totalLength;
+
+  @nullable
   Length get kasane;
+
+  @nullable
   Length get motokasane;
+
+  @nullable
   Length get sakikasane;
+
+  @nullable
   Length get mihaba;
+
+  @nullable
   Length get motohaba;
+
+  @nullable
   Length get sakihaba;
 
+  @nullable
   Weight get weight;
 
   static Measurements random() {

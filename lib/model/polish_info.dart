@@ -16,6 +16,7 @@ abstract class PolishInfo with Aggregate implements Built<PolishInfo, PolishInfo
 
   factory PolishInfo([updates(PolishInfoBuilder b)]) = _$PolishInfo;
 
+  @nullable
   PolishType get type;
 
   String get other;

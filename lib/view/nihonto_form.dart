@@ -1383,8 +1383,7 @@ class NihontoFormState extends State<NihontoForm> {
                     if (value != null) {
                       setState(() {
                         // Update the price based on the value returned by the dialog
-                        _current = _current.rebuild((builder) => builder
-                          ..price = value);
+                        _current = _current.rebuild((builder) => builder.price.replace(value));
                       });
                     } else {
                       // The value is null if the user clicked "Cancel"

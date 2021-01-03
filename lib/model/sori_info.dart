@@ -17,8 +17,10 @@ abstract class SoriInfo with Aggregate implements Built<SoriInfo, SoriInfoBuilde
 
   factory SoriInfo([updates(SoriInfoBuilder b)]) = _$SoriInfo;
 
+  @nullable
   SoriType get type;
 
+  @nullable
   Length get sori;
 
   String get other;

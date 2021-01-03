@@ -110,7 +110,7 @@ abstract class Nihonto implements Built<Nihonto, NihontoBuilder> {
       ..type = NihontoType.random()
       ..sugata.replace(SugataInfo.random())
       ..signature.replace(SignatureInfo.random())
-      ..price = Money.random()
+      ..price.replace(Money.random())
       ..measurements.replace(Measurements.random())
       ..sori.replace(SoriInfo.random())
       ..hada.replace(HadaInfo.random())
