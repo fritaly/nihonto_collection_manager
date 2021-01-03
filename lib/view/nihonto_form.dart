@@ -1078,8 +1078,7 @@ class NihontoFormState extends State<NihontoForm> {
                 readOnly: readOnly,
                 onChanged: (value) {
                   setState(() {
-                    _current = _current.rebuild((builder) => builder
-                      ..mune = _current.mune.copyWith(type: value));
+                    _current = _current.rebuild((builder) => builder.mune.type = value);
                   });
                 }),
 
@@ -1094,8 +1093,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Mune-Other-${_current.mune.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.rebuild((builder) => builder
-                    ..mune = _current.mune.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.mune.other = value);
                 });
               },
             ),

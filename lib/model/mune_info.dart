@@ -1,46 +1,32 @@
-import 'package:flutter/foundation.dart';
+
+import 'package:built_value/built_value.dart';
 import 'package:nihonto_collection_manager/aggregate.dart';
 import 'package:nihonto_collection_manager/model/mune_type.dart';
 
-@immutable
-class MuneInfo with Aggregate {
-  static const DEFAULT = MuneInfo();
+part 'mune_info.g.dart';
 
-  final MuneType type;
+abstract class MuneInfo with Aggregate implements Built<MuneInfo, MuneInfoBuilder> {
 
-  final String other;
+  // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
+  static void _initializeBuilder(MuneInfoBuilder builder) => builder
+    ..other = '';
 
-  const MuneInfo({this.type, this.other = ''});
+  MuneInfo._();
 
-  MuneInfo copyWith({MuneType type, String other}) {
-    return MuneInfo(
-      type: type ?? this.type,
-      other: other ?? this.other,
-    );
-  }
+  factory MuneInfo([updates(MuneInfoBuilder b)]) = _$MuneInfo;
+
+  MuneType get type;
+
+  String get other;
 
   static MuneInfo random() {
-    return MuneInfo(type: MuneType.random(), other: '');
+    return MuneInfo((builder) => builder
+      ..type = MuneType.random()
+      ..other = '');
   }
 
   @override
   bool isBlank() {
-    return (type == null) && (other.isEmpty);
+    return (type == null) && other.isEmpty;
   }
-
-  @override
-  String toString() {
-    return 'MuneInfo[type: $type, other: ${other}]';
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is MuneInfo &&
-          runtimeType == other.runtimeType &&
-          type == other.type &&
-          other == other.other;
-
-  @override
-  int get hashCode => type.hashCode ^ other.hashCode;
 }
