@@ -310,12 +310,11 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _current.hada.types.values(),
+      initialValue: _current.hada.types.toList(),
       enabled: !readOnly,
       onSaved: (value) {
         setState(() {
-          _current = _current.rebuild((builder) => builder
-            ..hada = _current.hada.copyWith(types: EnumSet.from(value.cast<HadaType>())));
+          _current = _current.rebuild((builder) => builder.hada.types.replace(value));
         });
       },
     );
@@ -1128,8 +1127,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Hada-Other-${_current.hada.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.rebuild((builder) => builder
-                    ..hada = _current.hada.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.hada.other = value);
                 });
               },
             ),
