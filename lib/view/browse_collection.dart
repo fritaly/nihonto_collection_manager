@@ -120,7 +120,7 @@ class _BrowseCollectionState extends State<BrowseCollection> {
   void _pushAdd() async {
     var route = MaterialPageRoute<Nihonto>(
       builder: (BuildContext context) {
-        return NihontoForm(Mode.WRITE, Nihonto.DEFAULT);
+        return NihontoForm(Mode.WRITE, Nihonto());
       },
     );
 
