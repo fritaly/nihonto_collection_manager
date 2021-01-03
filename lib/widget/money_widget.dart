@@ -61,7 +61,7 @@ class MoneyWidgetState extends State<MoneyWidget> {
           decoration: InputDecoration(labelText: 'Currency', border: OutlineInputBorder()),
           value: _currency,
           key: Key(_currency.name),
-          items: Utils.getCurrencyMenuItems(),
+          items: Utils.getDropDownMenuItems(Currency.values),
           onChanged: (value) {
             setState(() {
               _currency = value;

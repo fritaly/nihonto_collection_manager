@@ -4,7 +4,6 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/labelled.dart';
-import 'package:nihonto_collection_manager/model/currency.dart';
 
 class Utils {
 
@@ -21,13 +20,6 @@ class Utils {
 
     return values.map((e) => DropdownMenuItem(
         child: Text(labelOf(e)),
-        value: e
-    )).toList(growable: false);
-  }
-
-  static List<DropdownMenuItem> getCurrencyMenuItems() {
-    return Currency.values.map((e) => DropdownMenuItem(
-        child: Text(e.name),
         value: e
     )).toList(growable: false);
   }
