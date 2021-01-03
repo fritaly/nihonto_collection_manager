@@ -1,45 +1,54 @@
-import 'package:nihonto_collection_manager/enum.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-class Bohi extends EnumWithLabel<Bohi> {
+part 'bohi.g.dart';
 
-  static const BO_HI = const Bohi._new('BO_HI', 'Bo-hi');
-  static const SOE_HI = const Bohi._new('SOE_HI', 'Soe-hi');
-  static const HORIMONO = const Bohi._new('HORIMONO', 'Horimono');
-  static const KATANA_HI = const Bohi._new('KATANA_HI', 'Katana hi');
-  static const KOSHI_BI = const Bohi._new('KOSHI_BI', 'Koshi bi');
-  static const FUTASUJI_HI = const Bohi._new('FUTASUJI_HI', 'Futasuhi-hi');
-  static const GOMABASHI = const Bohi._new('GOMABASHI', 'Gomabashi');
-  static const BONJI_KANJI = const Bohi._new('BONJI_KANJI', 'Bonji / Kanji');
-  static const OTHER = const Bohi._new('OTHER', 'Other');
+class Bohi extends EnumClass {
 
-  static const values = [
-    BO_HI,
-    SOE_HI,
-    HORIMONO,
-    KATANA_HI,
-    KOSHI_BI,
-    FUTASUJI_HI,
-    GOMABASHI,
-    BONJI_KANJI,
-    OTHER
-  ];
+  static Serializer<Bohi> get serializer => _$bohiSerializer;
 
-  const Bohi._new(String name, String label) : super(name, label);
+  static const Bohi BO_HI = _$BO_HI;
+  static const Bohi SOE_HI = _$SOE_HI;
+  static const Bohi HORIMONO = _$HORIMONO;
+  static const Bohi KATANA_HI = _$KATANA_HI;
+  static const Bohi KOSHI_BI = _$KOSHI_BI;
+  static const Bohi FUTASUJI_HI = _$FUTASUJI_HI;
+  static const Bohi GOMABASHI = _$GOMABASHI;
+  static const Bohi BONJI_KANJI = _$BONJI_KANJI;
+  static const Bohi OTHER = _$OTHER;
 
-  static Bohi valueOf(String name) {
-    assert (name != null);
+  const Bohi._(String name) : super(name);
 
-    var found = values.firstWhere((element) => element.name == name);
+  static BuiltSet<Bohi> get values => _$values;
+  static Bohi valueOf(String name) => _$valueOf(name);
 
-    if (found == null) {
-      throw Exception("No enum found with name '${name}'");
+  String get label {
+    switch(this) {
+      case BO_HI:
+        return 'Bo-hi';
+      case SOE_HI:
+        return 'Soe-hi';
+      case HORIMONO:
+        return 'Horimono';
+      case KATANA_HI:
+        return 'Katana-hi';
+      case KOSHI_BI:
+        return 'Koshi-bi';
+      case FUTASUJI_HI:
+        return 'Futasuhi-hi';
+      case GOMABASHI:
+        return 'Gomabashi';
+      case BONJI_KANJI:
+        return 'Bonji / Kanji';
+      case OTHER:
+        return 'Other';
+
+      default:
+        throw Exception('Unsupported value: ${this}');
     }
-
-    return found;
   }
 
-  static Bohi random() {
-    return Utils.random(values);
-  }
+  static Bohi random() => Utils.random(values.toList());
 }
