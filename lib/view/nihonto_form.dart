@@ -1046,8 +1046,7 @@ class NihontoFormState extends State<NihontoForm> {
                 readOnly: readOnly,
                 onChanged: (value) {
                   setState(() {
-                    _current = _current.rebuild((builder) => builder
-                      ..kissaki = _current.kissaki.copyWith(type: value));
+                    _current = _current.rebuild((builder) => builder.kissaki.type = value);
                   });
                 }),
 
@@ -1062,8 +1061,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Kissaki-Other-${_current.kissaki.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.rebuild((builder) => builder
-                    ..kissaki = _current.kissaki.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.kissaki.other = value);
                 });
               },
             ),
