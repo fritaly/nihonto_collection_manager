@@ -1,37 +1,24 @@
-import 'package:nihonto_collection_manager/enum.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-class Currency extends Enum<Currency> {
+part 'currency.g.dart';
 
-  static const USD = const Currency._new('USD');
-  static const EUR = const Currency._new('EUR');
-  static const JPY = const Currency._new('JPY');
-  static const AUD = const Currency._new('AUD');
-  static const GBP = const Currency._new('GBP');
+class Currency extends EnumClass {
 
-  static const values = [
-    USD,
-    EUR,
-    JPY,
-    AUD,
-    GBP,
-  ];
+  static Serializer<Currency> get serializer => _$currencySerializer;
 
-  const Currency._new(String name) : super(name);
+  static const Currency USD = _$USD;
+  static const Currency EUR = _$EUR;
+  static const Currency AUD = _$AUD;
+  static const Currency JPY = _$JPY;
+  static const Currency GBP = _$GBP;
 
-  static Currency valueOf(String name) {
-    assert (name != null);
+  const Currency._(String name) : super(name);
 
-    var found = values.firstWhere((element) => element.name == name);
+  static BuiltSet<Currency> get values => _$values;
+  static Currency valueOf(String name) => _$valueOf(name);
 
-    if (found == null) {
-      throw Exception("No enum found with name '${name}'");
-    }
-
-    return found;
-  }
-
-  static Currency random() {
-    return Utils.random(values);
-  }
+  static Currency random() => Utils.random(values.toList());
 }
