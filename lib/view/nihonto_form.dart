@@ -353,12 +353,11 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _current.yakiba.types.values(),
+      initialValue: _current.yakiba.types.toList(),
       enabled: !readOnly,
       onSaved: (value) {
         setState(() {
-          _current = _current.rebuild((builder) => builder
-            ..yakiba = _current.yakiba.copyWith(types: EnumSet.from(value.cast<Yakiba>())));
+          _current = _current.rebuild((builder) => builder.yakiba.types.replace(value));
         });
       },
     );
@@ -1174,8 +1173,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Yakiba-Other-${_current.yakiba.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.rebuild((builder) => builder
-                    ..yakiba = _current.yakiba.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.yakiba.other = value);
                 });
               },
             ),

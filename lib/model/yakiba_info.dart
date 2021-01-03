@@ -1,48 +1,35 @@
-import 'package:flutter/foundation.dart';
+
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
 import 'package:nihonto_collection_manager/aggregate.dart';
-import 'package:nihonto_collection_manager/enum_set.dart';
+import 'package:nihonto_collection_manager/model/boshi.dart';
 import 'package:nihonto_collection_manager/model/yakiba.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
-@immutable
-class YakibaInfo with Aggregate {
+part 'yakiba_info.g.dart';
 
-  static const DEFAULT = YakibaInfo();
+abstract class YakibaInfo with Aggregate implements Built<YakibaInfo, YakibaInfoBuilder> {
 
-  final EnumSet<Yakiba> types;
+  // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
+  static void _initializeBuilder(YakibaInfoBuilder builder) => builder
+    ..other = '';
 
-  final String other;
+  YakibaInfo._();
 
-  const YakibaInfo({ this.types = const EnumSet.empty(), this.other = '' });
+  factory YakibaInfo([updates(YakibaInfoBuilder b)]) = _$YakibaInfo;
 
-  YakibaInfo copyWith({EnumSet<Yakiba> types, String other}) {
-    return YakibaInfo(
-      types: types ?? this.types,
-      other: other ?? this.other,
-    );
-  }
+  String get other;
+
+  BuiltSet<Yakiba> get types;
 
   static YakibaInfo random() {
-    return YakibaInfo(types: EnumSet.random(Yakiba.values), other: '');
+    return YakibaInfo((builder) => builder
+      ..types.addAll(Utils.randomIterable(Yakiba.values))
+      ..other = '');
   }
 
   @override
   bool isBlank() {
-    return types.isEmpty() && (other.isEmpty);
+    return types.isEmpty && other.isEmpty;
   }
-
-  @override
-  String toString() {
-    return 'YakibaInfo[types: $types, other: $other]';
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is YakibaInfo &&
-          runtimeType == other.runtimeType &&
-          types == other.types &&
-          other == other.other;
-
-  @override
-  int get hashCode => types.hashCode ^ other.hashCode;
 }
