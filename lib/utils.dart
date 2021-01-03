@@ -30,14 +30,6 @@ class Utils {
     return list[Random().nextInt(list.length)];
   }
 
-  static List<T> randomSublist<T>(List<T> list) {
-    assert (list != null);
-
-    final random = Random();
-
-    return list.where((element) => random.nextBool()).toList();
-  }
-
   static Iterable<T> randomIterable<T>(Iterable<T> iterable) {
     assert (iterable != null);
 
