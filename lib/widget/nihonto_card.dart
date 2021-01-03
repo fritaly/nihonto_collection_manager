@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
 
-enum Action { view, edit, delete }
+enum _Action { view, edit, delete }
 
 /// Material card used for representing a Nihonto
 class NihontoCard extends Card {
@@ -31,32 +31,32 @@ class NihontoCard extends Card {
                   ),
                   subtitle: Text(
                       "${nihonto.type.label} by ${nihonto.signature.romaji}"),
-                  trailing: PopupMenuButton<Action>(
-                    onSelected: (Action result) {
+                  trailing: PopupMenuButton<_Action>(
+                    onSelected: (_Action result) {
                       switch (result) {
-                        case Action.view:
+                        case _Action.view:
                           onView.call();
                           break;
-                        case Action.edit:
+                        case _Action.edit:
                           onEdit.call();
                           break;
-                        case Action.delete:
+                        case _Action.delete:
                           onDelete.call();
                           break;
                       }
                     },
                     itemBuilder: (BuildContext context) =>
-                        <PopupMenuEntry<Action>>[
-                      const PopupMenuItem<Action>(
-                        value: Action.view,
+                        <PopupMenuEntry<_Action>>[
+                      const PopupMenuItem<_Action>(
+                        value: _Action.view,
                         child: const Text('View'),
                       ),
-                      const PopupMenuItem<Action>(
-                        value: Action.edit,
+                      const PopupMenuItem<_Action>(
+                        value: _Action.edit,
                         child: const Text('Edit'),
                       ),
-                      const PopupMenuItem<Action>(
-                        value: Action.delete,
+                      const PopupMenuItem<_Action>(
+                        value: _Action.delete,
                         child: const Text('Delete'),
                       ),
                     ],
