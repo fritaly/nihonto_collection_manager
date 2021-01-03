@@ -1,46 +1,33 @@
-import 'package:flutter/foundation.dart';
+
+import 'package:built_value/built_value.dart';
 import 'package:nihonto_collection_manager/aggregate.dart';
 import 'package:nihonto_collection_manager/model/polish_type.dart';
+import 'package:nihonto_collection_manager/model/sugata.dart';
 
-@immutable
-class PolishInfo with Aggregate {
-  static const DEFAULT = PolishInfo();
+part 'polish_info.g.dart';
 
-  final PolishType type;
+abstract class PolishInfo with Aggregate implements Built<PolishInfo, PolishInfoBuilder> {
 
-  final String other;
+  // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
+  static void _initializeBuilder(PolishInfoBuilder builder) => builder
+    ..other = '';
 
-  const PolishInfo({this.type, this.other = ''});
+  PolishInfo._();
 
-  PolishInfo copyWith({PolishType type, String other}) {
-    return PolishInfo(
-      type: type ?? this.type,
-      other: other ?? this.other,
-    );
-  }
+  factory PolishInfo([updates(PolishInfoBuilder b)]) = _$PolishInfo;
+
+  PolishType get type;
+
+  String get other;
 
   static PolishInfo random() {
-    return PolishInfo(type: PolishType.random(), other: '');
+    return PolishInfo((builder) => builder
+      ..type = PolishType.random()
+      ..other = '');
   }
 
   @override
   bool isBlank() {
-    return (type == null) && (other.isEmpty);
+    return (type == null) && other.isEmpty;
   }
-
-  @override
-  String toString() {
-    return 'PolishInfo[type: $type, other: ${other}]';
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PolishInfo &&
-          runtimeType == other.runtimeType &&
-          type == other.type &&
-          other == other.other;
-
-  @override
-  int get hashCode => type.hashCode ^ other.hashCode;
 }

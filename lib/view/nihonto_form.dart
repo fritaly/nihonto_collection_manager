@@ -1278,8 +1278,7 @@ class NihontoFormState extends State<NihontoForm> {
                 readOnly: readOnly,
                 onChanged: (value) {
                   setState(() {
-                    _current = _current.rebuild((builder) => builder
-                      ..polish = _current.polish.copyWith(type: value));
+                    _current = _current.rebuild((builder) => builder.polish.type = value);
                   });
                 }),
 
@@ -1294,8 +1293,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Polish-Other-${_current.polish.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.rebuild((builder) => builder
-                    ..polish = _current.polish.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.polish.other = value);
                 });
               },
             ),
