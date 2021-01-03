@@ -417,7 +417,7 @@ class NihontoFormState extends State<NihontoForm> {
       enabled: !readOnly,
       onSaved: (value) {
         setState(() {
-          _current = _current.rebuild((builder) => builder.yasurime.types = value));
+          _current = _current.rebuild((builder) => builder.yasurime.types = value);
         });
       },
     );
@@ -560,8 +560,7 @@ class NihontoFormState extends State<NihontoForm> {
                   readOnly: readOnly,
                   onChanged: (value) {
                     setState(() {
-                      _current = _current.rebuild((builder) => builder
-                        ..sugata = _current.sugata.copyWith(type: value));
+                      _current = _current.rebuild((builder) => builder.sugata.type = value);
                     });
                   }),
 
@@ -576,8 +575,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Sugata-Other-${_current.sugata.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.rebuild((builder) => builder
-                    ..sugata = _current.sugata.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.sugata.other = value);
                 });
               },
             ),

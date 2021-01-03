@@ -33,7 +33,7 @@ abstract class Nihonto implements Built<Nihonto, NihontoBuilder> {
     ..attribution = ''
     ..other = ''
     ..signature = SignatureInfo()
-    ..sugata = SugataInfo()
+    ..sugata.replace(SugataInfo())
     ..measurements = Measurements()
     ..hada.replace(HadaInfo())
     ..sori = SoriInfo()
@@ -108,7 +108,7 @@ abstract class Nihonto implements Built<Nihonto, NihontoBuilder> {
       ..overallDescription =
           'Description goes here...\nDescription goes here...\nDescription goes here...'
       ..type = NihontoType.random()
-      ..sugata = SugataInfo.random()
+      ..sugata.replace(SugataInfo.random())
       ..signature = SignatureInfo.random()
       ..price = Money.random()
       ..measurements = Measurements.random()
