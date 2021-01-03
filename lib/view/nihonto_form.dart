@@ -454,12 +454,11 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _current.signature.types.values(),
+      initialValue: _current.signature.types.toList(),
       enabled: !readOnly,
       onSaved: (value) {
         setState(() {
-          _current = _current.rebuild((builder) => builder
-            ..signature = _current.signature.copyWith(types: EnumSet.from(value.cast<SignatureType>())));
+          _current = _current.rebuild((builder) => builder.signature.types.replace(value));
         });
       },
     );
@@ -595,8 +594,7 @@ class NihontoFormState extends State<NihontoForm> {
               maxLines: 25,
               onChanged: (value) {
                 setState(() {
-                  _current = _current.rebuild((builder) => builder
-                    ..signature = _current.signature.copyWith(romaji: value));
+                  _current = _current.rebuild((builder) => builder.signature.romaji = value);
                 });
               },
             ),
@@ -612,8 +610,7 @@ class NihontoFormState extends State<NihontoForm> {
               maxLines: 25,
               onChanged: (value) {
                 setState(() {
-                  _current = _current.rebuild((builder) => builder
-                    ..signature = _current.signature.copyWith(kanji: value));
+                  _current = _current.rebuild((builder) => builder.signature.kanji = value);
                 });
               },
             ),
@@ -633,8 +630,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Signature-Other-${_current.signature.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.rebuild((builder) => builder
-                    ..signature = _current.signature.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.signature.other = value);
                 });
               },
             ),
