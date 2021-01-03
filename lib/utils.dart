@@ -1,16 +1,26 @@
 import 'dart:math';
 
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
 import 'package:flutter/material.dart';
-import 'package:nihonto_collection_manager/enum.dart';
+import 'package:nihonto_collection_manager/labelled.dart';
 import 'package:nihonto_collection_manager/model/currency.dart';
 
 class Utils {
 
-  static List<DropdownMenuItem<T>> getDropDownMenuItems<T extends EnumWithLabel<T>>(List<T> values) {
+  static String labelOf(EnumClass value) {
+    if (value is Labelled) {
+      return (value as Labelled).label;
+    }
+
+    return value.name;
+  }
+
+  static List<DropdownMenuItem<T>> getDropDownMenuItems<T extends EnumClass>(BuiltSet<T> values) {
     assert (values != null);
 
     return values.map((e) => DropdownMenuItem(
-        child: Text(e.label),
+        child: Text(labelOf(e)),
         value: e
     )).toList(growable: false);
   }

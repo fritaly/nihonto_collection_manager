@@ -1,49 +1,61 @@
-import 'package:nihonto_collection_manager/enum.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
+import 'package:nihonto_collection_manager/labelled.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-class Nakago extends EnumWithLabel<Nakago> {
+part 'nakago.g.dart';
 
-  static const UBU = const Nakago._new('UBU', 'Ubu');
-  static const FUTSU_GATA = const Nakago._new('FUTSU_GATA', 'Futsu gata');
-  static const KIJIMOTO_GATA = const Nakago._new('KIJIMOTO_GATA', 'Kijimoto gata');
-  static const SHIRIBARI_GATA = const Nakago._new('SHIRIBARI_GATA', 'Shiribari gata');
-  static const GOHEI_GATA = const Nakago._new('GOHEI_GATA', 'Gohei gata');
-  static const FUNA_GATA = const Nakago._new('FUNA_GATA', 'Funa gata');
-  static const FURISODE_GATA = const Nakago._new('FURISODE_GATA', 'Furisode gata');
-  static const SURIAGE = const Nakago._new('SURIAGE', 'Suriage');
-  static const O_SURIAGE = const Nakago._new('O_SURIAGE', 'O suriage');
-  static const MACHI_OKURI = const Nakago._new('MACHI_OKURI', 'Machi okuri');
-  static const OTHER = const Nakago._new('OTHER', 'Other');
+class Nakago extends EnumClass with Labelled {
 
-  static const values = [
-    UBU,
-    FUTSU_GATA,
-    KIJIMOTO_GATA,
-    SHIRIBARI_GATA,
-    GOHEI_GATA,
-    FUNA_GATA,
-    FURISODE_GATA,
-    SURIAGE,
-    O_SURIAGE,
-    MACHI_OKURI,
-    OTHER
-  ];
+  static Serializer<Nakago> get serializer => _$nakagoSerializer;
 
-  const Nakago._new(String name, String label) : super(name, label);
+  static const Nakago UBU = _$UBU;
+  static const Nakago FUTSU_GATA = _$FUTSU_GATA;
+  static const Nakago KIJIMOTO_GATA = _$KIJIMOTO_GATA;
+  static const Nakago SHIRIBARI_GATA = _$SHIRIBARI_GATA;
+  static const Nakago GOHEI_GATA = _$GOHEI_GATA;
+  static const Nakago FUNA_GATA = _$FUNA_GATA;
+  static const Nakago FURISODE_GATA = _$FURISODE_GATA;
+  static const Nakago SURIAGE = _$SURIAGE;
+  static const Nakago O_SURIAGE = _$O_SURIAGE;
+  static const Nakago MACHI_OKURI = _$MACHI_OKURI;
+  static const Nakago OTHER = _$OTHER;
 
-  static Nakago valueOf(String name) {
-    assert (name != null);
+  const Nakago._(String name) : super(name);
 
-    var found = values.firstWhere((element) => element.name == name);
+  static BuiltSet<Nakago> get values => _$values;
+  static Nakago valueOf(String name) => _$valueOf(name);
 
-    if (found == null) {
-      throw Exception("No enum found with name '${name}'");
+  String get label {
+    switch(this) {
+      case UBU:
+        return 'Ubu';
+      case FUTSU_GATA:
+        return 'Futsu gata';
+      case KIJIMOTO_GATA:
+        return 'Kijimoto gata';
+      case SHIRIBARI_GATA:
+        return 'Shiribari gata';
+      case GOHEI_GATA:
+        return 'Gohei gata';
+      case FUNA_GATA:
+        return 'Funa gata';
+      case FURISODE_GATA:
+        return 'Furisode gata';
+      case SURIAGE:
+        return 'Suriage';
+      case O_SURIAGE:
+        return 'O suriage';
+      case MACHI_OKURI:
+        return 'Machi okuri';
+      case OTHER:
+        return 'Other';
+
+      default:
+        throw Exception('Unsupported value: ${this}');
     }
-
-    return found;
   }
 
-  static Nakago random() {
-    return Utils.random(values);
-  }
+  static Nakago random() => Utils.random(values.toList());
 }

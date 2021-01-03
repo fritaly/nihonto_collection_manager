@@ -1,41 +1,49 @@
-import 'package:nihonto_collection_manager/enum.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
+import 'package:nihonto_collection_manager/labelled.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-class MuneType extends EnumWithLabel<MuneType> {
+part 'mune_type.g.dart';
 
-  static const IORI = const MuneType._new('IORI', 'Iori');
-  static const TAKASHI = const MuneType._new('TAKASHI', 'Takashi');
-  static const HIKUSHI = const MuneType._new('HIKUSHI', 'Hikushi');
-  static const HIRA = const MuneType._new('HIRA', 'Hira');
-  static const MITSU = const MuneType._new('MITSU', 'Mitsu');
-  static const MARU = const MuneType._new('MARU', 'Maru');
-  static const OTHER = const MuneType._new('OTHER', 'Other');
+class MuneType extends EnumClass with Labelled {
 
-  static const values = [
-    IORI,
-    TAKASHI,
-    HIKUSHI,
-    HIRA,
-    MITSU,
-    MARU,
-    OTHER
-  ];
+  static Serializer<MuneType> get serializer => _$muneTypeSerializer;
 
-  const MuneType._new(String name, String label) : super(name, label);
+  static const MuneType IORI = _$IORI;
+  static const MuneType TAKASHI = _$TAKASHI;
+  static const MuneType HIKUSHI = _$HIKUSHI;
+  static const MuneType HIRA = _$HIRA;
+  static const MuneType MITSU = _$MITSU;
+  static const MuneType MARU = _$MARU;
+  static const MuneType OTHER = _$OTHER;
 
-  static MuneType valueOf(String name) {
-    assert (name != null);
+  const MuneType._(String name) : super(name);
 
-    var found = values.firstWhere((element) => element.name == name);
+  static BuiltSet<MuneType> get values => _$values;
+  static MuneType valueOf(String name) => _$valueOf(name);
 
-    if (found == null) {
-      throw Exception("No enum found with name '${name}'");
+  String get label {
+    switch(this) {
+      case IORI:
+        return 'Iori';
+      case TAKASHI:
+        return 'Takashi';
+      case HIKUSHI:
+        return 'Hikushi';
+      case HIRA:
+        return 'Hira';
+      case MITSU:
+        return 'Mitsu';
+      case MARU:
+        return 'Maru';
+      case OTHER:
+        return 'Other';
+
+      default:
+        throw Exception('Unsupported value: ${this}');
     }
-
-    return found;
   }
 
-  static MuneType random() {
-    return Utils.random(values);
-  }
+  static MuneType random() => Utils.random(values.toList());
 }

@@ -15,7 +15,7 @@ class EnumSet<T> {
   EnumSet.from(Iterable<T> args): this(args);
 
   /// Returns an EnumSet containing values randomly chosen from the given iterable
-  EnumSet.random(Iterable<T> args): this(Utils.randomSublist(args));
+  EnumSet.random(Iterable<T> args): this(Utils.randomSublist(args.toList()));
 
   EnumSet<T> operator +(T value) {
     assert (value != null);

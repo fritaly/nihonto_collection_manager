@@ -1,43 +1,52 @@
-import 'package:nihonto_collection_manager/enum.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
+import 'package:nihonto_collection_manager/labelled.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-class HadaType extends EnumWithLabel<HadaType> {
+part 'hada_type.g.dart';
 
-  static const ITAME = const HadaType._new('ITAME', 'Itame');
-  static const MOKUME = const HadaType._new('MOKUME', 'Mokume');
-  static const MASAME = const HadaType._new('MASAME', 'Masame');
-  static const AYASUGI = const HadaType._new('AYASUGI', 'Ayasugi');
-  static const NASHIJI = const HadaType._new('NASHIJI', 'Nashiji');
-  static const KONUKA = const HadaType._new('KONUKA', 'Konuka');
-  static const MUJI = const HadaType._new('MUJI', 'Muji');
-  static const OTHER = const HadaType._new('OTHER', 'Other');
+class HadaType extends EnumClass with Labelled {
 
-  static const values = [
-    ITAME,
-    MOKUME,
-    MASAME,
-    AYASUGI,
-    NASHIJI,
-    KONUKA,
-    MUJI,
-    OTHER
-  ];
+  static Serializer<HadaType> get serializer => _$hadaTypeSerializer;
 
-  const HadaType._new(String name, String label) : super(name, label);
+  static const HadaType ITAME = _$ITAME;
+  static const HadaType MOKUME = _$MOKUME;
+  static const HadaType MASAME = _$MASAME;
+  static const HadaType AYASUGI = _$AYASUGI;
+  static const HadaType NASHIJI = _$NASHIJI;
+  static const HadaType KONUKA = _$KONUKA;
+  static const HadaType MUJI = _$MUJI;
+  static const HadaType OTHER = _$OTHER;
 
-  static HadaType valueOf(String name) {
-    assert (name != null);
+  const HadaType._(String name) : super(name);
 
-    var found = values.firstWhere((element) => element.name == name);
+  static BuiltSet<HadaType> get values => _$values;
+  static HadaType valueOf(String name) => _$valueOf(name);
 
-    if (found == null) {
-      throw Exception("No enum found with name '${name}'");
+  String get label {
+    switch(this) {
+      case ITAME:
+        return 'Itame';
+      case MOKUME:
+        return 'Mokume';
+      case MASAME:
+        return 'Masame';
+      case AYASUGI:
+        return 'Ayasugi';
+      case NASHIJI:
+        return 'Nashiji';
+      case KONUKA:
+        return 'Konuka';
+      case MUJI:
+        return 'Muji';
+      case OTHER:
+        return 'Other';
+
+      default:
+        throw Exception('Unsupported value: ${this}');
     }
-
-    return found;
   }
 
-  static HadaType random() {
-    return Utils.random(values);
-  }
+  static HadaType random() => Utils.random(values.toList());
 }

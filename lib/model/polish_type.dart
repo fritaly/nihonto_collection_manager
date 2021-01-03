@@ -1,39 +1,46 @@
-import 'package:nihonto_collection_manager/enum.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
+import 'package:nihonto_collection_manager/labelled.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-class PolishType extends EnumWithLabel<PolishType> {
+part 'polish_type.g.dart';
 
-  static const NONE = const PolishType._new('NONE', 'None');
-  static const ROUGH = const PolishType._new('ROUGH', 'Rough (raw)');
-  static const ORIGINAL = const PolishType._new('ORIGINAL', 'Original (old)');
-  static const HADORI = const PolishType._new('HADORI', 'Hadori (modern aka keisho)');
-  static const SASHIKOMI = const PolishType._new('SASHIKOMI', 'Sashikomi (traditional)');
-  static const OTHER = const PolishType._new('OTHER', 'Other');
+class PolishType extends EnumClass with Labelled {
 
-  static const values = [
-    NONE,
-    ROUGH,
-    ORIGINAL,
-    HADORI,
-    SASHIKOMI,
-    OTHER
-  ];
+  static Serializer<PolishType> get serializer => _$polishTypeSerializer;
 
-  const PolishType._new(String name, String label) : super(name, label);
+  static const PolishType NONE = _$NONE;
+  static const PolishType ROUGH = _$ROUGH;
+  static const PolishType ORIGINAL = _$ORIGINAL;
+  static const PolishType HADORI = _$HADORI;
+  static const PolishType SASHIKOMI = _$SASHIKOMI;
+  static const PolishType OTHER = _$OTHER;
 
-  static PolishType valueOf(String name) {
-    assert (name != null);
+  const PolishType._(String name) : super(name);
 
-    var found = values.firstWhere((element) => element.name == name);
+  static BuiltSet<PolishType> get values => _$values;
+  static PolishType valueOf(String name) => _$valueOf(name);
 
-    if (found == null) {
-      throw Exception("No enum found with name '${name}'");
+  String get label {
+    switch(this) {
+      case NONE:
+        return 'None';
+      case ROUGH:
+        return 'Rough (raw)';
+      case ORIGINAL:
+        return 'Original (old)';
+      case HADORI:
+        return 'Hadori (modern aka keisho)';
+      case SASHIKOMI:
+        return 'Sashikomi (traditional)';
+      case OTHER:
+        return 'Other';
+
+      default:
+        throw Exception('Unsupported value: ${this}');
     }
-
-    return found;
   }
 
-  static PolishType random() {
-    return Utils.random(values);
-  }
+  static PolishType random() => Utils.random(values.toList());
 }

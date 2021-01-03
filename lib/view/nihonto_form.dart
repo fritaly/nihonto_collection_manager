@@ -1,7 +1,7 @@
+import 'package:built_value/built_value.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nihonto_collection_manager/enum.dart';
 import 'package:nihonto_collection_manager/enum_set.dart';
 import 'package:nihonto_collection_manager/model/bohi.dart';
 import 'package:nihonto_collection_manager/model/boshi.dart';
@@ -276,7 +276,7 @@ class NihontoFormState extends State<NihontoForm> {
     return dialog;
   }
 
-  DropdownButtonFormField<T> _buildDropDownField<T extends EnumWithLabel<T>>({ @required String label,
+  DropdownButtonFormField<T> _buildDropDownField<T extends EnumClass>({ @required String label,
     @required T value,
     @required List<DropdownMenuItem<T>> items,
     @required bool readOnly,
@@ -291,7 +291,7 @@ class NihontoFormState extends State<NihontoForm> {
         decoration: FieldDecoration(label),
         value: value,
         items: items,
-        disabledHint: (readOnly && (value != null)) ? Text(value.label) : null,
+        disabledHint: (readOnly && (value != null)) ? Text(Utils.labelOf(value)) : null,
         onChanged: readOnly ? null: onChanged);
   }
 

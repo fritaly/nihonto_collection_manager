@@ -1,31 +1,41 @@
-import 'package:nihonto_collection_manager/enum.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
+import 'package:nihonto_collection_manager/labelled.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-class WeightUnit extends EnumWithLabel<WeightUnit> {
+part 'weight_unit.g.dart';
 
-  static const GRAM = const WeightUnit._new('GRAM', 'gram', 'g');
+class WeightUnit extends EnumClass with Labelled {
 
-  static const values = [
-    GRAM
-  ];
+  static Serializer<WeightUnit> get serializer => _$weightUnitSerializer;
 
-  final String symbol;
+  static const WeightUnit GRAM = _$GRAM;
 
-  const WeightUnit._new(String name, String label, this.symbol) : super(name, label);
+  const WeightUnit._(String name) : super(name);
 
-  static WeightUnit valueOf(String name) {
-    assert (name != null);
+  static BuiltSet<WeightUnit> get values => _$values;
+  static WeightUnit valueOf(String name) => _$valueOf(name);
 
-    var found = values.firstWhere((element) => element.name == name);
+  String get label {
+    switch(this) {
+      case GRAM:
+        return 'gram';
 
-    if (found == null) {
-      throw Exception("No enum found with name '${name}'");
+      default:
+        throw Exception('Unsupported value: ${this}');
     }
-
-    return found;
   }
 
-  static WeightUnit random() {
-    return Utils.random(values);
+  String get symbol {
+    switch(this) {
+      case GRAM:
+        return 'g';
+
+      default:
+        throw Exception('Unsupported value: ${this}');
+    }
   }
+
+  static WeightUnit random() => Utils.random(values.toList());
 }

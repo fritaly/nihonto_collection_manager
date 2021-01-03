@@ -1,39 +1,46 @@
-import 'package:nihonto_collection_manager/enum.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
+import 'package:nihonto_collection_manager/labelled.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-class Yasurime extends EnumWithLabel<Yasurime> {
+part 'yasurime.g.dart';
 
-  static const KIRI = const Yasurime._new('KIRI', 'Kiri');
-  static const KATTESAGARI = const Yasurime._new('KATTESAGARI', 'Kattesagari');
-  static const HIGAKI = const Yasurime._new('HIGAKI', 'Higaki');
-  static const TAKANOHA = const Yasurime._new('TAKANOHA', 'Taka no ha');
-  static const SUJIKAI = const Yasurime._new('SUJIKAI', 'Sujikai');
-  static const OTHER = const Yasurime._new('OTHER', 'Other');
+class Yasurime extends EnumClass with Labelled {
 
-  static const values = [
-    KIRI,
-    KATTESAGARI,
-    HIGAKI,
-    TAKANOHA,
-    SUJIKAI,
-    OTHER
-  ];
+  static Serializer<Yasurime> get serializer => _$yasurimeSerializer;
 
-  const Yasurime._new(String name, String label) : super(name, label);
+  static const Yasurime KIRI = _$KIRI;
+  static const Yasurime KATTESAGARI = _$KATTESAGARI;
+  static const Yasurime HIGAKI = _$HIGAKI;
+  static const Yasurime TAKANOHA = _$TAKANOHA;
+  static const Yasurime SUJIKAI = _$SUJIKAI;
+  static const Yasurime OTHER = _$OTHER;
 
-  static Yasurime valueOf(String name) {
-    assert (name != null);
+  const Yasurime._(String name) : super(name);
 
-    var found = values.firstWhere((element) => element.name == name);
+  static BuiltSet<Yasurime> get values => _$values;
+  static Yasurime valueOf(String name) => _$valueOf(name);
 
-    if (found == null) {
-      throw Exception("No enum found with name '${name}'");
+  String get label {
+    switch(this) {
+      case KIRI:
+        return 'Kiri';
+      case KATTESAGARI:
+        return 'Kattesagari';
+      case HIGAKI:
+        return 'Higaki';
+      case TAKANOHA:
+        return 'Taka no ha';
+      case SUJIKAI:
+        return 'Sujikai';
+      case OTHER:
+        return 'Other';
+
+      default:
+        throw Exception('Unsupported value: ${this}');
     }
-
-    return found;
   }
 
-  static Yasurime random() {
-    return Utils.random(values);
-  }
+  static Yasurime random() => Utils.random(values.toList());
 }

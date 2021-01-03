@@ -1,33 +1,37 @@
-import 'package:nihonto_collection_manager/enum.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
+import 'package:nihonto_collection_manager/labelled.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-class LengthUnit extends EnumWithLabel<LengthUnit> {
+part 'length_unit.g.dart';
 
-  static const CM = const LengthUnit._new('CM', 'cm');
-  static const MM = const LengthUnit._new('MM', 'mm');
-  static const INCH = const LengthUnit._new('INCH', 'inch');
+class LengthUnit extends EnumClass with Labelled {
 
-  static const values = [
-    CM,
-    MM,
-    INCH
-  ];
+  static Serializer<LengthUnit> get serializer => _$lengthUnitSerializer;
 
-  const LengthUnit._new(String name, String label) : super(name, label);
+  static const LengthUnit CM = _$CM;
+  static const LengthUnit MM = _$MM;
+  static const LengthUnit INCH = _$INCH;
 
-  static LengthUnit valueOf(String name) {
-    assert (name != null);
+  const LengthUnit._(String name) : super(name);
 
-    var found = values.firstWhere((element) => element.name == name);
+  static BuiltSet<LengthUnit> get values => _$values;
+  static LengthUnit valueOf(String name) => _$valueOf(name);
 
-    if (found == null) {
-      throw Exception("No enum found with name '${name}'");
+  String get label {
+    switch(this) {
+      case CM:
+        return 'cm';
+      case MM:
+        return 'mm';
+      case INCH:
+        return 'inch';
+
+      default:
+        throw Exception('Unsupported value: ${this}');
     }
-
-    return found;
   }
 
-  static LengthUnit random() {
-    return Utils.random(values);
-  }
+  static LengthUnit random() => Utils.random(values.toList());
 }
