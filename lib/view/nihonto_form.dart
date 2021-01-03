@@ -2,7 +2,6 @@ import 'package:built_value/built_value.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nihonto_collection_manager/enum_set.dart';
 import 'package:nihonto_collection_manager/model/bohi.dart';
 import 'package:nihonto_collection_manager/model/boshi.dart';
 import 'package:nihonto_collection_manager/model/hada_type.dart';
@@ -299,7 +298,7 @@ class NihontoFormState extends State<NihontoForm> {
   Widget build(BuildContext context) {
     final bool readOnly = (_mode == Mode.READ);
 
-    final hadaWidget = MultiSelectFormField(
+    final hadaWidget = MultiSelectFormField<List<HadaType>, HadaType>(
       key: Key('Hada-${_current.hada.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
@@ -319,7 +318,7 @@ class NihontoFormState extends State<NihontoForm> {
       },
     );
 
-    final hamonWidget = MultiSelectFormField(
+    final hamonWidget = MultiSelectFormField<List<HamonType>, HamonType>(
       key: Key('Hamon-${_current.hamon.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
@@ -342,7 +341,7 @@ class NihontoFormState extends State<NihontoForm> {
       },
     );
 
-    final yakibaWidget = MultiSelectFormField(
+    final yakibaWidget = MultiSelectFormField<List<Yakiba>, Yakiba>(
       key: Key('Yakiba-${_current.yakiba.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
@@ -362,7 +361,7 @@ class NihontoFormState extends State<NihontoForm> {
       },
     );
 
-    final boshiWidget = MultiSelectFormField(
+    final boshiWidget = MultiSelectFormField<List<Boshi>, Boshi>(
       key: Key('Boshi-${_current.boshi.toString()}'),
       autovalidate: false,
       border: OutlineInputBorder(),
@@ -382,7 +381,7 @@ class NihontoFormState extends State<NihontoForm> {
       },
     );
 
-    final nakagoWidget = MultiSelectFormField(
+    final nakagoWidget = MultiSelectFormField<List<Nakago>, Nakago>(
       key: Key('Nakago-${_current.nakago.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
@@ -402,7 +401,7 @@ class NihontoFormState extends State<NihontoForm> {
       },
     );
 
-    final yasurimeWidget = MultiSelectFormField(
+    final yasurimeWidget = MultiSelectFormField<List<Yasurime>, Yasurime>(
       key: Key('Yasurime-${_current.yasurime.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
@@ -417,12 +416,12 @@ class NihontoFormState extends State<NihontoForm> {
       enabled: !readOnly,
       onSaved: (value) {
         setState(() {
-          _current = _current.rebuild((builder) => builder.yasurime.types = value);
+          _current = _current.rebuild((builder) => builder.yasurime.types.replace(value));
         });
       },
     );
 
-    final bohiWidget = MultiSelectFormField(
+    final bohiWidget = MultiSelectFormField<List<Bohi>, Bohi>(
       key: Key('Bohi-${_current.bohi.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),
@@ -443,7 +442,7 @@ class NihontoFormState extends State<NihontoForm> {
       },
     );
 
-    final signatureWidget = MultiSelectFormField(
+    final signatureWidget = MultiSelectFormField<List<SignatureType>, SignatureType>(
       key: Key('SignatureInfo-${_current.signature.types}'),
       autovalidate: false,
       border: OutlineInputBorder(),

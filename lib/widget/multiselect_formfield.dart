@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/widget/multiselect_dialog.dart';
 
-class MultiSelectFormField extends FormField<dynamic> {
+class MultiSelectFormField<L extends List<T>, T> extends FormField<L> {
   final String title;
   final Widget hintWidget;
   final bool required;
@@ -28,9 +28,9 @@ class MultiSelectFormField extends FormField<dynamic> {
 
   MultiSelectFormField({
     Key key,
-    FormFieldSetter<dynamic> onSaved,
-    FormFieldValidator<dynamic> validator,
-    dynamic initialValue,
+    FormFieldSetter<L> onSaved,
+    FormFieldValidator<L> validator,
+    L initialValue,
     bool autovalidate = false,
     this.title = 'Title',
     this.hintWidget = const Text('Tap to select one or more'),
@@ -63,7 +63,7 @@ class MultiSelectFormField extends FormField<dynamic> {
           validator: validator,
           initialValue: initialValue,
           autovalidate: autovalidate,
-          builder: (FormFieldState<dynamic> state) {
+          builder: (FormFieldState<L> state) {
             List<Widget> _buildSelectedOptions(state) {
               List<Widget> selectedOptions = [];
 
@@ -90,12 +90,12 @@ class MultiSelectFormField extends FormField<dynamic> {
             return InkWell(
 
               onTap:  !enabled ? null :() async {
-                List initialSelected = state.value;
+                List<T> initialSelected = state.value;
                 if (initialSelected == null) {
-                  initialSelected = List();
+                  initialSelected = List<T>();
                 }
 
-                final items = List<MultiSelectDialogItem<dynamic>>();
+                final items = List<MultiSelectDialogItem<T>>();
                 dataSource.forEach((item) {
                   items.add(
                       MultiSelectDialogItem(item[valueField], item[textField]));
