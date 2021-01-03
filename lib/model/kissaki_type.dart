@@ -1,43 +1,51 @@
-import 'package:nihonto_collection_manager/enum.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-class KissakiType extends EnumWithLabel<KissakiType> {
+part 'kissaki_type.g.dart';
 
-  static const KO_KISSAKI = const KissakiType._new('KO_KISSAKI', 'Ko kissaki');
-  static const CHU_KISSAKI = const KissakiType._new('CHU_KISSAKI', 'Chu kissaki');
-  static const O_KISSAKI = const KissakiType._new('O_KISSAKI', 'O kissaki');
-  static const IKUBI_KISSAKI = const KissakiType._new('IKUBI_KISSAKI', 'Ikubi kissaki');
-  static const IKARI_KISSAKI = const KissakiType._new('IKARI_KISSAKI', 'Ikari kissaki');
-  static const KAMASU_KISSAKI = const KissakiType._new('KAMASU_KISSAKI', 'Kamasu kissaki');
-  static const MOROHA_KISSAKI = const KissakiType._new('MOROHA_KISSAKI', 'Moroha kissaki');
-  static const OTHER = const KissakiType._new('OTHER', 'Other');
+class KissakiType extends EnumClass {
 
-  static const values = [
-    KO_KISSAKI,
-    CHU_KISSAKI,
-    O_KISSAKI,
-    IKUBI_KISSAKI,
-    IKARI_KISSAKI,
-    KAMASU_KISSAKI,
-    MOROHA_KISSAKI,
-    OTHER
-  ];
+  static Serializer<KissakiType> get serializer => _$kissakiTypeSerializer;
 
-  const KissakiType._new(String name, String label) : super(name, label);
+  static const KissakiType KO_KISSAKI = _$KO_KISSAKI;
+  static const KissakiType CHU_KISSAKI = _$CHU_KISSAKI;
+  static const KissakiType O_KISSAKI = _$O_KISSAKI;
+  static const KissakiType IKUBI_KISSAKI = _$IKUBI_KISSAKI;
+  static const KissakiType IKARI_KISSAKI = _$IKARI_KISSAKI;
+  static const KissakiType KAMASU_KISSAKI = _$KAMASU_KISSAKI;
+  static const KissakiType MOROHA_KISSAKI = _$MOROHA_KISSAKI;
+  static const KissakiType OTHER = _$OTHER;
 
-  static KissakiType valueOf(String name) {
-    assert (name != null);
+  const KissakiType._(String name) : super(name);
 
-    var found = values.firstWhere((element) => element.name == name);
+  static BuiltSet<KissakiType> get values => _$values;
+  static KissakiType valueOf(String name) => _$valueOf(name);
 
-    if (found == null) {
-      throw Exception("No enum found with name '${name}'");
+  String get label {
+    switch(this) {
+      case KO_KISSAKI:
+        return 'Ko kissaki';
+      case CHU_KISSAKI:
+        return 'Chu kissaki';
+      case O_KISSAKI:
+        return 'O kissaki';
+      case IKUBI_KISSAKI:
+        return 'Ikubi kissaki';
+      case IKARI_KISSAKI:
+        return 'Ikari kissaki';
+      case KAMASU_KISSAKI:
+        return 'Kamasu kissaki';
+      case MOROHA_KISSAKI:
+        return 'Moroha kissaki';
+      case OTHER:
+        return 'Other';
+
+      default:
+        throw Exception('Unsupported value: ${this}');
     }
-
-    return found;
   }
 
-  static KissakiType random() {
-    return Utils.random(values);
-  }
+  static KissakiType random() => Utils.random(values.toList());
 }
