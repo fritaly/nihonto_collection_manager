@@ -1,51 +1,63 @@
-import 'package:nihonto_collection_manager/enum.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-class Sugata extends EnumWithLabel<Sugata> {
+part 'sugata.g.dart';
 
-  static const SHINOGI_ZUKURI = const Sugata._new('SHINOGI_ZUKURI', 'Shinogi zukuri');
-  static const SHOBU_ZUKURI = const Sugata._new('SHOBU_ZUKURI', 'Shobu zukuri');
-  static const HIRA_ZUKURI = const Sugata._new('HIRA_ZUKURI', 'Hira zukuri');
-  static const KATA_KIRI_HA_ZUKURI = const Sugata._new('KATA_KIRI_HA_ZUKURI', 'Kata kiri ha zukuri');
-  static const KIRI_HA_ZUKURI = const Sugata._new('KIRI_HA_ZUKURI', 'Kiri ha zukuri');
-  static const MOROHA_ZUKURI = const Sugata._new('MOROHA_ZUKURI', 'Moroha zukuri');
-  static const UNOKUBI_ZUKURI = const Sugata._new('UNOKUBI_ZUKURI', 'Unokubi zukuri');
-  static const TSUKURI_KOMI = const Sugata._new('TSUKURI_KOMI', 'Tsukuri komi');
-  static const KANMURIOTOSHI_ZUKURI = const Sugata._new('KANMURIOTOSHI_ZUKURI', 'Kanmuriotoshi zukuri');
-  static const KOGARASUMARU_ZUKURI = const Sugata._new('KOGARASUMARU_ZUKURI', 'Kogaratsumaru zukuri');
-  static const OSORAKU_ZUKURI = const Sugata._new('OSORAKU_ZUKURI', 'Osoraku zukuri');
-  static const OTHER = const Sugata._new('OTHER', 'Other');
+class Sugata extends EnumClass {
 
-  static const values = [
-    SHINOGI_ZUKURI,
-    SHOBU_ZUKURI,
-    HIRA_ZUKURI,
-    KATA_KIRI_HA_ZUKURI,
-    KIRI_HA_ZUKURI,
-    MOROHA_ZUKURI,
-    UNOKUBI_ZUKURI,
-    TSUKURI_KOMI,
-    KANMURIOTOSHI_ZUKURI,
-    KOGARASUMARU_ZUKURI,
-    OSORAKU_ZUKURI,
-    OTHER
-  ];
+  static Serializer<Sugata> get serializer => _$sugataSerializer;
 
-  const Sugata._new(String name, String label) : super(name, label);
+  static const Sugata SHINOGI_ZUKURI = _$SHINOGI_ZUKURI;
+  static const Sugata SHOBU_ZUKURI = _$SHOBU_ZUKURI;
+  static const Sugata HIRA_ZUKURI = _$HIRA_ZUKURI;
+  static const Sugata KATA_KIRI_HA_ZUKURI = _$KATA_KIRI_HA_ZUKURI;
+  static const Sugata KIRI_HA_ZUKURI = _$KIRI_HA_ZUKURI;
+  static const Sugata MOROHA_ZUKURI = _$MOROHA_ZUKURI;
+  static const Sugata UNOKUBI_ZUKURI = _$UNOKUBI_ZUKURI;
+  static const Sugata TSUKURI_KOMI = _$TSUKURI_KOMI;
+  static const Sugata KANMURIOTOSHI_ZUKURI = _$KANMURIOTOSHI_ZUKURI;
+  static const Sugata KOGARASUMARU_ZUKURI = _$KOGARASUMARU_ZUKURI;
+  static const Sugata OSORAKU_ZUKURI = _$OSORAKU_ZUKURI;
+  static const Sugata OTHER = _$OTHER;
 
-  static Sugata valueOf(String name) {
-    assert (name != null);
+  const Sugata._(String name) : super(name);
 
-    var found = values.firstWhere((element) => element.name == name);
+  static BuiltSet<Sugata> get values => _$values;
+  static Sugata valueOf(String name) => _$valueOf(name);
 
-    if (found == null) {
-      throw Exception("No enum found with name '${name}'");
+  String get label {
+    switch(this) {
+      case SHINOGI_ZUKURI:
+        return 'Shinogi zukuri';
+      case SHOBU_ZUKURI:
+        return 'Shobu zukuri';
+      case HIRA_ZUKURI:
+        return 'Hira zukuri';
+      case KATA_KIRI_HA_ZUKURI:
+        return 'Kata kiri ha zukuri';
+      case KIRI_HA_ZUKURI:
+        return 'Kiri ha zukuri';
+      case MOROHA_ZUKURI:
+        return 'Moroha zukuri';
+      case UNOKUBI_ZUKURI:
+        return 'Unokubi zukuri';
+      case TSUKURI_KOMI:
+        return 'Tsukuri komi';
+      case KANMURIOTOSHI_ZUKURI:
+        return 'Kanmuriotoshi zukuri';
+      case KOGARASUMARU_ZUKURI:
+        return 'Kogaratsumaru zukuri';
+      case OSORAKU_ZUKURI:
+        return 'Osoraku zukuri';
+      case OTHER:
+        return 'Other';
+
+      default:
+        throw Exception('Unsupported value: ${this}');
     }
-
-    return found;
   }
 
-  static Sugata random() {
-    return Utils.random(values);
-  }
+  static Sugata random() => Utils.random(values.toList());
 }
