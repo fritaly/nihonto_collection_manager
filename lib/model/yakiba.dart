@@ -1,55 +1,69 @@
-import 'package:nihonto_collection_manager/enum.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-class Yakiba extends EnumWithLabel<Yakiba> {
+part 'yakiba.g.dart';
 
-  static const NIE = const Yakiba._new('NIE', 'Nie');
-  static const NIOI = const Yakiba._new('NIOI', 'Nioi');
-  static const INAZUMA = const Yakiba._new('INAZUMA', 'Inazuma');
-  static const CHIKEI = const Yakiba._new('CHIKEI', 'Chikei');
-  static const TOBIYAKI = const Yakiba._new('TOBIYAKI', 'Tobiyaki');
-  static const HOTSURE = const Yakiba._new('HOTSURE', 'Hotsure');
-  static const YO = const Yakiba._new('YO', 'Yo');
-  static const YAKI_KUZURE = const Yakiba._new('YAKI_KUZURE', 'Yaki kuzure');
-  static const YUBASHIRI = const Yakiba._new('YUBASHIRI', 'Yubashiri');
-  static const KINSUJI = const Yakiba._new('KINSUJI', 'Kinsuji');
-  static const ASHI = const Yakiba._new('ASHI', 'Ashi');
-  static const NIJUBA = const Yakiba._new('NIJUBA', 'Nijuba');
-  static const UTSURI = const Yakiba._new('UTSURI', 'Utsuri');
-  static const OTHER = const Yakiba._new('OTHER', 'Other');
+class Yakiba extends EnumClass {
 
-  static const values = [
-    NIE,
-    NIOI,
-    INAZUMA,
-    CHIKEI,
-    TOBIYAKI,
-    HOTSURE,
-    YO,
-    YAKI_KUZURE,
-    ASHI,
-    KINSUJI,
-    YUBASHIRI,
-    NIJUBA,
-    UTSURI,
-    OTHER
-  ];
+  static Serializer<Yakiba> get serializer => _$yakibaSerializer;
 
-  const Yakiba._new(String name, String label) : super(name, label);
+  static const Yakiba NIE = _$NIE;
+  static const Yakiba NIOI = _$NIOI;
+  static const Yakiba INAZUMA = _$INAZUMA;
+  static const Yakiba CHIKEI = _$CHIKEI;
+  static const Yakiba TOBIYAKI = _$TOBIYAKI;
+  static const Yakiba HOTSURE = _$HOTSURE;
+  static const Yakiba YO = _$YO;
+  static const Yakiba YAKI_KUZURE = _$YAKI_KUZURE;
+  static const Yakiba YUBASHIRI = _$YUBASHIRI;
+  static const Yakiba KINSUJI = _$KINSUJI;
+  static const Yakiba ASHI = _$ASHI;
+  static const Yakiba NIJUBA = _$NIJUBA;
+  static const Yakiba UTSURI = _$UTSURI;
+  static const Yakiba OTHER = _$OTHER;
 
-  static Yakiba valueOf(String name) {
-    assert (name != null);
+  const Yakiba._(String name) : super(name);
 
-    var found = values.firstWhere((element) => element.name == name);
+  static BuiltSet<Yakiba> get values => _$values;
+  static Yakiba valueOf(String name) => _$valueOf(name);
 
-    if (found == null) {
-      throw Exception("No enum found with name '${name}'");
+  String get label {
+    switch(this) {
+      case NIE:
+        return 'Nie';
+      case NIOI:
+        return 'Nioi';
+      case INAZUMA:
+        return 'Inazuma';
+      case CHIKEI:
+        return 'Chikei';
+      case TOBIYAKI:
+        return 'Tobiyaki';
+      case HOTSURE:
+        return 'Hotsure';
+      case YO:
+        return 'Yo';
+      case YAKI_KUZURE:
+        return 'Yaki kuzure';
+      case YUBASHIRI:
+        return 'Yubashiri';
+      case KINSUJI:
+        return 'Kinsuji';
+      case ASHI:
+        return 'Ashi';
+      case NIJUBA:
+        return 'Nijuba';
+      case UTSURI:
+        return 'Utsuri';
+      case OTHER:
+        return 'Other';
+
+      default:
+        throw Exception('Unsupported value: ${this}');
     }
-
-    return found;
   }
 
-  static Yakiba random() {
-    return Utils.random(values);
-  }
+  static Yakiba random() => Utils.random(values.toList());
 }
