@@ -393,12 +393,11 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _current.nakago.types.values(),
+      initialValue: _current.nakago.types.toList(),
       enabled: !readOnly,
       onSaved: (value) {
         setState(() {
-          _current = _current.rebuild((builder) => builder
-            ..nakago = _current.nakago.copyWith(types: EnumSet.from(value.cast<Nakago>())));
+          _current = _current.rebuild((builder) => builder.nakago.types.replace(value));
         });
       },
     );
@@ -1221,8 +1220,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Nakago-Other-${_current.nakago.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.rebuild((builder) => builder
-                    ..nakago = _current.nakago.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.nakago.other = value);
                 });
               },
             ),
