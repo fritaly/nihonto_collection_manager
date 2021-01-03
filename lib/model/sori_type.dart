@@ -1,37 +1,42 @@
-import 'package:nihonto_collection_manager/enum.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-class SoriType extends EnumWithLabel<SoriType> {
+part 'sori_type.g.dart';
 
-  static const KOSHIZORI = const SoriType._new('KOSHIZORI', 'Koshi-zori');
-  static const TORIIZORI = const SoriType._new('TORIIZORI', 'Torii-zori');
-  static const SAKIZORI = const SoriType._new('SAKIZORI', 'Saki-zori');
-  static const MUZORI = const SoriType._new('MUZORI', 'Mu-zori');
-  static const UCHIZORI = const SoriType._new('UCHIZORI', 'Uchi-zori');
+class SoriType extends EnumClass {
 
-  static const values = [
-    KOSHIZORI,
-    TORIIZORI,
-    SAKIZORI,
-    MUZORI,
-    UCHIZORI
-  ];
+  static Serializer<SoriType> get serializer => _$soriTypeSerializer;
 
-  const SoriType._new(String name, String label) : super(name, label);
+  static const SoriType KOSHIZORI = _$KOSHIZORI;
+  static const SoriType TORIIZORI = _$TORIIZORI;
+  static const SoriType SAKIZORI = _$SAKIZORI;
+  static const SoriType MUZORI = _$MUZORI;
+  static const SoriType UCHIZORI = _$UCHIZORI;
 
-  static SoriType valueOf(String name) {
-    assert (name != null);
+  const SoriType._(String name) : super(name);
 
-    var found = values.firstWhere((element) => element.name == name);
+  static BuiltSet<SoriType> get values => _$values;
+  static SoriType valueOf(String name) => _$valueOf(name);
 
-    if (found == null) {
-      throw Exception("No enum found with name '${name}'");
+  String get label {
+    switch(this) {
+      case KOSHIZORI:
+        return 'Koshi-zori';
+      case TORIIZORI:
+        return 'Torii-zori';
+      case SAKIZORI:
+        return 'Saki-zori';
+      case MUZORI:
+        return 'Mu-zori';
+      case UCHIZORI:
+        return 'Uchi-zori';
+
+      default:
+        throw Exception('Unsupported value: ${this}');
     }
-
-    return found;
   }
 
-  static SoriType random() {
-    return Utils.random(values);
-  }
+  static SoriType random() => Utils.random(values.toList());
 }
