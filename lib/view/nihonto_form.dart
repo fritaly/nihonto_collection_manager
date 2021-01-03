@@ -663,8 +663,7 @@ class NihontoFormState extends State<NihontoForm> {
                           if (value != null) {
                             setState(() {
                               // Update the nagasa based on the value returned by the dialog
-                              _current = _current.rebuild((builder) => builder
-                                ..measurements = _current.measurements.copyWith(nagasa: value));
+                              _current = _current.rebuild((builder) => builder.measurements.nagasa = value);
                             });
                           } else {
                             // The value is null if the user clicked "Cancel"
@@ -694,8 +693,7 @@ class NihontoFormState extends State<NihontoForm> {
                             }).then((value) {
                           if (value != null) {
                             setState(() {
-                              _current = _current.rebuild((builder) => builder
-                                ..measurements = _current.measurements.copyWith(totalLength: value));
+                              _current = _current.rebuild((builder) => builder.measurements.totalLength = value);
 
                               print("Total length set to ${value}");
                             });
@@ -725,8 +723,7 @@ class NihontoFormState extends State<NihontoForm> {
                         }).then((value) {
                       if (value != null) {
                         setState(() {
-                          _current = _current.rebuild((builder) => builder
-                            ..measurements = _current.measurements.copyWith(weight: value));
+                          _current = _current.rebuild((builder) => builder.measurements.weight = value);
                         });
                       } else {
                         // The value is null if the user clicked "Cancel"
@@ -761,8 +758,7 @@ class NihontoFormState extends State<NihontoForm> {
                           }).then((value) {
                         if (value != null) {
                           setState(() {
-                            _current = _current.rebuild((builder) => builder
-                              ..measurements = _current.measurements.copyWith(kasane: value));
+                            _current = _current.rebuild((builder) => builder.measurements.kasane = value);
 
                             print("Kasane set to ${value}");
                           });
@@ -795,8 +791,7 @@ class NihontoFormState extends State<NihontoForm> {
                           }).then((value) {
                         if (value != null) {
                           setState(() {
-                            _current = _current.rebuild((builder) => builder
-                              ..measurements = _current.measurements.copyWith(motokasane: value));
+                            _current = _current.rebuild((builder) => builder.measurements.motokasane = value);
 
                             print("Motokasane set to ${value}");
                           });
@@ -829,8 +824,7 @@ class NihontoFormState extends State<NihontoForm> {
                           }).then((value) {
                         if (value != null) {
                           setState(() {
-                            _current = _current.rebuild((builder) => builder
-                              ..measurements = _current.measurements.copyWith(sakikasane: value));
+                            _current = _current.rebuild((builder) => builder.measurements.sakikasane = value);
 
                             print("Sakikasane set to ${value}");
                           });
@@ -871,8 +865,7 @@ class NihontoFormState extends State<NihontoForm> {
                         }).then((value) {
                       if (value != null) {
                         setState(() {
-                          _current = _current.rebuild((builder) => builder
-                            ..measurements = _current.measurements.copyWith(mihaba: value));
+                          _current = _current.rebuild((builder) => builder.measurements.mihaba = value);
 
                           print("Mihaba set to ${value}");
                         });
@@ -910,8 +903,7 @@ class NihontoFormState extends State<NihontoForm> {
                         }).then((value) {
                       if (value != null) {
                         setState(() {
-                          _current = _current.rebuild((builder) => builder
-                            ..measurements = _current.measurements.copyWith(motohaba: value));
+                          _current = _current.rebuild((builder) => builder.measurements.motohaba = value);
 
                           print("Motohaba set to ${value}");
                         });
@@ -945,8 +937,7 @@ class NihontoFormState extends State<NihontoForm> {
                           }).then((value) {
                         if (value != null) {
                           setState(() {
-                            _current = _current.rebuild((builder) => builder
-                              ..measurements = _current.measurements.copyWith(sakihaba: value));
+                            _current = _current.rebuild((builder) => builder.measurements.sakihaba = value);
 
                             print("Sakihaba set to ${value}");
                           });

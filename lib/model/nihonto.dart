@@ -34,7 +34,7 @@ abstract class Nihonto implements Built<Nihonto, NihontoBuilder> {
     ..other = ''
     ..signature.replace(SignatureInfo())
     ..sugata.replace(SugataInfo())
-    ..measurements = Measurements()
+    ..measurements.replace(Measurements())
     ..hada.replace(HadaInfo())
     ..sori.replace(SoriInfo())
     ..kissaki.replace(KissakiInfo())
@@ -111,7 +111,7 @@ abstract class Nihonto implements Built<Nihonto, NihontoBuilder> {
       ..sugata.replace(SugataInfo.random())
       ..signature.replace(SignatureInfo.random())
       ..price = Money.random()
-      ..measurements = Measurements.random()
+      ..measurements.replace(Measurements.random())
       ..sori.replace(SoriInfo.random())
       ..hada.replace(HadaInfo.random())
       ..kissaki.replace(KissakiInfo.random())
