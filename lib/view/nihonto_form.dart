@@ -331,14 +331,13 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _current.hamon.types.values(),
+      initialValue: _current.hamon.types.toList(),
       enabled: !readOnly,
       onSaved: (value) {
         print('Value=${value}');
 
         setState(() {
-          _current = _current.rebuild((builder) => builder
-            ..hamon = _current.hamon.copyWith(types: EnumSet.from(value.cast<HamonType>())));
+          _current = _current.rebuild((builder) => builder.hamon.types.replace(value));
         });
       },
     );
@@ -1151,8 +1150,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Hamon-Other-${_current.hamon.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.rebuild((builder) => builder
-                    ..hamon = _current.hamon.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.hamon.other = value);
                 });
               },
             ),
