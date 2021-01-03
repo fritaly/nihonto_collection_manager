@@ -1,35 +1,39 @@
-import 'package:nihonto_collection_manager/enum.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
-class SignatureType extends EnumWithLabel<SignatureType> {
+part 'signature_type.g.dart';
 
-  static const MUMEI = const SignatureType._new('MUMEI', 'Mumei');
-  static const GIMEI = const SignatureType._new('GIMEI', 'Gimei');
-  static const SHOSHIN = const SignatureType._new('SHOSHIN', 'Shoshin');
-  static const MODERN = const SignatureType._new('MODERN', 'Modern');
+class SignatureType extends EnumClass {
 
-  static const values = [
-    MUMEI,
-    GIMEI,
-    SHOSHIN,
-    MODERN
-  ];
+  static Serializer<SignatureType> get serializer => _$signatureTypeSerializer;
 
-  const SignatureType._new(String name, String label) : super(name, label);
+  static const SignatureType MUMEI = _$MUMEI;
+  static const SignatureType GIMEI = _$GIMEI;
+  static const SignatureType SHOSHIN = _$SHOSHIN;
+  static const SignatureType MODERN = _$MODERN;
 
-  static SignatureType valueOf(String name) {
-    assert (name != null);
+  const SignatureType._(String name) : super(name);
 
-    var found = values.firstWhere((element) => element.name == name);
+  static BuiltSet<SignatureType> get values => _$values;
+  static SignatureType valueOf(String name) => _$valueOf(name);
 
-    if (found == null) {
-      throw Exception("No enum found with name '${name}'");
+  String get label {
+    switch(this) {
+      case MUMEI:
+        return 'Mumei';
+      case GIMEI:
+        return 'Gimei';
+      case SHOSHIN:
+        return 'Shoshin';
+      case MODERN:
+        return 'Modern';
+
+      default:
+        throw Exception('Unsupported value: ${this}');
     }
-
-    return found;
   }
 
-  static SignatureType random() {
-    return Utils.random(values);
-  }
+  static SignatureType random() => Utils.random(values.toList());
 }
