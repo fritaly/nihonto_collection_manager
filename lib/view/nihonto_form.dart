@@ -1330,8 +1330,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('School-School-${_current.school.school}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.rebuild((builder) => builder
-                    ..school = _current.school.copyWith(school: value));
+                  _current = _current.rebuild((builder) => builder.school.school = value);
                 });
               },
             ),

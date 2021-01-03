@@ -45,7 +45,7 @@ abstract class Nihonto implements Built<Nihonto, NihontoBuilder> {
     ..nakago.replace(NakagoInfo())
     ..yasurime.replace(YasurimeInfo())
     ..polish.replace(PolishInfo())
-    ..school = SchoolInfo();
+    ..school.replace(SchoolInfo());
 
   Nihonto._();
 
@@ -124,7 +124,7 @@ abstract class Nihonto implements Built<Nihonto, NihontoBuilder> {
       ..bohi.replace(BohiInfo.random())
       ..polish.replace(PolishInfo.random())
       ..period = Period.random()
-      ..school = SchoolInfo.random()
+      ..school.replace(SchoolInfo.random())
       ..attribution = ''
       ..other = '');
   }
