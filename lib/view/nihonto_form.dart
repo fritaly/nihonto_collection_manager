@@ -291,7 +291,7 @@ class NihontoFormState extends State<NihontoForm> {
         decoration: FieldDecoration(label),
         value: value,
         items: items,
-        disabledHint: (readOnly && (value != null)) ? Text(value.name) : null,
+        disabledHint: (readOnly && (value != null)) ? Text(Utils.labelOf(value)) : null,
         onChanged: readOnly ? null: onChanged);
   }
 

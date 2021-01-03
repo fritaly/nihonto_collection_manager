@@ -1,11 +1,12 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:nihonto_collection_manager/labelled.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
 part 'nakago.g.dart';
 
-class Nakago extends EnumClass {
+class Nakago extends EnumClass with Labelled {
 
   static Serializer<Nakago> get serializer => _$nakagoSerializer;
 

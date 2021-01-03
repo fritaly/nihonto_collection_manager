@@ -1,11 +1,12 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:nihonto_collection_manager/labelled.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
 part 'weight_unit.g.dart';
 
-class WeightUnit extends EnumClass {
+class WeightUnit extends EnumClass with Labelled {
 
   static Serializer<WeightUnit> get serializer => _$weightUnitSerializer;
 

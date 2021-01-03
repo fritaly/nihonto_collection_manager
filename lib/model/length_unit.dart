@@ -1,11 +1,12 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:nihonto_collection_manager/labelled.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
 part 'length_unit.g.dart';
 
-class LengthUnit extends EnumClass {
+class LengthUnit extends EnumClass with Labelled {
 
   static Serializer<LengthUnit> get serializer => _$lengthUnitSerializer;
 

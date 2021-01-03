@@ -1,11 +1,12 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:nihonto_collection_manager/labelled.dart';
 import 'package:nihonto_collection_manager/utils.dart';
 
 part 'polish_type.g.dart';
 
-class PolishType extends EnumClass {
+class PolishType extends EnumClass with Labelled {
 
   static Serializer<PolishType> get serializer => _$polishTypeSerializer;
 
