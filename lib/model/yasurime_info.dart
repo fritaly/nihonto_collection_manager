@@ -1,48 +1,35 @@
-import 'package:flutter/foundation.dart';
+
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
 import 'package:nihonto_collection_manager/aggregate.dart';
-import 'package:nihonto_collection_manager/enum_set.dart';
+import 'package:nihonto_collection_manager/model/boshi.dart';
 import 'package:nihonto_collection_manager/model/yasurime.dart';
+import 'package:nihonto_collection_manager/utils.dart';
 
-@immutable
-class YasurimeInfo with Aggregate {
+part 'yasurime_info.g.dart';
 
-  static const DEFAULT = YasurimeInfo();
+abstract class YasurimeInfo with Aggregate implements Built<YasurimeInfo, YasurimeInfoBuilder> {
 
-  final EnumSet<Yasurime> types;
+  // See https://github.com/google/built_value.dart/issues/212#issuecomment-632702910
+  static void _initializeBuilder(YasurimeInfoBuilder builder) => builder
+    ..other = '';
 
-  final String other;
+  YasurimeInfo._();
 
-  const YasurimeInfo({ this.types = const EnumSet.empty(), this.other = '' });
+  factory YasurimeInfo([updates(YasurimeInfoBuilder b)]) = _$YasurimeInfo;
 
-  YasurimeInfo copyWith({EnumSet<Yasurime> types, String other}) {
-    return YasurimeInfo(
-      types: types ?? this.types,
-      other: other ?? this.other,
-    );
-  }
+  String get other;
+
+  BuiltSet<Yasurime> get types;
 
   static YasurimeInfo random() {
-    return YasurimeInfo(types: EnumSet.random(Yasurime.values), other: '');
+    return YasurimeInfo((builder) => builder
+      ..types.addAll(Utils.randomIterable(Yasurime.values))
+      ..other = '');
   }
 
   @override
   bool isBlank() {
-    return types.isEmpty() && (other.isEmpty);
+    return types.isEmpty && other.isEmpty;
   }
-
-  @override
-  String toString() {
-    return 'YasurimeInfo[types: $types, other: $other]';
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is YasurimeInfo &&
-          runtimeType == other.runtimeType &&
-          types == other.types &&
-          other == other.other;
-
-  @override
-  int get hashCode => types.hashCode ^ other.hashCode;
 }

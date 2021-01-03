@@ -413,12 +413,11 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _current.yasurime.types.values(),
+      initialValue: _current.yasurime.types.toList(),
       enabled: !readOnly,
       onSaved: (value) {
         setState(() {
-          _current = _current.rebuild((builder) => builder
-            ..yasurime = _current.yasurime.copyWith(types: EnumSet.from(value.cast<Yasurime>())));
+          _current = _current.rebuild((builder) => builder.yasurime.types = value));
         });
       },
     );
@@ -1244,8 +1243,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Yasurime-Other-${_current.yasurime.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.rebuild((builder) => builder
-                    ..yasurime = _current.yasurime.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.yasurime.other = value);
                 });
               },
             ),
