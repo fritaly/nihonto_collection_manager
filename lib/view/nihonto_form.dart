@@ -376,12 +376,11 @@ class NihontoFormState extends State<NihontoForm> {
       valueField: 'value',
       // required: true,
       hintWidget: Text('Please choose one or more'),
-      initialValue: _current.boshi.types.values(),
+      initialValue: _current.boshi.types.toList(),
       enabled: !readOnly,
       onSaved: (value) {
         setState(() {
-          _current = _current.rebuild((builder) => builder
-            ..boshi = _current.boshi.copyWith(types: EnumSet.from(value.cast<Boshi>())));
+          _current = _current.rebuild((builder) => builder.boshi.types.replace(value));
         });
       },
     );
@@ -402,7 +401,7 @@ class NihontoFormState extends State<NihontoForm> {
       onSaved: (value) {
         setState(() {
           _current = _current.rebuild((builder) => builder
-            ..boshi = _current.boshi.copyWith(types: EnumSet.from(value.cast<Nakago>())));
+            ..nakago = _current.nakago.copyWith(types: EnumSet.from(value.cast<Nakago>())));
         });
       },
     );
@@ -1204,8 +1203,7 @@ class NihontoFormState extends State<NihontoForm> {
               key: Key('Boshi-Other-${_current.boshi.other}'),
               onChanged: (value) {
                 setState(() {
-                  _current = _current.rebuild((builder) => builder
-                    ..boshi = _current.boshi.copyWith(other: value));
+                  _current = _current.rebuild((builder) => builder.boshi.other = value);
                 });
               },
             ),
