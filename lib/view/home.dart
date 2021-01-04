@@ -9,8 +9,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final _collection = List<Nihonto>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +40,7 @@ class _HomeState extends State<Home> {
             title: Text('Browse collection'),
             actions: [],
           ),
-          body: BrowseCollection(_collection),
+          body: BrowseCollection(),
         );
       },
     );

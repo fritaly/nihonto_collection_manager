@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
 import 'package:nihonto_collection_manager/serialization/serializers.dart';
@@ -5,16 +6,11 @@ import 'package:nihonto_collection_manager/view/nihonto_form.dart';
 import 'package:nihonto_collection_manager/widget/nihonto_card.dart';
 
 class BrowseCollection extends StatefulWidget {
-  List<Nihonto> _collection;
-
-  BrowseCollection(List<Nihonto> collection) {
-    assert(collection != null);
-
-    _collection = collection;
+  BrowseCollection() {
   }
 
   @override
-  _BrowseCollectionState createState() => _BrowseCollectionState(_collection);
+  _BrowseCollectionState createState() => _BrowseCollectionState();
 }
 
 class _BrowseCollectionState extends State<BrowseCollection> {
@@ -23,12 +19,9 @@ class _BrowseCollectionState extends State<BrowseCollection> {
 
   static const Duration TWO_SECONDS = Duration(seconds: 2);
 
-  List<Nihonto> _collection;
+  BuiltList<Nihonto> _collection = BuiltList();
 
-  _BrowseCollectionState(List<Nihonto> collection) {
-    assert(collection != null);
-
-    _collection = collection;
+  _BrowseCollectionState() {
   }
 
   Widget _buildWidget() {
@@ -96,7 +89,7 @@ class _BrowseCollectionState extends State<BrowseCollection> {
     assert (nihonto != null);
 
     setState(() {
-      _collection.remove(nihonto);
+      _collection = _collection.rebuild((builder) => builder.remove(nihonto));
     });
 
     // Display the message for 2 seconds to let the end user revert the deletion if necessary
@@ -140,7 +133,7 @@ class _BrowseCollectionState extends State<BrowseCollection> {
     if (data != null) {
       setState(() {
         // Update the collection from setState() to refresh the UI
-        _collection.add(data);
+        _collection = _collection.rebuild((builder) => builder.add(data));
 
         final snackBar = SnackBar(content: Text('Saved changes', textAlign: TextAlign.center), duration: ONE_SECOND);
 
@@ -167,7 +160,7 @@ class _BrowseCollectionState extends State<BrowseCollection> {
         // Replace the nihonto in the collection
         final index = _collection.indexOf(nihonto);
 
-        _collection.replaceRange(index, index+1, [ result ]);
+        _collection = _collection.rebuild((builder) => builder.replaceRange(index, index+1, [ result ]));
 
         final snackBar = SnackBar(content: Text('Saved changes', textAlign: TextAlign.center), duration: ONE_SECOND);
 
