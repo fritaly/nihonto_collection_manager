@@ -11,6 +11,8 @@ import 'package:nihonto_collection_manager/model/hamon_info.dart';
 import 'package:nihonto_collection_manager/model/hamon_type.dart';
 import 'package:nihonto_collection_manager/model/kissaki_info.dart';
 import 'package:nihonto_collection_manager/model/kissaki_type.dart';
+import 'package:nihonto_collection_manager/model/length.dart';
+import 'package:nihonto_collection_manager/model/length_unit.dart';
 import 'package:nihonto_collection_manager/model/measurements.dart';
 import 'package:nihonto_collection_manager/model/money.dart';
 import 'package:nihonto_collection_manager/model/mune_info.dart';

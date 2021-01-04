@@ -31,7 +31,7 @@ abstract class SoriInfo with Aggregate implements Built<SoriInfo, SoriInfoBuilde
   static SoriInfo random() {
     return SoriInfo((builder) => builder
       ..type = SoriType.random()
-      ..sori = Length.random(LengthUnit.CM, min: 0, max: 3)
+      ..sori.replace(Length.random(LengthUnit.CM, min: 0, max: 3))
       ..other = '');
   }
 

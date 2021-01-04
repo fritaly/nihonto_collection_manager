@@ -36,7 +36,7 @@ class LengthWidgetState extends State<LengthWidget> {
   }
 
   Length getLength() {
-    return Length(_value, _unit);
+    return Length.of(_value, _unit);
   }
 
   @override

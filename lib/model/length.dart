@@ -1,20 +1,39 @@
 import 'dart:math';
 
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 import 'package:nihonto_collection_manager/model/japanese_length.dart';
 import 'package:nihonto_collection_manager/model/length_unit.dart';
 
-class Length {
+part 'length.g.dart';
 
-  final double value;
-  final LengthUnit unit;
+abstract class Length implements Built<Length, LengthBuilder> {
 
-  const Length(this.value, this.unit);
+  static Serializer<Length> get serializer => _$lengthSerializer;
+
+  Length._();
+
+  factory Length([updates(LengthBuilder b)]) = _$Length;
+
+  factory Length.of(double value, LengthUnit unit) {
+    assert (value >= 0);
+    assert (unit != null);
+
+    return Length((builder) => builder
+      ..value = value
+      ..unit = unit
+    );
+  }
+
+  double get value;
+
+  LengthUnit get unit;
 
   Length operator +(Length length) {
     assert (length != null);
     assert (length.unit == this.unit); // Can only add 2 lengths with the same unit
 
-    return Length(this.value + length.value, this.unit);
+    return Length.of(this.value + length.value, this.unit);
   }
 
   bool validate() {
@@ -26,18 +45,17 @@ class Length {
     return "${value.toStringAsFixed(2)} ${unit.name.toLowerCase()}";
   }
 
-  String toString() {
-    return toText();
-  }
-
   Length asCentimeters() {
     switch (unit) {
       case LengthUnit.CM:
         return this;
+
       case LengthUnit.MM:
-        return Length(value / 10, LengthUnit.CM);
+        return Length.of(this.value / 10,LengthUnit.CM);
+
       case LengthUnit.INCH:
-        return Length(value * 2.54, LengthUnit.CM);
+        return Length.of(this.value * 2.54,LengthUnit.CM);
+
       default:
         throw Exception("Unsupported length unit: ${unit}");
     }
@@ -84,17 +102,6 @@ class Length {
 
     var span = max - min;
 
-    return Length(((Random().nextInt((span * 10).toInt()).toDouble() / 10) + min).toDouble(), unit);
+    return Length.of((Random().nextInt((span * 10).toInt()).toDouble() / 10) + min, unit);
   }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Length &&
-          runtimeType == other.runtimeType &&
-          value == other.value &&
-          unit == other.unit;
-
-  @override
-  int get hashCode => value.hashCode ^ unit.hashCode;
 }

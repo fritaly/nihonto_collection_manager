@@ -53,14 +53,14 @@ abstract class Measurements with Aggregate implements Built<Measurements, Measur
     final mihaba = Length.random(LengthUnit.CM, min: 2.7, max: 3.6);
 
     return new Measurements((builder) => builder
-        ..nagasa = nagasa
-        ..totalLength = nagasa + nakagoLength
-        ..kasane = kasane
-        ..motokasane = kasane
-        ..sakikasane = kasane
-        ..mihaba = mihaba
-        ..motohaba = mihaba
-        ..sakihaba = mihaba
+        ..nagasa.replace(nagasa)
+        ..totalLength.replace(nagasa + nakagoLength)
+        ..kasane.replace(kasane)
+        ..motokasane.replace(kasane)
+        ..sakikasane.replace(kasane)
+        ..mihaba.replace(mihaba)
+        ..motohaba.replace(mihaba)
+        ..sakihaba.replace(mihaba)
         ..weight = Weight.random(700, 1200)
     );
   }

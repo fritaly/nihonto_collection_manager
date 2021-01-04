@@ -18,7 +18,7 @@ class _UnitConverterState extends State<UnitConverter> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(children: [
-          Text("${Length(75, LengthUnit.CM).asJapaneseLength().toText()}")
+          Text("${Length.of(75, LengthUnit.CM).asJapaneseLength().toText()}")
         ]));
   }
 }
