@@ -31,6 +31,8 @@ import 'package:nihonto_collection_manager/model/sori_info.dart';
 import 'package:nihonto_collection_manager/model/sori_type.dart';
 import 'package:nihonto_collection_manager/model/sugata.dart';
 import 'package:nihonto_collection_manager/model/sugata_info.dart';
+import 'package:nihonto_collection_manager/model/weight.dart';
+import 'package:nihonto_collection_manager/model/weight_unit.dart';
 import 'package:nihonto_collection_manager/model/yakiba.dart';
 import 'package:nihonto_collection_manager/model/yakiba_info.dart';
 import 'package:nihonto_collection_manager/model/yasurime.dart';

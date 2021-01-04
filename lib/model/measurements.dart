@@ -61,7 +61,7 @@ abstract class Measurements with Aggregate implements Built<Measurements, Measur
         ..mihaba.replace(mihaba)
         ..motohaba.replace(mihaba)
         ..sakihaba.replace(mihaba)
-        ..weight = Weight.random(700, 1200)
+        ..weight.replace(Weight.random(700, 1200))
     );
   }
 

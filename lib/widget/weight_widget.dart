@@ -37,7 +37,7 @@ class WeightWidgetState extends State<WeightWidget> {
   }
 
   Weight getWeight() {
-    return Weight(_value, _unit);
+    return Weight.of(_value, _unit);
   }
 
   @override

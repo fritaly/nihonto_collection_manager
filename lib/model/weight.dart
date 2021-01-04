@@ -1,19 +1,38 @@
 import 'dart:math';
 
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 import 'package:nihonto_collection_manager/model/weight_unit.dart';
 
-class Weight {
+part 'weight.g.dart';
 
-  final double value;
-  final WeightUnit unit;
+abstract class Weight implements Built<Weight, WeightBuilder> {
 
-  const Weight(this.value, this.unit);
+  static Serializer<Weight> get serializer => _$weightSerializer;
+
+  Weight._();
+
+  factory Weight([updates(WeightBuilder b)]) = _$Weight;
+
+  factory Weight.of(double value, WeightUnit unit) {
+    assert (value >= 0);
+    assert (unit != null);
+
+    return Weight((builder) => builder
+      ..value = value
+      ..unit = unit
+    );
+  }
+
+  double get value;
+
+  WeightUnit get unit;
 
   Weight operator +(Weight weight) {
     assert (weight != null);
     assert (weight.unit == this.unit); // Can only add 2 weights with the same unit
 
-    return Weight(this.value + weight.value, this.unit);
+    return Weight.of(this.value + weight.value, this.unit);
   }
 
   bool validate() {
@@ -24,27 +43,14 @@ class Weight {
     return "${value.toStringAsFixed(2)} ${unit.symbol}";
   }
 
-  String toString() {
-    return toText();
-  }
-
   static Weight random(double min, double max) {
     assert (min >= 0);
     assert (min < max);
 
     var span = max - min;
 
-    return Weight(((Random().nextInt((span * 10).toInt()).toDouble() / 10) + min).toDouble(), WeightUnit.GRAM);
+    return Weight.of(((Random().nextInt((span * 10).toInt()).toDouble() / 10) + min).toDouble(), WeightUnit.GRAM);
   }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Weight &&
-          runtimeType == other.runtimeType &&
-          value == other.value &&
-          unit == other.unit;
-
-  @override
-  int get hashCode => value.hashCode ^ unit.hashCode;
 }
+
+
