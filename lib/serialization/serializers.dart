@@ -1,5 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
+import 'package:built_value/standard_json_plugin.dart';
 import 'package:nihonto_collection_manager/model/bohi.dart';
 import 'package:nihonto_collection_manager/model/bohi_info.dart';
 import 'package:nihonto_collection_manager/model/boshi.dart';
@@ -43,4 +44,5 @@ part 'serializers.g.dart';
 @SerializersFor([
   Nihonto
 ])
-final Serializers serializers = _$serializers;
+// Enable the JSON serialization (see https://stacksecrets.com/flutter/json-serialization-in-dart-flutter-with-built_value)
+final Serializers serializers = (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

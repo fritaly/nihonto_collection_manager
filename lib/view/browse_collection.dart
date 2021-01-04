@@ -1,4 +1,3 @@
-import 'package:built_value/serializer.dart';
 import 'package:flutter/material.dart';
 import 'package:nihonto_collection_manager/model/nihonto.dart';
 import 'package:nihonto_collection_manager/serialization/serializers.dart';
